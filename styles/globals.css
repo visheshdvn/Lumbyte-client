@@ -28,20 +28,16 @@ body {
   transition: width 0.3s ease;
 }
 
-/* #searchControl.active input {
-  
-} */
-
-/* #searchButton:focus,
-#searchButton:active {
-  transform: scale(1.5);
-} */
+.longInput {
+  width: 200px;
+  border-bottom: 1px solid #555 !important;
+  margin-right: 50px;
+}
 
 #searchButton:focus + input {
-  width: 320px;
+  @apply longInput;
 }
 
 #searchInput:focus {
-  width: 320px!important;
-  border-bottom: 1px solid #555!important;
+  @apply longInput;
 }

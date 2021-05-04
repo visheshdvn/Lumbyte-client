@@ -4,25 +4,18 @@ import { MenuIcon, XIcon, SearchIcon } from "@heroicons/react/outline"
 import { Disclosure, Switch } from "@headlessui/react"
 import Link from "next/link"
 
-const navigation = [
-  { name: "Dashboard", href: "#", current: true },
-  { name: "Team", href: "#", current: false },
-  { name: "Projects", href: "#", current: false },
-  { name: "Calendar", href: "#", current: false },
-]
-
-function classNames(...classes) {
-  return classes.filter(Boolean).join(" ")
-}
-
 export default function Navbar() {
   const [enabled, setEnabled] = useState(false)
-  // const [searchValue, setSearchValue] = useState(null)
+  const [searchValue, setSearchValue] = useState("")
 
   const searchInputFieldRef = useRef(null)
 
   const searchClickButtonHandler = () => {
-    searchInputFieldRef.current.focus()
+    if (searchValue === "" || searchValue === null || searchInputFieldRef.current.offsetWidth < 200) {
+      searchInputFieldRef.current.focus()
+    } else {
+      console.log('submition logic here - search term:', searchValue);
+    }
   }
 
   return (
@@ -66,7 +59,7 @@ export default function Navbar() {
 
                 <div
                   id="searchControl"
-                  className="relative flex align-middle mr-4"
+                  className="relative align-middle mr-4 hidden md:flex"
                 >
                   <button
                     onClick={searchClickButtonHandler}
@@ -74,17 +67,23 @@ export default function Navbar() {
                     className="w-12 h-full absolute focus:outline-none right-0 bg-white z-10"
                   >
                     <span className="sr-only">Search form</span>
-                    <SearchIcon className="h-6 m-auto cursor-pointer" aria-hidden="true" />
+                    <SearchIcon
+                      className="h-6 m-auto cursor-pointer"
+                      aria-hidden="true"
+                    />
                   </button>
                   <input
-                    placeholder="Click here to search anything..."
+                    placeholder="Search anything..."
                     type="search"
                     id="searchInput"
                     ref={searchInputFieldRef}
                     name="searchbar"
-                    className="bg-white border-none focus:outline-none py-1 pr-0 w-12 z-0 focus:border-b focus:border-black"
+                    className="bg-white border-none focus:outline-none py-1 pr-0 w-12 z-0"
+                    value={searchValue}
+                    onChange={() => setSearchValue(searchInputFieldRef.current.value)}
                   />
                 </div>
+
                 {/* theme switch below*/}
                 <Switch
                   checked={enabled}
@@ -105,23 +104,7 @@ export default function Navbar() {
           </div>
 
           <Disclosure.Panel className="sm:hidden">
-            <div className="px-2 pt-2 pb-3 space-y-1">
-              {navigation.map((item) => (
-                <a
-                  key={item.name}
-                  href={item.href}
-                  className={classNames(
-                    item.current
-                      ? "bg-gray-900 text-white"
-                      : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                    "block px-3 py-2 rounded-md text-base font-medium"
-                  )}
-                  aria-current={item.current ? "page" : undefined}
-                >
-                  {item.name}
-                </a>
-              ))}
-            </div>
+            <div className="px-2 pt-2 pb-3 space-y-1">customize me</div>
           </Disclosure.Panel>
         </>
       )}
