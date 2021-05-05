@@ -1,4 +1,3 @@
-/* This example requires Tailwind CSS v2.0+ */
 import { useState, useRef } from "react"
 import { MenuIcon, XIcon, SearchIcon } from "@heroicons/react/outline"
 import { Disclosure, Switch } from "@headlessui/react"
@@ -52,10 +51,6 @@ export default function Navbar() {
                 </div>
               </div>
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                {/* <button className="p-1 rounded-full text-gray-800 focus:outline-none transform focus:scale-150 transition duration-200 ease-in-out mr-2">
-                  <span className="sr-only">Search form</span>
-                  <SearchIcon className="h-6 w-6" aria-hidden="true" />
-                </button> */}
 
                 <div
                   id="searchControl"
