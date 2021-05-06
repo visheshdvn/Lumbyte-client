@@ -1,38 +1,61 @@
 import Head from "next/head"
+import PostIntro from "../components/postIntro"
 
 export default function Home() {
   return (
-    <div className="border border-red-800">
-      index page Cupidatat sint cupidatat sit deserunt ad elit magna veniam id
-      laboris reprehenderit. Deserunt commodo ad ipsum reprehenderit cillum sit
-      Lorem fugiat minim aliquip aliquip duis eiusmod. Cupidatat aliqua officia
-      est quis officia et laboris minim consequat anim tempor dolore sunt sit.
-      <br />
-      Quis elit ut nostrud enim est esse ullamco incididunt. Sunt velit velit
-      Lorem ut est consequat voluptate eiusmod incididunt eiusmod do labore. Est
-      fugiat do ex in veniam.
-      <br />
-      Laborum consequat nostrud cillum anim do anim. Aliqua est duis Lorem
-      incididunt velit sit incididunt duis excepteur cillum ea. Eu ex Lorem
-      labore id eu.
-      <br />
-      Consectetur excepteur fugiat anim consequat adipisicing ut in officia
-      aliquip et. Fugiat culpa Lorem qui qui enim veniam. Enim proident
-      exercitation fugiat velit laborum occaecat eiusmod sunt ipsum nisi dolore
-      exercitation qui.
-      <br />
-      Ea co
-      <br />
-      mmodo ex est qui cupidatat nostrud occaecat enim. Magna tempor enim quis
-      labore veniam. Cillum culpa quis excepteur velit Lorem incididunt nisi ad
-      eu id laboris. Occaecat ea aliquip ipsum minim cupidatat est duis laboris
-      pariatur.
-      <br />
-      Labor
-      <br />e esse excepteur dolore sit voluptate fugiat consectetur sit et
-      ipsum. Exercitation aliqua sint labore deserunt adipisicing est duis
-      cupidatat irure commodo ipsum dolore laborum. Voluptate adipisicing cillum
-      adipisicing nulla non irure adipisicing.
-    </div>
+    <>
+      <Head>
+        <title>LumBytes | Home</title>
+      </Head>
+      <section className="text-gray-600 body-font relative">
+        <div className="container px-5 py-10 mx-auto flex sm:flex-nowrap flex-wrap">
+          <div className="lg:w-2/3 md:w-full rounded-lg overflow-hidden lg:mr-8 flex flex-col">
+            <PostIntro />
+            <PostIntro />
+            <PostIntro />
+          </div>
+          <div className="lg:w-1/3 hidden lg:flex bg-white flex-col md:ml-auto w-full md:py-8 mt-8 md:mt-0">
+            <h2 className="text-gray-900 text-lg mb-1 font-medium title-font">
+              Feedback
+            </h2>
+            <p className="leading-relaxed mb-5 text-gray-600">
+              Post-ironic portland shabby chic echo park, banjo fashion axe
+            </p>
+            <div className="relative mb-4">
+              <label htmlFor="name" className="leading-7 text-sm text-gray-600">
+                Name
+              </label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+              />
+            </div>
+            <div className="relative mb-4">
+              <label
+                htmlFor="email"
+                className="leading-7 text-sm text-gray-600"
+              >
+                Email
+              </label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+              />
+            </div>
+            <button className="text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg">
+              Button
+            </button>
+            <p className="text-xs text-gray-500 mt-3">
+              Chicharrones blog helvetica normcore iceland tousled brook viral
+              artisan.
+            </p>
+          </div>
+        </div>
+      </section>
+    </>
   )
 }

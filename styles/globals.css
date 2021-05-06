@@ -30,7 +30,7 @@ body {
 
 .longInput {
   width: 200px;
-  border-bottom: 1px solid #555 !important;
+  border-bottom: 1px solid rgba(85, 85, 85, 0.5) !important;
   margin-right: 50px;
 }
 
