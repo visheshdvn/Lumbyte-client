@@ -41,3 +41,11 @@ body {
 #searchInput:focus {
   @apply longInput;
 }
+
+#postIntroParent article:last-child {
+  margin-bottom: 0rem;
+}
+
+.mobileImageSize {
+  min-width: 100px !important;
+}

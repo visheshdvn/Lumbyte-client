@@ -13,7 +13,10 @@ module.exports = {
     extend: {},
   },
   variants: {
-    extend: {},
+    extend: {
+      borderWidth: ['last'],
+      margin: ['last', 'odd', 'even']
+    },
   },
   plugins: []
 }
