@@ -2,6 +2,7 @@ import { useState, useRef } from "react"
 import { MenuIcon, XIcon, SearchIcon } from "@heroicons/react/outline"
 import { Disclosure, Switch } from "@headlessui/react"
 import Link from "next/link"
+import Image from "next/image"
 
 export default function Navbar() {
   const [enabled, setEnabled] = useState(false)
@@ -10,18 +11,25 @@ export default function Navbar() {
   const searchInputFieldRef = useRef(null)
 
   const searchClickButtonHandler = () => {
-    if (searchValue === "" || searchValue === null || searchInputFieldRef.current.offsetWidth < 200) {
+    if (
+      searchValue === "" ||
+      searchValue === null ||
+      searchInputFieldRef.current.offsetWidth < 200
+    ) {
       searchInputFieldRef.current.focus()
     } else {
-      console.log('submition logic here - search term:', searchValue);
+      console.log("submition logic here - search term:", searchValue)
     }
   }
 
   return (
-    <Disclosure as="nav" className="bg-white text-gray-800 fixed top-0 w-full z-50">
+    <Disclosure
+      as="nav"
+      className="bg-white text-gray-800 fixed top-0 w-full z-50"
+    >
       {({ open }) => (
         <>
-          <div className="max-w-7xl mx-auto p-3 sm:px-6 lg:px-8">
+          <div className="max-w-7xl mx-auto px-2 py-1 sm:py-4 sm:px-6 lg:px-8">
             <div className="relative flex items-center justify-between h-16">
               <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
                 {/* Mobile menu button*/}
@@ -37,21 +45,42 @@ export default function Navbar() {
               <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
                 <div className="flex-shrink-0 flex items-center">
                   <Link href="/">
-                    <a className="sm:flex sm:items-center">
-                      <img
+                    <a className="hidden sm:flex sm:items-center h-24 w-72 relative overflow-visible">
+                      <Image
                         className="block h-8 w-auto"
-                        src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg"
-                        alt="Lumbyte"
+                        src="/icons/LumBytes_light.png"
+                        alt="Lumbytes"
+                        width={220}
+                        height={73}
+                        // layout="fill"
+                        // objectFit="contain"
+                        className="object-cover object-center overflow-visible"
                       />
-                      <h1 className="hidden sm:flex sm:items-center text-4xl font-serif ml-1 text-gray-700">
+                      {/* <h1 className="hidden sm:flex sm:items-center text-4xl font-serif ml-1 text-gray-700">
                         LumBytes
-                      </h1>
+                      </h1> */}
+                    </a>
+                  </Link>
+                  <Link href="/">
+                    <a className="h-24 w-72 relative sm:hidden p-0 z-20 flex justify-center overflow-hidden">
+                      <Image
+                        className="block h-8 w-auto"
+                        src="/icons/Icon_only-big.png"
+                        alt="Lumbytes"
+                        // layout="fill"
+                        // objectFit="cover"
+                        height={90}
+                        width={90}
+                        className="object-cover object-center transform scale-50"
+                      />
+                      {/* <h1 className="hidden sm:flex sm:items-center text-4xl font-serif ml-1 text-gray-700">
+                        LumBytes
+                      </h1> */}
                     </a>
                   </Link>
                 </div>
               </div>
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-
                 <div
                   id="searchControl"
                   className="relative align-middle mr-4 hidden md:flex"
@@ -75,7 +104,9 @@ export default function Navbar() {
                     name="searchbar"
                     className="bg-white border-none focus:outline-none py-1 pr-0 w-12 z-0"
                     value={searchValue}
-                    onChange={() => setSearchValue(searchInputFieldRef.current.value)}
+                    onChange={() =>
+                      setSearchValue(searchInputFieldRef.current.value)
+                    }
                   />
                 </div>
 
@@ -98,7 +129,7 @@ export default function Navbar() {
             </div>
           </div>
 
-          <Disclosure.Panel className="sm:hidden">
+          <Disclosure.Panel className="lg:hidden">
             <div className="px-2 pt-2 pb-3 space-y-1">customize me</div>
           </Disclosure.Panel>
         </>

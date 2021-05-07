@@ -49,3 +49,13 @@ body {
 .mobileImageSize {
   min-width: 100px !important;
 }
+
+.truncat {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  line-height: 1.5rem;     /* fallback */
+  /* max-height: 32px;      fallback */
+  -webkit-line-clamp: 2; /* number of lines to show */
+  -webkit-box-orient: vertical;
+}

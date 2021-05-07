@@ -8,8 +8,11 @@ export default function Home() {
         <title>LumBytes | Home</title>
       </Head>
       <section className="text-gray-600 body-font relative">
-        <div className="container px-3 md:px-5 py-10 mx-auto flex sm:flex-nowrap flex-wrap">
-          <div id="postIntroParent" className="lg:w-2/3 md:w-3/4 w-full rounded-lg overflow-hidden md:mr-4 lg:mr-8 flex flex-col">
+        <div className="container px-3 md:px-5 py-5 lg:py-15 mx-auto flex sm:flex-nowrap flex-wrap">
+          <div
+            id="postIntroParent"
+            className="lg:w-2/3 md:w-3/4 w-full rounded-lg overflow-hidden md:mr-4 lg:mr-8 flex flex-col"
+          >
             <PostIntro />
             <PostIntro />
             <PostIntro />
