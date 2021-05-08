@@ -1,5 +1,6 @@
 import React from "react"
 import Image from "next/image"
+import Link from "next/link"
 import {
   UserCircleIcon,
   CalendarIcon,
@@ -67,10 +68,12 @@ const postIntro = () => {
               mollit quis duis laborum id commodo reprehenderit. Culpa pariatur
               minim aliqua reprehenderit qui sit voluptate ea.
             </p>
-            <a className="text-yellow-500 inline-flex items-center cursor-pointer bg-gray-200 hover:bg-yellow-600 hover:text-white absolute right-0 bottom-0 px-2 font-semibold">
-              ...Read More
-              <ArrowSmRightIcon className="h-5" />
-            </a>
+            <Link href="/post/mastering-js">
+              <a className="text-yellow-500 inline-flex items-center cursor-pointer bg-gray-200 hover:bg-yellow-600 hover:text-white absolute right-0 bottom-0 px-2 font-semibold">
+                ...Read More
+                <ArrowSmRightIcon className="h-5" />
+              </a>
+            </Link>
           </div>
         </div>
       </div>

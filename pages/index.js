@@ -1,5 +1,7 @@
 import Head from "next/head"
 import PostIntro from "../components/postIntro"
+import { gql } from "@apollo/client"
+import client from "../apollo-client"
 
 export default function Home() {
   return (
@@ -11,7 +13,7 @@ export default function Home() {
         <div className="container px-3 md:px-5 py-5 lg:py-15 mx-auto flex sm:flex-nowrap flex-wrap">
           <div
             id="postIntroParent"
-            className="lg:w-2/3 md:w-3/4 w-full rounded-lg overflow-hidden md:mr-4 lg:mr-8 flex flex-col"
+            className="lg:w-2/3 md:w-3/4 w-full overflow-hidden md:mr-4 lg:mr-8 flex flex-col"
           >
             <PostIntro />
             <PostIntro />
@@ -61,4 +63,34 @@ export default function Home() {
       </section>
     </>
   )
+}
+
+export async function getStaticProps() {
+  const { data } = await client.query({
+    query: gql`
+      query {
+        blogposts {
+          title
+          date
+          banner {
+            url
+          }
+          tags {
+            tagname
+          }
+          topics {
+            topicname
+          }
+        }
+      }
+    `,
+  })
+
+  console.log(JSON.stringify(data, null, 4));
+
+  return {
+    props: {
+      // countries: data.countries.slice(0, 4),
+    },
+  }
 }
