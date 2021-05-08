@@ -11,7 +11,7 @@ export async function getPostBySlug(slug) {
           tags {
             tagname
           }
-          topics {
+          topic {
             topicname
           }
           banner {
