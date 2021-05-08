@@ -1,8 +1,8 @@
 import React from "react"
 import { getSlugs, getPostBySlug } from "../../graphql/Queries"
 
-import { serialize } from 'next-mdx-remote/serialize'
-import { MDXRemote } from 'next-mdx-remote'
+import { serialize } from "next-mdx-remote/serialize"
+import { MDXRemote } from "next-mdx-remote"
 
 const Post = ({ postData }) => {
   const { content, title, date, tags, topic, banner, id } = postData
@@ -13,8 +13,8 @@ const Post = ({ postData }) => {
         <code key={element.tagname}>{element.tagname}</code>
       ))}
       <h1>{title}</h1>
-      <div className="prose">
-      <MDXRemote {...content} />
+      <div className="prose prose-lg mx-auto lg:max-w-3xl px-3 sm:px-0">
+        <MDXRemote {...content} />
       </div>
       {/* <div className="container mx-auto">{content.compiledSource}</div> */}
     </main>
@@ -22,23 +22,22 @@ const Post = ({ postData }) => {
 }
 
 export async function getStaticProps(context) {
-  console.log('Re-Generating...');
+  console.log("Re-Generating...")
   const { params } = context
   const { slug } = params
 
   const data = await getPostBySlug(slug)
 
   const mdxSource = await serialize(data.data.blogposts[0].content)
-  const {title, date, tags, banner, topic, id} = data.data.blogposts[0]
-  
+  const { title, date, tags, banner, topic, id } = data.data.blogposts[0]
+
   return {
     props: {
-      postData: {title, date, tags, topic, banner,id, content: mdxSource},
+      postData: { title, date, tags, topic, banner, id, content: mdxSource },
     },
-    revalidate: 1
+    revalidate: 1,
   }
 }
-
 
 export async function getStaticPaths() {
   const { data } = await getSlugs()
