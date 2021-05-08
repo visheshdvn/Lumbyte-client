@@ -65,32 +65,32 @@ export default function Home() {
   )
 }
 
-export async function getStaticProps() {
-  const { data } = await client.query({
-    query: gql`
-      query {
-        blogposts {
-          title
-          date
-          banner {
-            url
-          }
-          tags {
-            tagname
-          }
-          topics {
-            topicname
-          }
-        }
-      }
-    `,
-  })
+// export async function getStaticProps() {
+//   const { data } = await client.query({
+//     query: gql`
+//       query {
+//         blogposts {
+//           title
+//           date
+//           banner {
+//             url
+//           }
+//           tags {
+//             tagname
+//           }
+//           topics {
+//             topicname
+//           }
+//         }
+//       }
+//     `,
+//   })
 
-  console.log(JSON.stringify(data, null, 4));
+//   console.log(JSON.stringify(data, null, 4));
 
-  return {
-    props: {
-      // countries: data.countries.slice(0, 4),
-    },
-  }
-}
+//   return {
+//     props: {
+//       // countries: data.countries.slice(0, 4),
+//     },
+//   }
+// }
