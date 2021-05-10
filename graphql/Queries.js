@@ -2,13 +2,13 @@ import client from "../apollo-client"
 import { gql } from "@apollo/client"
 
 export async function getPostBySlug(slug) {
-  const data =  await client.query({
+  const data = await client.query({
     query: gql`
       query getPostfromSlug($slug: String!) {
         blogposts(where: { slug: $slug }) {
           id
           title
-          date
+          published_at
           tags {
             tagname
           }
@@ -16,7 +16,9 @@ export async function getPostBySlug(slug) {
             topicname
           }
           banner {
-            caption
+            height
+            width
+            alternativeText
             url
           }
           content
@@ -32,17 +34,17 @@ export async function getPostBySlug(slug) {
 }
 
 export async function getSlugs() {
-    const data = await client.query({
-        query: gql`
-        query {
-          blogposts {
-            slug
-          }
+  const data = await client.query({
+    query: gql`
+      query {
+        blogposts {
+          slug
         }
-      `
-    })
+      }
+    `,
+  })
 
-    return data
+  return data
 }
 
 export const getTags = gql`
@@ -52,4 +54,24 @@ export const getTags = gql`
     }
   }
 `
-
+export async function getPostIntroIndexPage(start, limit) {
+  const data = await client.query({
+    query: gql`
+      query fetchPostIntro($start: Int, $limit: Int) {
+        blogposts(sort: "published_at:DESC", start: $start, limit: $limit) {
+          topic {
+            topicname
+          }
+          title
+          banner {
+            url
+          }
+          published_at
+        }
+      }
+    `,
+    variables: {
+      start, limit
+    }
+  })
+}

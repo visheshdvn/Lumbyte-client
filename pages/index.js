@@ -1,7 +1,5 @@
 import Head from "next/head"
 import PostIntro from "../components/postIntro"
-import { gql } from "@apollo/client"
-import client from "../apollo-client"
 
 export default function Home() {
   return (
