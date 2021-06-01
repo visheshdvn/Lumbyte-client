@@ -20,7 +20,7 @@ const Post = ({ postData }) => {
       </section>
       <div className="p-3">
         <Image
-          src={`http://172.26.102.80:1337${banner.url}`}
+          src={`http://localhost:1337${banner.url}`}
           width={1366}
           height={972}
           layout="responsive"

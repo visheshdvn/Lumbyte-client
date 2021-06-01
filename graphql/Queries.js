@@ -54,7 +54,7 @@ export const getTags = gql`
     }
   }
 `
-export async function getPostIntroIndexPage(start, limit) {
+export async function getPostIntroIndex(start, limit) {
   const data = await client.query({
     query: gql`
       query fetchPostIntro($start: Int, $limit: Int) {
@@ -67,6 +67,8 @@ export async function getPostIntroIndexPage(start, limit) {
             url
           }
           published_at
+          slug
+          excerpt
         }
       }
     `,
@@ -74,4 +76,6 @@ export async function getPostIntroIndexPage(start, limit) {
       start, limit
     }
   })
+
+  return data
 }

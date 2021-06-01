@@ -1,7 +1,9 @@
 import Head from "next/head"
 import PostIntro from "../components/postIntro"
+import { getPostIntroIndex } from "../graphql/Queries"
 
-export default function Home() {
+export default function Home({data}) {
+
   return (
     <>
       <Head>
@@ -13,9 +15,7 @@ export default function Home() {
             id="postIntroParent"
             className="lg:w-2/3 md:w-3/4 w-full overflow-hidden md:mr-4 lg:mr-8 flex flex-col"
           >
-            <PostIntro />
-            <PostIntro />
-            <PostIntro />
+            {data.map(item => <PostIntro key={item.slug} postData={item} />)}
           </div>
           <div className="lg:w-1/3 hidden md:flex md:w-1/4 bg-white flex-col md:ml-auto w-full md:py-8 mt-8 md:mt-0">
             <h2 className="text-gray-900 text-lg mb-1 font-medium title-font">
@@ -63,32 +63,13 @@ export default function Home() {
   )
 }
 
-// export async function getStaticProps() {
-//   const { data } = await client.query({
-//     query: gql`
-//       query {
-//         blogposts {
-//           title
-//           date
-//           banner {
-//             url
-//           }
-//           tags {
-//             tagname
-//           }
-//           topics {
-//             topicname
-//           }
-//         }
-//       }
-//     `,
-//   })
-
-//   console.log(JSON.stringify(data, null, 4));
-
-//   return {
-//     props: {
-//       // countries: data.countries.slice(0, 4),
-//     },
-//   }
-// }
+export async function getStaticProps() {
+  const { data } = await getPostIntroIndex(0, 10)
+  
+  return {
+    props: {
+      data: data.blogposts
+    },
+    revalidate: 1,
+  }
+}

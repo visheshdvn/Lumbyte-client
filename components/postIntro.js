@@ -8,14 +8,17 @@ import {
   ArrowSmRightIcon,
 } from "@heroicons/react/outline"
 
-const postIntro = () => {
+const postIntro = ({
+  postData: { title, topic, banner, published_at, slug, excerpt },
+}) => {
+  console.log(excerpt)
+  // console.log(title, topic, banner, published_at, slug)
   return (
     <article className="text-gray-700 body-font overflow-hidden md:mb-20 mb-10">
       <div className="mx-auto flex md:flex-col">
         <div className="w-auto md:order-1 order-2 md:max-w-max pl-2 md:pl-0">
           <h1 className="text-base leading-5 lg:text-3xl md:text-2xl md:mb-3 mb-2 font-bold">
-            Elit Lorem eu voluptate consectetur duis laboris veniam labore
-            commodo fugiat amet enim ex ipsum.
+            {title}
           </h1>
           <div className="md:hidden font-normal">
             <span>Date</span> {" | "}
@@ -26,8 +29,6 @@ const postIntro = () => {
         <div className="mobileImageSize overflow-hidden relative h-28 md:h-64 lg:h-72 md:w-full md:order-2 order-1">
           <Image
             alt="Post Banner"
-            // width={1024}
-            // height={350}
             className="object-cover object-center"
             src="https://source.unsplash.com/random/"
             layout="fill"
@@ -59,16 +60,8 @@ const postIntro = () => {
             </div>
           </div>
           <div className="hidden md:block w-3/4 py-0 pt-0 mt-0 text-left relative">
-            <p className="text-base mb-0 z-0 h-full truncat">
-              Ea eu occaecat reprehenderit aliquip ad ullamco consequat irure
-              aliqua irure mollit culpa dolor. Nulla et veniam irure tempor
-              eiusmod quis anim voluptate nostrud. Fugiat minim et reprehenderit
-              consequat eu veniam ea enim. Minim amet irure ipsum enim qui irure
-              sint. Nisi mollit veniam id consequat veniam. Ex proident velit
-              mollit quis duis laborum id commodo reprehenderit. Culpa pariatur
-              minim aliqua reprehenderit qui sit voluptate ea.
-            </p>
-            <Link href="/post/mastering-js">
+            <p className="text-base mb-0 z-0 h-full truncat">{excerpt}</p>
+            <Link href={`/post/${slug}`}>
               <a className="text-yellow-500 inline-flex items-center cursor-pointer bg-gray-200 hover:bg-yellow-600 hover:text-white absolute right-0 bottom-0 px-2 font-semibold">
                 ...Read More
                 <ArrowSmRightIcon className="h-5" />
