@@ -3,7 +3,11 @@
 @tailwind utilities;
 
 body {
-  padding-top: 6rem;
+  @apply text-gray-800 pt-24;
+}
+
+.horizontal-spacing {
+  @apply 2xl:px-0 lg:px-5 md:px-3 px-2;
 }
 
 .centered-item {

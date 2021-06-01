@@ -2,7 +2,6 @@ import { useState, useRef } from "react"
 import { MenuIcon, XIcon, SearchIcon } from "@heroicons/react/outline"
 import { Disclosure, Switch } from "@headlessui/react"
 import Link from "next/link"
-import Image from "next/image"
 
 export default function Navbar() {
   const [enabled, setEnabled] = useState(false)
@@ -25,13 +24,13 @@ export default function Navbar() {
   return (
     <Disclosure
       as="nav"
-      className="bg-white text-gray-800 fixed top-0 w-full z-50"
+      className="bg-white text-gray-800 fixed top-0 w-full z-50 border-b md:py-2 py-3"
     >
       {({ open }) => (
         <>
-          <div className="max-w-7xl mx-auto px-2 py-1 sm:py-4 sm:px-6 lg:px-8">
-            <div className="relative flex items-center justify-between h-16">
-              <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
+          <div className="w-full max-w-screen-2xl horizontal-spacing mx-auto">
+            <div className="relative flex items-center justify-between h-auto">
+              <div className="absolute inset-y-0 left-0 flex items-center md:hidden">
                 {/* Mobile menu button*/}
                 <Disclosure.Button className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
                   <span className="sr-only">Open main menu</span>
@@ -42,45 +41,20 @@ export default function Navbar() {
                   )}
                 </Disclosure.Button>
               </div>
-              <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
+              <div className="flex-1 flex items-center justify-center md:items-stretch md:justify-start">
                 <div className="flex-shrink-0 flex items-center">
                   <Link href="/">
-                    <a className="hidden sm:flex sm:items-center h-24 w-72 relative overflow-visible">
-                      <Image
-                        className="block h-8 w-auto"
-                        src="/icons/LumBytes_light.png"
-                        alt="Lumbytes"
-                        width={220}
-                        height={73}
-                        // layout="fill"
-                        // objectFit="contain"
-                        className="object-cover object-center overflow-visible"
+                    <a className="items-center flex justify-center overflow-hidden">
+                      <img
+                        src="/logo/logo.svg"
+                        alt="Lumbytes logo"
+                        className="object-cover object-center overflow-visible xl:h-11 lg:h-10 sm:h-9 h-7"
                       />
-                      {/* <h1 className="hidden sm:flex sm:items-center text-4xl font-serif ml-1 text-gray-700">
-                        LumBytes
-                      </h1> */}
-                    </a>
-                  </Link>
-                  <Link href="/">
-                    <a className="h-24 w-72 relative sm:hidden p-0 z-20 flex justify-center overflow-hidden">
-                      <Image
-                        className="block h-8 w-auto"
-                        src="/icons/Icon_only-big.png"
-                        alt="Lumbytes"
-                        // layout="fill"
-                        // objectFit="cover"
-                        height={90}
-                        width={90}
-                        className="object-cover object-center transform scale-50"
-                      />
-                      {/* <h1 className="hidden sm:flex sm:items-center text-4xl font-serif ml-1 text-gray-700">
-                        LumBytes
-                      </h1> */}
                     </a>
                   </Link>
                 </div>
               </div>
-              <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+              <div className="absolute inset-y-0 right-0 flex items-center sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                 <div
                   id="searchControl"
                   className="relative align-middle mr-4 hidden md:flex"
@@ -127,6 +101,13 @@ export default function Navbar() {
                 </Switch>
               </div>
             </div>
+            <div className="w-full pt-3 hidden md:block">
+              <SecondaryNavLink href="/">Home</SecondaryNavLink>
+              <SecondaryNavLink href="/">latest</SecondaryNavLink>
+              <SecondaryNavLink href="/">featured</SecondaryNavLink>
+              <SecondaryNavLink href="/">technology</SecondaryNavLink>
+              <SecondaryNavLink href="/">all</SecondaryNavLink>
+            </div>
           </div>
 
           <Disclosure.Panel className="lg:hidden">
@@ -135,5 +116,13 @@ export default function Navbar() {
         </>
       )}
     </Disclosure>
+  )
+}
+
+function SecondaryNavLink({ children, href }) {
+  return (
+    <Link href={href}>
+      <a className="uppercase mr-5 font-pt-sans font-normal">{children}</a>
+    </Link>
   )
 }

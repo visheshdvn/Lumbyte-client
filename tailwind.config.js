@@ -2,15 +2,16 @@ module.exports = {
   purge: ["./pages/**/*.{js,ts,jsx,tsx}", "./components/**/*.{js,ts,jsx,tsx}"],
   darkMode: "class", // or 'media' or 'class'
   theme: {
-    container: {
-      screens: {
-        sm: "640px",
-        md: "768px",
-        lg: "1024px",
-        xl: "1280px",
-      },
+    screens: {
+      sm: "640px",
+      md: "768px",
+      lg: "1024px",
+      xl: "1280px",
+      "2xl": "1336px",
     },
-    extend: {},
+    fontFamily: {
+      "pt-sans": ["PT Sans Narrow", "Arial Narrow Bold", "sans-serif"],
+    },
   },
   variants: {
     extend: {
