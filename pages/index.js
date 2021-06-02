@@ -1,15 +1,14 @@
 import Head from "next/head"
-// import PostIntro from "../components/postIntro"
+import WidePeek from "../components/PostPeek/wide"
 // import { getPostIntroIndex } from "../graphql/Queries"
 
-export default function Home({data}) {
-
+export default function Home({ data }) {
   return (
     <>
       <Head>
         <title>LumBytes | Home</title>
       </Head>
-      <section className="text-gray-600 body-font relative">
+      <section className="body-font relative">
         {/* <div className="container px-3 sm:px-0 md:px-5 py-5 lg:py-15 mx-auto flex sm:flex-nowrap flex-wrap">
           <div
             id="postIntroParent"
@@ -21,6 +20,39 @@ export default function Home({data}) {
             section 2
           </div>
         </div> */}
+        d
+        <div className="container mx-auto">
+          <div className="grid gap-4 grid-cols-12 mt-2 border-t pt-1">
+            <div className="col-span-8">
+              <div className="">
+                <h1 style={{fontSize: "2.625re"}} className="uppercase font-bungee-shade text-4.5xl text-black pb-3">
+                  The latest
+                </h1>
+                <div className="pt-3">
+                  <WidePeek />
+                  <WidePeek />
+                  <WidePeek />
+                  <WidePeek />
+                  <WidePeek />
+                  <WidePeek />
+                  <WidePeek />
+                  <WidePeek />
+                  <WidePeek />
+                </div>
+              </div>
+            </div>
+            <div className="bg-blue- col-span-4">
+            <div className="border-l pl-2">
+                <h1 style={{fontSize: "2.625re"}} className="uppercase font-bungee-shade text-4.5xl text-black pb-3">
+                  Top picks
+                </h1>
+                <div className="pt-3">
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
     </>
   )
@@ -28,7 +60,7 @@ export default function Home({data}) {
 
 // export async function getStaticProps() {
 //   const { data } = await getPostIntroIndex(0, 10)
-  
+
 //   return {
 //     props: {
 //       data: data.blogposts
