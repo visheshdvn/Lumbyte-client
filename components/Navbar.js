@@ -28,7 +28,7 @@ export default function Navbar() {
     >
       {({ open }) => (
         <>
-          <div className="w-full max-w-screen-2xl horizontal-spacing mx-auto">
+          <div className="container horizontal-spacing mx-auto">
             <div className="relative flex items-center justify-between h-auto">
               <div className="absolute inset-y-0 left-0 flex items-center md:hidden">
                 {/* Mobile menu button*/}
@@ -122,7 +122,7 @@ export default function Navbar() {
 function SecondaryNavLink({ children, href }) {
   return (
     <Link href={href}>
-      <a className="uppercase mr-5 font-pt-sans font-normal">{children}</a>
+      <a className="uppercase mr-8 font-pt-sans font-normal">{children}</a>
     </Link>
   )
 }

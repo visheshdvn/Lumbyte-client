@@ -7,17 +7,14 @@ export async function getPostBySlug(slug) {
       query getPostfromSlug($slug: String!) {
         blogposts(where: { slug: $slug }) {
           id
-          title
+          metadescription
+          minuteRead
           published_at
-          tags {
-            tagname
-          }
           topic {
             topicname
           }
+          title
           banner {
-            height
-            width
             alternativeText
             url
           }
@@ -73,8 +70,9 @@ export async function getPostIntroIndex(start, limit) {
       }
     `,
     variables: {
-      start, limit
-    }
+      start,
+      limit,
+    },
   })
 
   return data

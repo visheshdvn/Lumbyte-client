@@ -10,17 +10,22 @@ const WidePeek = (
 ) => {
   // console.log(excerpt)
   // console.log(title, topic, banner, published_at, slug)
+  const title = "Cillum ea magna officia consequat enim consectetur nulla excepteur veniam nisi eiusmod."
+  const topic = "technology"
+  const banner = "https://source.unsplash.com/random/800x600"
+  const excerpt = "Adipisicing cillum aliquip proident eiusmod sint irure sunt ipsum enim do ullamco."
+
   return (
-    <article className="widearticle overflow-hidden flex pb-16">
-      <div className="h-44 w-72 overflow-hidden border">
-        <Link href="/"> 
+    <article className="widearticle overflow-hidden flex mb-16">
+      <div className="xl:h-44 xl:w-72 lg:h-40 lg:w-64 md:h-40 md:w-40 overflow-hidden border">
+        <Link href="/">
           <a>
             <Image
-              src="https://source.unsplash.com/random/800x600"
+              src={banner}
               alt="post banner"
               className="object-cover object-center"
-              width={1024}
-              height={768}
+              width={600}
+              height={600}
             />
           </a>
         </Link>
@@ -29,21 +34,19 @@ const WidePeek = (
         {/* link to topic page */}
         <Link href="/">
           <a>
-            <h3 className="uppercase font-pt-sans font-bold leading-5 text-lightBlue-600 mb-1 text-lg">
-              techology
+            <h3 className="uppercase font-pt-sans font-bold lg:leading-5 md:leading-4 text-lightBlue-600 mb-1 xl:text-lg md:text-base">
+              {topic}
             </h3>
           </a>
         </Link>
         {/* link to blogpost */}
         <Link href="/">
           <a>
-            <h1 className="font-coda text-2xl mb-2">
-              Cillum ea magna officia consequat enim consectetur nulla excepteur
-              veniam nisi eiusmod.
+            <h1 className="font-coda lg:text-xl xl:text-2xl lg:mb-2 md:mb-1 font-bold">
+              {title}
             </h1>
-            <p className="truncat w-2/3 font-serif text-grayText mb-2">
-              Cillum commodo voluptate nulla nisi velit adipisicing sint labore
-              elit commodo consequat non.
+            <p className="truncate-1-line leading-3 w-4/5 font-serif text-grayText mb-2 xl:text-base lg:text-sm">
+              {excerpt}
             </p>
           </a>
         </Link>

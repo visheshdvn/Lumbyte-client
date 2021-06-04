@@ -1,14 +1,23 @@
-import Head from "next/head"
-import WidePeek from "../components/PostPeek/wide"
-import SmallPeek from "../components/PostPeek/smaller"
-// import { getPostIntroIndex } from "../graphql/Queries"
+import React from "react"
+import { useRouter } from "next/router"
+// import bgimg from "/topicbg/technology.jpg"
+import WidePeek from "../../components/PostPeek/wide"
+import SmallPeek from "../../components/PostPeek/smaller"
 
-export default function Home({ data }) {
+const Topic = () => {
+  const router = useRouter()
+  const { topic } = router.query
+
   return (
     <>
-      <Head>
-        <title>LumBytes | Home</title>
-      </Head>
+      <div
+        style={{
+          backgroundImage: `radial-gradient( rgba(56, 131, 202, 1), rgba(56, 131, 202, 0.85)), url(/topicbg/technology.jpg)`,
+        }}
+        className="w-full h-48 bg-lightBlue-80 flex items-center justify-center bg-center bg-cover"
+      >
+        <h1 className="font-bungee-shade text-white text-5xl">{topic}</h1>
+      </div>
       <section className="body-font">
         <div className="container mx-auto horizontal-spacing">
           <div className="grid gap-4 grid-cols-12 mt-2 border-t pt-1">
@@ -53,13 +62,4 @@ export default function Home({ data }) {
   )
 }
 
-// export async function getStaticProps() {
-//   const { data } = await getPostIntroIndex(0, 10)
-
-//   return {
-//     props: {
-//       data: data.blogposts
-//     },
-//     revalidate: 1,
-//   }
-// }
+export default Topic

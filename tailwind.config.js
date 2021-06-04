@@ -10,7 +10,7 @@ module.exports = {
       md: "768px",
       lg: "1024px",
       xl: "1280px",
-      "2xl": "1336px",
+      "2xl": "1280px",
     },
     fontFamily: {
       serif: ["Georgia", ...defaultTheme.fontFamily.serif],
@@ -25,7 +25,7 @@ module.exports = {
       current: "currentColor",
       lightBlue: colors.lightBlue,
       gray: colors.gray,
-      trurGray: colors.trueGray,
+      trueGray: colors.trueGray,
     },
     extend: {
       fontSize: {
@@ -33,6 +33,9 @@ module.exports = {
       },
       colors: {
         grayText: "#757575"
+      },
+      lineHeight: {
+        "7.5": "1.875rem"
       }
     },
   },
