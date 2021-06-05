@@ -120,7 +120,7 @@ const Post = ({
             <SimilarArticles />
           </div> */}
 
-          <div className="grid gap-4 grid-cols-4">
+          <div className="grid lg:gap-1 md:gap-4 grid-cols-4">
             <SimilarArticles />
             <SimilarArticles />
             <SimilarArticles />
@@ -136,18 +136,18 @@ function SimilarArticles() {
   return (
     <Link href="/">
       <a className="px-2 col-span-2 lg:col-auto">
-        <div className="relative xl:h-80 lg:h-72 md:h-64 w-full overflow-hidden">
+        <div className="relative md:h-72 lg:h-80 w-full overflow-hidden">
           <Image
             className="object-cover object-center"
             src="https://source.unsplash.com/random"
             alt="image"
             width={1000}
-            height={1000}
+            height={1300}
           />
           <div
             style={{
               backgroundImage:
-                "linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.7) 75%, rgba(0,0,0,1) 99%)",
+                "linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.7) 60%, rgba(0,0,0,1) 98%)",
             }}
             className="absolute top-0 right-0 left-0 bottom-0"
           />

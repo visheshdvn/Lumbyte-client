@@ -13,7 +13,7 @@ const SmallPeek = () => {
           </h3>
         </a>
       </Link>
-      <div className="h-44 w-full overflow-hidden border mb-1">
+      <div className="h-44 w-full overflow-hidden transform md:scale-105 lg:scale-100 mb-1">
         <Link href="/">
           <a>
             <Image
