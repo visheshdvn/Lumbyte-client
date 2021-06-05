@@ -16,7 +16,7 @@ body {
   display: table;
 }
 
-.divider {
+.divider-col {
   border-color: rgba(0, 0, 0, 0.2);
 }
 

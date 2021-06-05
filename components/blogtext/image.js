@@ -3,7 +3,7 @@ import React from "react"
 
 const Img = ({src, alt}) => {
   return (
-    <div className="overflow-hidden mb-7">
+    <div className="overflow-hidden mb-8">
       <img
         src={`http://localhost:1337${src}`}
         alt={alt}

@@ -1,4 +1,4 @@
-import React, {Suspense, lazy} from "react"
+import React, { Suspense, lazy } from "react"
 import { getSlugs, getPostBySlug } from "../../graphql/Queries"
 import { ClockIcon, CalendarIcon } from "@heroicons/react/outline"
 import { serialize } from "next-mdx-remote/serialize"
@@ -7,13 +7,12 @@ import Image from "next/image"
 import Link from "next/link"
 import Head from "next/head"
 
-
 // custom mdx component imports
 import Paragraph from "../../components/blogtext/paragraph"
 import { H1, H2, H3 } from "../../components/blogtext/headings"
 import Img from "../../components/blogtext/image"
 import Ul from "../../components/blogtext/ul"
-
+import Code from "../../components/blogtext/code"
 
 // const Img = lazy(() => import('../../components/blogtext/image'))
 
@@ -38,7 +37,8 @@ const Post = ({
     h2: (props) => <H2 {...props} />,
     h3: (props) => <H3 {...props} />,
     img: (props) => <Img {...props} />,
-    ul: (props) => <Ul {...props} />
+    ul: (props) => <Ul {...props} />,
+    code: (props) => <Code {...props} />,
   }
   return (
     <>
@@ -47,21 +47,20 @@ const Post = ({
       </Head>
       <section className="">
         <div
-          style={{ borderColor: "rgba(0,0,0,0.20)" }}
           className="container mt-2 mx-auto horizontal-spacing pt-16 border-b"
         >
           <>
             <Link href={`/topic/${topic}`}>
-              <a className="font-pt-sans uppercase font-bold text-lightBlue-600 text-lg pl-8 mb-3">
+              <a className="font-pt-sans uppercase font-bold text-lightBlue-600 text-lg pl-8">
                 {topic}
               </a>
             </Link>
 
-            <h1 className="md:text-5xl text-4xl font-pt-sans font-bold px-8 mb-5">
+            <h1 className="md:text-5xl text-4xl font-pt-sans font-bold px-8 mb-5 mt-3">
               {title}
             </h1>
 
-            <div className="flex items-center h-4 px-8 mb-5 text-grayText overflow-hidden">
+            <div className="flex items-center h-4 px-8 mb-8 text-grayText overflow-hidden">
               <CalendarIcon className="h-full inline mr-1" />
               <span className="text-base font-coda">{stringdate}</span>
               <span className="mx-2">|</span>
@@ -71,8 +70,8 @@ const Post = ({
           </>
 
           <div className="grid gap-4 grid-cols-12">
-            <div className="col-span-8 ">
-              {/* <div className="h-96 overflow-hidden"> */}
+            <div className="col-span-8">
+              <div className="mb-8">
               <Image
                 src={`http://localhost:1337${banner.url}`}
                 width={1366}
@@ -80,12 +79,12 @@ const Post = ({
                 layout="responsive"
                 className="object-cover object-center"
               />
+              </div>
               <main key={id} className="px-8 mt-5">
                 <div className="font-serif leading-7.5 text-gray-700 text-lg">
                   <MDXRemote {...content} components={components} />
                 </div>
               </main>
-              {/* </div> */}
             </div>
             <div className="col-span-4">
               <div className="border-l pl-3 pb-2">
@@ -160,7 +159,7 @@ export async function getStaticProps(context) {
   const { params } = context
   const { slug } = params
 
-  const {data} = await getPostBySlug(slug)
+  const { data } = await getPostBySlug(slug)
   // console.log(JSON.stringify(data.data.blogposts[0].banner, null, 4));
 
   const mdxSource = await serialize(data.blogposts[0].content)
