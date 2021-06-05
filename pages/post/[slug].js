@@ -46,9 +46,7 @@ const Post = ({
         <meta name="description" content={metadescription} />
       </Head>
       <section className="">
-        <div
-          className="container mt-2 mx-auto horizontal-spacing pt-16 border-b"
-        >
+        <div className="container mt-2 mx-auto horizontal-spacing lg:pt-16 md:pt-10 border-b">
           <>
             <Link href={`/topic/${topic}`}>
               <a className="font-pt-sans uppercase font-bold text-lightBlue-600 text-lg pl-8">
@@ -70,23 +68,24 @@ const Post = ({
           </>
 
           <div className="grid gap-4 grid-cols-12">
-            <div className="col-span-8">
+            <div className="lg:col-span-8 col-span-12">
               <div className="mb-8">
-              <Image
-                src={`http://localhost:1337${banner.url}`}
-                width={1366}
-                height={950}
-                layout="responsive"
-                className="object-cover object-center"
-              />
+                <Image
+                  src={`http://localhost:1337${banner.url}`}
+                  width={1366}
+                  height={950}
+                  layout="responsive"
+                  className="object-cover object-center"
+                />
               </div>
-              <main key={id} className="px-8 mt-5">
+              <main key={id} className="lg:px-8 md:px-16 mt-5">
                 <div className="font-serif leading-7.5 text-gray-700 text-lg">
                   <MDXRemote {...content} components={components} />
                 </div>
               </main>
             </div>
-            <div className="col-span-4">
+
+            <div className="col-span-4 hidden lg:block">
               <div className="border-l pl-3 pb-2">
                 <h1 className="text-4xl font-pt-sans font-bold mb-4">
                   Featured
@@ -110,11 +109,19 @@ const Post = ({
         </div>
       </section>
       <section className="bg-gray-800 py-3 my-2">
-        <div className="container mx-auto">
+        <div className="container mx-auto horizontal-spacing">
           <h1 className="font-pt-sans font-bold text-white text-4xl mb-2">
             Similar
           </h1>
-          <div className="flex justify-between">
+          {/* <div className="">
+            <SimilarArticles />
+            <SimilarArticles />
+            <SimilarArticles />
+            <SimilarArticles />
+          </div> */}
+
+          <div className="grid gap-4 grid-cols-4">
+            <SimilarArticles />
             <SimilarArticles />
             <SimilarArticles />
             <SimilarArticles />
@@ -128,8 +135,8 @@ const Post = ({
 function SimilarArticles() {
   return (
     <Link href="/">
-      <a className="px-2">
-        <div className="relative h-80 w-full overflow-hidden">
+      <a className="px-2 col-span-2 lg:col-auto">
+        <div className="relative xl:h-80 lg:h-72 md:h-64 w-full overflow-hidden">
           <Image
             className="object-cover object-center"
             src="https://source.unsplash.com/random"
@@ -140,7 +147,7 @@ function SimilarArticles() {
           <div
             style={{
               backgroundImage:
-                "linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.7) 80%, rgba(0,0,0,1) 99%)",
+                "linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.7) 75%, rgba(0,0,0,1) 99%)",
             }}
             className="absolute top-0 right-0 left-0 bottom-0"
           />

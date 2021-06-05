@@ -7,7 +7,7 @@ body {
 }
 
 .horizontal-spacing {
-  @apply 2xl:px-0 lg:px-5 md:px-3 px-2;
+  @apply 2xl:px-3 lg:px-5 md:px-3 px-2;
 }
 
 .clearfix::after {
