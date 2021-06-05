@@ -10,24 +10,17 @@ body {
   @apply 2xl:px-0 lg:px-5 md:px-3 px-2;
 }
 
-.centered-item {
-  transform: translate(-50%, -50%);
-}
-
-.vertically-centered {
-  transform: translateY(-50%);
-}
-
-.horizontally-centered {
-  transform: translateY(-50%);
-}
-
 .clearfix::after {
   content: "";
   clear: both;
   display: table;
 }
 
+.divider {
+  border-color: rgba(0, 0, 0, 0.2);
+}
+
+/* interactive search */
 #searchControl input {
   transition: width 0.3s ease;
 }
@@ -46,6 +39,8 @@ body {
   @apply longInput;
 }
 
+/*  */
+
 #postIntroParent article:last-child {
   margin-bottom: 0rem;
 }
@@ -58,7 +53,7 @@ body {
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
-  line-height: 1.5rem;     /* fallback */
+  line-height: 1.5rem; /* fallback */
   /* max-height: 32px;      fallback */
   -webkit-line-clamp: 1; /* number of lines to show */
   -webkit-box-orient: vertical;

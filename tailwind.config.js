@@ -26,6 +26,7 @@ module.exports = {
       lightBlue: colors.lightBlue,
       gray: colors.gray,
       trueGray: colors.trueGray,
+      red: colors.red
     },
     extend: {
       fontSize: {

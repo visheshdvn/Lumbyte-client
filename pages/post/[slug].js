@@ -10,6 +10,7 @@ import Head from "next/head"
 // custom mdx component imports
 import Paragraph from "../../components/blogtext/paragraph"
 import { H1, H2, H3 } from "../../components/blogtext/headings"
+import Img from '../../components/blogtext/image'
 
 const Post = ({
   postData: {
@@ -31,6 +32,7 @@ const Post = ({
     h1: (props) => <H1 {...props} />,
     h2: (props) => <H2 {...props} />,
     h3: (props) => <H3 {...props} />,
+    img: (props) => <Img {...props} />
   }
   return (
     <>

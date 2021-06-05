@@ -32,7 +32,7 @@ const WidePeek = (
       </div>
       <div className="flex-1 bg-blue-100 pl-3 flex flex-col">
         {/* link to topic page */}
-        <Link href="/">
+        <Link href={`/topic/${topic}`}>
           <a>
             <h3 className="uppercase font-pt-sans font-bold lg:leading-5 md:leading-4 text-lightBlue-600 mb-1 xl:text-lg md:text-base">
               {topic}
