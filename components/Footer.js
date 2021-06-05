@@ -6,7 +6,7 @@ const Footer = () => {
   return (
     <footer className="body-font bg-gray-800">
       <div className="container px-5 py-8 mx-auto flex items-center sm:flex-row flex-col">
-        <a className="flex title-font font-medium items-center md:justify-start justify-center">
+        <div className="flex title-font font-medium items-center md:justify-start justify-center">
           <div className="flex-shrink-0 flex items-center">
             <Link href="/">
               <a className="items-center flex justify-center overflow-hidden">
@@ -18,7 +18,7 @@ const Footer = () => {
               </a>
             </Link>
           </div>
-        </a>
+        </div>
         <p className="text-sm text-gray-500 sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-200 sm:py-1 sm:mt-0 mt-4 flex">
           <a
             href="https://facebook.com"
