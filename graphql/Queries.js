@@ -17,6 +17,7 @@ export async function getPostBySlug(slug) {
           banner {
             alternativeText
             url
+            formats
           }
           content
         }

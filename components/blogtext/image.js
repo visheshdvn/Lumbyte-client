@@ -1,16 +1,14 @@
 import React from "react"
-import Image from "next/image"
+// import Image from "next/image"
 
 const Img = ({src, alt}) => {
   return (
-    <div className="w-full overflow-hidden border relativ">
-      <Image
-        src={`http://172.23.16.255:1337${src}`}
+    <div className="overflow-hidden mb-7">
+      <img
+        src={`http://localhost:1337${src}`}
         alt={alt}
         layout="fill"
-        className="object-fit absolute top-0"
-        // width={1000}
-        // height={1000}
+        className="object-fit object-center"
       />
     </div>
   )

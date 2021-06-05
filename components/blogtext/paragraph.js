@@ -5,7 +5,7 @@ const Paragraph = ({ children }) => {
   if (React.isValidElement(children)) {
     return <>{children}</>
   } else {
-    return <p className="text-lg mb-7 leading-7.5 text-gray-700">{children}</p>
+    return <p className="mb-7">{children}</p>
   }
 }
 

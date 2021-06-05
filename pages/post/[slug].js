@@ -1,16 +1,21 @@
-import React from "react"
+import React, {Suspense, lazy} from "react"
 import { getSlugs, getPostBySlug } from "../../graphql/Queries"
-import Image from "next/image"
 import { ClockIcon, CalendarIcon } from "@heroicons/react/outline"
 import { serialize } from "next-mdx-remote/serialize"
 import { MDXRemote } from "next-mdx-remote"
+import Image from "next/image"
 import Link from "next/link"
 import Head from "next/head"
+
 
 // custom mdx component imports
 import Paragraph from "../../components/blogtext/paragraph"
 import { H1, H2, H3 } from "../../components/blogtext/headings"
-import Img from '../../components/blogtext/image'
+import Img from "../../components/blogtext/image"
+import Ul from "../../components/blogtext/ul"
+
+
+// const Img = lazy(() => import('../../components/blogtext/image'))
 
 const Post = ({
   postData: {
@@ -25,14 +30,15 @@ const Post = ({
   },
 }) => {
   const stringdate = new Date(date).toDateString()
-  console.log(metadescription)
+  // console.log(metadescription)
 
   const components = {
     p: (props) => <Paragraph {...props} />,
     h1: (props) => <H1 {...props} />,
     h2: (props) => <H2 {...props} />,
     h3: (props) => <H3 {...props} />,
-    img: (props) => <Img {...props} />
+    img: (props) => <Img {...props} />,
+    ul: (props) => <Ul {...props} />
   }
   return (
     <>
@@ -40,13 +46,14 @@ const Post = ({
         <meta name="description" content={metadescription} />
       </Head>
       <section className="">
-        <div style={{borderColor: "rgba(0,0,0,0.20)"}} className="container mt-2 mx-auto horizontal-spacing pt-16 border-b">
+        <div
+          style={{ borderColor: "rgba(0,0,0,0.20)" }}
+          className="container mt-2 mx-auto horizontal-spacing pt-16 border-b"
+        >
           <>
             <Link href={`/topic/${topic}`}>
-              <a>
-                <h4 className="font-pt-sans uppercase font-bold text-lightBlue-600 text-lg pl-8 mb-3">
-                  {topic}
-                </h4>
+              <a className="font-pt-sans uppercase font-bold text-lightBlue-600 text-lg pl-8 mb-3">
+                {topic}
               </a>
             </Link>
 
@@ -74,7 +81,7 @@ const Post = ({
                 className="object-cover object-center"
               />
               <main key={id} className="px-8 mt-5">
-                <div className="prose lg:prose-lg font-serif">
+                <div className="font-serif leading-7.5 text-gray-700 text-lg">
                   <MDXRemote {...content} components={components} />
                 </div>
               </main>
@@ -139,7 +146,9 @@ function SimilarArticles() {
             className="absolute top-0 right-0 left-0 bottom-0"
           />
 
-          <h3 className="absolute bottom-2 right-2 left-2 font-coda text-white text-lg leading-6">Voluptate adipisicing occaecat quis mollit et laborum commodo.</h3>
+          <h3 className="absolute bottom-2 right-2 left-2 font-coda text-white text-lg leading-6">
+            Voluptate adipisicing occaecat quis mollit et laborum commodo.
+          </h3>
         </div>
       </a>
     </Link>
@@ -151,9 +160,10 @@ export async function getStaticProps(context) {
   const { params } = context
   const { slug } = params
 
-  const data = await getPostBySlug(slug)
+  const {data} = await getPostBySlug(slug)
+  // console.log(JSON.stringify(data.data.blogposts[0].banner, null, 4));
 
-  const mdxSource = await serialize(data.data.blogposts[0].content)
+  const mdxSource = await serialize(data.blogposts[0].content)
   const {
     title,
     published_at,
@@ -162,7 +172,7 @@ export async function getStaticProps(context) {
     id,
     metadescription,
     minuteRead,
-  } = data.data.blogposts[0]
+  } = data.blogposts[0]
 
   return {
     props: {
