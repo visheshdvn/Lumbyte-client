@@ -1,10 +1,10 @@
 import Head from "next/head"
 import WidePeek from "../components/PostPeek/wide"
 import SmallPeek from "../components/PostPeek/smaller"
-import { getLatestPosts } from "../graphql/Queries"
+import { getLatestPosts, getfeauredPosts } from "../graphql/Queries"
 
-export default function Home({ latestPosts }) {
-  console.log(latestPosts);
+export default function Home({ latestPosts, featuredPosts }) {
+  // console.log(featuredPosts);
   return (
     <>
       <Head>
@@ -32,10 +32,7 @@ export default function Home({ latestPosts }) {
                   featured
                 </h1>
                 <div className="pt-3">
-                  <SmallPeek />
-                  <SmallPeek />
-                  <SmallPeek />
-                  <SmallPeek />
+                  {featuredPosts.map(postData => <SmallPeek populateData={postData} />)}
                 </div>
               </div>
             </div>
@@ -47,11 +44,14 @@ export default function Home({ latestPosts }) {
 }
 
 export async function getStaticProps() {
-  const { data } = await getLatestPosts(0, 10)
+  const latestPosts = await getLatestPosts(0, 10)
+  const featuredPosts = await getfeauredPosts(0, 10)
+
 
   return {
     props: {
-      latestPosts: data.blogposts
+      latestPosts: latestPosts.data.blogposts,
+      featuredPosts: featuredPosts.data.blogposts
     },
     revalidate: 10,
   }
