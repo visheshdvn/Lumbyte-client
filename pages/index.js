@@ -1,9 +1,10 @@
 import Head from "next/head"
 import WidePeek from "../components/PostPeek/wide"
 import SmallPeek from "../components/PostPeek/smaller"
-// import { getPostIntroIndex } from "../graphql/Queries"
+import { getLatestPosts } from "../graphql/Queries"
 
-export default function Home({ data }) {
+export default function Home({ latestPosts }) {
+  console.log(latestPosts);
   return (
     <>
       <Head>
@@ -18,15 +19,7 @@ export default function Home({ data }) {
                   The latest
                 </h1>
                 <div className="pt-3">
-                  <WidePeek />
-                  <WidePeek />
-                  <WidePeek />
-                  <WidePeek />
-                  <WidePeek />
-                  <WidePeek />
-                  <WidePeek />
-                  <WidePeek />
-                  <WidePeek />
+                  {latestPosts.map(postData => <WidePeek populateData={postData} />)}
                 </div>
               </div>
             </div>
@@ -53,13 +46,13 @@ export default function Home({ data }) {
   )
 }
 
-// export async function getStaticProps() {
-//   const { data } = await getPostIntroIndex(0, 10)
+export async function getStaticProps() {
+  const { data } = await getLatestPosts(0, 10)
 
-//   return {
-//     props: {
-//       data: data.blogposts
-//     },
-//     revalidate: 1,
-//   }
-// }
+  return {
+    props: {
+      latestPosts: data.blogposts
+    },
+    revalidate: 10,
+  }
+}

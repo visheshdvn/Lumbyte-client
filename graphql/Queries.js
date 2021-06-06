@@ -18,7 +18,6 @@ export async function getPostBySlug(slug) {
           banner {
             alternativeText
             url
-            formats
           }
           content
         }
@@ -46,28 +45,26 @@ export async function getSlugs() {
   return data
 }
 
-export const getTags = gql`
-  query {
-    tags {
-      tagname
-    }
-  }
-`
-export async function getPostIntroIndex(start, limit) {
+// index page
+
+export async function getLatestPosts(start, limit) {
   const data = await client.query({
     query: gql`
       query fetchPostIntro($start: Int, $limit: Int) {
-        blogposts(sort: "published_at:DESC", start: $start, limit: $limit) {
+        blogposts(sort: "id:DESC", start: $start, limit: $limit) {
           topic {
             topicname
+            associatedColour
           }
-          title
           banner {
             url
+            alternativeText
           }
-          published_at
-          slug
+          title
           excerpt
+          published_at
+          minuteRead
+          slug
         }
       }
     `,

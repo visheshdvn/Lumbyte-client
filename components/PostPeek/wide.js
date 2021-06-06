@@ -3,26 +3,21 @@ import Image from "next/image"
 import Link from "next/link"
 import { ClockIcon, CalendarIcon } from "@heroicons/react/outline"
 
-const WidePeek = (
-  {
-    // postData: { title, topic, banner, published_at, slug, excerpt },
-  }
-) => {
+const WidePeek = ({
+  populateData: { title, topic, banner, published_at, slug, excerpt, minuteRead },
+}) => {
   // console.log(excerpt)
   // console.log(title, topic, banner, published_at, slug)
-  const title = "Cillum ea magna officia consequat enim consectetur nulla excepteur veniam nisi eiusmod."
-  const topic = "technology"
-  const banner = "https://source.unsplash.com/random/800x600"
-  const excerpt = "Adipisicing cillum aliquip proident eiusmod sint irure sunt ipsum enim do ullamco."
+  // const banner = "https://source.unsplash.com/random/800x600"
 
   return (
     <article className="widearticle overflow-hidden flex mb-16">
-      <div className="xl:h-44 xl:w-72 lg:h-40 lg:w-64 md:h-40 md:w-40 overflow-hidden border">
-        <Link href="/">
+      <div className="xl:h-44 xl:w-72 lg:h-40 lg:w-64 md:h-40 md:w-40 overflow-hidden">
+        <Link href={`/post/${slug}`}>
           <a>
             <Image
-              src={banner}
-              alt="post banner"
+              src={`http://localhost:1337${banner.url}`}
+              alt={banner.alternativeText}
               className="object-cover object-center"
               width={600}
               height={600}
@@ -32,11 +27,12 @@ const WidePeek = (
       </div>
       <div className="flex-1 bg-blue-100 pl-3 flex flex-col">
         {/* link to topic page */}
-        <Link href={`/topic/${topic}`}>
-          <a>
-            <h3 className="uppercase font-pt-sans font-bold lg:leading-5 md:leading-4 text-lightBlue-600 mb-1 xl:text-lg md:text-base">
-              {topic}
-            </h3>
+        <Link href={`/topic/${topic.topicname}`}>
+          <a
+            style={{ color: `#${topic.associatedColour}` }}
+            className="uppercase font-pt-sans font-bold lg:leading-5 md:leading-4 text-lightBlue-600 mb-1 xl:text-lg md:text-base"
+          >
+            {topic.topicname}
           </a>
         </Link>
         {/* link to blogpost */}

@@ -14,8 +14,6 @@ import Img from "../../components/blogtext/image"
 import Ul from "../../components/blogtext/ul"
 import Code from "../../components/blogtext/code"
 
-// const Img = lazy(() => import('../../components/blogtext/image'))
-
 const Post = ({
   postData: {
     id,
@@ -114,12 +112,6 @@ const Post = ({
           <h1 className="font-pt-sans font-bold text-white text-4xl mb-2">
             Similar
           </h1>
-          {/* <div className="">
-            <SimilarArticles />
-            <SimilarArticles />
-            <SimilarArticles />
-            <SimilarArticles />
-          </div> */}
 
           <div className="grid lg:gap-1 md:gap-4 grid-cols-4">
             <SimilarArticles />
