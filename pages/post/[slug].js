@@ -22,6 +22,7 @@ const Post = ({
     minutes,
     metadescription,
     title,
+    associatedColor,
     date,
     topic,
     banner,
@@ -29,15 +30,14 @@ const Post = ({
   },
 }) => {
   const stringdate = new Date(date).toDateString()
-  // console.log(metadescription)
 
   const components = {
     p: (props) => <Paragraph {...props} />,
     h1: (props) => <H1 {...props} />,
     h2: (props) => <H2 {...props} />,
     h3: (props) => <H3 {...props} />,
-    img: (props) => <Img {...props} />,
     ul: (props) => <Ul {...props} />,
+    img: (props) => <Img {...props} />,
     code: (props) => <Code {...props} />,
   }
   return (
@@ -49,7 +49,7 @@ const Post = ({
         <div className="container mt-2 mx-auto horizontal-spacing lg:pt-16 md:pt-10 border-b">
           <>
             <Link href={`/topic/${topic}`}>
-              <a className="font-pt-sans uppercase font-bold text-lightBlue-600 text-lg pl-8">
+              <a style={{color: `#${associatedColor}`}} className="font-pt-sans uppercase font-bold text-lg pl-8">
                 {topic}
               </a>
             </Link>
@@ -72,6 +72,7 @@ const Post = ({
               <div className="mb-8">
                 <Image
                   src={`http://localhost:1337${banner.url}`}
+                  alt={banner.alternativeText}
                   width={1366}
                   height={950}
                   layout="responsive"
@@ -79,7 +80,7 @@ const Post = ({
                 />
               </div>
               <main key={id} className="lg:px-8 md:px-16 mt-5">
-                <div className="font-serif leading-7.5 text-gray-700 text-lg">
+                <div className="font-serif leading-7.5 text-lg">
                   <MDXRemote {...content} components={components} />
                 </div>
               </main>
@@ -186,6 +187,7 @@ export async function getStaticProps(context) {
         title,
         date: published_at,
         topic: topic.topicname,
+        associatedColor: topic.associatedColour,
         banner,
         id,
         content: mdxSource,

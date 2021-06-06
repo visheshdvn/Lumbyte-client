@@ -12,6 +12,7 @@ export async function getPostBySlug(slug) {
           published_at
           topic {
             topicname
+            associatedColour
           }
           title
           banner {
