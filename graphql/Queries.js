@@ -113,6 +113,24 @@ export async function getfeauredPosts(start, limit) {
 }
 
 // post page
+
+export async function getAssociatedColor(topicname) {
+  const data = await client.query({
+    query: gql`
+      query fetchLatestPostsOfTopicIntro($topicname: String) {
+        topics(where: { topicname: $topicname }) {
+          associatedColor
+        }
+      }
+    `,
+    variables: {
+      topicname,
+    },
+  })
+
+  return data
+}
+
 export async function getAllTopicNames() {
   const data = await client.query({
     query: gql`
@@ -127,7 +145,7 @@ export async function getAllTopicNames() {
   return data
 }
 
-export async function getLatestPostsOfTopic(topicname, start, limit) {
+export async function getTopicPageData(topicname, start, limit) {
   const data = await client.query({
     query: gql`
       query fetchLatestPostsOfTopicIntro(
@@ -155,6 +173,9 @@ export async function getLatestPostsOfTopic(topicname, start, limit) {
           minuteRead
           slug
         }
+        topics(where: { topicname: $topicname }) {
+          associatedColour
+        }
       }
     `,
     variables: {
@@ -164,5 +185,6 @@ export async function getLatestPostsOfTopic(topicname, start, limit) {
     },
   })
 
+  console.log(data)
   return data
 }

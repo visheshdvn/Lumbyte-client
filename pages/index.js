@@ -35,7 +35,7 @@ export default function Home({ latestPosts, featuredPosts }) {
                 </h1>
                 <div className="pt-3">
                   {featuredPosts.map((postData) => (
-                    <SmallPeek populateData={postData} />
+                    <SmallPeek key={postData.slug} populateData={postData} />
                   ))}
                 </div>
               </div>

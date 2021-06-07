@@ -3,18 +3,28 @@ import { useRouter } from "next/router"
 // import bgimg from "/topicbg/technology.jpg"
 import WidePeek from "../../components/PostPeek/wide"
 import SmallPeek from "../../components/PostPeek/smaller"
-import { getAllTopicNames, getLatestPostsOfTopic } from "../../graphql/Queries"
+import { getAllTopicNames, getTopicPageData } from "../../graphql/Queries"
 
-const Topic = ({ latestPosts }) => {
-  console.log(latestPosts)
+function hexToRgb(hex) {
+  var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+  return result ? {
+    r: parseInt(result[1], 16),
+    g: parseInt(result[2], 16),
+    b: parseInt(result[3], 16)
+  } : null;
+}
+
+const Topic = ({ latestPosts, headerColor }) => {
   const router = useRouter()
   const { topic } = router.query
+  const rgb = hexToRgb(headerColor)
+  const {r, g, b} = rgb
 
   return (
     <>
       <div
         style={{
-          backgroundImage: `radial-gradient( rgba(56, 131, 202, 1), rgba(56, 131, 202, 0.85)), url(/topicbg/technology.jpg)`,
+          backgroundImage: `radial-gradient( rgba(${r}, ${g}, ${b}, 1), rgba(${r}, ${g}, ${b}, 0.85)), url(/topicbg/technology.jpg)`,
         }}
         className="w-full h-48 bg-lightBlue-80 flex items-center justify-center bg-center bg-cover"
       >
@@ -60,11 +70,12 @@ export async function getStaticProps(context) {
   const { params } = context
   const { topic } = params
 
-  const latestPosts = await getLatestPostsOfTopic(topic, 0, 10)
+  const latestPosts = await getTopicPageData(topic, 0, 10)
 
   return {
     props: {
       latestPosts: latestPosts.data.blogposts,
+      headerColor: latestPosts.data.topics[0].associatedColour
     },
     revalidate: 86400,
   }

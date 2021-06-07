@@ -19,7 +19,6 @@ const Img = ({src, alt}) => {
   } else {
     source = `http://localhost:1337${src}`
   }
-  console.log(source);
   
   return (
     <div className="overflow-hidden mb-8 relative h-96 w-full">
