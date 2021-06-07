@@ -114,22 +114,22 @@ export async function getfeauredPosts(start, limit) {
 
 // post page
 
-export async function getAssociatedColor(topicname) {
-  const data = await client.query({
-    query: gql`
-      query fetchLatestPostsOfTopicIntro($topicname: String) {
-        topics(where: { topicname: $topicname }) {
-          associatedColor
-        }
-      }
-    `,
-    variables: {
-      topicname,
-    },
-  })
+// export async function getAssociatedColor(topicname) {
+//   const data = await client.query({
+//     query: gql`
+//       query fetchLatestPostsOfTopicIntro($topicname: String) {
+//         topics(where: { topicname: $topicname }) {
+//           associatedColor
+//         }
+//       }
+//     `,
+//     variables: {
+//       topicname,
+//     },
+//   })
 
-  return data
-}
+//   return data
+// }
 
 export async function getAllTopicNames() {
   const data = await client.query({
@@ -153,64 +153,43 @@ export async function getTopicPageData(topicname, start, limit) {
         $start: Int
         $limit: Int
       ) {
-        blogposts(
+        latestPosts: blogposts(
           where: { topic: { topicname: $topicname } }
           sort: "id:DESC"
           start: $start
           limit: $limit
         ) {
-          topic {
-            topicname
-            associatedColour
-          }
-          banner {
-            url
-            alternativeText
-          }
-          title
+          ...toFetch
           excerpt
-          published_at
-          minuteRead
-          slug
         }
-        topics(where: { topicname: $topicname }) {
-          associatedColour
-        }
-      }
-    `,
-    variables: {
-      topicname,
-      start,
-      limit,
-    },
-  })
 
-  return data
-}
-
-export async function getfeauredPostsOnTopic(topicname, start, limit) {
-  const data = await client.query({
-    query: gql`
-      query FeaturedOnly($topicname: String, $start: Int, $limit: Int) {
-        blogposts(
+        featured: blogposts(
           where: { isfeatured: true, topic: { topicname: $topicname } }
           start: $start
           limit: $limit
           sort: "id:DESC"
         ) {
-          topic {
-            topicname
-            associatedColour
-          }
-          banner {
-            url
-            alternativeText
-          }
-          title
-          minuteRead
-          published_at
-          slug
+          ...toFetch
         }
+
+        color: topics(where: { topicname: $topicname }) {
+          associatedColour
+        }
+      }
+
+      fragment toFetch on Blogposts {
+        topic {
+          topicname
+          associatedColour
+        }
+        banner {
+          url
+          alternativeText
+        }
+        title
+        minuteRead
+        published_at
+        slug
       }
     `,
     variables: {
@@ -222,3 +201,38 @@ export async function getfeauredPostsOnTopic(topicname, start, limit) {
 
   return data
 }
+
+// export async function getfeauredPostsOnTopic(topicname, start, limit) {
+//   const data = await client.query({
+//     query: gql`
+//       query FeaturedOnly($topicname: String, $start: Int, $limit: Int) {
+//         blogposts(
+//           where: { isfeatured: true, topic: { topicname: $topicname } }
+//           start: $start
+//           limit: $limit
+//           sort: "id:DESC"
+//         ) {
+//           topic {
+//             topicname
+//             associatedColour
+//           }
+//           banner {
+//             url
+//             alternativeText
+//           }
+//           title
+//           minuteRead
+//           published_at
+//           slug
+//         }
+//       }
+//     `,
+//     variables: {
+//       topicname,
+//       start,
+//       limit,
+//     },
+//   })
+
+//   return data
+// }
