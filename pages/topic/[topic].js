@@ -42,7 +42,7 @@ const Topic = ({ latestPosts, headerColor, featuredPosts }) => {
             <div className="col-span-9">
               <div className="">
                 <h1 className="uppercase font-bungee-shade xl:text-4.5xl lg:text-4xl md:text-3xl text-black pb-3">
-                  The latest
+                  latest
                 </h1>
                 <div className="pt-3">
                   {latestPosts.map((postData) => (
