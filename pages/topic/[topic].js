@@ -3,8 +3,10 @@ import { useRouter } from "next/router"
 // import bgimg from "/topicbg/technology.jpg"
 import WidePeek from "../../components/PostPeek/wide"
 import SmallPeek from "../../components/PostPeek/smaller"
+import { getAllTopicNames, getLatestPostsOfTopic } from "../../graphql/Queries"
 
-const Topic = () => {
+const Topic = ({ latestPosts }) => {
+  console.log(latestPosts)
   const router = useRouter()
   const { topic } = router.query
 
@@ -27,15 +29,9 @@ const Topic = () => {
                   The latest
                 </h1>
                 <div className="pt-3">
-                  <WidePeek />
-                  <WidePeek />
-                  <WidePeek />
-                  <WidePeek />
-                  <WidePeek />
-                  <WidePeek />
-                  <WidePeek />
-                  <WidePeek />
-                  <WidePeek />
+                  {latestPosts.map((postData) => (
+                    <WidePeek key={postData.slug} populateData={postData} />
+                  ))}
                 </div>
               </div>
             </div>
@@ -47,12 +43,7 @@ const Topic = () => {
                 >
                   featured
                 </h1>
-                <div className="pt-3">
-                  <SmallPeek />
-                  <SmallPeek />
-                  <SmallPeek />
-                  <SmallPeek />
-                </div>
+                <div className="pt-3">{/* <SmallPeek /> */}</div>
               </div>
             </div>
           </div>
@@ -63,3 +54,27 @@ const Topic = () => {
 }
 
 export default Topic
+
+export async function getStaticProps(context) {
+  console.log("Re-Generating...")
+  const { params } = context
+  const { topic } = params
+
+  const latestPosts = await getLatestPostsOfTopic(topic, 0, 10)
+
+  return {
+    props: {
+      latestPosts: latestPosts.data.blogposts,
+    },
+    revalidate: 86400,
+  }
+}
+
+export async function getStaticPaths() {
+  const { data } = await getAllTopicNames()
+
+  return {
+    paths: data.topics.map((item) => ({ params: { topic: item.topicname } })),
+    fallback: true,
+  }
+}

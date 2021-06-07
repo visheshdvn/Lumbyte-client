@@ -19,7 +19,9 @@ export default function Home({ latestPosts, featuredPosts }) {
                   The latest
                 </h1>
                 <div className="pt-3">
-                  {latestPosts.map(postData => <WidePeek populateData={postData} />)}
+                  {latestPosts.map((postData) => (
+                    <WidePeek key={postData.slug} populateData={postData} />
+                  ))}
                 </div>
               </div>
             </div>
@@ -32,7 +34,9 @@ export default function Home({ latestPosts, featuredPosts }) {
                   featured
                 </h1>
                 <div className="pt-3">
-                  {featuredPosts.map(postData => <SmallPeek populateData={postData} />)}
+                  {featuredPosts.map((postData) => (
+                    <SmallPeek populateData={postData} />
+                  ))}
                 </div>
               </div>
             </div>
@@ -47,11 +51,10 @@ export async function getStaticProps() {
   const latestPosts = await getLatestPosts(0, 10)
   const featuredPosts = await getfeauredPosts(0, 10)
 
-
   return {
     props: {
       latestPosts: latestPosts.data.blogposts,
-      featuredPosts: featuredPosts.data.blogposts
+      featuredPosts: featuredPosts.data.blogposts,
     },
     revalidate: 10,
   }

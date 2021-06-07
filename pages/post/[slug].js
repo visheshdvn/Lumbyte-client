@@ -187,7 +187,7 @@ export async function getStaticProps(context) {
         minutes: minuteRead,
       },
     },
-    revalidate: 1,
+    revalidate: 86400,
   }
 }
 

@@ -82,7 +82,12 @@ export async function getfeauredPosts(start, limit) {
   const data = await client.query({
     query: gql`
       query FeaturedOnly($start: Int, $limit: Int) {
-        blogposts(where: { isfeatured: true }, start: $start, limit: $limit, sort: "id:DESC") {
+        blogposts(
+          where: { isfeatured: true }
+          start: $start
+          limit: $limit
+          sort: "id:DESC"
+        ) {
           topic {
             topicname
             associatedColour
@@ -99,6 +104,61 @@ export async function getfeauredPosts(start, limit) {
       }
     `,
     variables: {
+      start,
+      limit,
+    },
+  })
+
+  return data
+}
+
+// post page
+export async function getAllTopicNames() {
+  const data = await client.query({
+    query: gql`
+      query getAllTopics {
+        topics {
+          topicname
+        }
+      }
+    `,
+  })
+
+  return data
+}
+
+export async function getLatestPostsOfTopic(topicname, start, limit) {
+  const data = await client.query({
+    query: gql`
+      query fetchLatestPostsOfTopicIntro(
+        $topicname: String
+        $start: Int
+        $limit: Int
+      ) {
+        blogposts(
+          where: { topic: { topicname: $topicname } }
+          sort: "id:DESC"
+          start: $start
+          limit: $limit
+        ) {
+          topic {
+            topicname
+            associatedColour
+          }
+          banner {
+            url
+            alternativeText
+          }
+          title
+          excerpt
+          published_at
+          minuteRead
+          slug
+        }
+      }
+    `,
+    variables: {
+      topicname,
       start,
       limit,
     },
