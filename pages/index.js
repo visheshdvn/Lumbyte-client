@@ -1,7 +1,7 @@
 import Head from "next/head"
 import WidePeek from "../components/PostPeek/wide"
 import SmallPeek from "../components/PostPeek/smaller"
-import { getLatestPosts, getfeauredPosts } from "../graphql/buildTimeQueries"
+import { getIndexPageData } from "../graphql/buildTimeQueries"
 
 export default function Home({ latestPosts, featuredPosts }) {
   // console.log(featuredPosts);
@@ -50,13 +50,13 @@ export default function Home({ latestPosts, featuredPosts }) {
 }
 
 export async function getStaticProps() {
-  const latestPosts = await getLatestPosts(0, 10)
-  const featuredPosts = await getfeauredPosts(0, 10)
+  const {data} = await getIndexPageData(0, 10)
+  // const featuredPosts = await getfeauredPosts(0, 10)
 
   return {
     props: {
-      latestPosts: latestPosts.data.blogposts,
-      featuredPosts: featuredPosts.data.blogposts,
+      latestPosts: data.latestPosts,
+      featuredPosts: data.featured,
     },
     revalidate: 10,
   }

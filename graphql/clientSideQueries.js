@@ -47,27 +47,12 @@ export async function getSlugs() {
 
 // index page
 
-export async function getIndexPageData(start, limit) {
+export async function getLatestPosts(start, limit) {
   const data = await client.query({
     query: gql`
       query fetchPostIntro($start: Int, $limit: Int) {
-        latestPosts: blogposts(sort: "id:DESC", start: $start, limit: $limit) {
-          ...toFetch
-          excerpt
-        }
-
-        featured: blogposts(
-          where: { isfeatured: true }
-          start: $start
-          limit: $limit
-          sort: "id:DESC"
-        ) {
-          ...toFetch
-        }
-      }
-
-      fragment toFetch on Blogposts {
-        topic {
+        blogposts(sort: "id:DESC", start: $start, limit: $limit) {
+          topic {
             topicname
             associatedColour
           }
@@ -76,9 +61,11 @@ export async function getIndexPageData(start, limit) {
             alternativeText
           }
           title
-          minuteRead
+          excerpt
           published_at
+          minuteRead
           slug
+        }
       }
     `,
     variables: {
@@ -91,39 +78,39 @@ export async function getIndexPageData(start, limit) {
 }
 
 // featured post all topics
-// export async function getfeauredPosts(start, limit) {
-//   const data = await client.query({
-//     query: gql`
-//       query FeaturedOnly($start: Int, $limit: Int) {
-//         blogposts(
-//           where: { isfeatured: true }
-//           start: $start
-//           limit: $limit
-//           sort: "id:DESC"
-//         ) {
-//           topic {
-//             topicname
-//             associatedColour
-//           }
-//           banner {
-//             url
-//             alternativeText
-//           }
-//           title
-//           minuteRead
-//           published_at
-//           slug
-//         }
-//       }
-//     `,
-//     variables: {
-//       start,
-//       limit,
-//     },
-//   })
+export async function getfeauredPosts(start, limit) {
+  const data = await client.query({
+    query: gql`
+      query FeaturedOnly($start: Int, $limit: Int) {
+        blogposts(
+          where: { isfeatured: true }
+          start: $start
+          limit: $limit
+          sort: "id:DESC"
+        ) {
+          topic {
+            topicname
+            associatedColour
+          }
+          banner {
+            url
+            alternativeText
+          }
+          title
+          minuteRead
+          published_at
+          slug
+        }
+      }
+    `,
+    variables: {
+      start,
+      limit,
+    },
+  })
 
-//   return data
-// }
+  return data
+}
 
 // post page
 

@@ -6,7 +6,6 @@ import SmallPeek from "../../components/PostPeek/smaller"
 import {
   getAllTopicNames,
   getTopicPageData,
-  // getfeauredPostsOnTopic,
 } from "../../graphql/buildTimeQueries"
 
 function hexToRgb(hex) {
