@@ -3,22 +3,29 @@ import { useRouter } from "next/router"
 // import bgimg from "/topicbg/technology.jpg"
 import WidePeek from "../../components/PostPeek/wide"
 import SmallPeek from "../../components/PostPeek/smaller"
-import { getAllTopicNames, getTopicPageData } from "../../graphql/Queries"
+import {
+  getAllTopicNames,
+  getTopicPageData,
+  getfeauredPostsOnTopic,
+} from "../../graphql/Queries"
 
 function hexToRgb(hex) {
-  var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-  return result ? {
-    r: parseInt(result[1], 16),
-    g: parseInt(result[2], 16),
-    b: parseInt(result[3], 16)
-  } : null;
+  var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex)
+  return result
+    ? {
+        r: parseInt(result[1], 16),
+        g: parseInt(result[2], 16),
+        b: parseInt(result[3], 16),
+      }
+    : null
 }
 
-const Topic = ({ latestPosts, headerColor }) => {
+const Topic = ({ latestPosts, headerColor, featuredPosts }) => {
+  console.log(featuredPosts)
   const router = useRouter()
   const { topic } = router.query
   const rgb = hexToRgb(headerColor)
-  const {r, g, b} = rgb
+  const { r, g, b } = rgb
 
   return (
     <>
@@ -46,15 +53,21 @@ const Topic = ({ latestPosts, headerColor }) => {
               </div>
             </div>
             <div className="col-span-4">
-              <div className="border-l pl-3 pb-1">
-                <h1
-                  style={{ fontSize: "2.625re" }}
-                  className="uppercase font-bungee-shade xl:text-4.5xl lg:text-4xl md:text-3xl text-black pb-3"
-                >
-                  featured
-                </h1>
-                <div className="pt-3">{/* <SmallPeek /> */}</div>
-              </div>
+              {featuredPosts.length > 0 ? (
+                <div className="border-l pl-3 pb-1">
+                  <h1
+                    style={{ fontSize: "2.625re" }}
+                    className="uppercase font-bungee-shade xl:text-4.5xl lg:text-4xl md:text-3xl text-black pb-3"
+                  >
+                    featured
+                  </h1>
+                  <div className="pt-3">
+                    {featuredPosts.map((postData) => (
+                      <SmallPeek key={postData.slug} populateData={postData} />
+                    ))}
+                  </div>
+                </div>
+              ) : null}
             </div>
           </div>
         </div>
@@ -71,11 +84,13 @@ export async function getStaticProps(context) {
   const { topic } = params
 
   const latestPosts = await getTopicPageData(topic, 0, 10)
+  const featuredPosts = await getfeauredPostsOnTopic(topic, 0, 10)
 
   return {
     props: {
       latestPosts: latestPosts.data.blogposts,
-      headerColor: latestPosts.data.topics[0].associatedColour
+      featuredPosts: featuredPosts.data.blogposts,
+      headerColor: latestPosts.data.topics[0].associatedColour,
     },
     revalidate: 86400,
   }

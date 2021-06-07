@@ -185,6 +185,40 @@ export async function getTopicPageData(topicname, start, limit) {
     },
   })
 
-  console.log(data)
+  return data
+}
+
+export async function getfeauredPostsOnTopic(topicname, start, limit) {
+  const data = await client.query({
+    query: gql`
+      query FeaturedOnly($topicname: String, $start: Int, $limit: Int) {
+        blogposts(
+          where: { isfeatured: true, topic: { topicname: $topicname } }
+          start: $start
+          limit: $limit
+          sort: "id:DESC"
+        ) {
+          topic {
+            topicname
+            associatedColour
+          }
+          banner {
+            url
+            alternativeText
+          }
+          title
+          minuteRead
+          published_at
+          slug
+        }
+      }
+    `,
+    variables: {
+      topicname,
+      start,
+      limit,
+    },
+  })
+
   return data
 }
