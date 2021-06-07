@@ -1,5 +1,5 @@
 import React, { Suspense, lazy } from "react"
-import { getSlugs, getPostBySlug } from "../../graphql/Queries"
+import { getSlugs, getPostBySlug } from "../../graphql/buildTimeQueries"
 import { ClockIcon, CalendarIcon } from "@heroicons/react/outline"
 import { serialize } from "next-mdx-remote/serialize"
 import { MDXRemote } from "next-mdx-remote"

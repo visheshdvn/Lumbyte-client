@@ -6,8 +6,7 @@ import SmallPeek from "../../components/PostPeek/smaller"
 import {
   getAllTopicNames,
   getTopicPageData,
-  getfeauredPostsOnTopic,
-} from "../../graphql/Queries"
+} from "../../graphql/buildTimeQueries"
 
 function hexToRgb(hex) {
   var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex)
@@ -21,7 +20,6 @@ function hexToRgb(hex) {
 }
 
 const Topic = ({ latestPosts, headerColor, featuredPosts }) => {
-  console.log(featuredPosts)
   const router = useRouter()
   const { topic } = router.query
   const rgb = hexToRgb(headerColor)
@@ -40,7 +38,7 @@ const Topic = ({ latestPosts, headerColor, featuredPosts }) => {
       <section className="body-font">
         <div className="container mx-auto horizontal-spacing">
           <div className="grid gap-4 grid-cols-12 mt-2 border-t pt-1">
-            <div className="col-span-8">
+            <div className="col-span-9">
               <div className="">
                 <h1 className="uppercase font-bungee-shade xl:text-4.5xl lg:text-4xl md:text-3xl text-black pb-3">
                   The latest
@@ -52,7 +50,7 @@ const Topic = ({ latestPosts, headerColor, featuredPosts }) => {
                 </div>
               </div>
             </div>
-            <div className="col-span-4">
+            <div className="col-span-3">
               {featuredPosts.length > 0 ? (
                 <div className="border-l pl-3 pb-1">
                   <h1
@@ -83,14 +81,14 @@ export async function getStaticProps(context) {
   const { params } = context
   const { topic } = params
 
-  const latestPosts = await getTopicPageData(topic, 0, 10)
-  const featuredPosts = await getfeauredPostsOnTopic(topic, 0, 10)
+  const {data} = await getTopicPageData(topic, 0, 10)
+  // const featuredPosts = await getfeauredPostsOnTopic(topic, 0, 10)
 
   return {
     props: {
-      latestPosts: latestPosts.data.blogposts,
-      featuredPosts: featuredPosts.data.blogposts,
-      headerColor: latestPosts.data.topics[0].associatedColour,
+      latestPosts: data.latestPosts,
+      featuredPosts: data.featured,
+      headerColor: data.color[0].associatedColour,
     },
     revalidate: 86400,
   }
