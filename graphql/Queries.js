@@ -145,7 +145,7 @@ export async function getAllTopicNames() {
   return data
 }
 
-export async function getTopicPageData(topicname, start, limit) {
+export async function getPostsOfTopic(topicname, start, limit) {
   const data = await client.query({
     query: gql`
       query fetchLatestPostsOfTopicIntro(
@@ -153,43 +153,30 @@ export async function getTopicPageData(topicname, start, limit) {
         $start: Int
         $limit: Int
       ) {
-        latestPosts: blogposts(
+        blogposts(
           where: { topic: { topicname: $topicname } }
           sort: "id:DESC"
           start: $start
           limit: $limit
         ) {
-          ...toFetch
+          topic {
+            topicname
+            associatedColour
+          }
+          banner {
+            url
+            alternativeText
+          }
+          title
+          minuteRead
+          published_at
+          slug
           excerpt
-        }
-
-        featured: blogposts(
-          where: { isfeatured: true, topic: { topicname: $topicname } }
-          start: $start
-          limit: $limit
-          sort: "id:DESC"
-        ) {
-          ...toFetch
         }
 
         color: topics(where: { topicname: $topicname }) {
           associatedColour
         }
-      }
-
-      fragment toFetch on Blogposts {
-        topic {
-          topicname
-          associatedColour
-        }
-        banner {
-          url
-          alternativeText
-        }
-        title
-        minuteRead
-        published_at
-        slug
       }
     `,
     variables: {
@@ -202,37 +189,37 @@ export async function getTopicPageData(topicname, start, limit) {
   return data
 }
 
-// export async function getfeauredPostsOnTopic(topicname, start, limit) {
-//   const data = await client.query({
-//     query: gql`
-//       query FeaturedOnly($topicname: String, $start: Int, $limit: Int) {
-//         blogposts(
-//           where: { isfeatured: true, topic: { topicname: $topicname } }
-//           start: $start
-//           limit: $limit
-//           sort: "id:DESC"
-//         ) {
-//           topic {
-//             topicname
-//             associatedColour
-//           }
-//           banner {
-//             url
-//             alternativeText
-//           }
-//           title
-//           minuteRead
-//           published_at
-//           slug
-//         }
-//       }
-//     `,
-//     variables: {
-//       topicname,
-//       start,
-//       limit,
-//     },
-//   })
+export async function getfeauredPostsOfTopic(topicname, start, limit) {
+  const data = await client.query({
+    query: gql`
+      query FeaturedOnly($topicname: String, $start: Int, $limit: Int) {
+        blogposts(
+          where: { isfeatured: true, topic: { topicname: $topicname } }
+          start: $start
+          limit: $limit
+          sort: "id:DESC"
+        ) {
+          topic {
+            topicname
+            associatedColour
+          }
+          banner {
+            url
+            alternativeText
+          }
+          title
+          minuteRead
+          published_at
+          slug
+        }
+      }
+    `,
+    variables: {
+      topicname,
+      start,
+      limit,
+    },
+  })
 
-//   return data
-// }
+  return data
+}

@@ -5,8 +5,9 @@ import WidePeek from "../../components/PostPeek/wide"
 import SmallPeek from "../../components/PostPeek/smaller"
 import {
   getAllTopicNames,
-  getTopicPageData,
-} from "../../graphql/buildTimeQueries"
+  getPostsOfTopic,
+  getfeauredPostsOfTopic
+} from "../../graphql/Queries"
 
 function hexToRgb(hex) {
   var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex)
@@ -81,14 +82,14 @@ export async function getStaticProps(context) {
   const { params } = context
   const { topic } = params
 
-  const {data} = await getTopicPageData(topic, 0, 10)
-  // const featuredPosts = await getfeauredPostsOnTopic(topic, 0, 10)
+  const latestPosts = await getPostsOfTopic(topic, 0, 10)
+  const featuredPosts = await getfeauredPostsOfTopic(topic, 0, 10)
 
   return {
     props: {
-      latestPosts: data.latestPosts,
-      featuredPosts: data.featured,
-      headerColor: data.color[0].associatedColour,
+      latestPosts: latestPosts.data.blogposts,
+      featuredPosts: featuredPosts.data.blogposts,
+      headerColor: latestPosts.data.color[0].associatedColour,
     },
     revalidate: 86400,
   }
