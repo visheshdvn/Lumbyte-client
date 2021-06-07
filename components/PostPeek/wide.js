@@ -1,10 +1,19 @@
 import React from "react"
 import Image from "next/image"
 import Link from "next/link"
-import { ClockIcon, CalendarIcon } from "@heroicons/react/outline"
+
+import DateMinute from '../micro/dateMinute'
 
 const WidePeek = ({
-  populateData: { title, topic, banner, published_at, slug, excerpt, minuteRead },
+  populateData: {
+    title,
+    topic,
+    banner,
+    published_at,
+    slug,
+    excerpt,
+    minuteRead,
+  },
 }) => {
   // console.log(excerpt)
   // console.log(title, topic, banner, published_at, slug)
@@ -46,15 +55,7 @@ const WidePeek = ({
             </p>
           </a>
         </Link>
-        <div className="h-3 text-gray-400 flex items-center">
-          <div className="flex items-center h-3 text-grayText overflow-y-hidden">
-            <CalendarIcon className="h-full inline mb-1 mr-1 mt-1" />
-            <span className="text-xs font-coda leading-3 mt-1">26 May</span>
-            <span className="mx-2">|</span>
-            <ClockIcon className="h-full inline mb-1 mr-1 mt-1" />
-            <span className="text-xs font-coda leading-3 mt-1">5 Min read</span>
-          </div>
-        </div>
+        <DateMinute date={published_at} minuteRead={minuteRead} />
       </div>
     </article>
   )
