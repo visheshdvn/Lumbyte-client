@@ -160,17 +160,17 @@ export async function getPostsOfTopic(topicname, start, limit) {
           limit: $limit
         ) {
           topic {
-            topicname
-            associatedColour
-          }
-          banner {
-            url
-            alternativeText
-          }
-          title
-          minuteRead
-          published_at
-          slug
+          topicname
+          associatedColour
+        }
+        banner {
+          url
+          alternativeText
+        }
+        title
+        minuteRead
+        published_at
+        slug
           excerpt
         }
 
@@ -189,7 +189,7 @@ export async function getPostsOfTopic(topicname, start, limit) {
   return data
 }
 
-export async function getfeauredPostsOfTopic(topicname, start, limit) {
+export async function getfeauredPostsOnTopic(topicname, start, limit) {
   const data = await client.query({
     query: gql`
       query FeaturedOnly($topicname: String, $start: Int, $limit: Int) {
