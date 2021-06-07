@@ -5,7 +5,7 @@ import WidePeek from "../../components/PostPeek/wide"
 import SmallPeek from "../../components/PostPeek/smaller"
 import {
   getAllTopicNames,
-  getPostsOfTopic,
+  getLatestPostsOfTopic,
   getfeauredPostsOfTopic
 } from "../../graphql/Queries"
 
@@ -82,14 +82,14 @@ export async function getStaticProps(context) {
   const { params } = context
   const { topic } = params
 
-  const latestPosts = await getPostsOfTopic(topic, 0, 10)
-  const featuredPosts = await getfeauredPostsOfTopic(topic, 0, 10)
+  const {data: {latest, color}} = await getLatestPostsOfTopic(topic, 0, 10)
+  const {data: {featured}} = await getfeauredPostsOfTopic(topic, 0, 10)
 
   return {
     props: {
-      latestPosts: latestPosts.data.blogposts,
-      featuredPosts: featuredPosts.data.blogposts,
-      headerColor: latestPosts.data.color[0].associatedColour,
+      headerColor: color[0].associatedColour,
+      latestPosts: latest,
+      featuredPosts: featured,
     },
     revalidate: 86400,
   }
