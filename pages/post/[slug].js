@@ -5,7 +5,6 @@ import Head from "next/head"
 import { ClockIcon, CalendarIcon } from "@heroicons/react/outline"
 import { serialize } from "next-mdx-remote/serialize"
 import { MDXRemote } from "next-mdx-remote"
-import WidePeek from '../../components/PostPeek/wide'
 
 import {
   getSlugs,
@@ -13,6 +12,10 @@ import {
   getSimilarPosts,
   getExtraBytes,
 } from "../../graphql/postPageQueries"
+
+// custon components
+import WidePeek from '../../components/PostPeek/wide'
+import FormattedDate from '../../components/micro/formattedDate'
 
 // custom mdx component imports
 import Paragraph from "../../components/blogtext/paragraph"
@@ -34,6 +37,7 @@ const Post = ({
     content,
   }, extraBytes
 }) => {
+  console.log(date);
   const stringdate = new Date(date).toDateString()
 
   const components = {
@@ -68,7 +72,7 @@ const Post = ({
 
             <div className="flex items-center h-4 px-8 mb-8 text-grayText overflow-hidden">
               <CalendarIcon className="h-full inline mr-1" />
-              <span className="text-base font-coda">{stringdate}</span>
+              <span className="text-base font-coda"><FormattedDate date={date} /></span>
               <span className="mx-2">|</span>
               <ClockIcon className="h-full inline mr-1" />
               <span className="text-base font-coda">{minutes} Min read</span>

@@ -16,17 +16,21 @@ const Img = ({src, alt}) => {
   if (validURL(src)) {
     source = src
   } else {
-    source = `http://localhost:1337${src}`
+    source = `http://172.23.17.101:1337${src}`
   }
-  
+
   return (
-    <div className="overflow-hidden mb-8 relative h-96 w-full">
+    <div className="overflow-hidden mb-8 w-full">
       <Image
         src={source}
         alt={alt}
-        layout="fill"
-        className="object-contain object-left stati"
+        // layout="fill"
+        width={700}
+        height={300}
+        // layout="responsive"
+        className="object-contain object-left max-h-96 h-full"
       />
+      {/* <img className="h-48" src={source} alt={alt} /> */}
     </div>
   )
 }
