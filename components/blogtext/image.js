@@ -2,7 +2,6 @@ import React from "react"
 import Image from "next/image"
 
 const Img = ({src, alt}) => {
-  console.log(src);
   function validURL(str) {
     var pattern = new RegExp('^(https?:\\/\\/)?'+ // protocol
       '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // domain name

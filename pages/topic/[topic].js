@@ -7,7 +7,7 @@ import {
   getAllTopicNames,
   getLatestPostsOfTopic,
   getfeauredPostsOfTopic,
-  getPostsRelatedToTopic
+  getPostsRelatedToTopic,
 } from "../../graphql/topicPageQueries"
 
 function hexToRgb(hex) {

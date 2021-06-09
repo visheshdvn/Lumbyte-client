@@ -1,11 +1,18 @@
 import React from "react"
-import { getSlugs, getPostBySlug } from "../../graphql/Queries"
-import { ClockIcon, CalendarIcon } from "@heroicons/react/outline"
-import { serialize } from "next-mdx-remote/serialize"
-import { MDXRemote } from "next-mdx-remote"
 import Image from "next/image"
 import Link from "next/link"
 import Head from "next/head"
+import { ClockIcon, CalendarIcon } from "@heroicons/react/outline"
+import { serialize } from "next-mdx-remote/serialize"
+import { MDXRemote } from "next-mdx-remote"
+import WidePeek from '../../components/PostPeek/wide'
+
+import {
+  getSlugs,
+  getPostBySlug,
+  getSimilarPosts,
+  getExtraBytes,
+} from "../../graphql/postPageQueries"
 
 // custom mdx component imports
 import Paragraph from "../../components/blogtext/paragraph"
@@ -25,7 +32,7 @@ const Post = ({
     topic,
     banner,
     content,
-  },
+  }, extraBytes
 }) => {
   const stringdate = new Date(date).toDateString()
 
@@ -47,7 +54,10 @@ const Post = ({
         <div className="container mt-2 mx-auto horizontal-spacing lg:pt-16 md:pt-10 border-b">
           <>
             <Link href={`/topic/${topic}`}>
-              <a style={{color: `#${associatedColor}`}} className="font-pt-sans uppercase font-bold text-lg pl-8">
+              <a
+                style={{ color: `#${associatedColor}` }}
+                className="font-pt-sans uppercase font-bold text-lg pl-8"
+              >
                 {topic}
               </a>
             </Link>
@@ -72,13 +82,13 @@ const Post = ({
                   src={`http://localhost:1337${banner.url}`}
                   alt={banner.alternativeText}
                   width={1366}
-                  height={950}
+                  height={900}
                   layout="responsive"
                   className="object-cover object-center"
                 />
               </div>
-              <main key={id} className="lg:px-8 md:px-16 mt-5">
-                <div className="font-serif leading-7.5 text-lg">
+              <main key={id} className="lg:px-14 md:px-16 mt-5 bordr">
+                <div className="font-serif leading-7.5 text-lg bordr">
                   <MDXRemote {...content} components={components} />
                 </div>
               </main>
@@ -107,17 +117,43 @@ const Post = ({
           </div>
         </div>
       </section>
-      <section className="bg-gray-800 py-3 my-2">
+      <section
+        style={{ backgroundColor: "#fafafa" }}
+        className="bg-gray- py-3 my-2"
+      >
         <div className="container mx-auto horizontal-spacing">
-          <h1 className="font-pt-sans font-bold text-white text-4xl mb-2">
-            Similar
-          </h1>
+          <h1 className="font-pt-sans font-bold text-4xl mb-2">Similar</h1>
 
-          <div className="grid lg:gap-1 md:gap-4 grid-cols-4">
+          {/* <div className="grid lg:gap-1 md:gap-4 grid-cols-4">
             <SimilarArticles />
             <SimilarArticles />
             <SimilarArticles />
             <SimilarArticles />
+          </div> */}
+          <div className="flex sm:flex-row flex-col justify-betwee flex-wrap">
+            <SimilarArticles />
+            <SimilarArticles />
+            <SimilarArticles />
+          </div>
+        </div>
+      </section>
+      <section className="">
+        <div className="container mt-2 mx-auto horizontal-spacing border-t">
+          <div className="grid gap-4 grid-cols-12 pt-1">
+            <div className="lg:col-span-8 col-span-12">
+              <div className="">
+                <h1 className="uppercase font-bungee-shade xl:text-4.5xl lg:text-4xl md:text-3xl text-black pb-3">
+                  Extra bytes
+                </h1>
+                <div className="pt-3">
+                  {extraBytes.map((postData) => (
+                    <WidePeek key={postData.slug} populateData={postData} />
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            <div className="col-span-4 hidden lg:block">2</div>
           </div>
         </div>
       </section>
@@ -128,8 +164,11 @@ const Post = ({
 function SimilarArticles() {
   return (
     <Link href="/">
-      <a className="px-2 col-span-2 lg:col-auto">
-        <div className="relative md:h-72 lg:h-80 w-full overflow-hidden">
+      <a
+        style={{ minWidth: "x" }}
+        className="px-2 col-span-2 lg:col-auto sm:w-1/3 w-full sm:h-auto h-48 mb-5 sm:mb-0"
+      >
+        <div className="relative md:h-72 lg:h-80 h-full w-full overflow-hidden">
           <Image
             className="object-cover object-center"
             src="https://source.unsplash.com/random"
@@ -159,10 +198,12 @@ export async function getStaticProps(context) {
   const { params } = context
   const { slug } = params
 
-  const { data } = await getPostBySlug(slug)
+  const { data: {blogposts} } = await getPostBySlug(slug)
+  const { data: {extraBytes} } = await getExtraBytes(slug)
   // console.log(JSON.stringify(data.data.blogposts[0].banner, null, 4));
 
-  const mdxSource = await serialize(data.blogposts[0].content)
+
+  const mdxSource = await serialize(blogposts[0].content)
   const {
     title,
     published_at,
@@ -171,7 +212,7 @@ export async function getStaticProps(context) {
     id,
     metadescription,
     minuteRead,
-  } = data.blogposts[0]
+  } = blogposts[0]
 
   return {
     props: {
@@ -186,6 +227,7 @@ export async function getStaticProps(context) {
         metadescription,
         minutes: minuteRead,
       },
+      extraBytes: extraBytes
     },
     revalidate: 86400,
   }

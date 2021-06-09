@@ -13,7 +13,7 @@ export default function Home({ latestPosts, featuredPosts }) {
       <section className="body-font">
         <div className="container mx-auto horizontal-spacing">
           <div className="grid gap-4 grid-cols-12 mt-2 border-t pt-1">
-            <div className="col-span-9">
+            <div className="col-span-8">
               <div className="">
                 <h1 className="uppercase font-bungee-shade xl:text-4.5xl lg:text-4xl md:text-3xl text-black pb-3">
                   latest
@@ -25,7 +25,7 @@ export default function Home({ latestPosts, featuredPosts }) {
                 </div>
               </div>
             </div>
-            <div className="col-span-3">
+            <div className="col-span-4">
             {featuredPosts.length > 0 ? (
                 <div className="border-l pl-3 pb-1">
                   <h1
