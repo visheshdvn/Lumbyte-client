@@ -103,9 +103,9 @@ export default function Navbar() {
             </div>
             <div className="w-full pt-3 hidden md:block">
               <SecondaryNavLink href="/">Home</SecondaryNavLink>
-              <SecondaryNavLink href="/">latest</SecondaryNavLink>
+              <SecondaryNavLink href="/latest">latest</SecondaryNavLink>
               <SecondaryNavLink href="/">featured</SecondaryNavLink>
-              <SecondaryNavLink href="/">technology</SecondaryNavLink>
+              <SecondaryNavLink href="/topic/technology">technology</SecondaryNavLink>
               <SecondaryNavLink href="/">all</SecondaryNavLink>
             </div>
           </div>
