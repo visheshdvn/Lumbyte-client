@@ -15,21 +15,21 @@ const WidePeek = ({
     minuteRead,
   },
 }) => {
-  // console.log(excerpt)
+  console.log(banner.formats)
   // console.log(title, topic, banner, published_at, slug)
   // const banner = "https://source.unsplash.com/random/800x600"
 
   return (
     <article className="widearticle overflow-hidden flex mb-16">
-      <div className="xl:h-44 xl:w-72 lg:h-40 lg:w-64 md:h-40 md:w-40 overflow-hidden">
+      <div className="xl:w-72 lg:w-64 md:w-40 overflow-hidden">
         <Link href={`/post/${slug}`}>
           <a>
             <Image
-              src={`http://localhost:1337${banner.url}`}
+              src={`http://172.23.17.101:1337${banner.url}`}
               alt={banner.alternativeText}
               className="object-cover object-center"
-              width={600}
-              height={600}
+              width={288}
+              height={176}
             />
           </a>
         </Link>

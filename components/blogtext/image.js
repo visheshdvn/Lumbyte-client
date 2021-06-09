@@ -20,17 +20,15 @@ const Img = ({src, alt}) => {
   }
 
   return (
-    <div className="overflow-hidden mb-8 w-full">
-      <Image
+    <div className="overflow-hidden mb-8 w-full flex justify-center">
+      {/* <Image
         src={source}
         alt={alt}
-        // layout="fill"
         width={700}
         height={300}
-        // layout="responsive"
         className="object-contain object-left max-h-96 h-full"
-      />
-      {/* <img className="h-48" src={source} alt={alt} /> */}
+      /> */}
+      <img style={{maxHeight: "700px"}} className="object-center" src={source} alt={alt} />
     </div>
   )
 }

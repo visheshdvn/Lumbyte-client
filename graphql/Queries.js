@@ -15,6 +15,7 @@ export async function getLatestPosts(start, limit) {
           banner {
             url
             alternativeText
+            formats
           }
           title
           excerpt
@@ -51,6 +52,7 @@ export async function getfeauredPosts(start, limit) {
           banner {
             url
             alternativeText
+            formats
           }
           title
           minuteRead

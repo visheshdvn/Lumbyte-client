@@ -93,8 +93,6 @@ export async function getExtraBytes(slug) {
     }
   })
 
-  console.log(data);
-
   return data
 }
 

@@ -25,8 +25,8 @@ const SmallPeek = ({
               src={`http://localhost:1337${banner.url}`}
               alt={banner.alternativeText}
               className="object-cover object-center"
-              width={1024}
-              height={768}
+              width={395}
+              height={176}
               layout="responsive"
             />
           </a>
