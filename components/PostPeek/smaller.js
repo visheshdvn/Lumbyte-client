@@ -18,7 +18,7 @@ const SmallPeek = ({
           {topic.topicname}
         </a>
       </Link>
-      <div className="h-44 w-full overflow-hidden transform md:scale-105 lg:scale-100 mb-1">
+      <div className="h-auto w-full overflow-hidden transform md:scale-105 lg:scale-100 mb-1">
         <Link href={`/post/${slug}`}>
           <a>
             <Image
