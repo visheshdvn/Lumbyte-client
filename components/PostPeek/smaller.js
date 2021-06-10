@@ -34,7 +34,7 @@ const SmallPeek = ({
       </div>
       <Link href={`/post/${slug}`}>
         <a>
-          <h1 className="lg:text-lg xl:text-xl mb-2 font-bold font-roboto-cond">
+          <h1 className="lg:text-lg xl:text-xl mb-2 font-bold font-roboto">
             {title}
           </h1>
         </a>

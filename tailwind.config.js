@@ -10,7 +10,7 @@ module.exports = {
       md: "768px",
       lg: "1024px",
       xl: "1280px",
-      "2xl": "1280px",
+      "2xl": "1336px",
     },
     fontFamily: {
       serif: ["Georgia", ...defaultTheme.fontFamily.serif],
@@ -38,11 +38,16 @@ module.exports = {
       },
       lineHeight: {
         "7.5": "1.875rem"
+      },
+      height: {
+        100: "29rem"
       }
     },
   },
   variants: {
-    extend: {},
+    extend: {
+      
+    },
   },
   // plugins: [require("@tailwindcss/typography")],/
 }

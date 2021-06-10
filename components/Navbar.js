@@ -24,7 +24,7 @@ export default function Navbar() {
   return (
     <Disclosure
       as="nav"
-      className="bg-white text-gray-800 absolute top-0 w-full z-50 border-b md:pt-2 md:pb-1 py-3"
+      className="bg-white text-gray-800 absolute top-0 w-full z-50 border-b md:py-2 py-3"
     >
       {({ open }) => (
         <>
@@ -101,11 +101,11 @@ export default function Navbar() {
                 </Switch>
               </div>
             </div>
-            <div className="w-full pt-3 hidden md:block ">
+            {/* <div className="w-full pt-3 hidden md:block ">
               <SecondaryNavLink href="/">Home</SecondaryNavLink>
               <SecondaryNavLink href="/">featured</SecondaryNavLink>
               <SecondaryNavLink href="/topic/technology">technology</SecondaryNavLink>
-            </div>
+            </div> */}
           </div>
 
           <Disclosure.Panel className="lg:hidden">

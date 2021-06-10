@@ -1,15 +1,24 @@
 import Head from "next/head"
+
 import WidePeek from "../components/PostPeek/wide"
 import SmallPeek from "../components/PostPeek/smaller"
-import { getLatestPosts, getfeauredPosts } from "../graphql/Queries"
+import SpotLight from '../components/PostPeek/spotLight'
 
-export default function Home({ latestPosts, featuredPosts }) {
-  // console.log(featuredPosts);
+import {
+  getLatestPosts,
+  getfeauredPosts,
+  getTopPicks,
+} from "../graphql/Queries"
+
+export default function Home({ latestPosts, featuredPosts, topPicks }) {
   return (
     <>
       <Head>
         <title>LumBytes | Home</title>
       </Head>
+
+      <SpotLight posts={topPicks} />
+
       <section className="body-font">
         <div className="container mx-auto horizontal-spacing">
           <div className="grid gap-4 grid-cols-12 mt-2 border-t pt-1">
@@ -26,7 +35,7 @@ export default function Home({ latestPosts, featuredPosts }) {
               </div>
             </div>
             <div className="col-span-4">
-            {featuredPosts.length > 0 ? (
+              {featuredPosts.length > 0 ? (
                 <div className="border-l pl-3 pb-1">
                   <h1
                     style={{ fontSize: "2.625re" }}
@@ -50,14 +59,21 @@ export default function Home({ latestPosts, featuredPosts }) {
 }
 
 export async function getStaticProps() {
-  const {data: {latest}} = await getLatestPosts(0, 10)
-  const {data: {featured}} = await getfeauredPosts(0, 10)
-
+  const {
+    data: { latest },
+  } = await getLatestPosts(0, 10)
+  const {
+    data: { featured },
+  } = await getfeauredPosts(0, 10)
+  const {
+    data: { topPicks },
+  } = await getTopPicks(0, 1)
 
   return {
     props: {
       latestPosts: latest,
       featuredPosts: featured,
+      topPicks: topPicks,
     },
     revalidate: 10,
   }

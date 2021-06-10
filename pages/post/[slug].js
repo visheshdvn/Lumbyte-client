@@ -37,8 +37,6 @@ const Post = ({
     content,
   }, extraBytes
 }) => {
-  console.log(date);
-  const stringdate = new Date(date).toDateString()
 
   const components = {
     p: (props) => <Paragraph {...props} />,
@@ -54,7 +52,7 @@ const Post = ({
       <Head>
         <meta name="description" content={metadescription} />
       </Head>
-      <section className="">
+      <section className="max-w-7xl mx-auto">
         <div className="container mt-2 mx-auto horizontal-spacing lg:pt-16 md:pt-10 border-b">
           <>
             <Link href={`/topic/${topic}`}>
@@ -188,7 +186,7 @@ function SimilarArticles() {
             className="absolute top-0 right-0 left-0 bottom-0"
           />
 
-          <h3 className="absolute bottom-2 right-2 left-2 font-roboto font-bold text-white text-xl leading-7">
+          <h3 className="absolute bottom-2 right-2 left-2 font-roboto font-bold text-white text-2xl leading-7">
             Voluptate adipisicing occaecat quis mollit et laborum commodo.
           </h3>
         </div>

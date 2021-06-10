@@ -70,3 +70,38 @@ export async function getfeauredPosts(start, limit) {
   return data
 }
 
+export async function getTopPicks(start, limit) {
+  const data = client.query({
+    query: gql`
+      query getTopPick($start: Int, $limit: Int) {
+        topPicks: blogposts(
+          where: { topPick: true }
+          start: $start
+          limit: $limit
+          sort: "id:desc"
+        ) {
+          banner {
+            url
+            alternativeText
+          }
+          topic {
+            topicname
+            associatedColour
+          }
+          topPick
+          title
+          excerpt
+          published_at
+          minuteRead
+          slug
+        }
+      }
+    `,
+    variables: {
+      start,
+      limit,
+    },
+  })
+
+  return data
+}

@@ -46,7 +46,7 @@ const WidePeek = ({
         {/* link to blogpost */}
         <Link href={`/post/${slug}`}>
           <a>
-            <h1 className="lg:text-xl xl:text-2xl lg:mb-2 md:mb-1 font-bold font-roboto-cond">
+            <h1 className="lg:text-xl xl:text-2xl lg:mb-2 md:mb-1 font-bold font-roboto">
               {title}
             </h1>
             <p className="truncate-1-line leading-3 w-4/5 font-serif text-grayText mb-2 xl:text-base lg:text-sm">
