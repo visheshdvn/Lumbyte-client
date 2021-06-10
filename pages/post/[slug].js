@@ -60,22 +60,22 @@ const Post = ({
             <Link href={`/topic/${topic}`}>
               <a
                 style={{ color: `#${associatedColor}` }}
-                className="font-pt-sans uppercase font-bold text-lg pl-8"
+                className="font-roboto-cond uppercase font-bold text-lg pl-8"
               >
                 {topic}
               </a>
             </Link>
 
-            <h1 className="md:text-5xl text-4xl font-pt-sans font-bold px-8 mb-5 mt-3">
+            <h1 className="md:text-5xl text-4xl font-roboto-cond font-bold px-8 mb-5 mt-3">
               {title}
             </h1>
 
-            <div className="flex items-center h-4 px-8 mb-8 text-grayText overflow-hidden">
+            <div className="flex items-center h-3 px-8 mb-8 text-grayText overflow-hidden">
               <CalendarIcon className="h-full inline mr-1" />
-              <span className="text-base font-coda"><FormattedDate date={date} /></span>
+              <span className="text-sm font-roboto"><FormattedDate date={date} /></span>
               <span className="mx-2">|</span>
               <ClockIcon className="h-full inline mr-1" />
-              <span className="text-base font-coda">{minutes} Min read</span>
+              <span className="text-sm font-roboto">{minutes} min read</span>
             </div>
           </>
 
@@ -103,17 +103,17 @@ const Post = ({
                 <h1 className="text-4xl font-pt-sans font-bold mb-4">
                   Featured
                 </h1>
-                <h3 className="font-coda text-lg leading-6 mb-4">
+                <h3 className="text-xl leading-6 mb-4 font-normal font-roboto-cond">
                   Ad adipisicing reprehenderit esse nostrud sint eu qui.
                 </h3>
-                <h3 className="font-coda text-lg leading-6 mb-4">
+                <h3 className="text-xl leading-6 mb-4 font-normal font-roboto-cond">
                   Culpa Lorem esse nulla enim deserunt est voluptate occaecat
                   exercitation aliquip do in pariatur veniam.
                 </h3>
-                <h3 className="font-coda text-lg leading-6 mb-4">
+                <h3 className="text-xl leading-6 mb-4 font-normal font-roboto-cond">
                   Culpa Lorem esse nulla enim deserunt est veniam.
                 </h3>
-                <h3 className="font-coda text-lg leading-6 mb-4">
+                <h3 className="text-xl leading-6 mb-4 font-normal font-roboto-cond">
                   Culpa Lorem esse nulla enim deserunt est voluptate occaecat.
                 </h3>
               </div>
@@ -188,7 +188,7 @@ function SimilarArticles() {
             className="absolute top-0 right-0 left-0 bottom-0"
           />
 
-          <h3 className="absolute bottom-2 right-2 left-2 font-coda text-white text-lg leading-6">
+          <h3 className="absolute bottom-2 right-2 left-2 font-roboto font-bold text-white text-xl leading-7">
             Voluptate adipisicing occaecat quis mollit et laborum commodo.
           </h3>
         </div>

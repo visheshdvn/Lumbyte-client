@@ -24,7 +24,7 @@ export default function Navbar() {
   return (
     <Disclosure
       as="nav"
-      className="bg-white text-gray-800 absolute top-0 w-full z-50 border-b md:py-2 py-3"
+      className="bg-white text-gray-800 absolute top-0 w-full z-50 border-b md:pt-2 md:pb-1 py-3"
     >
       {({ open }) => (
         <>
@@ -101,12 +101,10 @@ export default function Navbar() {
                 </Switch>
               </div>
             </div>
-            <div className="w-full pt-3 hidden md:block">
+            <div className="w-full pt-3 hidden md:block ">
               <SecondaryNavLink href="/">Home</SecondaryNavLink>
-              <SecondaryNavLink href="/latest">latest</SecondaryNavLink>
               <SecondaryNavLink href="/">featured</SecondaryNavLink>
               <SecondaryNavLink href="/topic/technology">technology</SecondaryNavLink>
-              <SecondaryNavLink href="/">all</SecondaryNavLink>
             </div>
           </div>
 
@@ -122,7 +120,7 @@ export default function Navbar() {
 function SecondaryNavLink({ children, href }) {
   return (
     <Link href={href}>
-      <a className="uppercase mr-8 font-pt-sans font-normal">{children}</a>
+      <a style={{fontFamily: "Roboto Condensed"}} className="uppercase mr-8 font-pt-san font-normal text-sm">{children}</a>
     </Link>
   )
 }

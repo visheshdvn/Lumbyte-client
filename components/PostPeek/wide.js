@@ -15,7 +15,6 @@ const WidePeek = ({
     minuteRead,
   },
 }) => {
-  console.log(banner.formats)
   // console.log(title, topic, banner, published_at, slug)
   // const banner = "https://source.unsplash.com/random/800x600"
 
@@ -25,7 +24,7 @@ const WidePeek = ({
         <Link href={`/post/${slug}`}>
           <a>
             <Image
-              src={`http://172.23.17.101:1337${banner.url}`}
+              src={`http://localhost:1337${banner.url}`}
               alt={banner.alternativeText}
               className="object-cover object-center"
               width={288}
@@ -38,8 +37,8 @@ const WidePeek = ({
         {/* link to topic page */}
         <Link href={`/topic/${topic.topicname}`}>
           <a
-            style={{ color: `#${topic.associatedColour}` }}
-            className="uppercase font-pt-sans font-bold lg:leading-5 md:leading-4 text-lightBlue-600 mb-1 xl:text-lg md:text-base"
+            style={{ color: `#${topic.associatedColour}`}}
+            className="uppercase font-roboto-cond font-bold lg:leading-5 md:leading-4 text-lightBlue-600 mb-1 xl:text-lg md:text-base"
           >
             {topic.topicname}
           </a>
@@ -47,7 +46,7 @@ const WidePeek = ({
         {/* link to blogpost */}
         <Link href={`/post/${slug}`}>
           <a>
-            <h1 className="font-coda lg:text-xl xl:text-2xl lg:mb-2 md:mb-1 font-bold">
+            <h1 className="lg:text-xl xl:text-2xl lg:mb-2 md:mb-1 font-bold font-roboto-cond">
               {title}
             </h1>
             <p className="truncate-1-line leading-3 w-4/5 font-serif text-grayText mb-2 xl:text-base lg:text-sm">

@@ -14,9 +14,10 @@ module.exports = {
     },
     fontFamily: {
       serif: ["Georgia", ...defaultTheme.fontFamily.serif],
-      "pt-sans": ["PT Sans Narrow", "Arial Narrow Bold", "sans-serif"],
       "bungee-shade": ["Bungee Shade", "PT Sans Narrow", "sans"],
-      coda: ["Coda", "PT Sans Narrow"],
+      "pt-sans": ["PT Sans Narrow", "Arial Narrow Bold", "sans-serif"],
+      "roboto": ["Roboto", "sans-serif"],
+      "roboto-cond": ["Roboto Condensed", "Arial Narrow", "PT Sans Narrow", "sans-serif"],
     },
     colors: {
       white: "white",

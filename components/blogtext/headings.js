@@ -5,7 +5,7 @@ export const H1 = ({ children }) => {
 }
 
 export const H2 = ({ children }) => {
-  return <h2 className="text-3xl font-pt-sans font-bold mb-3">{children}</h2>
+  return <h2 className="text-3xl font-pt-sans font-bold mb-2">{children}</h2>
 }
 
 export const H3 = ({ children }) => {

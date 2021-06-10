@@ -35,7 +35,7 @@ const Topic = ({ latestPosts, headerColor, featuredPosts }) => {
         }}
         className="w-full h-48 bg-lightBlue-80 flex items-center justify-center bg-center bg-cover"
       >
-        <h1 className="font-bungee-shade text-white text-5xl">{topic}</h1>
+        <h1 className="font-bungee-shade text-white text-6xl">{topic}</h1>
       </div>
       <section className="body-font">
         <div className="container mx-auto horizontal-spacing">
