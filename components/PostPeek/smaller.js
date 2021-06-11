@@ -2,44 +2,57 @@ import React from "react"
 import Image from "next/image"
 import Link from "next/link"
 
-import DateMinute from '../micro/dateMinute'
+import DateMinute from "../micro/dateMinute"
 
 const SmallPeek = ({
   populateData: { topic, banner, title, minuteRead, published_at, slug },
 }) => {
-
   return (
-    <article className="lg:mb-16 md:mb-14">
+    <article className="lg:mb-16 md:mb-14 sm:mb-10 mb-8 flex md:flex-col justify-start overflow-hidden">
       <Link href={`/topic/${topic.topicname}`}>
         <a
           style={{ color: `#${topic.associatedColour}` }}
-          className="uppercase font-roboto-cond font-bold leading-5 mb-1 xl:text-lg lg:text-base"
+          className="uppercase font-roboto-cond font-bold leading-5 xl:text-lg text-base hidden md:block"
         >
           {topic.topicname}
         </a>
       </Link>
-      <div className="h-auto w-full overflow-hidden transform md:scale-105 lg:scale-100 mb-1">
+
+      <div className="lg:h-44 sm:h-27 sm:w-44 md:w-full h-28 w-28 overflow-hidden transform md:scale-105 lg:scale-100 md:my-2">
         <Link href={`/post/${slug}`}>
           <a>
             <Image
               src={`http://localhost:1337${banner.url}`}
               alt={banner.alternativeText}
               className="object-cover object-center"
-              width={395}
-              height={176}
-              layout="responsive"
+              // width={395}
+              // height={176}
+              layout="fill"
             />
           </a>
         </Link>
       </div>
-      <Link href={`/post/${slug}`}>
-        <a>
-          <h1 className="lg:text-lg xl:text-xl md:text-base mb-2 font-bold font-roboto">
-            {title}
-          </h1>
-        </a>
-      </Link>
-      <DateMinute date={published_at} minuteRead={minuteRead} />
+
+      <div className="flex-1 pl-3 md:pl-0">
+        <Link href={`/topic/${topic.topicname}`}>
+          <a
+            style={{ color: `#${topic.associatedColour}` }}
+            className="uppercase font-roboto-cond font-bold lg:leading-5 md:leading-4 text-lightBlue-600 md:mb-1 xl:text-lg sm:text-base text-sm md:hidden"
+          >
+            {topic.topicname}
+          </a>
+        </Link>
+
+        <Link href={`/post/${slug}`}>
+          <a>
+            <h1 className="lg:text-xl md:text-lg sm:text-xl text-lg mb-1 font-bold font-roboto">
+              {title}
+            </h1>
+          </a>
+        </Link>
+
+        <DateMinute date={published_at} minuteRead={minuteRead} />
+      </div>
     </article>
   )
 }
