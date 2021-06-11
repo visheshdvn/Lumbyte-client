@@ -1,4 +1,4 @@
-import React from "react"
+import React, { StrictMode } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import Head from "next/head"
@@ -14,8 +14,8 @@ import {
 } from "../../graphql/postPageQueries"
 
 // custon components
-import WidePeek from '../../components/PostPeek/wide'
-import FormattedDate from '../../components/micro/formattedDate'
+import WidePeek from "../../components/PostPeek/wide"
+import FormattedDate from "../../components/micro/formattedDate"
 
 // custom mdx component imports
 import Paragraph from "../../components/blogtext/paragraph"
@@ -35,9 +35,10 @@ const Post = ({
     topic,
     banner,
     content,
-  }, extraBytes
+  },
+  extraBytes,
+  similar,
 }) => {
-
   const components = {
     p: (props) => <Paragraph {...props} />,
     h1: (props) => <H1 {...props} />,
@@ -70,7 +71,9 @@ const Post = ({
 
             <div className="flex items-center h-3 px-8 mb-8 text-grayText overflow-hidden">
               <CalendarIcon className="h-full inline mr-1" />
-              <span className="text-sm font-roboto"><FormattedDate date={date} /></span>
+              <span className="text-sm font-roboto">
+                <FormattedDate date={date} />
+              </span>
               <span className="mx-2">|</span>
               <ClockIcon className="h-full inline mr-1" />
               <span className="text-sm font-roboto">{minutes} min read</span>
@@ -119,34 +122,37 @@ const Post = ({
           </div>
         </div>
       </section>
-      <section
-        style={{ backgroundColor: "#fafafa" }}
-        className="bg-gray- py-3 my-2"
-      >
-        <div className="container mx-auto horizontal-spacing">
-          <h1 className="font-pt-sans font-bold text-4xl mb-2">Similar</h1>
+      {similar.length > 1 ? (
+        <section
+          style={{ backgroundColor: "#fafafa" }}
+          className="bg-gray- py-3 my-2"
+        >
+          <div className="container mx-auto horizontal-spacing">
+            <h1 className="font-pt-sans font-bold text-4xl mb-2 pl-2">
+              Similar
+            </h1>
 
-          {/* <div className="grid lg:gap-1 md:gap-4 grid-cols-4">
+            {/* <div className="grid lg:gap-1 md:gap-4 grid-cols-4">
             <SimilarArticles />
             <SimilarArticles />
             <SimilarArticles />
             <SimilarArticles />
           </div> */}
-          <div className="flex sm:flex-row flex-col justify-betwee flex-wrap">
-            <SimilarArticles />
-            <SimilarArticles />
-            <SimilarArticles />
+            <div className="flex sm:flex-row flex-col justify-betwee flex-wrap">
+              {similar.map((data) => (
+                <SimilarArticles data={data} asd="dwe" />
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      ) : null}
+
       <section className="">
-        <div className="container mt-2 mx-auto horizontal-spacing border-t">
-          <div className="grid gap-4 grid-cols-12 pt-1">
+        <div className="container mx-auto horizontal-spacing border-t">
+          <div className="grid gap-4 grid-cols-12 pt-2">
             <div className="lg:col-span-8 col-span-12">
               <div className="">
-                <h1 className="uppercase font-bungee-shade xl:text-4.5xl lg:text-4xl md:text-3xl text-black pb-3">
-                  Extra bytes
-                </h1>
+                <h1 className="bungee-head-style">Extra bytes</h1>
                 <div className="pt-3">
                   {extraBytes.map((postData) => (
                     <WidePeek key={postData.slug} populateData={postData} />
@@ -155,7 +161,7 @@ const Post = ({
               </div>
             </div>
 
-            <div className="col-span-4 hidden lg:block">2</div>
+            <div className="col-span-4 hidden lg:block"></div>
           </div>
         </div>
       </section>
@@ -163,31 +169,52 @@ const Post = ({
   )
 }
 
-function SimilarArticles() {
+function SimilarArticles({ data, asd }) {
+  function validURL(str) {
+    var pattern = new RegExp(
+      "^(https?:\\/\\/)?" + // protocol
+        "((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|" + // domain name
+        "((\\d{1,3}\\.){3}\\d{1,3}))" + // OR ip (v4) address
+        "(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*" + // port and path
+        "(\\?[;&a-z\\d%_.~+=-]*)?" + // query string
+        "(\\#[-a-z\\d_]*)?$",
+      "i"
+    ) // fragment locator
+    return !!pattern.test(str)
+  }
+
+  let source = null
+  if (validURL(data.banner.url)) {
+    source = src
+  } else {
+    source = `http://localhost:1337${data.banner.url}`
+  }
+
   return (
-    <Link href="/">
+    <Link href={`/post/${data.slug}`}>
       <a
         style={{ minWidth: "x" }}
-        className="px-2 col-span-2 lg:col-auto sm:w-1/3 w-full sm:h-auto h-48 mb-5 sm:mb-0"
+        className="px-2 col-span-2 lg:col-auto sm:w-1/3 w-full sm:h-auto h-auto mb-5 sm:mb-0"
       >
-        <div className="relative md:h-72 lg:h-80 h-full w-full overflow-hidden">
+        <div className="relative md:h-72 lg:h-80 sm:h-64 h-44 w-full overflow-hidden">
           <Image
             className="object-cover object-center"
-            src="https://source.unsplash.com/random"
+            src={source}
             alt="image"
-            width={1000}
-            height={1300}
+            // width={340}
+            // height={320}
+            layout="fill"
           />
           <div
             style={{
               backgroundImage:
-                "linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.7) 60%, rgba(0,0,0,1) 98%)",
+                "linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.7) 70%, rgba(0,0,0,1) 98%)",
             }}
             className="absolute top-0 right-0 left-0 bottom-0"
           />
 
           <h3 className="absolute bottom-2 right-2 left-2 font-roboto font-bold text-white text-2xl leading-7">
-            Voluptate adipisicing occaecat quis mollit et laborum commodo.
+            {data.title}
           </h3>
         </div>
       </a>
@@ -200,10 +227,13 @@ export async function getStaticProps(context) {
   const { params } = context
   const { slug } = params
 
-  const { data: {blogposts} } = await getPostBySlug(slug)
-  const { data: {extraBytes} } = await getExtraBytes(slug)
+  const {
+    data: { blogposts },
+  } = await getPostBySlug(slug)
+  const {
+    data: { extraBytes },
+  } = await getExtraBytes(slug)
   // console.log(JSON.stringify(data.data.blogposts[0].banner, null, 4));
-
 
   const mdxSource = await serialize(blogposts[0].content)
   const {
@@ -215,6 +245,11 @@ export async function getStaticProps(context) {
     metadescription,
     minuteRead,
   } = blogposts[0]
+
+  const {
+    data: { similar },
+  } = await getSimilarPosts(topic.topicname, slug)
+  // console.log(similar);
 
   return {
     props: {
@@ -229,7 +264,8 @@ export async function getStaticProps(context) {
         metadescription,
         minutes: minuteRead,
       },
-      extraBytes: extraBytes
+      extraBytes,
+      similar,
     },
     revalidate: 86400,
   }

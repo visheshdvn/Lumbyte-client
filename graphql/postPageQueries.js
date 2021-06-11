@@ -31,12 +31,12 @@ export async function getPostBySlug(slug) {
   return data
 }
 
-export async function getSimilarPosts(tagname, slug) {
-  const data = await clien.query({
+export async function getSimilarPosts(topicname, slug) {
+  const data = await client.query({
     query: gql`
-      query getSImilarPosts($tagname: String, $slug: String) {
+      query getSImilarPosts($topicname: String, $slug: String) {
         similar: blogposts(
-          where: { slug_ne: $slug, tags: { tagname: $tagname } }
+          where: { slug_ne: $slug, tags: { tagname: $topicname } }
           start: 0
           limit: 10
           sort: "id:DESC"
@@ -51,7 +51,7 @@ export async function getSimilarPosts(tagname, slug) {
       }
     `,
     variables: {
-      tagname,
+      topicname,
       slug,
     },
   })
@@ -89,8 +89,8 @@ export async function getExtraBytes(slug) {
       }
     `,
     variables: {
-        slug
-    }
+      slug,
+    },
   })
 
   return data
