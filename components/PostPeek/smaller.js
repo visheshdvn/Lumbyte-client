@@ -18,7 +18,7 @@ const SmallPeek = ({
         </a>
       </Link>
 
-      <div className="lg:h-44 sm:h-27 sm:w-44 md:w-full h-28 w-28 overflow-hidden transform md:scale-105 lg:scale-100 md:my-2">
+      <div className="xl:h-44 lg:h-38 sm:h-27 md:w-full sm:w-44 h-25 w-25 overflow-hidden md:my-2 relative">
         <Link href={`/post/${slug}`}>
           <a>
             <Image
