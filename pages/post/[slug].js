@@ -89,8 +89,8 @@ const Post = ({
                   className="object-cover object-center"
                 />
               </div>
-              <main key={id} className="lg:px-14 md:px-16 mt-5 bordr">
-                <div className="font-serif leading-7.5 text-lg bordr">
+              <main key={id} className="lg:px-14 md:px-16 sm:px-8 mt-5">
+                <div className="font-serif leading-7.5 text-lg">
                   <MDXRemote {...content} components={components} />
                 </div>
               </main>

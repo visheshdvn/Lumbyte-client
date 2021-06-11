@@ -9,7 +9,7 @@ const SmallPeek = ({
 }) => {
 
   return (
-    <article className="mb-16">
+    <article className="lg:mb-16 md:mb-14">
       <Link href={`/topic/${topic.topicname}`}>
         <a
           style={{ color: `#${topic.associatedColour}` }}
@@ -34,7 +34,7 @@ const SmallPeek = ({
       </div>
       <Link href={`/post/${slug}`}>
         <a>
-          <h1 className="lg:text-lg xl:text-xl mb-2 font-bold font-roboto">
+          <h1 className="lg:text-lg xl:text-xl md:text-base mb-2 font-bold font-roboto">
             {title}
           </h1>
         </a>

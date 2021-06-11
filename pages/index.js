@@ -22,9 +22,9 @@ export default function Home({ latestPosts, featuredPosts, topPicks }) {
       <section className="body-font">
         <div className="container mx-auto horizontal-spacing">
           <div className="grid gap-4 grid-cols-12 mt-2 border-t pt-1">
-            <div className="col-span-8">
+            <div className="md:col-span-8 col-span-12 order-1">
               <div className="">
-                <h1 className="uppercase font-bungee-shade xl:text-4.5xl lg:text-4xl md:text-3xl text-black pb-3">
+                <h1 className="uppercase font-bungee-shade lg:text-4.5xl sm:text-4xl text-black pb-3">
                   latest
                 </h1>
                 <div className="pt-3">
@@ -34,12 +34,11 @@ export default function Home({ latestPosts, featuredPosts, topPicks }) {
                 </div>
               </div>
             </div>
-            <div className="col-span-4">
+            <div className="md:col-span-4 col-span-12 order-2">
               {featuredPosts.length > 0 ? (
-                <div className="border-l pl-3 pb-1">
+                <div className="md:border-l md:pl-3 pb-1">
                   <h1
-                    style={{ fontSize: "2.625re" }}
-                    className="uppercase font-bungee-shade xl:text-4.5xl lg:text-4xl md:text-3xl text-black pb-3"
+                    className="uppercase font-bungee-shade lg:text-4.5xl sm:text-4xl text-black pb-3"
                   >
                     featured
                   </h1>

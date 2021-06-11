@@ -21,7 +21,7 @@ body {
 }
 
 ul.spaced li:not(:last-child) {
-  @apply mb-3
+  @apply mb-3;
 }
 
 /* interactive search */
@@ -53,12 +53,14 @@ ul.spaced li:not(:last-child) {
   min-width: 100px !important;
 }
 
-.truncate-1-line {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  line-height: 1.5rem; /* fallback */
-  /* max-height: 32px;      fallback */
-  -webkit-line-clamp: 1; /* number of lines to show */
-  -webkit-box-orient: vertical;
+@media only screen and (min-width: 768px) {
+  .truncate-1-line {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    line-height: 1.5rem; /* fallback */
+    /* max-height: 32px;      fallback */
+    -webkit-line-clamp: 1; /* number of lines to show */
+    -webkit-box-orient: vertical;
+  }
 }

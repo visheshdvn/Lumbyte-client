@@ -9,8 +9,6 @@ const SpotLight = ({ posts }) => {
   const { title, topic, banner, excerpt, minuteRead, published_at, slug } =
     topPick
 
-  const readMore = <em>Read More</em>
-
   return (
     <section className="lg:py-10 md:py-5 py-3 block">
       <div style={{minHeight: "12rem"}} className="container xl:h-100 lg:h-96 h-auto md:h-80 mx-auto horizontal-spacing grid gap-1 grid-cols-12">
