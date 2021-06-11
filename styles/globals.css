@@ -64,3 +64,8 @@ ul.spaced li:not(:last-child) {
     -webkit-box-orient: vertical;
   }
 }
+
+/* Bungee headings */
+.bungee-head-style {
+  @apply uppercase font-bungee-shade lg:text-4.5xl sm:text-4xl text-3xl text-black pb-3;
+}

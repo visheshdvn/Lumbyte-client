@@ -33,16 +33,16 @@ const Topic = ({ latestPosts, headerColor, featuredPosts }) => {
         style={{
           backgroundImage: `radial-gradient( rgba(${r}, ${g}, ${b}, 1), rgba(${r}, ${g}, ${b}, 0.85)), url(/topicbg/technology.jpg)`,
         }}
-        className="w-full h-48 bg-lightBlue-80 flex items-center justify-center bg-center bg-cover"
+        className="w-full lg:h-48 md:h-44 sm:h-32 h-28 bg-lightBlue-80 flex items-center justify-center bg-center bg-cover"
       >
-        <h1 className="font-bungee-shade text-white text-6xl">{topic}</h1>
+        <h1 className="font-bungee-shade text-white xl:text-6xl md:text-5xl sm:text-4xl text-3xl">{topic}</h1>
       </div>
       <section className="body-font">
         <div className="container mx-auto horizontal-spacing">
           <div className="grid gap-4 grid-cols-12 mt-2 border-t pt-1">
-            <div className="col-span-8">
+            <div className="md:col-span-8 col-span-12 order-1">
               <div className="">
-                <h1 className="uppercase font-bungee-shade xl:text-4.5xl lg:text-4xl md:text-3xl text-black pb-3">
+                <h1 className="bungee-head-style">
                   latest
                 </h1>
                 <div className="pt-3">
@@ -52,14 +52,13 @@ const Topic = ({ latestPosts, headerColor, featuredPosts }) => {
                 </div>
               </div>
             </div>
-            <div className="col-span-4">
+            <div className="md:col-span-4 col-span-12 order-2">
               {featuredPosts.length > 0 ? (
-                <div className="border-l pl-3 pb-1">
+                <div className="md:border-l md:pl-3 pb-1">
                   <h1
-                    style={{ fontSize: "2.625re" }}
-                    className="uppercase font-bungee-shade xl:text-4.5xl lg:text-4xl md:text-3xl text-black pb-3"
+                    className="bungee-head-style"
                   >
-                    related to {topic}
+                    related
                   </h1>
                   <div className="pt-3">
                     {featuredPosts.map((postData) => (

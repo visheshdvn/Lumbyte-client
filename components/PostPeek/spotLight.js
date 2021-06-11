@@ -11,7 +11,7 @@ const SpotLight = ({ posts }) => {
 
   return (
     <section className="lg:py-10 md:py-5 py-3 block">
-      <div style={{minHeight: "12rem"}} className="container xl:h-100 lg:h-96 h-auto md:h-80 mx-auto horizontal-spacing grid gap-1 grid-cols-12">
+      <div style={{minHeight: "12rem"}} className="container xl:h-100 lg:h-96 md:h-80 h-48 mx-auto horizontal-spacing grid gap-1 grid-cols-12">
         <div className="xl:col-span-9 md:col-span-8 col-span-4 relative overflow-hidden">
           <Link href={`/post/${slug}`}>
             <a>
@@ -49,14 +49,17 @@ const SpotLight = ({ posts }) => {
 
           <Link href={`/post/${slug}`}>
             <a>
-              <h1 className="font-roboto font-bold lg:text-4xl md:text-3xl text-2xl md:mt-2 mt-1">
+              <h1 className="font-roboto font-bold lg:text-4xl sm:text-3xl text-2xl md:mt-2 mt-1">
                 {title}
               </h1>
-              <p className="lg:my-4 md:my-3 my-1 mb-2 text-gray-300">
+              <p className="lg:my-4 md:my-3 my-1 mb-2 text-gray-300 text-sm md:text-base">
                 {excerpt.substr(0, 90) + "..."}
               </p>
 
+              <div className="hidden sm:block">
+
               <DateMinute date={published_at} minuteRead={minuteRead} />
+              </div>
             </a>
           </Link>
         </div>
