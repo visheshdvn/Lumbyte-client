@@ -53,7 +53,7 @@ const Post = ({
         <meta name="description" content={metadescription} />
       </Head>
       <section className="max-w-7xl mx-auto">
-        <div className="container mt-2 mx-auto horizontal-spacing lg:pt-16 md:pt-10 border-b">
+        <div className="container mt-2 mx-auto horizontal-spacing lg:pt-10 md:pt-10 border-b">
           <>
             <Link href={`/topic/${topic}`}>
               <a

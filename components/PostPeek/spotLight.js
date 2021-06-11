@@ -9,15 +9,17 @@ const SpotLight = ({ posts }) => {
   const { title, topic, banner, excerpt, minuteRead, published_at, slug } =
     topPick
 
+  const readMore = <em>Read More</em>
+
   return (
     <section className="lg:py-10 md:py-5 py-3 block">
-      <div style={{minHeight: "12rem"}} className="container xl:h-100 lg:h-96 h-auto md:h-80 mx-auto pb-3 md:pb-0 horizontal-spacing grid gap-1 grid-cols-12">
+      <div style={{minHeight: "12rem"}} className="container xl:h-100 lg:h-96 h-auto md:h-80 mx-auto horizontal-spacing grid gap-1 grid-cols-12">
         <div className="xl:col-span-9 md:col-span-8 col-span-4 relative overflow-hidden">
           <Link href={`/post/${slug}`}>
             <a>
               <div
                 style={{
-                  backgroundImage: `url(http://localhost:1337${banner.url})`,
+                  backgroundImage: `url(http://172.23.31.52:1337${banner.url})`,
                   backgroundSize: "cover",
                   backgroundPosition: "center",
                 }}
@@ -36,7 +38,7 @@ const SpotLight = ({ posts }) => {
         </div>
         <div
           style={{ backgroundColo: "#fafafa" }}
-          className="xl:col-span-3 md:col-span-4 col-span-8 pl-3 bg-gray-800 text-white pt-3"
+          className="xl:col-span-3 md:col-span-4 col-span-8 px-3 bg-gray-800 text-white pt-3"
         >
           <Link href={`/topic/${topic.topicname}`}>
             <a
