@@ -9,7 +9,7 @@ const WidePeek = ({
     title,
     topic,
     banner,
-    published_at,
+    date,
     slug,
     excerpt,
     minuteRead,
@@ -55,7 +55,7 @@ const WidePeek = ({
             </p>
           </a>
         </Link>
-        <DateMinute date={published_at} minuteRead={minuteRead} />
+        <DateMinute date={date} minuteRead={minuteRead} />
       </div>
     </article>
   )

@@ -6,7 +6,7 @@ import DateMinute from "../micro/dateMinute"
 const SpotLight = ({ posts }) => {
   const topPick = posts[0]
 
-  const { title, topic, banner, excerpt, minuteRead, published_at, slug } =
+  const { title, topic, banner, excerpt, minuteRead, date, slug } =
     topPick
 
   return (
@@ -17,7 +17,7 @@ const SpotLight = ({ posts }) => {
             <a>
               <div
                 style={{
-                  backgroundImage: `url(http://172.23.31.52:1337${banner.url})`,
+                  backgroundImage: `url(http://localhost:1337${banner.url})`,
                   backgroundSize: "cover",
                   backgroundPosition: "center",
                 }}
@@ -58,7 +58,7 @@ const SpotLight = ({ posts }) => {
 
               <div className="hidden sm:block">
 
-              <DateMinute date={published_at} minuteRead={minuteRead} />
+              <DateMinute date={date} minuteRead={minuteRead} />
               </div>
             </a>
           </Link>

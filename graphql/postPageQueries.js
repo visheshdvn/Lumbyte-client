@@ -20,6 +20,7 @@ export async function getPostBySlug(slug) {
             url
           }
           content
+          date
         }
       }
     `,
@@ -82,7 +83,7 @@ export async function getExtraBytes(slug) {
           }
           title
           minuteRead
-          published_at
+          date
           excerpt
           slug
         }

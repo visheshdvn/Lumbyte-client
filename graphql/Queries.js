@@ -19,7 +19,7 @@ export async function getLatestPosts(start, limit) {
           }
           title
           excerpt
-          published_at
+          date
           minuteRead
           slug
         }
@@ -56,7 +56,7 @@ export async function getfeauredPosts(start, limit) {
           }
           title
           minuteRead
-          published_at
+          date
           slug
         }
       }
@@ -91,7 +91,7 @@ export async function getTopPicks(start, limit) {
           topPick
           title
           excerpt
-          published_at
+          date
           minuteRead
           slug
         }

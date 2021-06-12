@@ -31,10 +31,11 @@ const Post = ({
     metadescription,
     title,
     associatedColor,
-    date,
+    published_at,
     topic,
     banner,
     content,
+    date
   },
   extraBytes,
   similar,
@@ -140,7 +141,7 @@ const Post = ({
           </div> */}
             <div className="flex sm:flex-row flex-col justify-betwee flex-wrap">
               {similar.map((data) => (
-                <SimilarArticles data={data} asd="dwe" />
+                <SimilarArticles key={data.slug} data={data} />
               ))}
             </div>
           </div>
@@ -169,7 +170,7 @@ const Post = ({
   )
 }
 
-function SimilarArticles({ data, asd }) {
+function SimilarArticles({ data }) {
   function validURL(str) {
     var pattern = new RegExp(
       "^(https?:\\/\\/)?" + // protocol
@@ -244,6 +245,7 @@ export async function getStaticProps(context) {
     id,
     metadescription,
     minuteRead,
+    date
   } = blogposts[0]
 
   const {
@@ -255,11 +257,12 @@ export async function getStaticProps(context) {
     props: {
       postData: {
         title,
-        date: published_at,
+        published_at,
         topic: topic.topicname,
         associatedColor: topic.associatedColour,
         banner,
         id,
+        date,
         content: mdxSource,
         metadescription,
         minutes: minuteRead,

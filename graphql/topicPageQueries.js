@@ -39,7 +39,7 @@ export async function getLatestPostsOfTopic(topicname, start, limit) {
           }
           title
           minuteRead
-          published_at
+          date
           slug
           excerpt
         }
@@ -84,7 +84,7 @@ export async function getPostsRelatedToTopic(topicname, start, limit) {
           }
           title
           minuteRead
-          published_at
+          date
           slug
         }
       }
@@ -119,7 +119,7 @@ export async function getfeauredPostsOfTopic(topicname, start, limit) {
           }
           title
           minuteRead
-          published_at
+          date
           slug
         }
       }
