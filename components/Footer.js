@@ -84,7 +84,9 @@ const Footer = () => {
         </p>
 
         <span className="inline-flex sm:ml-auto sm:mt-0 mt-4 justify-center sm:justify-start text-gray-500">
-          extra links
+          <Link href="/contact">
+            <a className="text-gray-400">Contact</a>
+          </Link>
         </span>
       </div>
       <div
