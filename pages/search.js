@@ -14,6 +14,11 @@ const Search = () => {
     setsearchInput({ ...searchInput, [name]: value })
   }
 
+  function formSubmitHandler(e) {
+    e.preventDefault()
+    //   submission logig here
+  }
+
   useEffect(() => {
     if (inputEleRef.current.value === "") {
       inputEleRef.current.setCustomValidity("Invalid field.")
@@ -25,7 +30,7 @@ const Search = () => {
   return (
     <section>
       <div className="container m-auto my-10">
-        <form className="max-w-5xl mx-auto">
+        <form className="max-w-5xl mx-auto" onSubmit={formSubmitHandler}>
           <div className="relative h-20 overflow-hidden">
             <input
               id="SearchInp"
@@ -48,7 +53,7 @@ const Search = () => {
             </label>
             <button
               type="submit"
-              className="search-btn right-0 h-9 w-9 absolute bottom-1 text-gray-400"
+              className="search-btn right-0 h-9 w-9 absolute bottom-1 text-gray-400 focus:outline-none"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
