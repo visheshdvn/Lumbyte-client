@@ -27,6 +27,8 @@ export async function getPostBySlug(slug) {
     variables: {
       slug,
     },
+    // pollInterval: 1
+    fetchPolicy: "network-only"
   })
 
   return data

@@ -17,7 +17,7 @@ const SpotLight = ({ posts }) => {
             <a>
               <div
                 style={{
-                  backgroundImage: `url(http://localhost:1337${banner.url})`,
+                  backgroundImage: `url(http://172.18.228.219:1337${banner.url})`,
                   backgroundSize: "cover",
                   backgroundPosition: "center",
                 }}

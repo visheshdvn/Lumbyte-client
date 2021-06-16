@@ -5,6 +5,8 @@ const Search = () => {
 
   const [searchInput, setsearchInput] = useState({
     searchInputVal: "",
+    start: 0,
+    end: 0
   })
 
   const { searchInputVal } = searchInput
@@ -16,7 +18,7 @@ const Search = () => {
 
   function formSubmitHandler(e) {
     e.preventDefault()
-    //   submission logig here
+    //   submission logic here
   }
 
   useEffect(() => {
@@ -72,6 +74,7 @@ const Search = () => {
             </button>
           </div>
         </form>
+        <button style={{margin: "10px 20px 40px 100px"}} className="border">margin me</button>
       </div>
     </section>
   )

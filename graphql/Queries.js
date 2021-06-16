@@ -29,6 +29,7 @@ export async function getLatestPosts(start, limit) {
       start,
       limit,
     },
+    fetchPolicy: "network-only"
   })
 
   return data
@@ -65,6 +66,7 @@ export async function getfeauredPosts(start, limit) {
       start,
       limit,
     },
+    fetchPolicy: "network-only"
   })
 
   return data
@@ -101,6 +103,7 @@ export async function getTopPicks(start, limit) {
       start,
       limit,
     },
+    fetchPolicy: "network-only"
   })
 
   return data

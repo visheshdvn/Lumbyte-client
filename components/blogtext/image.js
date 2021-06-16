@@ -16,7 +16,7 @@ const Img = ({src, alt}) => {
   if (validURL(src)) {
     source = src
   } else {
-    source = `http://localhost:1337${src}`
+    source = `http://172.18.228.219:1337${src}`
   }
 
   return (
