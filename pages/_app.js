@@ -2,15 +2,18 @@ import "../styles/globals.css"
 import Navbar from "../components/Navbar"
 import Footer from "../components/Footer"
 
-import {ApolloProvider} from '@apollo/client'
-import client from '../apollo-client'
+import { ApolloProvider } from "@apollo/client"
+import client from "../apollo-client"
+import { ThemeProvider } from "next-themes"
 
 function MyApp({ Component, pageProps }) {
   return (
     <ApolloProvider client={client}>
-      <Navbar />
-      <Component {...pageProps} />
-      <Footer />
+      <ThemeProvider attribute="class">
+        <Navbar />
+        <Component {...pageProps} />
+        <Footer />
+      </ThemeProvider>
     </ApolloProvider>
   )
 }

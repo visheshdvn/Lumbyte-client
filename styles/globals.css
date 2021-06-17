@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 body {
-  @apply text-gray-800 pt-16;
+  @apply text-gray-800 dark:text-white pt-16;
 }
 
 .horizontal-spacing {

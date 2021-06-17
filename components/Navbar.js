@@ -3,8 +3,10 @@ import { MenuIcon, XIcon, SearchIcon } from "@heroicons/react/outline"
 import { Disclosure, Switch } from "@headlessui/react"
 import Link from "next/link"
 
+import { useTheme } from "next-themes"
+
 export default function Navbar() {
-  const [enabled, setEnabled] = useState(false)
+  const [enabled, setEnabled] = useState(true)
   const [searchValue, setSearchValue] = useState("")
 
   const searchInputFieldRef = useRef(null)
@@ -20,6 +22,8 @@ export default function Navbar() {
       console.log("submition logic here - search term:", searchValue)
     }
   }
+
+  const { theme, setTheme } = useTheme()
 
   return (
     <Disclosure
@@ -88,7 +92,9 @@ export default function Navbar() {
                 {/* theme switch below*/}
                 <Switch
                   checked={enabled}
-                  onChange={setEnabled}
+                  onChange={() => {
+                    setEnabled(!enabled)
+                    setTheme(theme === "dark" ? "light" : "dark")}}
                   className={`${
                     enabled ? "bg-gray-800" : "bg-gray-200"
                   } relative inline-flex items-center h-6 rounded-full w-11 focus:outline-none cursor-pointer`}
@@ -121,7 +127,12 @@ export default function Navbar() {
 function SecondaryNavLink({ children, href }) {
   return (
     <Link href={href}>
-      <a style={{fontFamily: "Roboto Condensed"}} className="uppercase mr-8 font-pt-san font-normal text-sm">{children}</a>
+      <a
+        style={{ fontFamily: "Roboto Condensed" }}
+        className="uppercase mr-8 font-pt-san font-normal text-sm"
+      >
+        {children}
+      </a>
     </Link>
   )
 }
