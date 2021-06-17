@@ -74,7 +74,6 @@ const Search = () => {
             </button>
           </div>
         </form>
-        <button style={{margin: "10px 20px 40px 100px"}} className="border">margin me</button>
       </div>
     </section>
   )

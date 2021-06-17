@@ -54,8 +54,9 @@ export default function Navbar() {
                   </Link>
                 </div>
               </div>
+              {/* search widget */}
               <div className="absolute inset-y-0 right-0 flex items-center sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                <div
+                {/* <div
                   id="searchControl"
                   className="relative align-middle mr-4 hidden md:flex"
                 >
@@ -82,7 +83,7 @@ export default function Navbar() {
                       setSearchValue(searchInputFieldRef.current.value)
                     }
                   />
-                </div>
+                </div> */}
 
                 {/* theme switch below*/}
                 <Switch
