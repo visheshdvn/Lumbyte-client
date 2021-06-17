@@ -50,7 +50,7 @@ const WidePeek = ({
             <h1 className="lg:text-2xl md:text-xl sm:text-xl text-lg xl:mb-2 sm:mb-1 font-bold font-roboto">
               {title}
             </h1>
-            <p className="truncate-1-line leading-3 w-4/5 font-serif text-grayText mb-2 lg:text-base text-sm hidden">
+            <p className="truncate-1-line leading-3 w-4/5 font-serif text-grayText dark:text-gray-400 mb-2 lg:text-base text-sm hidden">
               {excerpt}
             </p>
           </a>

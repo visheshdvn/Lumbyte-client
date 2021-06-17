@@ -12,7 +12,7 @@ const Topic = ({ latestPosts, headerColor, featuredPosts }) => {
   if (!latestPosts || !headerColor || !featuredPosts) {
     return <div>Loading</div>
   }
-  
+
   function hexToRgb(hex) {
     var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex)
     return result
@@ -80,45 +80,6 @@ export async function getStaticProps(context) {
   console.log("Re-Generating...")
   const { params } = context
   const { topic } = params
-
-  // let latest = [
-  //   {
-  //     "topic": {
-  //       "topicname": "Loading",
-  //       "associatedColour": "000"
-  //     },
-  //     "banner": {
-  //       "url": "/uploads/Blockchain_66a0e4235f.jpg",
-  //       "alternativeText": "Loading"
-  //     },
-  //     "title": "Loading...",
-  //     "minuteRead": 1,
-  //     "date": "2021-06-08",
-  //     "slug": "Loading",
-  //     "excerpt": "Loading..."
-  //   }
-  // ]
-
-  // let color = [
-  //   {
-  //     associatedColour: "000"
-  //   }
-  // ]
-
-  // let related = [{
-  //   "topic": {
-  //     "topicname": "Loading...",
-  //     "associatedColour": "000"
-  //   },
-  //   "banner": {
-  //     "url": "/uploads/hacker_Gadgets_221df35014.jpg",
-  //     "alternativeText": "Loading..."
-  //   },
-  //   "title": "Loading...",
-  //   "minuteRead": 2,
-  //   "date": "2021-06-07",
-  //   "slug": "Loading..."
-  // }]
 
   const {
     data: { latest, color, related },

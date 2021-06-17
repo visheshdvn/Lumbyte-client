@@ -70,7 +70,7 @@ const Post = ({
               {title}
             </h1>
 
-            <div className="flex items-center h-3 px-8 mb-8 text-grayText overflow-hidden">
+            <div className="flex items-center h-3 px-8 mb-8 text-grayText dark:text-gray-400 overflow-hidden">
               <CalendarIcon className="h-full inline mr-1" />
               <span className="text-sm font-roboto">
                 <FormattedDate date={date} />

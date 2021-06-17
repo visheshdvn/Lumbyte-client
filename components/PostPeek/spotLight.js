@@ -52,7 +52,7 @@ const SpotLight = ({ posts }) => {
               <h1 className="font-roboto font-bold lg:text-4xl sm:text-3xl text-2xl md:mt-2 mt-1">
                 {title}
               </h1>
-              <p className="lg:my-4 md:my-3 my-1 mb-2 text-gray-300 text-sm md:text-base">
+              <p className="lg:my-4 md:my-3 my-1 mb-2 text-grayTex text-gray-400 text-sm md:text-base">
                 {excerpt.substr(0, 90) + "..."}
               </p>
 
