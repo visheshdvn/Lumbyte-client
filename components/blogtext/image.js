@@ -12,13 +12,11 @@ const Img = ({src, alt}) => {
     return !!pattern.test(str);
   }
 
-  // console.log('image url', `${process.env.HOST}${src}`);
-
   let source = null
   if (validURL(src)) {
     source = src
   } else {
-    source = `${process.env.HOST}${src}`
+    source = `http://172.18.234.163:1337${src}`
   }
 
   return (

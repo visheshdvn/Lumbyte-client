@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 body {
-  @apply text-gray-800 dark:text-white pt-16;
+  @apply text-gray-800 dark:text-gray-200 pt-16;
 }
 
 .horizontal-spacing {
@@ -48,7 +48,7 @@ ul.spaced li:not(:last-child) {
 
 /* Bungee headings */
 .bungee-head-style {
-  @apply uppercase font-bungee-shade lg:text-4.5xl sm:text-4xl text-3xl text-black pb-3;
+  @apply uppercase font-bungee-shade lg:text-4.5xl sm:text-4xl text-3xl text-black pb-3 dark:text-gray-300;
 }
 
 /* interactive search */

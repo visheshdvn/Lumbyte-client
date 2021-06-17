@@ -63,7 +63,11 @@ export async function getLatestPostsOfTopic(topicname, start, limit) {
 export async function getPostsRelatedToTopic(topicname, start, limit) {
   const data = await client.query({
     query: gql`
-      query getPostsRelatedToTopic($topicname: String, $start: Int, $limit: Int) {
+      query getPostsRelatedToTopic(
+        $topicname: String
+        $start: Int
+        $limit: Int
+      ) {
         # but not of topic
         related: blogposts(
           where: {
@@ -90,10 +94,10 @@ export async function getPostsRelatedToTopic(topicname, start, limit) {
       }
     `,
     variables: {
-        topicname,
-        start,
-        limit
-    }
+      topicname,
+      start,
+      limit,
+    },
   })
 
   return data
@@ -129,6 +133,63 @@ export async function getfeauredPostsOfTopic(topicname, start, limit) {
       start,
       limit,
     },
+  })
+
+  return data
+}
+
+export async function getTopickPageData(topicname, start, limit) {
+  const data = await client.query({
+    query: gql`
+      query getTopicPageData($topicname: String, $start: Int, $limit: Int) {
+        latest: blogposts(
+          where: { topic: { topicname: $topicname } }
+          sort: "id:DESC"
+          start: $start
+          limit: $limit
+        ) {
+          ...commonData
+          excerpt
+        }
+
+        color: topics(where: { topicname: $topicname }) {
+          associatedColour
+        }
+
+        related: blogposts(
+          where: {
+            tags: { tagname: $topicname }
+            topic: { topicname_ne: $topicname }
+          }
+          start: $start
+          limit: $limit
+          sort: "id:desc"
+        ) {
+          ...commonData
+        }
+      }
+
+      fragment commonData on Blogposts {
+        topic {
+          topicname
+          associatedColour
+        }
+        banner {
+          url
+          alternativeText
+        }
+        title
+        minuteRead
+        date
+        slug
+      }
+    `,
+    variables: {
+      topicname,
+      start,
+      limit,
+    },
+    fetchPolicy: "network-only",
   })
 
   return data

@@ -29,7 +29,7 @@ export async function getLatestPosts(start, limit) {
       start,
       limit,
     },
-    fetchPolicy: "network-only"
+    fetchPolicy: "network-only",
   })
 
   return data
@@ -66,14 +66,14 @@ export async function getfeauredPosts(start, limit) {
       start,
       limit,
     },
-    fetchPolicy: "network-only"
+    fetchPolicy: "network-only",
   })
 
   return data
 }
 
 export async function getTopPicks(start, limit) {
-  const data = client.query({
+  const data = await client.query({
     query: gql`
       query getTopPick($start: Int, $limit: Int) {
         topPicks: blogposts(
@@ -103,7 +103,61 @@ export async function getTopPicks(start, limit) {
       start,
       limit,
     },
-    fetchPolicy: "network-only"
+    fetchPolicy: "network-only",
+  })
+
+  return data
+}
+
+export async function getIndexPageData(start, limit) {
+  const data = await client.query({
+    query: gql`
+      query getIndexPageData($start: Int, $limit: Int) {
+        topPicks: blogposts(
+          where: { topPick: true }
+          start: $start
+          limit: $limit
+          sort: "id:desc"
+        ) {
+          ...commonData
+          excerpt
+        }
+
+        featured: blogposts(
+          where: { isfeatured: true }
+          start: $start
+          limit: $limit
+          sort: "id:DESC"
+        ) {
+          ...commonData
+        }
+
+        latest: blogposts(sort: "id:DESC", start: $start, limit: $limit) {
+          ...commonData
+          excerpt
+        }
+      }
+
+      fragment commonData on Blogposts {
+        topic {
+          topicname
+          associatedColour
+        }
+        banner {
+          url
+          alternativeText
+        }
+        title
+        date
+        minuteRead
+        slug
+      }
+    `,
+    variables: {
+      start,
+      limit,
+    },
+    fetchPolicy: "network-only",
   })
 
   return data

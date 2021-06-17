@@ -55,7 +55,7 @@ const Post = ({
         <meta name="description" content={metadescription} />
       </Head>
       <section className="max-w-7xl mx-auto">
-        <div className="container mt-2 mx-auto horizontal-spacing lg:pt-10 md:pt-10 border-b">
+        <div className="container mt-2 mx-auto horizontal-spacing lg:pt-10 md:pt-10 border-b dark:border-gray-700">
           <>
             <Link href={`/topic/${topic}`}>
               <a
@@ -101,7 +101,7 @@ const Post = ({
             </div>
 
             <div className="col-span-4 hidden lg:block">
-              <div className="border-l pl-3 pb-2">
+              <div className="border-l dark:border-gray-700 pl-3 pb-2">
                 <h1 className="text-4xl font-pt-sans font-bold mb-4">
                   Featured
                 </h1>
@@ -125,11 +125,10 @@ const Post = ({
       </section>
       {similar.length > 1 ? (
         <section
-          style={{ backgroundColor: "#fafafa" }}
-          className="bg-gray- py-3 my-2"
+          className="py-3 my-2 bg-gray-100 dark:bg-black"
         >
           <div className="container mx-auto horizontal-spacing">
-            <h1 className="font-pt-sans font-bold text-4xl mb-2 pl-2">
+            <h1 className="font-pt-sans font-bold text-4xl mb-2 pl-2 dark:text-gray-200">
               Similar
             </h1>
 
@@ -149,7 +148,7 @@ const Post = ({
       ) : null}
 
       <section className="">
-        <div className="container mx-auto horizontal-spacing border-t">
+        <div className="container mx-auto horizontal-spacing border-t dark:border-gray-700">
           <div className="grid gap-4 grid-cols-12 pt-2">
             <div className="lg:col-span-8 col-span-12">
               <div className="">
