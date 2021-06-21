@@ -152,12 +152,13 @@ export async function getTopickPageData(topicname, start, limit) {
           excerpt
         }
 
-        headerData: topics(where: { topicname: $topicname }) {
+        buildData: topics(where: { topicname: $topicname }) {
           associatedColour
           headerBack {
             url
             alternativeText
           }
+          metaDescription
         }
 
         related: blogposts(

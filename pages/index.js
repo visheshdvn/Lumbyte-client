@@ -5,9 +5,6 @@ import SmallPeek from "../components/PostPeek/smaller"
 import SpotLight from "../components/PostPeek/spotLight"
 
 import {
-  getLatestPosts,
-  getfeauredPosts,
-  getTopPicks,
   getIndexPageData,
 } from "../graphql/Queries"
 

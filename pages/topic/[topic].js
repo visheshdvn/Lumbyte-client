@@ -1,5 +1,6 @@
 import React from "react"
 import { useRouter } from "next/router"
+import Head from 'next/head'
 
 import WidePeek from "../../components/PostPeek/wide"
 import SmallPeek from "../../components/PostPeek/smaller"
@@ -8,8 +9,8 @@ import {
   getTopickPageData,
 } from "../../graphql/topicPageQueries"
 
-const Topic = ({ latestPosts, headerColor, featuredPosts, headerImg }) => {
-  if (!latestPosts || !headerColor || !featuredPosts) {
+const Topic = ({ latestPosts, headerColor, featuredPosts, headerImg, metaDescription }) => {
+  if (!latestPosts || !headerColor || !featuredPosts || !metaDescription || !headerImg) {
     return <div>Loading</div>
   }
 
@@ -33,6 +34,10 @@ const Topic = ({ latestPosts, headerColor, featuredPosts, headerImg }) => {
 
   return (
     <>
+    <Head>
+      <title>Lumbytes | {topic.toUpperCase()}</title>
+      <meta name="description" content={metaDescription} />
+    </Head>
       <div
         style={{
           backgroundImage: `radial-gradient( rgba(${r}, ${g}, ${b}, 1), rgba(${r}, ${g}, ${b}, 0.85)), url(${headImg})`,
@@ -83,13 +88,14 @@ export async function getStaticProps(context) {
   const { topic } = params
 
   const {
-    data: { latest, headerData, related },
+    data: { latest, buildData, related },
   } = await getTopickPageData(topic, 0, 10)
 
   return {
     props: {
-      headerColor: headerData[0].associatedColour,
-      headerImg: headerData[0].headerBack,
+      headerColor: buildData[0].associatedColour,
+      headerImg: buildData[0].headerBack,
+      metaDescription: buildData[0].metaDescription,
       latestPosts: latest,
       featuredPosts: related,
     },
