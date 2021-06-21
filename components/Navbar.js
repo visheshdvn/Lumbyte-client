@@ -100,6 +100,10 @@ export default function Navbar() {
                   } relative inline-flex items-center h-6 rounded-full w-11 focus:outline-none cursor-pointer`}
                 >
                   <span className="sr-only">Switch theme mode</span>
+                  <div className="absolute">
+                    <span className={`${!enabled && "opacity-0"}`}>🌒</span>
+                    <span className={`${enabled && "opacity-0"}`}>🌞</span>
+                  </div>
                   <span
                     className={`${
                       enabled ? "translate-x-6" : "translate-x-1"
