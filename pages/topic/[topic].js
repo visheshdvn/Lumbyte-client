@@ -13,8 +13,11 @@ const Topic = ({ latestPosts, headerColor, featuredPosts }) => {
     return <div>Loading</div>
   }
 
+  const router = useRouter()
+  const { topic } = router.query
+
   function hexToRgb(hex) {
-    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex)
+    const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex)
     return result
       ? {
           r: parseInt(result[1], 16),
@@ -23,11 +26,7 @@ const Topic = ({ latestPosts, headerColor, featuredPosts }) => {
         }
       : null
   }
-
-  const router = useRouter()
-  const { topic } = router.query
   const rgb = hexToRgb(headerColor)
-  console.log(rgb)
   const { r, g, b } = rgb
 
   return (
@@ -84,7 +83,6 @@ export async function getStaticProps(context) {
   const {
     data: { latest, color, related },
   } = await getTopickPageData(topic, 0, 10)
-  console.log("here", color, related)
 
   return {
     props: {

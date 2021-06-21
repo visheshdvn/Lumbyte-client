@@ -17,7 +17,7 @@ const SpotLight = ({ posts }) => {
             <a>
               <div
                 style={{
-                  backgroundImage: `url(http://172.18.234.163:1337${banner.url})`,
+                  backgroundImage: `url(http://${process.env.HOSTNAME}:${process.env.PORT}${banner.url})`,
                   backgroundSize: "cover",
                   backgroundPosition: "center",
                 }}

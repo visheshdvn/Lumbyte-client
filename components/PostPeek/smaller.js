@@ -22,7 +22,7 @@ const SmallPeek = ({
         <Link href={`/post/${slug}`}>
           <a>
             <Image
-              src={`http://localhost:1337${banner.url}`}
+              src={`http://${process.env.HOSTNAME}:${process.env.PORT}${banner.url}`}
               alt={banner.alternativeText}
               className="object-cover object-center"
               // width={395}

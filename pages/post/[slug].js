@@ -85,7 +85,7 @@ const Post = ({
             <div className="lg:col-span-8 col-span-12">
               <div className="mb-8">
                 <Image
-                  src={`http://localhost:1337${banner.url}`}
+                  src={`http://${process.env.HOSTNAME}:${process.env.PORT}${banner.url}`}
                   alt={banner.alternativeText}
                   width={1366}
                   height={900}
