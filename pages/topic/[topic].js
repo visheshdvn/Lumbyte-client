@@ -8,7 +8,7 @@ import {
   getTopickPageData,
 } from "../../graphql/topicPageQueries"
 
-const Topic = ({ latestPosts, headerColor, featuredPosts }) => {
+const Topic = ({ latestPosts, headerColor, featuredPosts, headerImg }) => {
   if (!latestPosts || !headerColor || !featuredPosts) {
     return <div>Loading</div>
   }
@@ -29,11 +29,13 @@ const Topic = ({ latestPosts, headerColor, featuredPosts }) => {
   const rgb = hexToRgb(headerColor)
   const { r, g, b } = rgb
 
+  const headImg = headerImg ? `http://${process.env.HOSTNAME}:${process.env.PORT}${headerImg.url}` : "/topicbg/bg.jpg"
+
   return (
     <>
       <div
         style={{
-          backgroundImage: `radial-gradient( rgba(${r}, ${g}, ${b}, 1), rgba(${r}, ${g}, ${b}, 0.85)), url(/topicbg/technology.jpg)`,
+          backgroundImage: `radial-gradient( rgba(${r}, ${g}, ${b}, 1), rgba(${r}, ${g}, ${b}, 0.85)), url(${headImg})`,
         }}
         className="w-full lg:h-48 md:h-44 sm:h-32 h-28 bg-lightBlue-80 flex items-center justify-center bg-center bg-cover"
       >
@@ -43,7 +45,7 @@ const Topic = ({ latestPosts, headerColor, featuredPosts }) => {
       </div>
       <section className="body-font">
         <div className="container mx-auto horizontal-spacing">
-          <div className="grid gap-4 grid-cols-12 mt-2 border-t dark:border-gray-700 pt-1">
+          <div className="grid gap-4 grid-cols-12 mt-2 border-t dark:border-gray-700 pt-5">
             <div className="md:col-span-8 col-span-12 order-1">
               <div className="">
                 <h1 className="bungee-head-style">latest</h1>
@@ -81,12 +83,13 @@ export async function getStaticProps(context) {
   const { topic } = params
 
   const {
-    data: { latest, color, related },
+    data: { latest, headerData, related },
   } = await getTopickPageData(topic, 0, 10)
 
   return {
     props: {
-      headerColor: color[0].associatedColour,
+      headerColor: headerData[0].associatedColour,
+      headerImg: headerData[0].headerBack,
       latestPosts: latest,
       featuredPosts: related,
     },

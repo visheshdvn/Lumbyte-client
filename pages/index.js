@@ -22,7 +22,7 @@ export default function Home({ latestPosts, featuredPosts, topPicks }) {
 
       <section className="body-font">
         <div className="container mx-auto horizontal-spacing">
-          <div className="grid gap-4 grid-cols-12 mt-2 border-t dark:border-gray-700 pt-1">
+          <div className="grid gap-4 grid-cols-12 mt-2 border-t dark:border-gray-700 pt-5">
             <div className="md:col-span-8 col-span-12 order-1">
               <div className="">
                 <h1 className="bungee-head-style">latest</h1>

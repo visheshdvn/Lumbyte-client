@@ -81,7 +81,7 @@ const Post = ({
             </div>
           </>
 
-          <div className="grid gap-4 grid-cols-12">
+          <div className="grid gap-4 grid-cols-12 mb-5">
             <div className="lg:col-span-8 col-span-12">
               <div className="mb-8">
                 <Image
@@ -148,7 +148,7 @@ const Post = ({
       ) : null}
 
       <section className="">
-        <div className="container mx-auto horizontal-spacing border-t dark:border-gray-700">
+        <div className="container mx-auto horizontal-spacing border-t dark:border-gray-700 pt-8">
           <div className="grid gap-4 grid-cols-12 pt-2">
             <div className="lg:col-span-8 col-span-12">
               <div className="">

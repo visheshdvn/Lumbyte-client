@@ -107,7 +107,7 @@ export default function Navbar() {
                   <span
                     className={`${
                       enabled ? "translate-x-6" : "translate-x-1"
-                    } inline-block w-4 h-4 transform bg-white rounded-full`}
+                    } inline-bloc w-4 h-4 transform bg-white rounded-full hidden`}
                   />
                 </Switch>
               </div>
