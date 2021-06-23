@@ -1,4 +1,4 @@
-import React, { StrictMode } from "react"
+import React from "react"
 import Image from "next/image"
 import Link from "next/link"
 import Head from "next/head"
@@ -31,11 +31,11 @@ const Post = ({
     metadescription,
     title,
     associatedColor,
-    published_at,
     topic,
     banner,
     content,
-    date
+    date,
+    slug,
   },
   extraBytes,
   similar,
@@ -49,10 +49,25 @@ const Post = ({
     img: (props) => <Img {...props} />,
     code: (props) => <Code {...props} />,
   }
+
   return (
     <>
       <Head>
+        <title>{title}</title>
         <meta name="description" content={metadescription} />
+        <meta property="og:title" content={title} key="ogtitle" />
+        <meta property="og:type" content="blog" />
+        <meta property="og:url" content={`https://lumbytes.com/post/${slug}`} />
+        <meta
+          property="og:description"
+          content={metadescription}
+          key="ogdesc"
+        />
+        <meta
+          property="og:image"
+          content={`https://lumbytes.com${banner.url}`}
+          key="ogimage"
+        />
       </Head>
       <section className="max-w-7xl mx-auto">
         <div className="container mt-2 mx-auto horizontal-spacing lg:pt-10 md:pt-10 border-b dark:border-gray-700">
@@ -124,9 +139,7 @@ const Post = ({
         </div>
       </section>
       {similar.length > 1 ? (
-        <section
-          className="py-3 my-2 bg-gray-100 dark:bg-black"
-        >
+        <section className="py-3 my-2 bg-gray-100 dark:bg-blac dark:bg-gray-800">
           <div className="container mx-auto horizontal-spacing">
             <h1 className="font-pt-sans font-bold text-4xl mb-2 pl-2 dark:text-gray-200">
               Similar
@@ -244,7 +257,7 @@ export async function getStaticProps(context) {
     id,
     metadescription,
     minuteRead,
-    date
+    date,
   } = blogposts[0]
 
   const {
@@ -265,6 +278,7 @@ export async function getStaticProps(context) {
         content: mdxSource,
         metadescription,
         minutes: minuteRead,
+        slug,
       },
       extraBytes,
       similar,

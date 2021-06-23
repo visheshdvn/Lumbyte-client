@@ -101,8 +101,8 @@ export default function Navbar() {
                 >
                   <span className="sr-only">Switch theme mode</span>
                   <div className="absolute">
-                    <span className={`${!enabled && "opacity-0"}`}>🌒</span>
-                    <span className={`${enabled && "opacity-0"}`}>🌞</span>
+                    <span className={`${!enabled && "opacity-0"}`}>🌞</span>
+                    <span className={`${enabled && "opacity-0"}`}>🌒</span>
                   </div>
                   <span
                     className={`${
