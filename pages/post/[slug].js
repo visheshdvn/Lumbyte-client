@@ -70,7 +70,7 @@ const Post = ({
         />
       </Head>
       <section className="max-w-7xl mx-auto">
-        <div className="container mt-2 mx-auto horizontal-spacing lg:pt-10 md:pt-10 border-b dark:border-gray-700">
+        <div className="container mx-auto horizontal-spacing md:pt-8 border-b dark:border-gray-700">
           <>
             <Link href={`/topic/${topic}`}>
               <a
@@ -81,18 +81,31 @@ const Post = ({
               </a>
             </Link>
 
-            <h1 className="md:text-5xl text-4xl font-roboto-cond font-bold px-8 mb-5 mt-3">
+            <h1 className="md:text-5xl text-4xl font-roboto-cond font-bold px-8 my-5">
               {title}
             </h1>
 
-            <div className="flex items-center h-3 px-8 mb-8 text-grayText dark:text-gray-400 overflow-hidden">
-              <CalendarIcon className="h-full inline mr-1" />
-              <span className="text-sm font-roboto">
-                <FormattedDate date={date} />
-              </span>
-              <span className="mx-2">|</span>
-              <ClockIcon className="h-full inline mr-1" />
-              <span className="text-sm font-roboto">{minutes} min read</span>
+            <div className="flex px-8  mb-8">
+              <div
+                style={{
+                  background: "center url('/topicbg/bg.jpg')",
+                  backgroundSize: "cover",
+                }}
+                className="md:h-11 md:w-11 h-10 w-10 rounded-full border-lightBlue-900 border relative"
+              />
+              <div className="flex flex-col pl-2 justify-around">
+                <h5 className="md:text-base text-sm font-roboto">Vishesh Dhawan</h5>
+                <div className="flex items-center h-3 text-grayText dark:text-gray-400 overflow-hidden">
+                  <span className="text-sm font-roboto">
+                    <FormattedDate date={date} />
+                  </span>
+                  <span className="mx-2">|</span>
+                  {/* <ClockIcon className="h-full inline mr-1" /> */}
+                  <span className="text-sm font-roboto">
+                    {minutes} min read
+                  </span>
+                </div>
+              </div>
             </div>
           </>
 
@@ -112,6 +125,14 @@ const Post = ({
                 <div className="font-serif leading-7.5 text-lg">
                   <MDXRemote {...content} components={components} />
                 </div>
+                {/* <div className="w-full border flex">
+                  <div className="border border-red-800">
+                    Vishesh Dhawan Image
+                  </div>
+                  <div className="border border-lightBlue-800 flex-1">
+                    jebv
+                  </div>
+                </div> */}
               </main>
             </div>
 
