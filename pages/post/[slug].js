@@ -70,7 +70,7 @@ const Post = ({
         />
       </Head>
       <section className="max-w-7xl mx-auto">
-        <div className="container mx-auto horizontal-spacing md:pt-8 border-b dark:border-gray-700">
+        <div className="container mx-auto horizontal-spacing md:pt-8">
           <>
             <Link href={`/topic/${topic}`}>
               <a
@@ -91,10 +91,12 @@ const Post = ({
                   background: "center url('/topicbg/bg.jpg')",
                   backgroundSize: "cover",
                 }}
-                className="md:h-11 md:w-11 h-10 w-10 rounded-full border-lightBlue-900 border relative"
+                className="md:h-11 md:w-11 h-10 w-10 rounded-full relative"
               />
               <div className="flex flex-col pl-2 justify-around">
-                <h5 className="md:text-base text-sm font-roboto">Vishesh Dhawan</h5>
+                <h5 className="md:text-base text-sm font-roboto">
+                  Vishesh Dhawan
+                </h5>
                 <div className="flex items-center h-3 text-grayText dark:text-gray-400 overflow-hidden">
                   <span className="text-sm font-roboto">
                     <FormattedDate date={date} />
@@ -121,23 +123,28 @@ const Post = ({
                   className="object-cover object-center"
                 />
               </div>
-              <main key={id} className="lg:px-14 md:px-16 sm:px-8 mt-5">
+              <main key={id} className="lg:px-14 md:px-16 sm:px-8 mt-5 pb-8">
                 <div className="font-serif leading-7.5 text-lg">
                   <MDXRemote {...content} components={components} />
                 </div>
-                {/* <div className="w-full border flex">
-                  <div className="border border-red-800">
-                    Vishesh Dhawan Image
-                  </div>
-                  <div className="border border-lightBlue-800 flex-1">
-                    jebv
-                  </div>
-                </div> */}
               </main>
+              <div className="lg:px-14 md:px-16 sm:px-8">
+                <hr className="border-t" />
+              </div>
+
+              {/* Author */}
+              {/* <div className="w-full lg:px-14 md:px-16 sm:px-8">
+                <div className="border-t dark:border-gray-700 flex pt-8">
+                  <div className="flex items-start justify-center lg:h-32">
+                    <div className="rounded-full h-20 w-20 border border-lightBlue-300"></div>
+                  </div>
+                  <div className="border-lightBlue-800 flex-1 pl-3">jebv</div>
+                </div>
+              </div> */}
             </div>
 
             <div className="col-span-4 hidden lg:block">
-              <div className="border-l dark:border-gray-700 pl-3 pb-2">
+              <div className="border-l pl-3 pb-2">
                 <h1 className="text-4xl font-pt-sans font-bold mb-4">
                   Featured
                 </h1>
@@ -159,19 +166,13 @@ const Post = ({
           </div>
         </div>
       </section>
-      {similar.length > 1 ? (
-        <section className="py-3 my-2 bg-gray-100 dark:bg-blac dark:bg-gray-800">
-          <div className="container mx-auto horizontal-spacing">
-            <h1 className="font-pt-sans font-bold text-4xl mb-2 pl-2 dark:text-gray-200">
-              Similar
-            </h1>
 
-            {/* <div className="grid lg:gap-1 md:gap-4 grid-cols-4">
-            <SimilarArticles />
-            <SimilarArticles />
-            <SimilarArticles />
-            <SimilarArticles />
-          </div> */}
+      {similar.length > 1 ? (
+        <section className="py-3 mb-14">
+          <div className="container mx-auto horizontal-spacing">
+            <h1 className="font-pt-sans font-bold lg:text-4xl sm:text-3xl text-4xl mb-2 pl-2 dark:text-gray-200">
+              Read More
+            </h1>
             <div className="flex sm:flex-row flex-col justify-betwee flex-wrap">
               {similar.map((data) => (
                 <SimilarArticles key={data.slug} data={data} />
@@ -181,7 +182,8 @@ const Post = ({
         </section>
       ) : null}
 
-      <section className="">
+      {/* extra bytes */}
+      {/* <section className="">
         <div className="container mx-auto horizontal-spacing border-t dark:border-gray-700 pt-8">
           <div className="grid gap-4 grid-cols-12 pt-2">
             <div className="lg:col-span-8 col-span-12">
@@ -198,7 +200,7 @@ const Post = ({
             <div className="col-span-4 hidden lg:block"></div>
           </div>
         </div>
-      </section>
+      </section> */}
     </>
   )
 }
@@ -230,7 +232,7 @@ function SimilarArticles({ data }) {
         style={{ minWidth: "x" }}
         className="px-2 col-span-2 lg:col-auto sm:w-1/3 w-full sm:h-auto h-auto mb-5 sm:mb-0"
       >
-        <div className="relative md:h-72 lg:h-80 sm:h-64 h-44 w-full overflow-hidden">
+        <div className="relative md:h-72 lg:h-80 sm:h-64 h-44 w-full rounded-lg overflow-hidden">
           <Image
             className="object-cover object-center"
             src={source}
@@ -242,12 +244,12 @@ function SimilarArticles({ data }) {
           <div
             style={{
               backgroundImage:
-                "linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.7) 70%, rgba(0,0,0,1) 98%)",
+                "linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.7) 60%, rgba(0,0,0,1) 98%)",
             }}
             className="absolute top-0 right-0 left-0 bottom-0"
           />
 
-          <h3 className="absolute bottom-2 right-2 left-2 font-roboto font-bold text-white text-2xl leading-7">
+          <h3 className="absolute bottom-2 right-2 left-2 font-roboto font-bold text-white text-2xl sm:text-2xl lg:text-3xl leading-7">
             {data.title}
           </h3>
         </div>
