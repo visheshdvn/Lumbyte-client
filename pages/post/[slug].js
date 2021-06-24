@@ -2,7 +2,6 @@ import React from "react"
 import Image from "next/image"
 import Link from "next/link"
 import Head from "next/head"
-import { ClockIcon, CalendarIcon } from "@heroicons/react/outline"
 import { serialize } from "next-mdx-remote/serialize"
 import { MDXRemote } from "next-mdx-remote"
 
@@ -14,7 +13,6 @@ import {
 } from "../../graphql/postPageQueries"
 
 // custon components
-import WidePeek from "../../components/PostPeek/wide"
 import FormattedDate from "../../components/micro/formattedDate"
 
 // custom mdx component imports
@@ -69,7 +67,7 @@ const Post = ({
           key="ogimage"
         />
       </Head>
-      <section className="max-w-7xl mx-auto">
+      <section style={{ maxWidth: "1200px" }} className="mx-auto">
         <div className="container mx-auto horizontal-spacing md:pt-8">
           <>
             <Link href={`/topic/${topic}`}>
@@ -112,7 +110,7 @@ const Post = ({
           </>
 
           <div className="grid gap-4 grid-cols-12 mb-5">
-            <div className="lg:col-span-8 col-span-12">
+            <div className="lg:col-span-9 col-span-12">
               <div className="mb-8">
                 <Image
                   src={`http://${process.env.HOSTNAME}:${process.env.PORT}${banner.url}`}
@@ -124,7 +122,7 @@ const Post = ({
                 />
               </div>
               <main key={id} className="lg:px-14 md:px-16 sm:px-8 mt-5 pb-8">
-                <div className="font-serif leading-7.5 text-lg">
+                <div id="toSpeech" className="font-serif leading-7.5 text-lg">
                   <MDXRemote {...content} components={components} />
                 </div>
               </main>
@@ -143,7 +141,7 @@ const Post = ({
               </div> */}
             </div>
 
-            <div className="col-span-4 hidden lg:block">
+            <div className="col-span-3 hidden lg:block">
               <div className="border-l pl-3 pb-2">
                 <h1 className="text-4xl font-pt-sans font-bold mb-4">
                   Featured
@@ -173,7 +171,7 @@ const Post = ({
             <h1 className="font-pt-sans font-bold lg:text-4xl sm:text-3xl text-4xl mb-2 pl-2 dark:text-gray-200">
               Read More
             </h1>
-            <div className="flex sm:flex-row flex-col justify-betwee flex-wrap">
+            <div className="flex sm:flex-row flex-col flex-wrap">
               {similar.map((data) => (
                 <SimilarArticles key={data.slug} data={data} />
               ))}
@@ -233,23 +231,22 @@ function SimilarArticles({ data }) {
         className="px-2 col-span-2 lg:col-auto sm:w-1/3 w-full sm:h-auto h-auto mb-5 sm:mb-0"
       >
         <div className="relative md:h-72 lg:h-80 sm:h-64 h-44 w-full rounded-lg overflow-hidden">
-          <Image
-            className="object-cover object-center"
-            src={source}
-            alt="image"
-            // width={340}
-            // height={320}
-            layout="fill"
-          />
           <div
             style={{
               backgroundImage:
                 "linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.7) 60%, rgba(0,0,0,1) 98%)",
             }}
-            className="absolute top-0 right-0 left-0 bottom-0"
+            className="gradient-div absolute top-0 right-0 left-0 bottom-0 z-10"
           />
 
-          <h3 className="absolute bottom-2 right-2 left-2 font-roboto font-bold text-white text-2xl sm:text-2xl lg:text-3xl leading-7">
+          <Image
+            className="object-cover object-center"
+            src={source}
+            alt="image"
+            layout="fill"
+          />
+
+          <h3 className="absolute bottom-2 right-2 left-2 font-roboto font-bold text-white text-2xl sm:text-2xl lg:text-3xl leading-7 z-20">
             {data.title}
           </h3>
         </div>

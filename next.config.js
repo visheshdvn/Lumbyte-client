@@ -1,9 +1,9 @@
 module.exports = {
     images: {
-        domains: ['source.unsplash.com', 'localhost', '172.23.9.217', 'i.imgur.com'],
+        domains: ['source.unsplash.com', 'localhost', '172.24.42.212', 'i.imgur.com'],
     },
     env: {
-        HOSTNAME: "localhost",
+        HOSTNAME: "172.24.42.212",
         PORT: 1337
     }
 }

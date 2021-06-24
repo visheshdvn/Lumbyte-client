@@ -89,3 +89,8 @@ ul.spaced li:not(:last-child) {
 .form-input:valid + .label-name {
   @apply border-b border-gray-800;
 }
+
+/*  */
+.gradient-div:hover + div img {
+  @apply transform scale-110 duration-500;
+}
