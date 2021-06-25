@@ -230,7 +230,7 @@ function SimilarArticles({ data }) {
         style={{ minWidth: "x" }}
         className="px-2 col-span-2 lg:col-auto sm:w-1/3 w-full sm:h-auto h-auto mb-5 sm:mb-0"
       >
-        <div className="relative md:h-72 lg:h-80 sm:h-64 h-44 w-full rounded-lg overflow-hidden">
+        <div className="relative h-44 sm:h-64 md:h-72 w-full rounded-lg overflow-hidden">
           <div
             style={{
               backgroundImage:
