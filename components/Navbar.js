@@ -1,4 +1,4 @@
-import { useState, useRef } from "react"
+import { useState, useRef, useEffect } from "react"
 import { MenuIcon, XIcon, SearchIcon } from "@heroicons/react/outline"
 import { Disclosure, Switch } from "@headlessui/react"
 import Link from "next/link"
@@ -24,6 +24,15 @@ export default function Navbar() {
   }
 
   const { theme, setTheme } = useTheme()
+
+  useEffect(() => {
+    if (enabled) {
+      setTheme("dark")
+    } else {
+      setTheme("light")
+    }
+    console.log(enabled);
+  }, [enabled])
 
   return (
     <Disclosure
@@ -94,7 +103,7 @@ export default function Navbar() {
                   checked={enabled}
                   onChange={() => {
                     setEnabled(!enabled)
-                    setTheme(theme === "dark" ? "light" : "dark")}}
+                  }}
                   className={`${
                     enabled ? "bg-gray-800" : "bg-gray-200"
                   } relative inline-flex items-center h-6 rounded-full w-11 focus:outline-none cursor-pointer`}
