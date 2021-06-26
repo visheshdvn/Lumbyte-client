@@ -15,6 +15,7 @@ class MyDocument extends Document {
             href="https://fonts.googleapis.com/css2?family=Bungee+Shade&family=PT+Sans+Narrow:wght@700&family=Roboto+Condensed:wght@400;700&family=Roboto:wght@400;700&display=swap"
             rel="stylesheet"
           />
+          <link rel="shortcut icon" href="/logo/FavIcon.png" />
         </Head>
         <body className="dark:bg-darkGray">
           <Main />

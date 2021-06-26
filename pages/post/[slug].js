@@ -26,7 +26,6 @@ import { H1, H2, H3 } from "../../components/blogtext/headings"
 import Img from "../../components/blogtext/image"
 import Ul from "../../components/blogtext/ul"
 import Code from "../../components/blogtext/code"
-import { from } from "@apollo/client"
 
 const Post = ({
   postData: {

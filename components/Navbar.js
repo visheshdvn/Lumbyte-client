@@ -31,7 +31,6 @@ export default function Navbar() {
     } else {
       setTheme("light")
     }
-    console.log(enabled);
   }, [enabled])
 
   return (
