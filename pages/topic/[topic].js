@@ -44,7 +44,7 @@ const Topic = ({ latestPosts, headerColor, featuredPosts, headerImg, metaDescrip
         }}
         className="w-full lg:h-48 md:h-44 sm:h-32 h-28 bg-lightBlue-80 flex items-center justify-center bg-center bg-cover"
       >
-        <h1 className="font-bungee-shade text-white xl:text-6xl md:text-5xl sm:text-4xl text-3xl">
+        <h1 className="font-bungee-shade text-white xl:text-6xl md:text-5xl sm:text-4xl text-3xl text-center">
           {topic}
         </h1>
       </div>
