@@ -6,7 +6,7 @@ import Link from "next/link"
 import { useTheme } from "next-themes"
 
 export default function Navbar() {
-  const [enabled, setEnabled] = useState(true)
+  const [enabled, setEnabled] = useState(false)
   const [searchValue, setSearchValue] = useState("")
 
   const searchInputFieldRef = useRef(null)

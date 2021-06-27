@@ -21,7 +21,7 @@ body {
 }
 
 ul.spaced li:not(:last-child) {
-  @apply mb-3;
+  @apply mb-5;
 }
 
 /*  */

@@ -24,8 +24,9 @@ import FormattedDate from "../../components/micro/formattedDate"
 import Paragraph from "../../components/blogtext/paragraph"
 import { H1, H2, H3 } from "../../components/blogtext/headings"
 import Img from "../../components/blogtext/image"
-import Ul from "../../components/blogtext/ul"
+import { Ul } from "../../components/blogtext/lists"
 import Code from "../../components/blogtext/code"
+import BlockQuote from "../../components/blogtext/blockQuote"
 
 const Post = ({
   postData: {
@@ -51,6 +52,7 @@ const Post = ({
     ul: (props) => <Ul {...props} />,
     img: (props) => <Img {...props} />,
     code: (props) => <Code {...props} />,
+    blockquote: (props) => <BlockQuote {...props} />,
   }
 
   return (
@@ -188,7 +190,10 @@ const Post = ({
                   className="object-cover object-center"
                 />
               </div>
-              <main key={id} className="lg:px-14 md:px-16 sm:px-8 px-3 mt-5 pb-8">
+              <main
+                key={id}
+                className="lg:px-14 md:px-16 sm:px-8 px-3 mt-5 pb-8"
+              >
                 <div
                   style={{ maxWidth: "730px" }}
                   id="toSpeech"

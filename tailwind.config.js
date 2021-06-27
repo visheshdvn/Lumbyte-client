@@ -36,7 +36,8 @@ module.exports = {
         "4.5xl": "2.5rem",
       },
       colors: {
-        grayText: "#757575"
+        grayText: "rgb(117, 117, 117)",
+        "bquote-dark": "rgba(75, 75, 75, 0.25)"
       },
       lineHeight: {
         "7.5": "1.875rem"
