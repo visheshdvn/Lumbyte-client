@@ -28,7 +28,7 @@ export async function getPostBySlug(slug) {
       slug,
     },
     // pollInterval: 1
-    fetchPolicy: "network-only"
+    fetchPolicy: "network-only",
   })
 
   return data
@@ -39,7 +39,13 @@ export async function getSimilarPosts(topicname, slug) {
     query: gql`
       query getSImilarPosts($topicname: String, $slug: String) {
         similar: blogposts(
-          where: { slug_ne: $slug, tags: { tagname: $topicname } }
+          where: {
+            slug_ne: $slug,
+            _or: [
+              { topic: { topicname: $topicname } }
+              { secondaryTopic: { topicname: $topicname } }
+            ]
+          }
           start: 0
           limit: 10
           sort: "id:DESC"

@@ -19,15 +19,13 @@ const WidePeek = ({
   // const banner = "https://source.unsplash.com/random/800x600"
   return (
     <article className="widearticle overflow-hidden flex lg:mb-16 md:mb-14 sm:mb-10 mb-8">
-      <div className="xl:h-44 lg:h-38 sm:h-27 xl:w-72 lg:w-64 sm:w-44 h-25 w-25 overflow-hidden relative">
+      <div className="lg:h-38 sm:h-27 h-25 lg:w-64 sm:w-44 w-25 overflow-hidden relative">
         <Link href={`/post/${slug}`}>
           <a>
             <Image
               src={`http://${process.env.HOSTNAME}:${process.env.PORT}${banner.url}`}
               alt={banner.alternativeText}
               className="object-cover object-center"
-              // width={288}
-              // height={176}
               layout="fill"
             />
           </a>

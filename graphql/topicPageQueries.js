@@ -163,8 +163,8 @@ export async function getTopickPageData(topicname, start, limit) {
 
         related: blogposts(
           where: {
-            tags: { tagname: $topicname }
             topic: { topicname_ne: $topicname }
+            secondaryTopic: { topicname: $topicname }
           }
           start: $start
           limit: $limit
