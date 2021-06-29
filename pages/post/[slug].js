@@ -27,6 +27,7 @@ import Img from "../../components/blogtext/image"
 import { Ul } from "../../components/blogtext/lists"
 import Code from "../../components/blogtext/code"
 import BlockQuote from "../../components/blogtext/blockQuote"
+import Table from "../../components/blogtext/table"
 
 const Post = ({
   postData: {
@@ -53,6 +54,7 @@ const Post = ({
     img: (props) => <Img {...props} />,
     code: (props) => <Code {...props} />,
     blockquote: (props) => <BlockQuote {...props} />,
+    table: (props) => <Table {...props} />,
   }
 
   return (

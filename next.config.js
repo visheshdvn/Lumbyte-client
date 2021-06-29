@@ -1,6 +1,6 @@
 module.exports = {
     images: {
-        domains: ['source.unsplash.com', 'localhost', '172.28.83.201', 'i.imgur.com'],
+        domains: ['localhost', '172.26.242.156', 'i.imgur.com'],
     },
     env: {
         HOSTNAME: "localhost",
