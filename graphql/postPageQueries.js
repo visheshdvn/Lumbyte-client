@@ -64,7 +64,6 @@ export async function getSimilarPosts(topicname, slug) {
       slug,
     },
   })
-
   return data
 }
 

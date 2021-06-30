@@ -243,7 +243,7 @@ const Post = ({
         </div>
       </section>
 
-      {similar.length > 1 ? (
+      {similar.length > 0 ? (
         <section className="py-3 mb-14">
           <div className="container mx-auto horizontal-spacing">
             <h1 className="font-pt-sans font-bold lg:text-4xl sm:text-3xl text-4xl mb-2 pl-2 dark:text-gray-200">
