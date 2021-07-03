@@ -190,6 +190,8 @@ const Post = ({
                   height={900}
                   layout="responsive"
                   className="object-cover object-center"
+                  placeholder="blur"
+                  blurDataURL={`http://${process.env.HOSTNAME}:${process.env.PORT}${banner.url}`}
                 />
               </div>
               <main

@@ -25,9 +25,9 @@ const SmallPeek = ({
               src={`http://${process.env.HOSTNAME}:${process.env.PORT}${banner.url}`}
               alt={banner.alternativeText}
               className="object-cover object-center"
-              // width={395}
-              // height={176}
               layout="fill"
+              placeholder="blur"
+              blurDataURL={`http://${process.env.HOSTNAME}:${process.env.PORT}${banner.url}`}
             />
           </a>
         </Link>

@@ -27,6 +27,8 @@ const WidePeek = ({
               alt={banner.alternativeText}
               className="object-cover object-center"
               layout="fill"
+              placeholder="blur"
+              blurDataURL={`http://${process.env.HOSTNAME}:${process.env.PORT}${banner.url}`}
             />
           </a>
         </Link>
