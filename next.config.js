@@ -1,9 +1,8 @@
 module.exports = {
     images: {
-        domains: ['localhost', '172.24.82.135', 'i.imgur.com'],
+        domains: ['localhost', '172.29.228.204', 'i.imgur.com', 'i.ibb.co'],
     },
     env: {
-        HOSTNAME: "172.24.82.135",
-        PORT: 1337
+        HOSTNAME: "localhost:1338"
     }
 }

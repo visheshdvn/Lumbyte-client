@@ -184,14 +184,14 @@ const Post = ({
             <div className="lg:col-span-12 col-span-12">
               <div className="mb-8">
                 <Image
-                  src={`http://${process.env.HOSTNAME}:${process.env.PORT}${banner.url}`}
+                  src={`http://${process.env.HOSTNAME}${banner.url}`}
                   alt={banner.alternativeText}
                   width={1366}
                   height={900}
                   layout="responsive"
                   className="object-cover object-center"
                   placeholder="blur"
-                  blurDataURL={`http://${process.env.HOSTNAME}:${process.env.PORT}${banner.url}`}
+                  blurDataURL={`http://${process.env.HOSTNAME}${banner.url}`}
                 />
               </div>
               <main

@@ -23,12 +23,12 @@ const WidePeek = ({
         <Link href={`/post/${slug}`}>
           <a>
             <Image
-              src={`http://${process.env.HOSTNAME}:${process.env.PORT}${banner.url}`}
+              src={`http://${process.env.HOSTNAME}${banner.url}`}
               alt={banner.alternativeText}
               className="object-cover object-center"
               layout="fill"
               placeholder="blur"
-              blurDataURL={`http://${process.env.HOSTNAME}:${process.env.PORT}${banner.url}`}
+              blurDataURL={`http://${process.env.HOSTNAME}${banner.url}`}
             />
           </a>
         </Link>
