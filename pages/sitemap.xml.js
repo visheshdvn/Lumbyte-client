@@ -57,6 +57,11 @@ export async function getServerSideProps({ res }) {
         "search.js",
         "topic",
         "api",
+        ".next",
+        "___next_launcher.js",
+        "___vc_bridge.js",
+        "node_modules",
+        "package.json"
       ].includes(staticPage);
     })
     .map((staticPagePath) => {
