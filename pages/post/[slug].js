@@ -127,7 +127,7 @@ const Post = ({
                     <li className="ml-3">
                       <TwitterShareButton
                         title={title}
-                        url="https://google.com"
+                        url={`https://lumbytes.com/post/${slug}`}
                         className="focus:outline-none border-none"
                       >
                         <svg
@@ -147,7 +147,7 @@ const Post = ({
                       <FacebookShareButton
                         style={{ color: "#3A5794" }}
                         quote={title}
-                        url="https://google.com"
+                        url={`https://lumbytes.com/post/${slug}`}
                         className="focus:outline-none border-none"
                       >
                         <svg
@@ -166,7 +166,7 @@ const Post = ({
                       <LinkedinShareButton
                         style={{ color: "#0A66C2" }}
                         title={title}
-                        url="https://google.com"
+                        url={`https://lumbytes.com/post/${slug}`}
                         className="focus:outline-none border-none"
                       >
                         <svg
