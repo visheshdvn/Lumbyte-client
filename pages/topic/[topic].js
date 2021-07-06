@@ -1,6 +1,6 @@
 import React from "react"
 import { useRouter } from "next/router"
-import Head from 'next/head'
+import Head from "next/head"
 
 import WidePeek from "../../components/PostPeek/wide"
 import SmallPeek from "../../components/PostPeek/smaller"
@@ -9,8 +9,14 @@ import {
   getTopickPageData,
 } from "../../graphql/topicPageQueries"
 
-const Topic = ({ latestPosts, headerColor, featuredPosts, headerImg, metaDescription }) => {
-  if (!latestPosts || !headerColor || !featuredPosts || !metaDescription || !headerImg) {
+const Topic = ({
+  latestPosts,
+  headerColor,
+  featuredPosts,
+  headerImg,
+  metaDescription,
+}) => {
+  if (!latestPosts || !headerColor || !featuredPosts || !metaDescription) {
     return <div>Loading</div>
   }
 
@@ -30,14 +36,15 @@ const Topic = ({ latestPosts, headerColor, featuredPosts, headerImg, metaDescrip
   const rgb = hexToRgb(headerColor)
   const { r, g, b } = rgb
 
-  const headImg = headerImg ? `http://${process.env.HOSTNAME}:${process.env.PORT}${headerImg.url}` : "/topicbg/bg.jpg"
+  // const headImg = headerImg ? `http://${process.env.HOSTNAME}:${process.env.PORT}${headerImg.url}` : "/topicbg/bg.jpg"
+  const headImg = "/topicbg/bg.jpg"
 
   return (
     <>
-    <Head>
-      <title>Lumbytes | {topic.toUpperCase()}</title>
-      <meta name="description" content={metaDescription} />
-    </Head>
+      <Head>
+        <title>Lumbytes | {topic.toUpperCase()}</title>
+        <meta name="description" content={metaDescription} />
+      </Head>
       <div
         style={{
           backgroundImage: `radial-gradient( rgba(${r}, ${g}, ${b}, 1), rgba(${r}, ${g}, ${b}, 0.85)), url(${headImg})`,

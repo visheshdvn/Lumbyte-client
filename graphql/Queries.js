@@ -15,7 +15,6 @@ export async function getLatestPosts(start, limit) {
           banner {
             url
             alternativeText
-            formats
           }
           title
           excerpt
@@ -53,7 +52,6 @@ export async function getfeauredPosts(start, limit) {
           banner {
             url
             alternativeText
-            formats
           }
           title
           minuteRead
@@ -138,7 +136,7 @@ export async function getIndexPageData(start, limit) {
         }
       }
 
-      fragment commonData on Blogposts {
+      fragment commonData on Blogpost {
         topic {
           topicname
           associatedColour
@@ -151,6 +149,8 @@ export async function getIndexPageData(start, limit) {
         date
         minuteRead
         slug
+        bannerUrl
+        bannerAlt
       }
     `,
     variables: {
@@ -159,6 +159,5 @@ export async function getIndexPageData(start, limit) {
     },
     fetchPolicy: "network-only",
   })
-
   return data
 }

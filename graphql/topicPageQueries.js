@@ -174,7 +174,7 @@ export async function getTopickPageData(topicname, start, limit) {
         }
       }
 
-      fragment commonData on Blogposts {
+      fragment commonData on Blogpost {
         topic {
           topicname
           associatedColour
@@ -187,6 +187,8 @@ export async function getTopickPageData(topicname, start, limit) {
         minuteRead
         date
         slug
+        bannerUrl,
+        bannerAlt
       }
     `,
     variables: {

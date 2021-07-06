@@ -4,9 +4,7 @@ import WidePeek from "../components/PostPeek/wide"
 import SmallPeek from "../components/PostPeek/smaller"
 import SpotLight from "../components/PostPeek/spotLight"
 
-import {
-  getIndexPageData,
-} from "../graphql/Queries"
+import { getIndexPageData } from "../graphql/Queries"
 
 export default function Home({ latestPosts, featuredPosts, topPicks }) {
   return (
@@ -50,8 +48,9 @@ export default function Home({ latestPosts, featuredPosts, topPicks }) {
 }
 
 export async function getStaticProps() {
-
-  const { data: {latest, featured, topPicks} } = await getIndexPageData(0, 10)
+  const {
+    data: { latest, featured, topPicks },
+  } = await getIndexPageData(0, 10)
 
   return {
     props: {

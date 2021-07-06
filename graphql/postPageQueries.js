@@ -21,6 +21,8 @@ export async function getPostBySlug(slug) {
           }
           content
           date
+          bannerUrl
+          bannerAlt
         }
       }
     `,
@@ -54,6 +56,8 @@ export async function getSimilarPosts(topicname, slug) {
             url
             alternativeText
           }
+          bannerUrl
+          bannerAlt
           title
           slug
         }

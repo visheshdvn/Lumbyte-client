@@ -3,10 +3,27 @@ import Image from "next/image"
 import Link from "next/link"
 
 import DateMinute from "../micro/dateMinute"
+import { isValidURL } from "../../utils/checkValidURL"
 
 const SmallPeek = ({
-  populateData: { topic, banner, title, minuteRead, date, slug },
+  populateData: {
+    topic,
+    banner,
+    title,
+    minuteRead,
+    date,
+    slug,
+    bannerUrl,
+    bannerAlt,
+  },
 }) => {
+  let source = null
+  if (isValidURL(bannerUrl)) {
+    source = bannerUrl
+  } else {
+    source = `http://${process.env.HOSTNAME}${bannerUrl}`
+  }
+
   return (
     <article className="lg:mb-16 md:mb-14 sm:mb-10 mb-8 flex md:flex-col justify-start overflow-hidden">
       <Link href={`/topic/${topic.topicname}`}>
@@ -22,12 +39,12 @@ const SmallPeek = ({
         <Link href={`/post/${slug}`}>
           <a>
             <Image
-              src={`http://${process.env.HOSTNAME}${banner.url}`}
-              alt={banner.alternativeText}
+              src={source}
+              alt={bannerAlt}
               className="object-cover object-center"
               layout="fill"
               placeholder="blur"
-              blurDataURL={`http://${process.env.HOSTNAME}${banner.url}`}
+              blurDataURL={source}
             />
           </a>
         </Link>

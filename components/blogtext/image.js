@@ -16,7 +16,7 @@ const Img = ({src, alt}) => {
   if (validURL(src)) {
     source = src
   } else {
-    source = `http://${process.env.HOSTNAME}:${process.env.PORT}${src}`
+    source = `http://${process.env.HOSTNAME}${src}`
   }
 
   return (

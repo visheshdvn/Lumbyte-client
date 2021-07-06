@@ -14,11 +14,11 @@ import {
   getSlugs,
   getPostBySlug,
   getSimilarPosts,
-  getExtraBytes,
 } from "../../graphql/postPageQueries"
 
-// custon components
+// custom components
 import FormattedDate from "../../components/micro/formattedDate"
+import { isValidURL } from "../../utils/checkValidURL"
 
 // custom mdx component imports
 import Paragraph from "../../components/blogtext/paragraph"
@@ -38,6 +38,8 @@ const Post = ({
     associatedColor,
     topic,
     banner,
+    bannerUrl,
+    bannerAlt,
     content,
     date,
     slug,
@@ -57,6 +59,13 @@ const Post = ({
     table: (props) => <Table {...props} />,
   }
 
+  let source = null
+  if (isValidURL(bannerUrl)) {
+    source = bannerUrl
+  } else {
+    source = `http://${process.env.HOSTNAME}${bannerUrl}`
+  }
+
   return (
     <>
       <Head>
@@ -70,11 +79,7 @@ const Post = ({
           content={metadescription}
           key="ogdesc"
         />
-        <meta
-          property="og:image"
-          content={`https://lumbytes.com${banner.url}`}
-          key="ogimage"
-        />
+        <meta property="og:image" content={source} key="ogimage" />
       </Head>
       <section style={{ maxWidth: "1200px" }} className="mx-auto">
         <div className="container mx-auto horizontal-spacing md:pt-8">
@@ -184,14 +189,14 @@ const Post = ({
             <div className="lg:col-span-12 col-span-12">
               <div className="mb-8">
                 <Image
-                  src={`http://${process.env.HOSTNAME}${banner.url}`}
-                  alt={banner.alternativeText}
+                  src={source}
+                  alt={bannerAlt}
                   width={1366}
                   height={900}
                   layout="responsive"
                   className="object-cover object-center"
                   placeholder="blur"
-                  blurDataURL={`http://${process.env.HOSTNAME}${banner.url}`}
+                  blurDataURL={source}
                 />
               </div>
               <main
@@ -283,47 +288,12 @@ const Post = ({
   )
 }
 
-function SocialShare({ title }) {
-  return (
-    <li className="ml-3">
-      <TwitterShareButton
-        title={title}
-        url="https://google.com"
-        className="focus:outline-none border-none"
-      >
-        <svg
-          style={{ color: "#00aced" }}
-          xmlns="http://www.w3.org/2000/svg"
-          fill="currentColor"
-          viewBox="0 0 16 16"
-          className="h-6 w-6"
-        >
-          <path d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z" />
-        </svg>
-      </TwitterShareButton>
-    </li>
-  )
-}
-
 function SimilarArticles({ data }) {
-  function validURL(str) {
-    var pattern = new RegExp(
-      "^(https?:\\/\\/)?" + // protocol
-        "((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|" + // domain name
-        "((\\d{1,3}\\.){3}\\d{1,3}))" + // OR ip (v4) address
-        "(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*" + // port and path
-        "(\\?[;&a-z\\d%_.~+=-]*)?" + // query string
-        "(\\#[-a-z\\d_]*)?$",
-      "i"
-    ) // fragment locator
-    return !!pattern.test(str)
-  }
-
   let source = null
-  if (validURL(data.banner.url)) {
-    source = src
+  if (isValidURL(data.bannerUrl)) {
+    source = data.bannerUrl
   } else {
-    source = `http://localhost:1337${data.banner.url}`
+    source = `http://${process.env.HOSTNAME}${data.bannerUrl}`
   }
 
   return (
@@ -344,7 +314,7 @@ function SimilarArticles({ data }) {
           <Image
             className="object-cover object-center"
             src={source}
-            alt="image"
+            alt={data.bannerAlt}
             layout="fill"
           />
 
@@ -365,16 +335,17 @@ export async function getStaticProps(context) {
   const {
     data: { blogposts },
   } = await getPostBySlug(slug)
-  const {
-    data: { extraBytes },
-  } = await getExtraBytes(slug)
-  // console.log(JSON.stringify(data.data.blogposts[0].banner, null, 4));
+  // const {
+  //   data: { extraBytes },
+  // } = await getExtraBytes(slug)
 
   const mdxSource = await serialize(blogposts[0].content)
   const {
     title,
     published_at,
     banner,
+    bannerUrl,
+    bannerAlt,
     topic,
     id,
     metadescription,
@@ -385,7 +356,6 @@ export async function getStaticProps(context) {
   const {
     data: { similar },
   } = await getSimilarPosts(topic.topicname, slug)
-  // console.log(similar);
 
   return {
     props: {
@@ -395,6 +365,8 @@ export async function getStaticProps(context) {
         topic: topic.topicname,
         associatedColor: topic.associatedColour,
         banner,
+        bannerUrl,
+        bannerAlt,
         id,
         date,
         content: mdxSource,
@@ -402,7 +374,7 @@ export async function getStaticProps(context) {
         minutes: minuteRead,
         slug,
       },
-      extraBytes,
+      // extraBytes,
       similar,
     },
     revalidate: 86400,

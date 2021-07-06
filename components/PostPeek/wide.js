@@ -2,33 +2,41 @@ import React from "react"
 import Image from "next/image"
 import Link from "next/link"
 
-import DateMinute from '../micro/dateMinute'
+import DateMinute from "../micro/dateMinute"
+import {isValidURL} from "../../utils/checkValidURL"
 
 const WidePeek = ({
   populateData: {
     title,
     topic,
     banner,
+    bannerUrl,
+    bannerAlt,
     date,
     slug,
     excerpt,
     minuteRead,
   },
 }) => {
-  // console.log(title, topic, banner, published_at, slug)
-  // const banner = "https://source.unsplash.com/random/800x600"
+  let source = null
+  if (isValidURL(bannerUrl)) {
+    source = bannerUrl
+  } else {
+    source = `http://${process.env.HOSTNAME}${bannerUrl}`
+  }
+
   return (
     <article className="widearticle overflow-hidden flex lg:mb-16 md:mb-14 sm:mb-10 mb-8">
       <div className="lg:h-38 sm:h-27 h-25 lg:w-64 sm:w-44 w-25 overflow-hidden relative">
         <Link href={`/post/${slug}`}>
           <a>
             <Image
-              src={`http://${process.env.HOSTNAME}${banner.url}`}
-              alt={banner.alternativeText}
+              src={source}
+              alt={bannerAlt}
               className="object-cover object-center"
               layout="fill"
               placeholder="blur"
-              blurDataURL={`http://${process.env.HOSTNAME}${banner.url}`}
+              blurDataURL={source}
             />
           </a>
         </Link>
@@ -37,7 +45,7 @@ const WidePeek = ({
         {/* link to topic page */}
         <Link href={`/topic/${topic.topicname}`}>
           <a
-            style={{ color: `#${topic.associatedColour}`}}
+            style={{ color: `#${topic.associatedColour}` }}
             className="uppercase font-roboto-cond font-bold lg:leading-5 md:leading-4 text-lightBlue-600 md:mb-1 xl:text-lg md:text-base text-sm"
           >
             {topic.topicname}

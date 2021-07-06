@@ -1,12 +1,18 @@
 import React from "react"
 import Link from "next/link"
-import Image from "next/image"
 import DateMinute from "../micro/dateMinute"
+import {isValidURL} from "../../utils/checkValidURL"
 
 const SpotLight = ({ posts }) => {
   const topPick = posts[0]
+  const { title, topic, excerpt, minuteRead, date, slug, bannerUrl } = topPick
 
-  const { title, topic, banner, excerpt, minuteRead, date, slug } = topPick
+  let source = null
+  if (isValidURL(bannerUrl)) {
+    source = bannerUrl
+  } else {
+    source = `http://${process.env.HOSTNAME}${bannerUrl}`
+  }
 
   return (
     <section className="lg:py-10 md:py-5 py-3 block">
@@ -19,7 +25,7 @@ const SpotLight = ({ posts }) => {
             <a>
               <div
                 style={{
-                  backgroundImage: `url(http://${process.env.HOSTNAME}${banner.url})`,
+                  backgroundImage: `url(${source})`,
                   backgroundSize: "cover",
                   backgroundPosition: "center",
                 }}
