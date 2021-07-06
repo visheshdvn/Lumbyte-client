@@ -48,6 +48,7 @@ export default function Home({ latestPosts, featuredPosts, topPicks }) {
 }
 
 export async function getStaticProps() {
+  console.log("Re-Generating...")
   const {
     data: { latest, featured, topPicks },
   } = await getIndexPageData(0, 10)

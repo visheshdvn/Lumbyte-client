@@ -4,7 +4,7 @@ module.exports = (phase, { defaultConfig }) => {
   if (phase === PHASE_DEVELOPMENT_SERVER) {
     return {
       env: {
-        HOSTNAME: "lumbyte-backend.herokuapp.com",
+        HOSTNAME: "localhost:1337",
       },
       images: {
         domains: [
