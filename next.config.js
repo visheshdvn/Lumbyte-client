@@ -9,8 +9,6 @@ module.exports = (phase, { defaultConfig }) => {
       images: {
         domains: [
           "localhost",
-          "172.29.228.204",
-          "i.imgur",
           "i.ibb.co",
           "lumbyte-backend.herokuapp",
         ],
