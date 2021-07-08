@@ -2,6 +2,7 @@ import React from "react"
 import Image from "next/image"
 import Link from "next/link"
 import Head from "next/head"
+import { useRouter } from "next/router"
 import { serialize } from "next-mdx-remote/serialize"
 import { MDXRemote } from "next-mdx-remote"
 import {
@@ -18,6 +19,7 @@ import {
 
 // custom components
 import FormattedDate from "../../components/micro/formattedDate"
+import Redirect from "../../components/redirect"
 import { isValidURL } from "../../utils/checkValidURL"
 
 // custom mdx component imports
@@ -29,8 +31,14 @@ import Code from "../../components/blogtext/code"
 import BlockQuote from "../../components/blogtext/blockQuote"
 import Table from "../../components/blogtext/table"
 
-const Post = ({
-  postData: {
+const Post = ({ postData, similar }) => {
+  const router = useRouter()
+
+  if (router.isFallback) {
+    return <div>Loading...</div>
+  }
+
+  const {
     id,
     minutes,
     metadescription,
@@ -43,10 +51,8 @@ const Post = ({
     content,
     date,
     slug,
-  },
-  extraBytes,
-  similar,
-}) => {
+  } = postData
+
   const components = {
     p: (props) => <Paragraph {...props} />,
     h1: (props) => <H1 {...props} />,
@@ -331,13 +337,16 @@ export async function getStaticProps(context) {
   console.log("Re-Generating...")
   const { params } = context
   const { slug } = params
-
+  console.log('here');
   const {
     data: { blogposts },
   } = await getPostBySlug(slug)
-  // const {
-  //   data: { extraBytes },
-  // } = await getExtraBytes(slug)
+
+  if (blogposts.length === 0) {
+    return {
+      notFound: true,
+    }
+  }
 
   const mdxSource = await serialize(blogposts[0].content)
   const {
@@ -386,7 +395,7 @@ export async function getStaticPaths() {
 
   return {
     paths: data.blogposts.map((item) => ({ params: { slug: item.slug } })),
-    fallback: false,
+    fallback: true,
   }
 }
 

@@ -91,7 +91,7 @@ ul.spaced li:not(:last-child) {
 
 /*  */
 .gradient-div:hover + div img {
-  @apply transform scale-110 duration-500;
+  @apply transform scale-110 duration-1000;
 }
 
 /* mdx table */
