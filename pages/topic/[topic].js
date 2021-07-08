@@ -16,11 +16,15 @@ const Topic = ({
   headerImg,
   metaDescription,
 }) => {
+  const router = useRouter()
+
+  if (router.isFallback) {
+    return <div>Loading...</div>
+  }
+
   if (!latestPosts || !headerColor || !featuredPosts || !metaDescription) {
     return <div>Loading</div>
   }
-
-  const router = useRouter()
   const { topic } = router.query
 
   function hexToRgb(hex) {
@@ -97,6 +101,12 @@ export async function getStaticProps(context) {
   const {
     data: { latest, buildData, related },
   } = await getTopickPageData(topic, 0, 10)
+
+  if (latest.length === 0 && buildData.length === 0 && related.length === 0) {
+    return {
+      notFound: true,
+    }
+  }
 
   return {
     props: {
