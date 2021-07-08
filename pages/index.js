@@ -59,6 +59,6 @@ export async function getStaticProps() {
       featuredPosts: featured,
       topPicks: [topPicks[0]],
     },
-    revalidate: 3600
+    revalidate: 14400
   }
 }
