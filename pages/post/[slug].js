@@ -337,7 +337,6 @@ export async function getStaticProps(context) {
   console.log("Re-Generating...")
   const { params } = context
   const { slug } = params
-  console.log('here');
   const {
     data: { blogposts },
   } = await getPostBySlug(slug)
