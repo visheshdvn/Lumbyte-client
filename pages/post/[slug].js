@@ -30,6 +30,7 @@ import { Ul } from "../../components/blogtext/lists"
 import Code from "../../components/blogtext/code"
 import BlockQuote from "../../components/blogtext/blockQuote"
 import Table from "../../components/blogtext/table"
+import {figure as Figure, figcaption as Figcaption} from "../../components/blogtext/figure"
 
 const Post = ({ postData, similar }) => {
   const router = useRouter()
@@ -63,6 +64,8 @@ const Post = ({ postData, similar }) => {
     code: (props) => <Code {...props} />,
     blockquote: (props) => <BlockQuote {...props} />,
     table: (props) => <Table {...props} />,
+    figure: (props) => <Figure {...props} />,
+    // figcaption: (props) => <Figcaption {...props} />,
   }
 
   let source = null
