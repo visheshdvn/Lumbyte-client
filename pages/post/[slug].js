@@ -263,7 +263,7 @@ const Post = ({ postData, similar }) => {
         <section className="py-3 mb-14">
           <div className="container mx-auto horizontal-spacing">
             <h1 className="font-pt-sans font-bold lg:text-4xl sm:text-3xl text-4xl mb-2 pl-2 dark:text-gray-200">
-              Read More
+              Extra bytes
             </h1>
             <div className="flex sm:flex-row flex-col flex-wrap">
               {similar.map((data) => (
@@ -311,7 +311,7 @@ function SimilarArticles({ data }) {
         style={{ minWidth: "x" }}
         className="px-2 col-span-2 lg:col-auto sm:w-1/3 w-full sm:h-auto h-auto mb-5 sm:mb-0"
       >
-        <div className="relative h-44 sm:h-64 md:h-72 w-full rounded-lg overflow-hidden">
+        <div className="scale-parent relative h-44 sm:h-64 md:h-72 w-full rounded-lg overflow-hidden">
           <div
             style={{
               backgroundImage:
@@ -327,7 +327,7 @@ function SimilarArticles({ data }) {
             layout="fill"
           />
 
-          <h3 className="absolute bottom-2 right-2 left-2 font-roboto font-bold text-white text-2xl sm:text-2xl lg:text-3xl leading-7 z-20">
+          <h3 className="absolute bottom-2 right-2 left-2 font-roboto font-bold text-white text-2xl sm:text-2xl lg:text-3xl leading-7 z-20 pointer-events-none">
             {data.title}
           </h3>
         </div>

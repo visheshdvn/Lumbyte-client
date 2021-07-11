@@ -49,7 +49,7 @@ export async function getSimilarPosts(topicname, slug) {
             ]
           }
           start: 0
-          limit: 10
+          limit: 3
           sort: "id:DESC"
         ) {
           banner {

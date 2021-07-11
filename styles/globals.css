@@ -95,7 +95,6 @@ ul.spaced li:not(:last-child) {
 }
 
 /* mdx table */
-
 #special-table thead {
   @apply bg-gray-800 dark:bg-gray-300 text-white dark:text-gray-800 ;
 }
