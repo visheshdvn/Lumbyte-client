@@ -1,6 +1,6 @@
 import React from "react"
 
-export const figure = ({ children }) => {
+const figure = ({ children }) => {
   const image = children.props.children[0]
   const caption = children.props.children[1]
   return (
@@ -13,7 +13,4 @@ export const figure = ({ children }) => {
   )
 }
 
-export const figcaption = ({ children }) => {
-  console.log("caption", children)
-  return <>caption</>
-}
+export default figure

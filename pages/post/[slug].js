@@ -30,7 +30,7 @@ import { Ul } from "../../components/blogtext/lists"
 import Code from "../../components/blogtext/code"
 import BlockQuote from "../../components/blogtext/blockQuote"
 import Table from "../../components/blogtext/table"
-import {figure as Figure, figcaption as Figcaption} from "../../components/blogtext/figure"
+import Figure from "../../components/blogtext/figure"
 
 const Post = ({ postData, similar }) => {
   const router = useRouter()
