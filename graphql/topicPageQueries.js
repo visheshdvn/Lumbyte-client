@@ -138,7 +138,7 @@ export async function getfeauredPostsOfTopic(topicname, start, limit) {
   return data
 }
 
-export async function getTopickPageData(topicname, start, limit) {
+export async function getTopicPageData(topicname, start, limit) {
   const data = await client.query({
     query: gql`
       query getTopicPageData($topicname: String, $start: Int, $limit: Int) {
@@ -159,6 +159,7 @@ export async function getTopickPageData(topicname, start, limit) {
             alternativeText
           }
           metaDescription
+          primaryImg
         }
 
         related: blogposts(
@@ -187,7 +188,7 @@ export async function getTopickPageData(topicname, start, limit) {
         minuteRead
         date
         slug
-        bannerUrl,
+        bannerUrl
         bannerAlt
       }
     `,

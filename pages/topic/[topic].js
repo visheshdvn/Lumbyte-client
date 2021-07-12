@@ -6,14 +6,17 @@ import WidePeek from "../../components/PostPeek/wide"
 import SmallPeek from "../../components/PostPeek/smaller"
 import {
   getAllTopicNames,
-  getTopickPageData,
+  getTopicPageData,
 } from "../../graphql/topicPageQueries"
+
+import { isValidURL } from "../../utils/checkValidURL"
 
 const Topic = ({
   latestPosts,
   headerColor,
   featuredPosts,
   headerImg,
+  headerImgNew,
   metaDescription,
 }) => {
   const router = useRouter()
@@ -40,15 +43,44 @@ const Topic = ({
   const rgb = hexToRgb(headerColor)
   const { r, g, b } = rgb
 
-  // const headImg = headerImg ? `http://${process.env.HOSTNAME}:${process.env.PORT}${headerImg.url}` : "/topicbg/bg.jpg"
-  const headImg = "/topicbg/bg.jpg"
+  const headImg = isValidURL(headerImgNew)
+    ? headerImgNew
+    : "https://lumbytes.com/topicbg/bg.jpg"
 
   return (
     <>
       <Head>
         <title>Lumbytes | {topic.toUpperCase()}</title>
         <meta name="description" content={metaDescription} />
+        {/* opengraph */}
+        <meta property="og:type" content="blog" />
+        <meta property="og:image" content={headImg} key="ogimage" />
+        <meta
+          property="og:title"
+          content={`Lumbytes | ${topic.toUpperCase()}`}
+          key="ogtitle"
+        />
+        <meta
+          property="og:url"
+          content={`https://lumbytes.com/topic/${encodeURI(topic)}`}
+        />
+        <meta
+          property="og:description"
+          content={metaDescription}
+          key="ogdesc"
+        />
+        {/* twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:site" content="@visheshdvn" />
+        <meta name="twitter:description" content={metaDescription} />
+        <meta name="twitter:creator" content="@visheshdvn" />
+        <meta name="twitter:image:src" content={headImg} />
+        <meta
+          name="twitter:title"
+          content={`Lumbytes | ${topic.toUpperCase()}`}
+        />
       </Head>
+
       <div
         style={{
           backgroundImage: `radial-gradient( rgba(${r}, ${g}, ${b}, 1), rgba(${r}, ${g}, ${b}, 0.85)), url(${headImg})`,
@@ -100,7 +132,7 @@ export async function getStaticProps(context) {
 
   const {
     data: { latest, buildData, related },
-  } = await getTopickPageData(topic, 0, 10)
+  } = await getTopicPageData(topic, 0, 10)
 
   if (latest.length === 0 && buildData.length === 0 && related.length === 0) {
     return {
@@ -113,6 +145,7 @@ export async function getStaticProps(context) {
       headerColor: buildData[0].associatedColour,
       headerImg: buildData[0].headerBack,
       metaDescription: buildData[0].metaDescription,
+      headerImgNew: buildData[0].primaryImg,
       latestPosts: latest,
       featuredPosts: related,
     },
