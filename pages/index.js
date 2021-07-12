@@ -10,7 +10,24 @@ export default function Home({ latestPosts, featuredPosts, topPicks }) {
   return (
     <>
       <Head>
-        <title>LumBytes | Home</title>
+        <title>Lumbytes | Home</title>
+        <meta
+          name="description"
+          content="Lumbytes is a technology and programming website. We publish content related to latest happenings in tech industry."
+        />
+        <meta
+          property="og:title"
+          content="Lumbytes - Luminous bytes for luminous minds."
+          key="ogtitle"
+        />
+        <meta property="og:type" content="blog" />
+        <meta property="og:url" content={`https://www.lumbytes.com`} />
+        <meta
+          property="og:description"
+          content="Lumbytes is a technology and programming website. We publish content related to latest happenings in tech industry."
+          key="ogdesc"
+        />
+        <meta property="og:image" content="/logo/ogImage.png" key="ogimage" />
       </Head>
 
       <SpotLight posts={topPicks} />
@@ -59,6 +76,6 @@ export async function getStaticProps() {
       featuredPosts: featured,
       topPicks: [topPicks[0]],
     },
-    revalidate: 14400
+    revalidate: 14400,
   }
 }
