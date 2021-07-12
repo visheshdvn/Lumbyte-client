@@ -15,19 +15,22 @@ export default function Home({ latestPosts, featuredPosts, topPicks }) {
           name="description"
           content="Lumbytes is a technology and programming website. We publish content related to latest happenings in tech industry."
         />
+        {/* opengraph */}
         <meta
           property="og:title"
           content="Lumbytes - Luminous bytes for luminous minds."
           key="ogtitle"
         />
         <meta property="og:type" content="blog" />
-        <meta property="og:url" content={`https://www.lumbytes.com`} />
+        <meta property="og:url" content={`https://lumbytes.com`} />
         <meta
           property="og:description"
           content="Lumbytes is a technology and programming website. We publish content related to latest happenings in tech industry."
           key="ogdesc"
         />
-        <meta property="og:image" content="/logo/ogImage.png" key="ogimage" />
+        <meta property="og:image" content="https://lumbytes.com/logo/ogImage.png" key="ogimage" />
+        {/* twitter */}
+        <meta name="twitter:card" value="summary_large_image" />
       </Head>
 
       <SpotLight posts={topPicks} />

@@ -89,6 +89,9 @@ const Post = ({ postData, similar }) => {
           key="ogdesc"
         />
         <meta property="og:image" content={source} key="ogimage" />
+        <meta property="og:site_name" content="Lumbytes" />
+        {/* twitter */}
+        <meta name="twitter:card" value="summary" />
       </Head>
       <section style={{ maxWidth: "1200px" }} className="mx-auto">
         <div className="container mx-auto horizontal-spacing md:pt-8">
