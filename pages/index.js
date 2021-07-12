@@ -28,9 +28,24 @@ export default function Home({ latestPosts, featuredPosts, topPicks }) {
           content="Lumbytes is a technology and programming website. We publish content related to latest happenings in tech industry."
           key="ogdesc"
         />
-        <meta property="og:image" content="https://lumbytes.com/logo/ogImage.png" key="ogimage" />
+        <meta
+          property="og:image"
+          content="https://lumbytes.com/logo/ogImage.png"
+          key="ogimage"
+        />
         {/* twitter */}
-        <meta name="twitter:card" value="summary_large_image" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:site" content="@visheshdvn" />
+        <meta name="twitter:title" content="Lumbytes - Luminous bytes for luminous minds." />
+        <meta
+          name="twitter:description"
+          content="Lumbytes is a technology and programming website. We publish content related to latest happenings in tech industry."
+        />
+        <meta name="twitter:creator" content="@visheshdvn" />
+        <meta
+          name="twitter:image:src"
+          content="https://lumbytes.com/logo/ogImage.png"
+        />
       </Head>
 
       <SpotLight posts={topPicks} />
