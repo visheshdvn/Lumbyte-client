@@ -50,9 +50,9 @@ export default function Navbar() {
     <Disclosure
       as="nav"
       style={{ transition: "top 0.3s" }}
-      className={`bg-white fixed top-0 w-full ${
-        navbarHidden && "-top-16"
-      } dark:bg-black text-gray-800 z-50 border-b dark:border-gray-700 md:py-2 py-3`}
+      className={`bg-white fixed w-full ${
+        navbarHidden ? "-top-16" : "top-0"
+      } dark:bg-black z-50 border-b dark:border-gray-700 md:py-2 py-3`}
     >
       {({ open }) => (
         <>
