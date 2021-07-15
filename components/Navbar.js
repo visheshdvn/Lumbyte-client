@@ -8,6 +8,7 @@ import { useTheme } from "next-themes"
 export default function Navbar() {
   const [enabled, setEnabled] = useState(false)
   const [searchValue, setSearchValue] = useState("")
+  const [navbarHidden, setNavbarHidden] = useState(false)
 
   const searchInputFieldRef = useRef(null)
 
@@ -25,18 +26,33 @@ export default function Navbar() {
 
   const { theme, setTheme } = useTheme()
 
+  let prevPos = 0
+  const handleScroll = () => {
+    const currentScrollPos = window.pageYOffset
+    const visible = prevPos < currentScrollPos
+    setNavbarHidden(visible)
+    prevPos = currentScrollPos
+  }
+
   useEffect(() => {
     if (enabled) {
       setTheme("dark")
     } else {
       setTheme("light")
     }
+
+    window.addEventListener("scroll", handleScroll)
   }, [enabled])
+
+  useEffect(() => {})
 
   return (
     <Disclosure
       as="nav"
-      className="bg-white dark:bg-black text-gray-800 absolute top-0 w-full z-50 border-b dark:border-gray-700 md:py-2 py-3"
+      style={{ transition: "top 0.3s" }}
+      className={`bg-white fixed top-0 w-full ${
+        navbarHidden && "-top-16"
+      } dark:bg-black text-gray-800 z-50 border-b dark:border-gray-700 md:py-2 py-3`}
     >
       {({ open }) => (
         <>
