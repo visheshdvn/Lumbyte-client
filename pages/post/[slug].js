@@ -19,12 +19,11 @@ import {
 
 // custom components
 import FormattedDate from "../../components/micro/formattedDate"
-import Redirect from "../../components/redirect"
 import { isValidURL } from "../../utils/checkValidURL"
 
 // custom mdx component imports
 import Paragraph from "../../components/blogtext/paragraph"
-import { H1, H2, H3 } from "../../components/blogtext/headings"
+import { H2, H3, H4 } from "../../components/blogtext/headings"
 import Img from "../../components/blogtext/image"
 import { Ul } from "../../components/blogtext/lists"
 import Code from "../../components/blogtext/code"
@@ -56,16 +55,15 @@ const Post = ({ postData, similar }) => {
 
   const components = {
     p: (props) => <Paragraph {...props} />,
-    h1: (props) => <H1 {...props} />,
-    h2: (props) => <H2 {...props} />,
-    h3: (props) => <H3 {...props} />,
+    h1: (props) => <H2 {...props} />,
+    h2: (props) => <H3 {...props} />,
+    h3: (props) => <H4 {...props} />,
     ul: (props) => <Ul {...props} />,
     img: (props) => <Img {...props} />,
     code: (props) => <Code {...props} />,
     blockquote: (props) => <BlockQuote {...props} />,
     table: (props) => <Table {...props} />,
     figure: (props) => <Figure {...props} />,
-    // figcaption: (props) => <Figcaption {...props} />,
   }
 
   let source = null
