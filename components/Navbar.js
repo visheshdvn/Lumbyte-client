@@ -49,8 +49,8 @@ export default function Navbar() {
   return (
     <Disclosure
       as="nav"
-      style={{ transition: "top 0.3s" }}
-      className={`bg-white fixed w-full ${
+      style={{ transition: "top 0.3s", position: "fixed" }}
+      className={`bg-white w-full ${
         navbarHidden ? "-top-16" : "top-0"
       } dark:bg-black z-50 border-b dark:border-gray-700 md:py-2 py-3`}
     >

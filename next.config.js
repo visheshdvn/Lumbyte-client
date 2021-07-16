@@ -5,6 +5,7 @@ module.exports = (phase, { defaultConfig }) => {
     return {
       env: {
         HOSTNAME: "localhost:1337",
+        NEXT_PUBLIC_GA_ID: "G-3BNNCK0DEL",
       },
       images: {
         domains: ["localhost", "i.ibb.co", "lumbyte-backend.herokuapp"],
@@ -15,6 +16,7 @@ module.exports = (phase, { defaultConfig }) => {
   return {
     env: {
       HOSTNAME: "lumbyte-backend.herokuapp.com",
+      NEXT_PUBLIC_GA_ID: "G-3BNNCK0DEL",
     },
     images: {
       domains: [
