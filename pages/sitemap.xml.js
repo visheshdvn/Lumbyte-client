@@ -1,8 +1,8 @@
-import fs from "fs";
-import client from "../apollo-client";
-import { gql } from "@apollo/client";
+import fs from "fs"
+import client from "../apollo-client"
+import { gql } from "@apollo/client"
 
-const Sitemap = () => {};
+const Sitemap = () => {}
 
 async function getSlugs() {
   const data = await client.query({
@@ -14,9 +14,9 @@ async function getSlugs() {
         }
       }
     `,
-  });
+  })
 
-  return data;
+  return data
 }
 
 async function getAllTopicNames() {
@@ -34,19 +34,23 @@ async function getAllTopicNames() {
   return data
 }
 
+console.log(process.cwd())
+
 export async function getServerSideProps({ res }) {
   const {
     data: { blogposts },
-  } = await getSlugs();
-  const {data: {topics}} = await getAllTopicNames();
+  } = await getSlugs()
+  const {
+    data: { topics },
+  } = await getAllTopicNames()
 
   const baseUrl = {
     development: "http://localhost:3000",
     production: "https://lumbytes.com",
-  }[process.env.NODE_ENV];
+  }[process.env.NODE_ENV]
 
   const staticPages = fs
-    .readdirSync(process.env.NODE_ENV === "production" ? process.cwd() : "pages")
+    .readdirSync("pages")
     .filter((staticPage) => {
       return ![
         "_app.js",
@@ -61,12 +65,14 @@ export async function getServerSideProps({ res }) {
         "___next_launcher.js",
         "___vc_bridge.js",
         "node_modules",
-        "package.json"
-      ].includes(staticPage);
+        "package.json",
+        "package-lock.json",
+        "out",
+      ].includes(staticPage)
     })
     .map((staticPagePath) => {
-      return `${baseUrl}/${staticPagePath}`;
-    });
+      return `${baseUrl}/${staticPagePath}`
+    })
 
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
     <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
@@ -79,7 +85,7 @@ export async function getServerSideProps({ res }) {
               <changefreq>monthly</changefreq>
               <priority>0.5</priority>
             </url>
-          `;
+          `
         })
         .join("")}
       ${blogposts
@@ -91,7 +97,7 @@ export async function getServerSideProps({ res }) {
               <changefreq>daily</changefreq>
               <priority>1.0</priority>
             </url>
-          `;
+          `
         })
         .join("")}
       ${topics
@@ -103,19 +109,19 @@ export async function getServerSideProps({ res }) {
               <changefreq>monthly</changefreq>
               <priority>0.8</priority>
             </url>
-          `;
+          `
         })
         .join("")}
     </urlset>
-  `;
+  `
 
-  res.setHeader("Content-Type", "text/xml");
-  res.write(sitemap);
-  res.end();
+  res.setHeader("Content-Type", "text/xml")
+  res.write(sitemap)
+  res.end()
 
   return {
     props: {},
-  };
+  }
 }
 
-export default Sitemap;
+export default Sitemap
