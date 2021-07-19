@@ -87,7 +87,7 @@ const Post = ({ postData, similar }) => {
         <meta property="og:image" content={source} key="ogimage" />
         <meta property="og:site_name" content="Lumbytes" />
         {/* twitter */}
-        <meta name="twitter:card" value="summary" />
+        <meta name="twitter:card" value="summary_large_image" />
       </Head>
       <section style={{ maxWidth: "1200px" }} className="mx-auto">
         <div className="container mx-auto horizontal-spacing md:pt-8">
