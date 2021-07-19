@@ -24,7 +24,7 @@ const Topic = ({
     return <div>Loading...</div>
   }
 
-  if (!latestPosts || !headerColor || !featuredPosts || !metaDescription) {
+  if (!latestPosts || !headerColor || !featuredPosts) {
     return <div>Loading</div>
   }
   const { topic } = router.query
@@ -51,6 +51,10 @@ const Topic = ({
       : `${process.env.PROTOCOL}://${process.env.HOSTNAME}${headerImg.url}`
   } else {
     headImg = "https://lumbytes.com/topicbg/bg.jpg"
+  }
+
+  if (!metaDescription) {
+    metaDescription = `All about ${topic}.`
   }
 
   return (
