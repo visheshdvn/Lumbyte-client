@@ -122,7 +122,7 @@ export async function getIndexPageData(start, limit) {
         }
 
         featured: blogposts(
-          where: { isfeatured: true }
+          where: { isFeatured: true }
           start: $start
           limit: $limit
           sort: "id:DESC"
@@ -136,10 +136,10 @@ export async function getIndexPageData(start, limit) {
         }
       }
 
-      fragment commonData on Blogpost {
+      fragment commonData on Blogposts {
         topic {
           topicname
-          associatedColour
+          theme
         }
         banner {
           url
@@ -149,8 +149,6 @@ export async function getIndexPageData(start, limit) {
         date
         minuteRead
         slug
-        bannerUrl
-        bannerAlt
       }
     `,
     variables: {

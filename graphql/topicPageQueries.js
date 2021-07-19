@@ -153,19 +153,18 @@ export async function getTopicPageData(topicname, start, limit) {
         }
 
         buildData: topics(where: { topicname: $topicname }) {
-          associatedColour
-          headerBack {
+          theme
+          headImg {
             url
             alternativeText
           }
           metaDescription
-          primaryImg
         }
 
         related: blogposts(
           where: {
             topic: { topicname_ne: $topicname }
-            secondaryTopic: { topicname: $topicname }
+            subTopic: { topicname: $topicname }
           }
           start: $start
           limit: $limit
@@ -175,10 +174,10 @@ export async function getTopicPageData(topicname, start, limit) {
         }
       }
 
-      fragment commonData on Blogpost {
+      fragment commonData on Blogposts {
         topic {
           topicname
-          associatedColour
+          theme
         }
         banner {
           url
@@ -188,8 +187,6 @@ export async function getTopicPageData(topicname, start, limit) {
         minuteRead
         date
         slug
-        bannerUrl
-        bannerAlt
       }
     `,
     variables: {

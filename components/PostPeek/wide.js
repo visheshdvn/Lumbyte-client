@@ -10,8 +10,6 @@ const WidePeek = ({
     title,
     topic,
     banner,
-    bannerUrl,
-    bannerAlt,
     date,
     slug,
     excerpt,
@@ -19,10 +17,10 @@ const WidePeek = ({
   },
 }) => {
   let source = null
-  if (isValidURL(bannerUrl)) {
+  if (isValidURL(banner.url)) {
     source = bannerUrl
   } else {
-    source = `http://${process.env.HOSTNAME}${bannerUrl}`
+    source = `${process.env.PROTOCOL}://${process.env.HOSTNAME}${banner.url}`
   }
 
   return (
@@ -32,7 +30,7 @@ const WidePeek = ({
           <a>
             <Image
               src={source}
-              alt={bannerAlt}
+              alt={banner.alternativeText}
               className="object-cover object-center"
               layout="fill"
               placeholder="blur"
@@ -45,7 +43,7 @@ const WidePeek = ({
         {/* link to topic page */}
         <Link href={`/topic/${topic.topicname}`}>
           <a
-            style={{ color: `#${topic.associatedColour}` }}
+            style={{ color: `#${topic.theme}` }}
             className="uppercase font-roboto-cond font-bold lg:leading-5 md:leading-4 text-lightBlue-600 md:mb-1 xl:text-lg md:text-base text-sm"
           >
             {topic.topicname}

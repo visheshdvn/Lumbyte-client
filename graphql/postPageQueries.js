@@ -12,7 +12,7 @@ export async function getPostBySlug(slug) {
           published_at
           topic {
             topicname
-            associatedColour
+            theme
           }
           title
           banner {
@@ -21,8 +21,6 @@ export async function getPostBySlug(slug) {
           }
           content
           date
-          bannerUrl
-          bannerAlt
         }
       }
     `,
@@ -45,7 +43,7 @@ export async function getSimilarPosts(topicname, slug) {
             slug_ne: $slug,
             _or: [
               { topic: { topicname: $topicname } }
-              { secondaryTopic: { topicname: $topicname } }
+              { subTopic: { topicname: $topicname } }
             ]
           }
           start: 0
@@ -56,8 +54,6 @@ export async function getSimilarPosts(topicname, slug) {
             url
             alternativeText
           }
-          bannerUrl
-          bannerAlt
           title
           slug
         }

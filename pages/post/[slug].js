@@ -46,8 +46,6 @@ const Post = ({ postData, similar }) => {
     associatedColor,
     topic,
     banner,
-    bannerUrl,
-    bannerAlt,
     content,
     date,
     slug,
@@ -67,10 +65,10 @@ const Post = ({ postData, similar }) => {
   }
 
   let source = null
-  if (isValidURL(bannerUrl)) {
-    source = bannerUrl
+  if (isValidURL(banner.url)) {
+    source = banner.url
   } else {
-    source = `http://${process.env.HOSTNAME}${bannerUrl}`
+    source = `http://${process.env.HOSTNAME}${banner.url}`
   }
 
   return (
@@ -200,7 +198,7 @@ const Post = ({ postData, similar }) => {
               <div className="mb-8">
                 <Image
                   src={source}
-                  alt={bannerAlt}
+                  alt={banner.alternativeText}
                   width={1366}
                   height={900}
                   layout="responsive"
@@ -300,10 +298,10 @@ const Post = ({ postData, similar }) => {
 
 function SimilarArticles({ data }) {
   let source = null
-  if (isValidURL(data.bannerUrl)) {
-    source = data.bannerUrl
+  if (isValidURL(data.banner.url)) {
+    source = data.banner.url
   } else {
-    source = `http://${process.env.HOSTNAME}${data.bannerUrl}`
+    source = `http://${process.env.HOSTNAME}${data.banner.url}`
   }
 
   return (
@@ -324,7 +322,7 @@ function SimilarArticles({ data }) {
           <Image
             className="object-cover object-center"
             src={source}
-            alt={data.bannerAlt}
+            alt={data.banner.alternativeText}
             layout="fill"
           />
 
@@ -356,8 +354,6 @@ export async function getStaticProps(context) {
     title,
     published_at,
     banner,
-    bannerUrl,
-    bannerAlt,
     topic,
     id,
     metadescription,
@@ -375,10 +371,8 @@ export async function getStaticProps(context) {
         title,
         published_at,
         topic: topic.topicname,
-        associatedColor: topic.associatedColour,
+        associatedColor: topic.theme,
         banner,
-        bannerUrl,
-        bannerAlt,
         id,
         date,
         content: mdxSource,

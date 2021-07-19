@@ -16,7 +16,6 @@ const Topic = ({
   headerColor,
   featuredPosts,
   headerImg,
-  headerImgNew,
   metaDescription,
 }) => {
   const router = useRouter()
@@ -43,9 +42,16 @@ const Topic = ({
   const rgb = hexToRgb(headerColor)
   const { r, g, b } = rgb
 
-  const headImg = isValidURL(headerImgNew)
-    ? headerImgNew
-    : "https://lumbytes.com/topicbg/bg.jpg"
+  // const
+
+  let headImg
+  if (headerImg !== null) {
+    headImg = isValidURL(headerImg.url)
+      ? headerImg.url
+      : `${process.env.PROTOCOL}://${process.env.HOSTNAME}${headerImg.url}`
+  } else {
+    headImg = "https://lumbytes.com/topicbg/bg.jpg"
+  }
 
   return (
     <>
@@ -142,10 +148,9 @@ export async function getStaticProps(context) {
 
   return {
     props: {
-      headerColor: buildData[0].associatedColour,
-      headerImg: buildData[0].headerBack,
+      headerColor: buildData[0].theme,
+      headerImg: buildData[0].headImg,
       metaDescription: buildData[0].metaDescription,
-      headerImgNew: buildData[0].primaryImg,
       latestPosts: latest,
       featuredPosts: related,
     },

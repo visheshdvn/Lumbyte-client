@@ -4,11 +4,12 @@ module.exports = (phase, { defaultConfig }) => {
   if (phase === PHASE_DEVELOPMENT_SERVER) {
     return {
       env: {
-        HOSTNAME: "localhost:1337",
-        NEXT_PUBLIC_GA_ID: "G-3BNNCK0DEL",
+        HOSTNAME: "172.29.135.204:1337",
+        PROTOCOL: "http"
+        // NEXT_PUBLIC_GA_ID: "G-3BNNCK0DEL",
       },
       images: {
-        domains: ["localhost", "i.ibb.co", "lumbyte-backend.herokuapp"],
+        domains: ["localhost", "i.ibb.co", "lumbyte-backend.herokuapp", "172.29.135.204"],
       },
     }
   }
@@ -17,6 +18,7 @@ module.exports = (phase, { defaultConfig }) => {
     env: {
       HOSTNAME: "lumbyte-backend.herokuapp.com",
       NEXT_PUBLIC_GA_ID: "G-3BNNCK0DEL",
+      PROTOCOL: "https"
     },
     images: {
       domains: [

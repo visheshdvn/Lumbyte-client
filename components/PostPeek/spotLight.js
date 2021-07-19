@@ -5,13 +5,13 @@ import {isValidURL} from "../../utils/checkValidURL"
 
 const SpotLight = ({ posts }) => {
   const topPick = posts[0]
-  const { title, topic, excerpt, minuteRead, date, slug, bannerUrl } = topPick
+  const { title, topic, excerpt, minuteRead, date, slug, banner } = topPick
 
   let source = null
-  if (isValidURL(bannerUrl)) {
+  if (isValidURL(banner.url)) {
     source = bannerUrl
   } else {
-    source = `http://${process.env.HOSTNAME}${bannerUrl}`
+    source = `${process.env.PROTOCOL}://${process.env.HOSTNAME}${banner.url}`
   }
 
   return (
@@ -32,7 +32,7 @@ const SpotLight = ({ posts }) => {
                 className="md:h-full w-full h-48"
               />
               <div
-                style={{ backgroundColor: `#${topic.associatedColour}` }}
+                style={{ backgroundColor: `#${topic.theme}` }}
                 className="absolute left-0 md:top-4 top-3 lg:px-8 lg:py-2 md:px-5 py-1 px-3 flex justify-center items-center"
               >
                 <p className="lg:text-4xl md:text-3xl text-2xl leading-none font-pt-sans font-bold text-white">
@@ -48,7 +48,7 @@ const SpotLight = ({ posts }) => {
         >
           <Link href={`/topic/${topic.topicname}`}>
             <a
-              style={{ color: `#${topic.associatedColour}` }}
+              style={{ color: `#${topic.theme}` }}
               className="uppercase font-roboto-cond font-bold lg:leading-5 md:leading-4 text-lightBlue-600 xl:text-lg md:text-base"
             >
               {topic.topicname}

@@ -6,29 +6,20 @@ import DateMinute from "../micro/dateMinute"
 import { isValidURL } from "../../utils/checkValidURL"
 
 const SmallPeek = ({
-  populateData: {
-    topic,
-    banner,
-    title,
-    minuteRead,
-    date,
-    slug,
-    bannerUrl,
-    bannerAlt,
-  },
+  populateData: { topic, banner, title, minuteRead, date, slug },
 }) => {
   let source = null
-  if (isValidURL(bannerUrl)) {
-    source = bannerUrl
+  if (isValidURL(banner.url)) {
+    source = banner.url
   } else {
-    source = `http://${process.env.HOSTNAME}${bannerUrl}`
+    source = `${process.env.PROTOCOL}://${process.env.HOSTNAME}${banner.url}`
   }
 
   return (
     <article className="lg:mb-16 md:mb-14 sm:mb-10 mb-8 flex md:flex-col justify-start overflow-hidden">
       <Link href={`/topic/${topic.topicname}`}>
         <a
-          style={{ color: `#${topic.associatedColour}` }}
+          style={{ color: `#${topic.theme}` }}
           className="uppercase font-roboto-cond font-bold leading-5 xl:text-lg text-base hidden md:block"
         >
           {topic.topicname}
@@ -40,7 +31,7 @@ const SmallPeek = ({
           <a>
             <Image
               src={source}
-              alt={bannerAlt}
+              alt={banner.alternativeText}
               className="object-cover object-center"
               layout="fill"
               placeholder="blur"
