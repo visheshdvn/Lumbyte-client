@@ -46,7 +46,7 @@ export async function getServerSideProps({ res }) {
 
   const baseUrl = {
     development: "http://localhost:3000",
-    production: "https://lumbytes.com",
+    production: "https://www.lumbytes.com",
   }[process.env.NODE_ENV]
 
   const staticPages = fs
@@ -59,6 +59,7 @@ export async function getServerSideProps({ res }) {
         "sitemap.xml.js",
         "post",
         "search.js",
+        "index.js",
         "topic",
         "api",
         ".next",
@@ -76,6 +77,12 @@ export async function getServerSideProps({ res }) {
 
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
     <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+        <loc>https://www.lumbytes.com/</loc>
+        <lastmod>${new Date().toISOString()}</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.5</priority>
+    </url>
       ${staticPages
         .map((url) => {
           return `
