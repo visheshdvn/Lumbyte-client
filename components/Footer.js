@@ -22,7 +22,9 @@ const Footer = () => {
           <a
             href="https://www.facebook.com/lumbytes"
             target="_blank"
+            rel="noopener"
             className="cursor-pointer mr-3"
+            aria-label="Facebook"
           >
             <svg
               style={{ color: "#4267b2" }}
@@ -39,7 +41,9 @@ const Footer = () => {
           <a
             href="https://twitter.com/lumbytes"
             target="_blank"
+            rel="noopener"
             className="cursor-pointer mr-3"
+            aria-label="Twitter"
           >
             <svg
               style={{ color: "#1da1f2" }}
