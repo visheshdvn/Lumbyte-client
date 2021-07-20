@@ -4,7 +4,7 @@ module.exports = (phase, { defaultConfig }) => {
   if (phase === PHASE_DEVELOPMENT_SERVER) {
     return {
       env: {
-        HOSTNAME: "localhost:1337",
+        HOSTNAME: "172.26.191.105:1337",
         PROTOCOL: "http",
         // NEXT_PUBLIC_GA_ID: "G-3BNNCK0DEL",
       },
@@ -12,7 +12,7 @@ module.exports = (phase, { defaultConfig }) => {
         domains: [
           "localhost",
           "i.ibb.co",
-          "172.26.180.72",
+          "172.26.191.105",
         ],
       },
     }

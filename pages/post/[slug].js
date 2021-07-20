@@ -196,7 +196,7 @@ const Post = ({ postData, similar }) => {
           <div className="grid gap-4 grid-cols-12 mb-5">
             <div className="lg:col-span-12 col-span-12">
               <div className="mb-8">
-                <Image
+                {/* <Image
                   src={source}
                   alt={banner.alternativeText}
                   width={1366}
@@ -205,6 +205,11 @@ const Post = ({ postData, similar }) => {
                   className="object-cover object-center"
                   placeholder="blur"
                   blurDataURL={source}
+                /> */}
+                <img
+                  src={source}
+                  alt={banner.alternativeText}
+                  className="w-full"
                 />
               </div>
               <main
@@ -324,6 +329,8 @@ function SimilarArticles({ data }) {
             src={source}
             alt={data.banner.alternativeText}
             layout="fill"
+            placeholder="blur"
+            blurDataURL={source}
           />
 
           <h3 className="absolute bottom-2 right-2 left-2 font-roboto font-bold text-white text-2xl sm:text-2xl lg:text-3xl leading-7 z-20 pointer-events-none">
