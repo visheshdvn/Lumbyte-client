@@ -72,13 +72,14 @@ export async function getServerSideProps({ res }) {
       ].includes(staticPage)
     })
     .map((staticPagePath) => {
-      return `${baseUrl}/${staticPagePath}`
+      console.log(staticPagePath);
+      return `${baseUrl}/${staticPagePath.replace(".js", "")}`
     })
 
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
     <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-        <loc>https://www.lumbytes.com/</loc>
+        <loc>https://www.lumbytes.com</loc>
         <lastmod>${new Date().toISOString()}</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.5</priority>
