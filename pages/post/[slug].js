@@ -68,7 +68,7 @@ const Post = ({ postData, similar }) => {
   if (isValidURL(banner.url)) {
     source = banner.url
   } else {
-    source = `http://${process.env.HOSTNAME}${banner.url}`
+    source = `${process.env.PROTOCOL}://${process.env.HOSTNAME}${banner.url}`
   }
 
   return (
@@ -140,7 +140,7 @@ const Post = ({ postData, similar }) => {
                       >
                         <svg
                           style={{ color: "#00aced" }}
-                          xmlns="http://www.w3.org/2000/svg"
+                          xmlns="https://www.w3.org/2000/svg"
                           fill="currentColor"
                           viewBox="0 0 16 16"
                           className="md:h-6 md:w-6 h-5 w-5"
@@ -159,7 +159,7 @@ const Post = ({ postData, similar }) => {
                         className="focus:outline-none border-none"
                       >
                         <svg
-                          xmlns="http://www.w3.org/2000/svg"
+                          xmlns="https://www.w3.org/2000/svg"
                           fill="currentColor"
                           viewBox="0 0 16 16"
                           className="md:h-6 md:w-6 h-5 w-5"
@@ -178,7 +178,7 @@ const Post = ({ postData, similar }) => {
                         className="focus:outline-none border-none"
                       >
                         <svg
-                          xmlns="http://www.w3.org/2000/svg"
+                          xmlns="https://www.w3.org/2000/svg"
                           fill="currentColor"
                           viewBox="0 0 16 16"
                           className="md:h-6 md:w-6 h-5 w-5"
@@ -306,7 +306,7 @@ function SimilarArticles({ data }) {
   if (isValidURL(data.banner.url)) {
     source = data.banner.url
   } else {
-    source = `http://${process.env.HOSTNAME}${data.banner.url}`
+    source = `${process.env.PROTOCOL}://${process.env.HOSTNAME}${data.banner.url}`
   }
 
   return (
