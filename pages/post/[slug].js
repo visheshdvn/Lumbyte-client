@@ -89,9 +89,9 @@ const Post = ({ postData, similar }) => {
         {/* twitter */}
         <meta name="twitter:card" value="summary_large_image" />
       </Head>
-      <section style={{ maxWidth: "1200px" }} className="mx-auto">
+      <div style={{ maxWidth: "1200px" }} className="mx-auto">
         <div className="container mx-auto horizontal-spacing md:pt-8">
-          <div style={{ maxWidth: "730px" }} className="mx-auto">
+          <header style={{ maxWidth: "730px" }} className="mx-auto">
             <Link href={`/topic/${topic}`}>
               <a
                 style={{ color: `#${associatedColor}` }}
@@ -107,17 +107,29 @@ const Post = ({ postData, similar }) => {
 
             <div className="mb-8">
               <div className="clearfix relative">
-                <div
-                  style={{
-                    background: "center url('/topicbg/bg.jpg')",
-                    backgroundSize: "cover",
-                  }}
-                  className="md:h-11 md:w-11 h-10 w-10 rounded-full relative float-left"
-                />
+                <a
+                  href="https://www.linkedin.com/in/visheshdvn"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <div
+                    style={{
+                      background: "center url('/me.jpg')",
+                      backgroundSize: "cover",
+                      backgroundPosition: "center",
+                    }}
+                    className="md:h-11 md:w-11 h-10 w-10 rounded-full relative float-left"
+                  />
+                </a>
                 <div className="flex flex-col pl-2 justify-around float-left">
-                  <h5 className="md:text-base text-sm font-roboto">
+                  <a
+                    href="https://www.linkedin.com/in/visheshdvn"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="md:text-base text-sm font-roboto font-bold"
+                  >
                     Vishesh Dhawan
-                  </h5>
+                  </a>
                   <div className="flex items-center h-3 text-grayText dark:text-gray-400 overflow-hidden">
                     <span className="text-sm font-roboto">
                       <FormattedDate date={date} />
@@ -191,9 +203,9 @@ const Post = ({ postData, similar }) => {
                 </div>
               </div>
             </div>
-          </div>
+          </header>
 
-          <div className="grid gap-4 grid-cols-12 mb-5">
+          <section className="grid gap-4 grid-cols-12 mb-5">
             <div className="lg:col-span-12 col-span-12">
               <div className="mb-8">
                 {/* <Image
@@ -227,19 +239,9 @@ const Post = ({ postData, similar }) => {
               <div className="lg:px-14 md:px-16 sm:px-8">
                 <hr className="border-t" />
               </div>
-
-              {/* Author */}
-              {/* <div className="w-full lg:px-14 md:px-16 sm:px-8">
-                <div className="border-t dark:border-gray-700 flex pt-8">
-                  <div className="flex items-start justify-center lg:h-32">
-                    <div className="rounded-full h-20 w-20 border border-lightBlue-300"></div>
-                  </div>
-                  <div className="border-lightBlue-800 flex-1 pl-3">jebv</div>
-                </div>
-              </div> */}
             </div>
 
-            <div className="col-span-3 hidden lg:bloc">
+            {/* <div className="col-span-3 hidden lg:bloc">
               <div className="border-l pl-3 pb-2">
                 <h1 className="text-4xl font-pt-sans font-bold mb-4">
                   Featured
@@ -258,10 +260,10 @@ const Post = ({ postData, similar }) => {
                   Culpa Lorem esse nulla enim deserunt est voluptate occaecat.
                 </h3>
               </div>
-            </div>
-          </div>
+            </div> */}
+          </section>
         </div>
-      </section>
+      </div>
 
       {similar.length > 0 ? (
         <section className="py-3 mb-14">
@@ -387,7 +389,6 @@ export async function getStaticProps(context) {
         minutes: minuteRead,
         slug,
       },
-      // extraBytes,
       similar,
     },
     revalidate: 86400,

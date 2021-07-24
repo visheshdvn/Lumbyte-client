@@ -35,7 +35,7 @@ export default function Home({ latestPosts, featuredPosts, topPicks }) {
         />
         {/* twitter */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:site" content="@visheshdvn" />
+        <meta name="twitter:site" content="@lumbytes" />
         <meta name="twitter:title" content="Lumbytes - Luminous bytes for luminous minds." />
         <meta
           name="twitter:description"
