@@ -4,7 +4,7 @@ module.exports = (phase, { defaultConfig }) => {
   if (phase === PHASE_DEVELOPMENT_SERVER) {
     return {
       env: {
-        HOSTNAME: "172.26.188.242:1337",
+        HOSTNAME: "localhost:1337",
         PROTOCOL: "http",
         // NEXT_PUBLIC_GA_ID: "G-3BNNCK0DEL",
       },

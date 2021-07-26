@@ -1,7 +1,7 @@
 import React from "react"
 import Link from "next/link"
 import DateMinute from "../micro/dateMinute"
-import {isValidURL} from "../../utils/checkValidURL"
+import { isValidURL } from "../../utils/checkValidURL"
 
 const SpotLight = ({ posts }) => {
   const topPick = posts[0]
@@ -22,15 +22,14 @@ const SpotLight = ({ posts }) => {
       >
         <div className="xl:col-span-9 md:col-span-8 col-span-12 relative overflow-hidden">
           <Link href={`/post/${slug}`}>
-            <a>
-              <div
-                style={{
-                  backgroundImage: `url(${source})`,
-                  backgroundSize: "cover",
-                  backgroundPosition: "center",
-                }}
-                className="md:h-full w-full h-48"
-              />
+            <a className="relative">
+              <div className="border-2 md:h-full w-full h-48 relative">
+                <img
+                  src={source}
+                  alt="temp alt"
+                  className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+                />
+              </div>
               <div
                 style={{ backgroundColor: `#${topic.theme}` }}
                 className="absolute left-0 md:top-4 top-3 lg:px-8 lg:py-2 md:px-5 py-1 px-3 flex justify-center items-center"
