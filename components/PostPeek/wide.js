@@ -3,18 +3,10 @@ import Image from "next/image"
 import Link from "next/link"
 
 import DateMinute from "../micro/dateMinute"
-import {isValidURL} from "../../utils/checkValidURL"
+import { isValidURL } from "../../utils/checkValidURL"
 
 const WidePeek = ({
-  populateData: {
-    title,
-    topic,
-    banner,
-    date,
-    slug,
-    excerpt,
-    minuteRead,
-  },
+  populateData: { title, topic, banner, date, slug, excerpt, minuteRead },
 }) => {
   let source = null
   if (isValidURL(banner.url)) {
@@ -28,14 +20,7 @@ const WidePeek = ({
       <div className="lg:h-38 sm:h-27 h-25 lg:w-64 sm:w-44 w-25 overflow-hidden relative">
         <Link href={`/post/${slug}`}>
           <a>
-            <Image
-              src={source}
-              alt={banner.alternativeText}
-              className="object-cover object-center"
-              layout="fill"
-              placeholder="blur"
-              blurDataURL={source}
-            />
+            <img src={source} alt={banner.alternativeText} className="between-rel-parent" />
           </a>
         </Link>
       </div>

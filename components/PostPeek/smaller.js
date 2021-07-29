@@ -29,14 +29,7 @@ const SmallPeek = ({
       <div className="xl:h-44 lg:h-38 sm:h-27 md:w-full sm:w-44 h-25 w-25 overflow-hidden md:my-2 relative">
         <Link href={`/post/${slug}`}>
           <a>
-            <Image
-              src={source}
-              alt={banner.alternativeText}
-              className="object-cover object-center"
-              layout="fill"
-              placeholder="blur"
-              blurDataURL={source}
-            />
+            <img src={source} alt={banner.alternativeText} className="between-rel-parent" />
           </a>
         </Link>
       </div>

@@ -10,6 +10,12 @@ body {
   @apply text-gray-800 dark:text-gray-200 pt-16;
 }
 
+/* utility classes */
+
+.between-rel-parent {
+  @apply absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2;
+}
+
 .horizontal-spacing {
   @apply xl:px-3 lg:px-5 md:px-3 px-2;
 }
