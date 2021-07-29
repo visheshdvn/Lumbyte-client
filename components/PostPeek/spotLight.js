@@ -23,11 +23,11 @@ const SpotLight = ({ posts }) => {
         <div className="xl:col-span-9 md:col-span-8 col-span-12 relative overflow-hidden">
           <Link href={`/post/${slug}`}>
             <a className="relative">
-              <div className="border-2 md:h-full w-full h-48 relative">
+              <div className="md:h-full w-full h-48 relative">
                 <img
                   src={source}
-                  alt="temp alt"
-                  className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+                  alt={banner.alternativeText}
+                  className="between-rel-parent"
                 />
               </div>
               <div
