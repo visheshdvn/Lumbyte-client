@@ -26,6 +26,10 @@ body {
   display: table;
 }
 
+.blog-link {
+  @apply font-semibold text-lightBlue-600 border-b-2 border-dotted border-lightBlue-600;
+}
+
 .divider-col {
   border-color: rgba(0, 0, 0, 0.2);
 }
