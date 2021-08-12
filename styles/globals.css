@@ -27,7 +27,7 @@ body {
 }
 
 .blog-link {
-  @apply font-semibold text-lightBlue-600 border-b-2 border-dotted border-lightBlue-600;
+  @apply font-semibold text-lightBlue-600;
 }
 
 .divider-col {
@@ -115,7 +115,7 @@ ul.spaced li:not(:last-child) {
 
 #special-table thead tr th,
 #special-table tbody tr td {
-  @apply py-3 pr-3;
+  @apply py-3 pr-3 pl-2;
 }
 
 #special-table tbody tr:nth-child(even) {
