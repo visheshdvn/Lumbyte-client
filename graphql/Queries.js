@@ -119,6 +119,10 @@ export async function getIndexPageData(start, limit) {
           title
           date
           slug
+          author {
+            firstname
+            lastname
+          }
         }
 
         featured: blogposts(
@@ -141,6 +145,7 @@ export async function getIndexPageData(start, limit) {
         title
         tags {
           tagname
+          color
         }
         banner {
           url
@@ -148,6 +153,10 @@ export async function getIndexPageData(start, limit) {
         }
         date
         slug
+        author {
+          firstname
+          lastname
+        }
       }
     `,
     variables: {

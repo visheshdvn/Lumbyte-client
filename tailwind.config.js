@@ -32,6 +32,8 @@ module.exports = {
       whiteMain: "#fafafa",
       "whiteMain-50": "rgba(250, 250, 250, 0.5)",
       grayMain: "#262611",
+      margins: "rgba(117,117,117, 0.25)",
+      "yellow-75": "rgba(251,191,36,0.75)",
       // old
       white: "white",
       black: "black",
@@ -51,13 +53,13 @@ module.exports = {
       },
       colors: {
         grayText: "rgb(117, 117, 117)",
-        "bquote-dark": "rgba(75, 75, 75, 0.25)",
+        "bquote-dark": "rgba(75, 75, 75, 0.5)",
       },
       lineHeight: {
         7.5: "1.875rem",
       },
       height: {
-        100: "29rem",
+        100: "41.625rem",
         38: "9.7775rem",
         27: "107.55px",
         25: "100px",

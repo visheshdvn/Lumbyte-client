@@ -7,13 +7,14 @@
 }
 
 body {
-  @apply text-gray-800 dark:text-gray-200 pt-16;
+  padding-top: 113px;
+  @apply text-gray-800 dark:text-gray-200;
 }
 
 /* utility classes */
 
 .between-rel-parent {
-  @apply absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2;
+  @apply absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 scale-110;
 }
 
 .horizontal-spacing {
@@ -120,4 +121,13 @@ ul.spaced li:not(:last-child) {
 
 #special-table tbody tr:nth-child(even) {
   @apply bg-gray-100 dark:bg-gray-800;
+}
+
+/* new header */
+.special-dividers:not(:nth-of-type(3)) {
+  @apply border-b border-margins;
+}
+
+.special-dividers:not(:nth-of-type(1)) {
+  @apply mt-5;
 }

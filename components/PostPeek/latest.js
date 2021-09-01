@@ -1,66 +1,116 @@
-import React from "react"
-import Link from "next/link"
-import DateMinute from "../micro/dateMinute"
-import { isValidURL } from "../../utils/checkValidURL"
+import React from "react";
+import Link from "next/link";
+import DateMinute from "../micro/dateMinute";
+import { isValidURL } from "../../utils/checkValidURL";
+import FormattedDate from "../micro/formattedDate";
 
 const Latest = ({ big, side }) => {
-  console.log(big);
-  const {title, tags, banner, date, slug} = big
+  const { title, tags, banner, date, slug, author } = big;
+  console.log(side);
 
-  let source = null
+  let source = null;
   if (isValidURL(banner.url)) {
-    source = bannerUrl
+    source = bannerUrl;
   } else {
-    source = `${process.env.PROTOCOL}://${process.env.HOSTNAME}${banner.url}`
+    source = `${process.env.PROTOCOL}://${process.env.HOSTNAME}${banner.url}`;
   }
 
   return (
-    <section className="lg:py-10 md:py-5 py-3 block">
-      <div
-        style={{ minHeight: "12rem" }}
-        className="container xl:h-100 lg:h-96 md:h-80 h-auto mx-auto horizontal-spacing grid gap-1 grid-cols-12"
-      >
-        <div className="xl:col-span-9 md:col-span-8 col-span-12 relative overflow-hidden">
-          <Link href={`/post/${slug}`}>
-            <a className="relative">
-              <div className="md:h-full w-full h-48 relative">
-                <img
-                  src={source}
-                  alt={banner.alternativeText}
-                  className="between-rel-parent"
-                />
-              </div>
-            </a>
-          </Link>
-        </div>
-        <div
-          style={{ backgroundColo: "#fafafa" }}
-          className="xl:col-span-3 md:col-span-4 col-span-12 px-3 bg-gray-800 text-white pt-3 md:pb-0 pb-3"
-        >
-          {/* <Link href={`/topic/${topic.topicname}`}>
-            <a
-              style={{ color: `#${topic.theme}` }}
-              className="uppercase font-roboto-cond font-bold lg:leading-5 md:leading-4 text-lightBlue-600 xl:text-lg md:text-base"
-            >
-              {topic.topicname}
-            </a>
-          </Link>
+    <div
+      style={{ minHeight: "12rem" }}
+      className="container xl:h-100 lg:h-96 md:h-80 h-auto mx-auto horizontal-spacing grid gap-1 grid-cols-12 lg:my-12 md:my-5 my-3"
+    >
+      <div className="xl:col-span-9 md:col-span-8 col-span-12 relative overflow-hidden">
+        <Link href={`/post/${slug}`}>
+          <a className="relative">
+            <div className="h-full w-full relative">
+              <img
+                src={source}
+                alt={banner.alternativeText}
+                className="between-rel-parent"
+              />
 
-          <Link href={`/post/${slug}`}>
-            <a>
-              <h1 className="font-roboto font-bold lg:text-4xl sm:text-3xl text-2xl md:mt-2 mt-1">
-                {title}
-              </h1>
-              <p className="lg:my-4 md:my-3 my-1 mb-2 text-grayTex text-gray-400 text-sm md:text-base hidden md:block">
-                {excerpt.substr(0, 90) + "..."}
-              </p>
-              <DateMinute date={date} minuteRead={minuteRead} />
-            </a>
-          </Link> */}
-        </div>
+              <div
+                style={{ backgroundColor: "rgba(38, 38, 17, 0.85)" }}
+                className="w-4/5 absolute bottom-8 px-5 py-6"
+              >
+                <div className="flex mb-4">
+                  {tags.map((tag) => (
+                    <ShowTags tagname={tag.tagname} color={tag.color} />
+                  ))}
+                </div>
+                <h1 className="text-whiteMain font-raleway font-black text-4xl">
+                  {title}
+                </h1>
+                <div className="mt-4 flex items-center">
+                  <h4 className="font-open-sans text-whiteMain text-xl font-bold">
+                    {author.firstname + " " + author.lastname}
+                  </h4>
+                  <div
+                    style={{ width: "1px", height: "15px" }}
+                    className="bg-whiteMain-50 mx-2"
+                  />
+                  <h5 className="text-whiteMain font-light">
+                    <FormattedDate date={date} />
+                  </h5>
+                </div>
+              </div>
+            </div>
+          </a>
+        </Link>
       </div>
-    </section>
-  )
+      <div className="xl:col-span-3 md:col-span-4 col-span-12 pl-3">
+        {side.map((item) => (
+          <SideHeads
+            title={item.title}
+            date={item.date}
+            slug={item.slug}
+            author={author}
+          />
+        ))}
+      </div>
+    </div>
+  );
+};
+
+function ShowTags({ tagname, color }) {
+  return (
+    <h3
+      style={{ backgroundColor: `${color}`, padding: "2px 4px" }}
+      className="text-whiteMain uppercase mr-4 text-lg font-raleway font-black leading-none"
+    >
+      {tagname}
+    </h3>
+  );
 }
 
-export default Latest
+function SideHeads({ title, date, slug, author }) {
+  return (
+    <div className="text-grayMain dark:text-whiteMain hover:text-gray-400 dark:hover:text-gray-400 special-dividers">
+      <Link href={`/post/${slug}`}>
+        <a>
+          <h1
+            style={{ fontSize: "32px" }}
+            className="font-raleway font-black leading-tight"
+          >
+            {title}
+          </h1>
+        </a>
+      </Link>
+      <div style={{ paddingTop: "2px" }} className="flex items-center">
+        <h4 className="font-open-sans text-lg font-bold">
+          {author.firstname + " " + author.lastname}
+        </h4>
+        <div
+          style={{ width: "1px", height: "15px" }}
+          className="mx-2 bg-margins"
+        />
+        <h5 className="font-light text-sm">
+          <FormattedDate date={date} />
+        </h5>
+      </div>
+    </div>
+  );
+}
+
+export default Latest;
