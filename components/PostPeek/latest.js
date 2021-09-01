@@ -3,9 +3,9 @@ import Link from "next/link"
 import DateMinute from "../micro/dateMinute"
 import { isValidURL } from "../../utils/checkValidURL"
 
-const SpotLight = ({ posts }) => {
-  const topPick = posts[0]
-  const { title, topic, excerpt, minuteRead, date, slug, banner } = topPick
+const Latest = ({ big, side }) => {
+  console.log(big);
+  const {title, tags, banner, date, slug} = big
 
   let source = null
   if (isValidURL(banner.url)) {
@@ -30,14 +30,6 @@ const SpotLight = ({ posts }) => {
                   className="between-rel-parent"
                 />
               </div>
-              <div
-                style={{ backgroundColor: `#${topic.theme}` }}
-                className="absolute left-0 md:top-4 top-3 lg:px-8 lg:py-2 md:px-5 py-1 px-3 flex justify-center items-center"
-              >
-                <p className="lg:text-4xl md:text-3xl text-2xl leading-none font-pt-sans font-bold text-white">
-                  Spotlight
-                </p>
-              </div>
             </a>
           </Link>
         </div>
@@ -45,7 +37,7 @@ const SpotLight = ({ posts }) => {
           style={{ backgroundColo: "#fafafa" }}
           className="xl:col-span-3 md:col-span-4 col-span-12 px-3 bg-gray-800 text-white pt-3 md:pb-0 pb-3"
         >
-          <Link href={`/topic/${topic.topicname}`}>
+          {/* <Link href={`/topic/${topic.topicname}`}>
             <a
               style={{ color: `#${topic.theme}` }}
               className="uppercase font-roboto-cond font-bold lg:leading-5 md:leading-4 text-lightBlue-600 xl:text-lg md:text-base"
@@ -64,11 +56,11 @@ const SpotLight = ({ posts }) => {
               </p>
               <DateMinute date={date} minuteRead={minuteRead} />
             </a>
-          </Link>
+          </Link> */}
         </div>
       </div>
     </section>
   )
 }
 
-export default SpotLight
+export default Latest

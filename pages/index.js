@@ -1,12 +1,12 @@
-import Head from "next/head"
+import Head from "next/head";
 
-import WidePeek from "../components/PostPeek/wide"
-import SmallPeek from "../components/PostPeek/smaller"
-import SpotLight from "../components/PostPeek/spotLight"
+import WidePeek from "../components/PostPeek/wide";
+import SmallPeek from "../components/PostPeek/smaller";
+import Latest from "../components/PostPeek/latest";
 
-import { getIndexPageData } from "../graphql/Queries"
+import { getIndexPageData } from "../graphql/Queries";
 
-export default function Home({ latestPosts, featuredPosts, topPicks }) {
+export default function Home({ latest, latestSide, featured, readMore }) {
   return (
     <>
       <Head>
@@ -36,7 +36,10 @@ export default function Home({ latestPosts, featuredPosts, topPicks }) {
         {/* twitter */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:site" content="@lumbytes" />
-        <meta name="twitter:title" content="Lumbytes - Luminous bytes for luminous minds." />
+        <meta
+          name="twitter:title"
+          content="Lumbytes - Luminous bytes for luminous minds."
+        />
         <meta
           name="twitter:description"
           content="Lumbytes is a technology and programming website. We publish content related to latest happenings in tech industry."
@@ -48,7 +51,7 @@ export default function Home({ latestPosts, featuredPosts, topPicks }) {
         />
       </Head>
 
-      <SpotLight posts={topPicks} />
+      <Latest big={latest} side={latestSide} />
 
       <section className="body-font">
         <div className="container mx-auto horizontal-spacing">
@@ -56,15 +59,15 @@ export default function Home({ latestPosts, featuredPosts, topPicks }) {
             <div className="md:col-span-8 col-span-12 md:order-1 order-2">
               <div className="md:border-r dark:border-gray-700">
                 <h1 className="bungee-head-style">latest</h1>
-                <div className="pt-3">
+                {/* <div className="pt-3">
                   {latestPosts.map((postData) => (
                     <WidePeek key={postData.slug} populateData={postData} />
                   ))}
-                </div>
+                </div> */}
               </div>
             </div>
             <div className="md:col-span-4 col-span-12 md:order-2 order-1">
-              {featuredPosts.length > 0 ? (
+              {/* {featuredPosts.length > 0 ? (
                 <aside className="md:pl-3 pb-1">
                   <h1 className="bungee-head-style">featured</h1>
                   <div className="pt-3">
@@ -73,27 +76,28 @@ export default function Home({ latestPosts, featuredPosts, topPicks }) {
                     ))}
                   </div>
                 </aside>
-              ) : null}
+              ) : null} */}
             </div>
           </div>
         </div>
       </section>
     </>
-  )
+  );
 }
 
 export async function getStaticProps() {
-  console.log("Re-Generating...")
+  console.log("Re-Generating...");
   const {
-    data: { latest, featured, topPicks },
-  } = await getIndexPageData(0, 10)
+    data: { latest, latestSide, featured, readMore },
+  } = await getIndexPageData(0, 10);
 
   return {
     props: {
-      latestPosts: latest,
-      featuredPosts: featured,
-      topPicks: [topPicks[0]],
+      latest: latest[0],
+      latestSide,
+      featured,
+      readMore,
     },
     revalidate: 14400,
-  }
+  };
 }

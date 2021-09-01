@@ -1,5 +1,5 @@
-import client from "../apollo-client"
-import { gql } from "@apollo/client"
+import client from "../apollo-client";
+import { gql } from "@apollo/client";
 
 // index page
 
@@ -29,9 +29,9 @@ export async function getLatestPosts(start, limit) {
       limit,
     },
     fetchPolicy: "network-only",
-  })
+  });
 
-  return data
+  return data;
 }
 
 // featured post all topics
@@ -65,9 +65,9 @@ export async function getfeauredPosts(start, limit) {
       limit,
     },
     fetchPolicy: "network-only",
-  })
+  });
 
-  return data
+  return data;
 }
 
 export async function getTopPicks(start, limit) {
@@ -102,52 +102,51 @@ export async function getTopPicks(start, limit) {
       limit,
     },
     fetchPolicy: "network-only",
-  })
+  });
 
-  return data
+  return data;
 }
 
 export async function getIndexPageData(start, limit) {
   const data = await client.query({
     query: gql`
-      query getIndexPageData($start: Int, $limit: Int) {
-        topPicks: blogposts(
-          where: { topPick: true }
-          start: $start
-          limit: $limit
-          sort: "id:desc"
-        ) {
+      query getIndexPageData {
+        latest: blogposts(start: 0, limit: 1, sort: "id:desc") {
           ...commonData
-          excerpt
+        }
+
+        latestSide: blogposts(start: 1, limit: 3, sort: "id:desc") {
+          title
+          date
+          slug
         }
 
         featured: blogposts(
-          where: { isFeatured: true }
-          start: $start
-          limit: $limit
+          where: { topPick: true }
+          start: 0
+          limit: 2
           sort: "id:DESC"
         ) {
+          excerpt
           ...commonData
         }
 
-        latest: blogposts(sort: "id:DESC", start: $start, limit: $limit) {
-          ...commonData
+        readMore: blogposts(start: 4, limit: 10, sort: "id:desc") {
           excerpt
+          ...commonData
         }
       }
 
       fragment commonData on Blogposts {
-        topic {
-          topicname
-          theme
+        title
+        tags {
+          tagname
         }
         banner {
           url
           alternativeText
         }
-        title
         date
-        minuteRead
         slug
       }
     `,
@@ -156,6 +155,6 @@ export async function getIndexPageData(start, limit) {
       limit,
     },
     fetchPolicy: "network-only",
-  })
-  return data
+  });
+  return data;
 }
