@@ -6,7 +6,6 @@ import FormattedDate from "../micro/formattedDate";
 
 const Latest = ({ big, side }) => {
   const { title, tags, banner, date, slug, author } = big;
-  console.log(side);
 
   let source = null;
   if (isValidURL(banner.url)) {
@@ -86,7 +85,7 @@ function ShowTags({ tagname, color }) {
 
 function SideHeads({ title, date, slug, author }) {
   return (
-    <div className="text-grayMain dark:text-whiteMain hover:text-gray-400 dark:hover:text-gray-400 special-dividers">
+    <div className="text-grayMain dark:text-whiteMain hover:opacity-70 dark:hover:text-gray-400 special-dividers">
       <Link href={`/post/${slug}`}>
         <a>
           <h1

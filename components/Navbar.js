@@ -73,8 +73,8 @@ export default function Navbar() {
                 <div className="flex-1 flex items-center justify-center md:items-stretch">
                   {/* <div className="flex-shrink-0 flex items-center"> */}
                   <Link href="/">
-                    <a className="font-antonio font-bold tracking-custom lg:-my-1 xl:text-4.75xl md:text-4.5xl">
-                      <div className="leading-none pt-3 pb-4">LUMBYTES</div>
+                    <a className="font-antonio font-bold lg:-my-1 xl:text-4.75xl md:text-4.5xl">
+                      <div className="leading-none pt-3 pb-4 tracking-custom -mr-3">LUMBYTES</div>
                     </a>
                   </Link>
                   {/* </div> */}

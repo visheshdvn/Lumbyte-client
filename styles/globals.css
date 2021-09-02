@@ -14,7 +14,7 @@ body {
 /* utility classes */
 
 .between-rel-parent {
-  @apply absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 scale-110;
+  @apply absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2;
 }
 
 .horizontal-spacing {
@@ -37,6 +37,10 @@ body {
 
 ul.spaced li:not(:last-child) {
   @apply mb-5;
+}
+
+.margin-tags:not(:last-of-type) {
+  @apply mr-4;
 }
 
 /*  */

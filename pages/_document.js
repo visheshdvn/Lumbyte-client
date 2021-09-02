@@ -11,7 +11,7 @@ class MyDocument extends Document {
     return (
       <Html className="dark" lang="en">
         <Head>
-          <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+          <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
 
           {/* depriciate */}
           <link

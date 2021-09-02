@@ -1,7 +1,7 @@
 import Head from "next/head";
 
 import WidePeek from "../components/PostPeek/wide";
-import SmallPeek from "../components/PostPeek/smaller";
+import BroadPeek from "../components/PostPeek/broad";
 import Latest from "../components/PostPeek/latest";
 
 import { getIndexPageData } from "../graphql/Queries";
@@ -55,33 +55,19 @@ export default function Home({ latest, latestSide, featured, readMore }) {
 
       <section className="body-font">
         <div className="container mx-auto horizontal-spacing">
-          <div className="grid gap-1 grid-cols-12 mt-2 border-t dark:border-gray-700 pt-5">
-            <div className="md:col-span-8 col-span-12 md:order-1 order-2">
-              <div className="md:border-r dark:border-gray-700">
-                <h1 className="bungee-head-style">latest</h1>
-                {/* <div className="pt-3">
-                  {latestPosts.map((postData) => (
-                    <WidePeek key={postData.slug} populateData={postData} />
-                  ))}
-                </div> */}
-              </div>
-            </div>
-            <div className="md:col-span-4 col-span-12 md:order-2 order-1">
-              {/* {featuredPosts.length > 0 ? (
-                <aside className="md:pl-3 pb-1">
-                  <h1 className="bungee-head-style">featured</h1>
-                  <div className="pt-3">
-                    {featuredPosts.map((postData) => (
-                      <SmallPeek key={postData.slug} populateData={postData} />
-                    ))}
-                  </div>
-                </aside>
-              ) : null} */}
-            </div>
-          </div>
+          <BroadHeading text="Read more" />
+          {readMore.map(item => <BroadPeek data={item} />)}
         </div>
       </section>
     </>
+  );
+}
+
+function BroadHeading({ text }) {
+  return (
+    <h1 className="font-antonio font-bold text-4.75xl tracking-custom uppercase text-center -mr-3 mb-20 leading-none">
+      {text}
+    </h1>
   );
 }
 
