@@ -48,8 +48,11 @@ module.exports = {
     },
     extend: {
       fontSize: {
+        "10xl": "10rem",
+        "7.5": "5rem",
         "4.5xl": "2.5rem",
-        "4.75xl": "2.75rem"
+        "4.75xl": "2.75rem",
+        "2.75": "1.75rem",
       },
       colors: {
         grayText: "rgb(117, 117, 117)",
@@ -63,12 +66,16 @@ module.exports = {
         38: "9.7775rem",
         27: "107.55px",
         25: "100px",
+        "5.5": "22px"
       },
       width: {
         25: "100px",
       },
       letterSpacing: {
         "custom": "12px"
+      },
+      padding: {
+        "113": "113px"
       }
     },
   },

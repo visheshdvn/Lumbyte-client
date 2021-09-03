@@ -6,7 +6,7 @@ import Latest from "../components/PostPeek/latest";
 
 import { getIndexPageData } from "../graphql/Queries";
 
-export default function Home({ latest, latestSide, featured, readMore }) {
+export default function Home({ latest, latestSide, readMore }) {
   return (
     <>
       <Head>
@@ -56,7 +56,7 @@ export default function Home({ latest, latestSide, featured, readMore }) {
       <section className="body-font">
         <div className="container mx-auto horizontal-spacing">
           <BroadHeading text="Read more" />
-          {readMore.map(item => <BroadPeek data={item} />)}
+          {readMore.map(item => <BroadPeek data={item} key={item.slug} />)}
         </div>
       </section>
     </>

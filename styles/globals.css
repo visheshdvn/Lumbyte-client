@@ -7,7 +7,7 @@
 }
 
 body {
-  padding-top: 113px;
+  /* padding-top: 113px; */
   @apply text-gray-800 dark:text-gray-200;
 }
 

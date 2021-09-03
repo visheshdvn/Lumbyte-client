@@ -1,18 +1,17 @@
-import client from "../apollo-client"
-import { gql } from "@apollo/client"
+import client from "../apollo-client";
+import { gql } from "@apollo/client";
 
-export async function getAllTopicNames() {
+export async function getAllTags() {
   const data = await client.query({
     query: gql`
-      query getAllTopics {
-        topics {
-          topicname
+      query getAllTags {
+        tags {
+          tagname
         }
       }
     `,
-  })
-
-  return data
+  });
+  return data;
 }
 
 export async function getLatestPostsOfTopic(topicname, start, limit) {
@@ -54,9 +53,9 @@ export async function getLatestPostsOfTopic(topicname, start, limit) {
       start,
       limit,
     },
-  })
+  });
 
-  return data
+  return data;
 }
 
 // this function gets related posts of a topic but not on that topic
@@ -98,9 +97,9 @@ export async function getPostsRelatedToTopic(topicname, start, limit) {
       start,
       limit,
     },
-  })
+  });
 
-  return data
+  return data;
 }
 
 export async function getfeauredPostsOfTopic(topicname, start, limit) {
@@ -133,69 +132,56 @@ export async function getfeauredPostsOfTopic(topicname, start, limit) {
       start,
       limit,
     },
-  })
+  });
 
-  return data
+  return data;
 }
 
-export async function getTopicPageData(topicname, start, limit) {
+export async function getTagPageData(tagname, start, limit) {
   const data = await client.query({
     query: gql`
-      query getTopicPageData($topicname: String, $start: Int, $limit: Int) {
-        latest: blogposts(
-          where: { topic: { topicname: $topicname } }
+      query getTagPageData($tagname: String, $start: Int, $limit: Int) {
+        posts: blogposts(
+          where: { tags: { tagname: $tagname } }
           sort: "id:DESC"
           start: $start
           limit: $limit
         ) {
-          ...commonData
-          excerpt
-        }
-
-        buildData: topics(where: { topicname: $topicname }) {
-          theme
-          headImg {
+          title
+          tags {
+            tagname
+            color
+          }
+          banner {
             url
             alternativeText
           }
-          metaDescription
-        }
-
-        related: blogposts(
-          where: {
-            topic: { topicname_ne: $topicname }
-            subTopic: { topicname: $topicname }
+          date
+          slug
+          excerpt
+          author {
+            firstname
+            lastname
           }
-          start: $start
-          limit: $limit
-          sort: "id:desc"
-        ) {
-          ...commonData
         }
-      }
 
-      fragment commonData on Blogposts {
-        topic {
-          topicname
-          theme
+        buildData: tags(where: { tagname: $tagname }) {
+          color
+          metaDescription
+          ogImg {
+            url
+            alternativeText
+          }
         }
-        banner {
-          url
-          alternativeText
-        }
-        title
-        minuteRead
-        date
-        slug
       }
     `,
     variables: {
-      topicname,
+      tagname,
       start,
       limit,
     },
     fetchPolicy: "network-only",
-  })
+  });
 
-  return data
+  return data;
 }

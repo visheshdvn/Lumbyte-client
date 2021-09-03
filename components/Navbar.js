@@ -50,14 +50,20 @@ export default function Navbar() {
     <>
       <Disclosure
         as="nav"
-        style={{ transition: "top 0.3s", position: "fixed" }}
-        className={`bg-white w-full ${
-          navbarHidden ? "-top-16" : "top-0"
-        } dark:bg-black z-40 border-b dark:border-gray-700`}
+        style={{
+          transition: "top 0.3s",
+          top: `${
+            navbarHidden
+              ? -1 * document.getElementById("hidebar").offsetHeight + "px"
+              : "0px"
+          }`,
+        }}
+        className="bg-white w-full fixed dark:bg-black z-40 border-b dark:border-gray-700"
       >
+        {/* ${navbarHidden ? "-top-16" : "top-0"}  */}
         {({ open }) => (
           <>
-            <div className="container horizontal-spacing mx-auto">
+            <div id="hidebar" className="container horizontal-spacing mx-auto">
               <div className="relative flex items-center justify-between h-auto">
                 <div className="absolute inset-y-0 left-0 items-center flex md:hidden ">
                   {/* Mobile menu button*/}
@@ -73,10 +79,10 @@ export default function Navbar() {
                 <div className="flex-1 flex items-center justify-center md:items-stretch">
                   {/* <div className="flex-shrink-0 flex items-center"> */}
                   <Link href="/">
-                    <a className="font-antonio font-bold lg:-my-1 xl:text-4.75xl md:text-4.5xl">
-                      <div className="leading-none pt-3 pb-4 tracking-custom -mr-3">
+                    <a className="font-antonio font-bold lg:-my-1">
+                      <h1 className="leading-none lg:pt-3 lg:pb-4 md:pt-2 md:pb-3 pt-2 pb-2 tracking-custom xl:text-4.75xl md:text-4xl text-3xl -mr-3">
                         LUMBYTES
-                      </div>
+                      </h1>
                     </a>
                   </Link>
                   {/* </div> */}
@@ -85,7 +91,7 @@ export default function Navbar() {
             </div>
             <div className="bg-grayMain">
               <div className="container mx-auto horizontal-spacing flex">
-                <div className="md:block py-2.5 flex-1 items-center">
+                <div className="md:block md:py-2.5 sm:py-2 py-2 flex-1 items-center">
                   <div className="w-min border-r border-whiteMain-50">
                     <SecondaryNavLink href="/tag/web">WEB</SecondaryNavLink>
                     <SecondaryNavLink href="/tag/blockchain">
@@ -154,9 +160,8 @@ export default function Navbar() {
                         <svg
                           version="1.1"
                           viewBox="0 0 512 512"
-                          className="ml-4 mr-2"
-                          height="20"
-                          width="20"
+                          className="ml-4 mr-2 lg:h-5"
+                          height="18"
                           fill="#fafafa"
                         >
                           <path d="M374.245,285.825l14.104,-91.961l-88.233,0l0,-59.677c0,-25.159 12.325,-49.682 51.845,-49.682l40.117,0l0,-78.291c0,0 -36.408,-6.214 -71.214,-6.214c-72.67,0 -120.165,44.042 -120.165,123.775l0,70.089l-80.777,0l0,91.961l80.777,0l0,222.31c16.197,2.542 32.798,3.865 49.709,3.865c16.911,0 33.512,-1.323 49.708,-3.865l0,-222.31l74.129,0Z" />
@@ -174,9 +179,7 @@ export default function Navbar() {
                         <svg
                           version="1.1"
                           viewBox="0 0 512 512"
-                          className="ml-2"
-                          height="22"
-                          width="22"
+                          className="ml-2 lg:h-5.5 md:h-5"
                           fill="#fafafa"
                         >
                           <path d="M492,109.5c-17.4,7.7-36,12.9-55.6,15.3c20-12,35.4-31,42.6-53.6c-18.7,11.1-39.4,19.2-61.5,23.5  C399.8,75.8,374.6,64,346.8,64c-53.5,0-96.8,43.4-96.8,96.9c0,7.6,0.8,15,2.5,22.1C172,179,100.6,140.4,52.9,81.7  c-8.3,14.3-13.1,31-13.1,48.7c0,33.6,17.1,63.3,43.1,80.7C67,210.7,52,206.3,39,199c0,0.4,0,0.8,0,1.2c0,47,33.4,86.1,77.7,95  c-8.1,2.2-16.7,3.4-25.5,3.4c-6.2,0-12.3-0.6-18.2-1.8c12.3,38.5,48.1,66.5,90.5,67.3c-33.1,26-74.9,41.5-120.3,41.5  c-7.8,0-15.5-0.5-23.1-1.4C62.9,432,113.8,448,168.4,448C346.6,448,444,300.3,444,172.2c0-4.2-0.1-8.4-0.3-12.5  C462.6,146,479,128.9,492,109.5z" />
@@ -201,7 +204,7 @@ export default function Navbar() {
 function SecondaryNavLink({ children, href }) {
   return (
     <Link href={href}>
-      <a className="uppercase mr-7 text-lg font-raleway font-normal text-white">
+      <a className="uppercase lg:mr-7 sm:mr-5 mr-3 lg:text-lg text-sm font-raleway font-normal text-white">
         {children}
       </a>
     </Link>
