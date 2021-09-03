@@ -74,7 +74,7 @@ const BroadPeek = ({
 
 function ShowTags({ tagname, color }) {
   return (
-    <Link href={`/topic/${tagname}`}>
+    <Link href={`/tag/${tagname}`}>
         <h3
           style={{ backgroundColor: `${color}`, padding: "2px 4px" }}
           className="text-whiteMain uppercase text-lg font-open-sans font-bold leading-none margin-tags cursor-pointer"

@@ -74,12 +74,14 @@ const Latest = ({ big, side }) => {
 
 function ShowTags({ tagname, color }) {
   return (
+    <Link href={`/tag/${tagname}`}>
     <h3
       style={{ backgroundColor: `${color}`, padding: "2px 4px" }}
       className="text-whiteMain uppercase mr-4 text-lg font-raleway font-black leading-none"
     >
       {tagname}
     </h3>
+    </Link>
   );
 }
 

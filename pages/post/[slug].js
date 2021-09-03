@@ -94,7 +94,7 @@ const Post = ({ postData, similar }) => {
       <div style={{ maxWidth: "1200px" }} className="mx-auto">
         <div className="container mx-auto horizontal-spacing md:pt-8">
           <header style={{ maxWidth: "730px" }} className="mx-auto">
-            <Link href={`/topic/${topic}`}>
+            <Link href={`/tag/${topic}`}>
               <a
                 style={{ color: `#${associatedColor}` }}
                 className="font-roboto-cond uppercase font-bold text-lg"
