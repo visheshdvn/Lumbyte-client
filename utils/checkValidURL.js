@@ -7,6 +7,14 @@ export function isValidURL(str) {
       "(\\?[;&a-z\\d%_.~+=-]*)?" + // query string
       "(\\#[-a-z\\d_]*)?$",
     "i"
-  ) // fragment locator
-  return !!pattern.test(str)
+  ); // fragment locator
+  return !!pattern.test(str);
+}
+
+export function getValidImageURL(url) {
+  if (isValidURL(url)) {
+    return url;
+  } else {
+    return `${process.env.PROTOCOL}://${process.env.HOSTNAME}${url}`;
+  }
 }

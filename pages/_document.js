@@ -13,12 +13,6 @@ class MyDocument extends Document {
         <Head>
           <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
 
-          {/* depriciate */}
-          <link
-            href="https://fonts.googleapis.com/css2?family=Bungee+Shade&family=PT+Sans+Narrow:wght@700&family=Roboto+Condensed:wght@400;700&family=Roboto:wght@400;700&display=swap"
-            rel="stylesheet"
-          />
-
           {/* new fonts */}
           <link rel="preconnect" href="https://fonts.googleapis.com" />
           <link

@@ -1,6 +1,5 @@
 import Head from "next/head";
 
-import WidePeek from "../components/PostPeek/wide";
 import BroadPeek from "../components/PostPeek/broad";
 import Latest from "../components/PostPeek/latest";
 
@@ -65,7 +64,7 @@ export default function Home({ latest, latestSide, readMore }) {
 
 function BroadHeading({ text }) {
   return (
-    <h1 className="font-antonio font-bold text-4.75xl tracking-custom uppercase text-center -mr-3 mb-20 leading-none">
+    <h1 className="font-antonio font-bold xl:text-4.75xl lg:text-4.5xl md:text-4xl sm:text-4.5xl text-3xl tracking-custom uppercase text-center -mr-3 xl:mb-20 lg:mb-18 md:mb-16 mb-16 leading-none">
       {text}
     </h1>
   );

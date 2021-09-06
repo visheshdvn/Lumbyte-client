@@ -1,5 +1,5 @@
-import client from "../apollo-client"
-import { gql } from "@apollo/client"
+import client from "../apollo-client";
+import { gql } from "@apollo/client";
 
 export async function getPostBySlug(slug) {
   const data = await client.query({
@@ -10,9 +10,19 @@ export async function getPostBySlug(slug) {
           metadescription
           minuteRead
           published_at
-          topic {
-            topicname
-            theme
+          author {
+            username
+            firstname
+            lastname
+            dp {
+              url
+              alternativeText
+            }
+            about
+          }
+          tags {
+            tagname
+            color
           }
           title
           banner {
@@ -29,9 +39,9 @@ export async function getPostBySlug(slug) {
     },
     // pollInterval: 1
     fetchPolicy: "network-only",
-  })
+  });
 
-  return data
+  return data;
 }
 
 export async function getSimilarPosts(topicname, slug) {
@@ -40,7 +50,7 @@ export async function getSimilarPosts(topicname, slug) {
       query getSImilarPosts($topicname: String, $slug: String) {
         similar: blogposts(
           where: {
-            slug_ne: $slug,
+            slug_ne: $slug
             _or: [
               { topic: { topicname: $topicname } }
               { subTopic: { topicname: $topicname } }
@@ -63,8 +73,8 @@ export async function getSimilarPosts(topicname, slug) {
       topicname,
       slug,
     },
-  })
-  return data
+  });
+  return data;
 }
 
 export async function getExtraBytes(slug) {
@@ -99,9 +109,9 @@ export async function getExtraBytes(slug) {
     variables: {
       slug,
     },
-  })
+  });
 
-  return data
+  return data;
 }
 
 export async function getSlugs() {
@@ -113,7 +123,7 @@ export async function getSlugs() {
         }
       }
     `,
-  })
+  });
 
-  return data
+  return data;
 }

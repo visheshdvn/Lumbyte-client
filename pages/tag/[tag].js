@@ -23,7 +23,7 @@ const Topic = ({ posts, theme, metaDescription, ogImg }) => {
   const { tag } = router.query;
 
   if (!metaDescription) {
-    metaDescription = `All about ${tag}.`;
+    metaDescription = `Tagged ${tag}.`;
   }
 
   let headImg;

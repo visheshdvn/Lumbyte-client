@@ -15,18 +15,8 @@ module.exports = {
       serif: ["Georgia", ...defaultTheme.fontFamily.serif],
       antonio: ["Antonio"],
       raleway: ["Raleway"],
-      "open-sans": ["Open Sans Condensed", ...defaultTheme.fontFamily.sans],
       "raleway-dot": ["Raleway Dots"],
-      // old
-      "bungee-shade": ["Bungee Shade", "PT Sans Narrow", "sans"],
-      "pt-sans": ["PT Sans Narrow", "Arial Narrow Bold", "sans-serif"],
-      roboto: ["Roboto", "sans-serif"],
-      "roboto-cond": [
-        "Roboto Condensed",
-        "Arial Narrow",
-        "PT Sans Narrow",
-        "sans-serif",
-      ],
+      "open-sans": ["Open Sans Condensed", ...defaultTheme.fontFamily.sans],
     },
     colors: {
       whiteMain: "#fafafa",
@@ -52,7 +42,8 @@ module.exports = {
         "7.5": "5rem",
         "4.5xl": "2.5rem",
         "4.75xl": "2.75rem",
-        "2.75": "1.75rem",
+        "3.5": "2rem",
+        "2.75xl": "1.75rem",
       },
       colors: {
         grayText: "rgb(117, 117, 117)",
@@ -76,6 +67,9 @@ module.exports = {
       },
       padding: {
         "113": "113px"
+      },
+      margin: {
+        "18": "74px"
       }
     },
   },
