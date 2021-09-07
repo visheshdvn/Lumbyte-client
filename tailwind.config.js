@@ -17,18 +17,22 @@ module.exports = {
       raleway: ["Raleway"],
       "raleway-dot": ["Raleway Dots"],
       "open-sans": ["Open Sans Condensed", ...defaultTheme.fontFamily.sans],
+      mono: [...defaultTheme.fontFamily.mono]
     },
     colors: {
+      white: "white",
+      black: "black",
+      transparent: "transparent",
       whiteMain: "#fafafa",
       "whiteMain-50": "rgba(250, 250, 250, 0.5)",
       grayMain: "#262611",
       margins: "rgba(117,117,117, 0.25)",
       "yellow-75": "rgba(251,191,36,0.75)",
-      // old
-      white: "white",
-      black: "black",
       darkGray: "#121212",
-      transparent: "transparent",
+      blueGray: colors.blueGray,
+      green: colors.green,
+      emerald: colors.emerald,
+      // old
       current: "currentColor",
       lightBlue: colors.lightBlue,
       gray: colors.gray,
@@ -42,7 +46,7 @@ module.exports = {
         "7.5": "5rem",
         "4.5xl": "2.5rem",
         "4.75xl": "2.75rem",
-        "3.5": "2rem",
+        "3.5xl": "2rem",
         "2.75xl": "1.75rem",
       },
       colors: {
@@ -74,7 +78,9 @@ module.exports = {
     },
   },
   variants: {
-    extend: {},
+    extend: {
+      brightness: ['hover']
+    },
   },
   // plugins: [require("@tailwindcss/typography")],/
 };

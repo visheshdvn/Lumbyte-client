@@ -23,7 +23,7 @@ const Topic = ({ posts, theme, metaDescription, ogImg }) => {
   const { tag } = router.query;
 
   if (!metaDescription) {
-    metaDescription = `Tagged ${tag}.`;
+    metaDescription = `Posts tagged ${tag}.`;
   }
 
   let headImg;
@@ -73,15 +73,15 @@ const Topic = ({ posts, theme, metaDescription, ogImg }) => {
         <div className="container horizontal-spacing mx-auto my-auto relative lg:h-48 md:h-40 sm:h-32 h-28 bg-grayMain overflow-hidden">
           <h1
             style={{ color: `${theme}` }}
-            className="font-raleway-dot between-rel-parent uppercase tracking-widest opacity-20 lg:text-10xl md:text-9xl sm:text-8xl text-8xl"
+            className="font-raleway-dot select-none between-rel-parent uppercase tracking-widest opacity-20 lg:text-10xl md:text-9xl sm:text-8xl text-8xl"
           >
             {tag}
           </h1>
           <h1
             style={{ color: `${theme}` }}
-            className="between-rel-parent font-raleway uppercase font-black tracking-custom xl:text-6xl md:text-5xl sm:text-4.5xl text-3xl text-center"
+            className="between-rel-parent select-none font-mono lowercase font-bold tracking-custom xl:text-6xl md:text-5xl sm:text-4.5xl text-3xl text-center"
           >
-            {tag}
+            {"#" + tag}
           </h1>
         </div>
       </header>

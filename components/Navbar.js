@@ -58,7 +58,7 @@ export default function Navbar() {
               : "0px"
           }`,
         }}
-        className="bg-white w-full fixed dark:bg-black z-40 border-b dark:border-gray-700"
+        className="bg-white w-full fixed dark:bg-darkGray z-40"
       >
         {/* ${navbarHidden ? "-top-16" : "top-0"}  */}
         {({ open }) => (
@@ -78,9 +78,9 @@ export default function Navbar() {
                 </div>
                 <div className="flex-1 flex items-center justify-center md:items-stretch">
                   {/* <div className="flex-shrink-0 flex items-center"> */}
-                  <Link href="/">
+                  <Link href="/" passHref>
                     <a className="font-antonio font-bold lg:-my-1">
-                      <h1 className="leading-none lg:pt-3 lg:pb-4 pt-1 pb-2 tracking-custom xl:text-4.75xl md:text-4xl text-3xl -mr-3">
+                      <h1 className="leading-none select-none lg:pt-3 lg:pb-4 pt-1 pb-2 tracking-custom xl:text-4.75xl md:text-4xl text-3xl -mr-3">
                         LUMBYTES
                       </h1>
                     </a>

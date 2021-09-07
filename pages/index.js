@@ -54,19 +54,13 @@ export default function Home({ latest, latestSide, readMore }) {
 
       <section className="body-font">
         <div className="container mx-auto horizontal-spacing">
-          <BroadHeading text="Read more" />
-          {readMore.map(item => <BroadPeek data={item} key={item.slug} />)}
+          <h1 className="wide-head">Read more</h1>
+          {readMore.map((item) => (
+            <BroadPeek data={item} key={item.slug} />
+          ))}
         </div>
       </section>
     </>
-  );
-}
-
-function BroadHeading({ text }) {
-  return (
-    <h1 className="font-antonio font-bold xl:text-4.75xl lg:text-4.5xl md:text-4xl sm:text-4.5xl text-3xl tracking-custom uppercase text-center -mr-3 xl:mb-20 lg:mb-18 md:mb-16 mb-16 leading-none">
-      {text}
-    </h1>
   );
 }
 
