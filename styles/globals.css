@@ -49,6 +49,12 @@ ul.spaced li:not(:last-child) {
   @apply font-antonio font-bold xl:text-4.75xl lg:text-4.5xl md:text-4xl sm:text-4.5xl text-3.5xl tracking-custom uppercase text-center -mr-3 xl:mb-20 lg:mb-18 mb-16 leading-none;
 }
 
+/* nav links */
+
+.nav-link {
+  @apply uppercase lg:mr-7 sm:mr-5 mr-3 lg:text-lg text-sm font-raleway hidden md:inline transition-all duration-300;
+}
+
 /*  */
 
 #postIntroParent article:last-child {

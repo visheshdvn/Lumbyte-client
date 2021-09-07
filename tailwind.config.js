@@ -17,21 +17,21 @@ module.exports = {
       raleway: ["Raleway"],
       "raleway-dot": ["Raleway Dots"],
       "open-sans": ["Open Sans Condensed", ...defaultTheme.fontFamily.sans],
-      mono: [...defaultTheme.fontFamily.mono]
+      mono: [...defaultTheme.fontFamily.mono],
     },
     colors: {
       white: "white",
       black: "black",
       transparent: "transparent",
+      "yellow-75": "rgba(251,191,36,0.75)",
       whiteMain: "#fafafa",
       "whiteMain-50": "rgba(250, 250, 250, 0.5)",
       grayMain: "#262611",
-      margins: "rgba(117,117,117, 0.25)",
-      "yellow-75": "rgba(251,191,36,0.75)",
       darkGray: "#121212",
-      blueGray: colors.blueGray,
-      green: colors.green,
-      emerald: colors.emerald,
+      margins: "rgba(117,117,117, 0.25)",
+      blue: colors.blue,
+      yellow: colors.yellow,
+      purple: colors.purple,
       // old
       current: "currentColor",
       lightBlue: colors.lightBlue,
@@ -43,7 +43,7 @@ module.exports = {
     extend: {
       fontSize: {
         "10xl": "10rem",
-        "7.5": "5rem",
+        7.5: "5rem",
         "4.5xl": "2.5rem",
         "4.75xl": "2.75rem",
         "3.5xl": "2rem",
@@ -61,25 +61,26 @@ module.exports = {
         38: "9.7775rem",
         27: "107.55px",
         25: "100px",
-        "5.5": "22px"
+        5.5: "22px",
       },
       width: {
         25: "100px",
       },
       letterSpacing: {
-        "custom": "12px"
+        custom: "12px",
       },
       padding: {
-        "113": "113px"
+        113: "113px",
       },
       margin: {
-        "18": "74px"
-      }
+        18: "74px",
+      },
     },
   },
   variants: {
     extend: {
-      brightness: ['hover']
+      brightness: ["hover", "focus"],
+      fontWeight: ["hover", "focus"],
     },
   },
   // plugins: [require("@tailwindcss/typography")],/

@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { MenuIcon, XIcon, SearchIcon } from "@heroicons/react/outline";
 import { Disclosure, Switch } from "@headlessui/react";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 import { useTheme } from "next-themes";
 
@@ -44,7 +45,8 @@ export default function Navbar() {
     window.addEventListener("scroll", handleScroll);
   }, [enabled]);
 
-  useEffect(() => {});
+  const router = useRouter();
+  const { asPath } = router;
 
   return (
     <>
@@ -93,11 +95,36 @@ export default function Navbar() {
               <div className="container mx-auto horizontal-spacing flex">
                 <div className="md:block flex-1 items-center">
                   <div className="w-min border-r border-whiteMain-50">
-                    <SecondaryNavLink href="/tag/web">WEB</SecondaryNavLink>
-                    <SecondaryNavLink href="/tag/blockchain">
+                    <a
+                      href="/tags/web"
+                      className={`nav-link ${
+                        asPath === "/tags/web"
+                          ? "font-black text-blue-500"
+                          : "font-normal text-white hover:text-blue-500"
+                      }`}
+                    >
+                      WEB
+                    </a>
+                    <a
+                      href="/tags/blockchain"
+                      className={`nav-link ${
+                        asPath === "/tags/blockchain"
+                          ? "font-black text-yellow-500"
+                          : "font-normal text-white hover:text-yellow-500"
+                      }`}
+                    >
                       BLOCKCHAIN
-                    </SecondaryNavLink>
-                    <SecondaryNavLink href="/tag/code">CODE</SecondaryNavLink>
+                    </a>
+                    <a
+                      href="/tags/code"
+                      className={`nav-link ${
+                        asPath === "/tags/code"
+                          ? "font-black text-purple-600"
+                          : "font-normal text-white hover:text-purple-600 hover:brightness-125"
+                      }`}
+                    >
+                      CODE
+                    </a>
                   </div>
                 </div>
 
@@ -198,16 +225,6 @@ export default function Navbar() {
         )}
       </Disclosure>
     </>
-  );
-}
-
-function SecondaryNavLink({ children, href }) {
-  return (
-    <Link href={href}>
-      <a className="uppercase lg:mr-7 sm:mr-5 mr-3 lg:text-lg text-sm font-raleway font-normal text-white hidden md:inline">
-        {children}
-      </a>
-    </Link>
   );
 }
 
