@@ -70,7 +70,7 @@ const Topic = ({ posts, theme, metaDescription, ogImg }) => {
       </Head>
 
       <header className="flex items-center justify-center horizontal-spacing xl:pt-10 lg:pt-3 md:pt-1 pt-4 xl:mb-16 lg:mb-14 md:mb-12 mb-10">
-        <div className="container horizontal-spacing mx-auto my-auto relative lg:h-48 md:h-40 sm:h-32 h-28 bg-grayMain overflow-hidden">
+        <div className="container horizontal-spacing mx-auto my-auto relative lg:h-48 md:h-40 sm:h-32 h-28 bg-grayMain dark:bg-gray-800 overflow-hidden">
           <h1
             style={{ color: `${theme}` }}
             className="font-raleway-dot select-none between-rel-parent uppercase tracking-widest opacity-20 lg:text-10xl md:text-9xl sm:text-8xl text-8xl"
