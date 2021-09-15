@@ -18,7 +18,7 @@ const WidePeek = ({
   return (
     <article className="widearticle overflow-hidden flex lg:mb-16 md:mb-14 sm:mb-10 mb-8">
       <div className="lg:h-38 sm:h-27 h-25 lg:w-64 sm:w-44 w-25 overflow-hidden relative">
-        <Link href={`/post/${slug}`}>
+        <Link href={`/post/${slug}`} passHref>
           <a>
             <img src={source} alt={banner.alternativeText} className="between-rel-parent" />
           </a>

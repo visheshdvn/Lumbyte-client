@@ -120,7 +120,7 @@ export default function Navbar() {
                       className={`nav-link ${
                         asPath === "/tags/code"
                           ? "font-black text-purple-600"
-                          : "font-normal text-white hover:text-purple-600 hover:brightness-125"
+                          : "font-normal text-white hover:text-purple-600"
                       }`}
                     >
                       CODE

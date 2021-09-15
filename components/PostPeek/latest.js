@@ -1,18 +1,12 @@
 import React from "react";
 import Link from "next/link";
-import { isValidURL } from "../../utils/checkValidURL";
+import Image from "next/image";
+import { getValidImageURL } from "../../utils/checkValidURL";
 import FormattedDate from "../micro/formattedDate";
 import ShowTags from "../micro/showTags";
 
 const Latest = ({ big, side }) => {
   const { title, tags, banner, date, slug, author } = big;
-
-  let source = null;
-  if (isValidURL(banner.url)) {
-    source = bannerUrl;
-  } else {
-    source = `${process.env.PROTOCOL}://${process.env.HOSTNAME}${banner.url}`;
-  }
 
   return (
     <div
@@ -21,15 +15,23 @@ const Latest = ({ big, side }) => {
     >
       <div className="xl:col-span-9 col-span-12 overflow-hidden">
         <div className="h-full w-full flex flex-wrap relative">
-          <a href={`/post/${slug}`}>
+          <a href={`/post/${slug}`} className="sm:relative w-full h-full">
             <img
-              src={source}
+              src={getValidImageURL(banner.url)}
               alt={banner.alternativeText}
               className="transform scale-105 hidden sm:block"
             />
+            {/* <Image
+                src={getValidImageURL(banner.url)}
+                alt={banner.alternativeText}
+                layout="fill"
+                className="object-cover object-center hidden sm:block"
+                placeholder="blur"
+                blurDataURL={getValidImageURL(banner.url)}
+              /> */}
             <div
               style={{
-                backgroundImage: `url(${source})`,
+                backgroundImage: `url(${getValidImageURL(banner.url)})`,
                 backgroundPosition: "center",
                 backgroundSize: "cover",
               }}

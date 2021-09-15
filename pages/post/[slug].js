@@ -89,7 +89,7 @@ const Post = ({ postData, readMore }) => {
         {/* twitter */}
         <meta name="twitter:card" value="summary_large_image" />
       </Head>
-      <div className="container mx-auto horizontal-spacing md:pt-6 pt-5">
+      <div className="container mx-auto horizontal-spacing xl:pt-8 lg:pt-6 md:pt-4 pt-5">
         <header style={{ maxWidth: "850px" }} className="mx-auto">
           <div className="flex items-center mb-5 sm:hidden">
             {tags.map((tag) => (

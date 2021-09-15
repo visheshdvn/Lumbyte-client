@@ -7,7 +7,6 @@
 }
 
 body {
-  /* padding-top: 113px; */
   @apply text-grayMain dark:text-whiteMain;
 }
 
