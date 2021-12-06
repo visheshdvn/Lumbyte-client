@@ -7,7 +7,7 @@
 }
 
 body {
-  @apply text-grayMain dark:text-whiteMain;
+  @apply text-grayMain dark:text-whiteMain dark:bg-darkGray md:pt-113 pt-20;
 }
 
 /* utility classes */

@@ -1,0 +1,140 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Account {
+  id         String      @id @default(uuid())
+  password   String      @db.VarChar(250)
+  facebook   String?     @db.VarChar(50)
+  twitter    String?     @db.VarChar(50)
+  instagram  String?     @db.VarChar(50)
+  linkedin   String?     @db.VarChar(50)
+  github     String?     @db.VarChar(50)
+  behance    String?     @db.VarChar(50)
+  pintrest   String?     @db.VarChar(50)
+  eyeem      String?     @db.VarChar(50)
+  px365      String?     @db.VarChar(50)
+  // relations
+  user       User        @relation(fields: [userId], references: [id])
+  userId     String      @unique
+  savedPosts Blogposts[]
+  // default fields
+  created_at DateTime    @default(now())
+  upadted_at DateTime
+  // superuser actions
+  disabled   Boolean     @default(false)
+}
+
+model AdminAccount {
+  id         Int      @id @default(autoincrement())
+  password   String   @db.VarChar(200)
+  // relations
+  user       User     @relation(fields: [userId], references: [id])
+  userId     String   @unique
+  // defaults
+  created_at DateTime @default(now())
+  upadted_at DateTime
+  //superuser actions
+  restricted Boolean  @default(false)
+}
+
+model Blogposts {
+  id              Int       @id @default(autoincrement())
+  title           String    @db.VarChar(150)
+  slug            String    @unique
+  metaDescription String?   @db.VarChar(200)
+  excerpt         String?   @db.VarChar(150)
+  content         String?   @unique
+  banner          String?   @db.VarChar(255)
+  banneralt       String?   @db.VarChar(255)
+  minuteRead      Int?      @default(1) @db.SmallInt
+  featured        Boolean?  @default(false)
+  topPick         Boolean?  @default(false)
+  date            DateTime? @db.Timestamp(0)
+  // relations
+  author          User?     @relation(fields: [authorId], references: [id], onDelete: SetNull)
+  authorId        String?
+  topics          Topics?   @relation(fields: [topicsId], references: [id], onDelete: SetNull)
+  topicsId        Int?
+  tags            Tags[]
+  savedBy         Account[]
+  // defaults
+  created_at      DateTime  @default(now())
+  upadted_at      DateTime
+  published_at    DateTime?
+  // published
+  published       Boolean   @default(false)
+  // superuser actions
+  blocked         Boolean   @default(false)
+}
+
+model Comments {
+  id         Int      @id @default(autoincrement())
+  content    String   @db.VarChar(200)
+  // defaults
+  created_at DateTime @default(now())
+  upadted_at DateTime
+}
+
+model User {
+  id            String        @id @default(uuid())
+  firstname     String        @db.VarChar(50)
+  lastname      String?       @db.VarChar(50)
+  username      String        @unique @db.VarChar(20)
+  about         String?       @db.VarChar(200)
+  dp            String?
+  dpalt         String?
+  email         String        @unique @db.VarChar(50)
+  phone         String?       @unique @db.VarChar(15)
+  role          String        @default("public") @db.VarChar(50)
+  // relations
+  blogposts     Blogposts[]
+  publicAccount Account?
+  adminAccount  AdminAccount?
+  // default fields
+  created_at    DateTime      @default(now())
+  upadted_at    DateTime
+  published_at  DateTime?
+  // published
+  published     Boolean       @default(false)
+  // superuser actions
+  adminGrant    Boolean       @default(false)
+}
+
+model Tags {
+  id              Int         @id @unique @default(autoincrement())
+  tagname         String      @unique @db.VarChar(40)
+  color           String?     @db.VarChar(25)
+  metaDescription String?     @db.VarChar(200)
+  ogimg           String?     @db.VarChar(250)
+  ogalt           String?     @db.VarChar(30)
+  // relations
+  blogposts       Blogposts[]
+  // defaults
+  created_at      DateTime    @default(now())
+  upadted_at      DateTime
+  published_at    DateTime?
+  // published?
+  published       Boolean     @default(false)
+}
+
+model Topics {
+  id              Int         @id @default(autoincrement())
+  topicname       String?     @unique @db.VarChar(50)
+  metaDescription String?     @db.VarChar(200)
+  ogimg           String?     @db.VarChar(250)
+  ogalt           String?     @db.VarChar(30)
+  // relations
+  blogposts       Blogposts[]
+  // defaults
+  created_at      DateTime    @default(now())
+  upadted_at      DateTime
+  published_at    DateTime?
+  // published?
+  published       Boolean     @default(false)
+}
