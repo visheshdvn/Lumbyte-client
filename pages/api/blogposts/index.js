@@ -121,6 +121,7 @@ handler.get(async (req, res) => {
       slug: _where && _where.slug ? encodeURIComponent(_where.slug) : undefined,
       featured:
         _where && _where.featured ? _where.featured === "true" : undefined,
+      topPick: _where && _where.topPick ? _where.topPick === "true" : undefined,
       tags:
         _where && _where.tags
           ? { some: { OR: _where.tags, published: true } }

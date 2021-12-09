@@ -9,14 +9,20 @@ export const sanitizeRequest = () => {
     if (req.body.slug) {
       req.body.slug = encodeURIComponent(req.body.slug.trim());
     }
-    if (req.body.metaDescription) {
+    if (
+      req.body.metaDescription &&
+      typeof req.body.metaDescription === "string"
+    ) {
       req.body.metaDescription = req.body.metaDescription.trim();
     }
     if (req.body.excerpt) {
       req.body.excerpt = req.body.excerpt.trim();
     }
     if (req.body.tagname) {
-      req.body.excerpt = encodeURIComponent(req.body.tagname.trim());
+      req.body.tagname = encodeURIComponent(req.body.tagname.trim());
+    }
+    if (req.body.topicname) {
+      req.body.topicname = encodeURIComponent(req.body.topicname.trim());
     }
     next();
   };

@@ -1,14 +1,13 @@
 import { PrismaClient } from "@prisma/client";
 import nc from "next-connect";
 
-const { tags } = new PrismaClient();
+const { topics } = new PrismaClient();
 
 // middlewares
 import {
   sanitizeRequest,
-  resolveQueryParams,
 } from "../../../middleware/sanitizeRequest";
-import { createtagsvalidations } from "../../../middleware/tags/createUpdateTag";
+import { createTopicsValidations } from "../../../middleware/topics/createUpdateTopics";
 
 const handler = nc({
   onError: (err, req, res) => {
@@ -21,29 +20,26 @@ const handler = nc({
 });
 
 handler.use(sanitizeRequest());
-handler.use(resolveQueryParams());
-handler.use(createtagsvalidations());
+handler.use(createTopicsValidations());
 
 handler.post(async (req, res) => {
   console.log("here");
-  const { tagname, color, metaDescription, ogimg, ogalt } = req.body;
+  const { topicname, metaDescription, ogimg, ogalt } = req.body;
 
   BigInt.prototype.toJSON = function () {
     return Number(this);
   };
 
-  const tag = await tags.create({
+  const topic = await topics.create({
     data: {
-      tagname,
-      color,
+      topicname,
       metaDescription,
       ogimg,
       ogalt,
-      published: false,
     },
   });
 
-  res.status(200).json({ tag, status: "created" });
+  res.status(200).json({ topic, status: "created" });
 });
 
 export default handler;

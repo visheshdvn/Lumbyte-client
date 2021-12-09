@@ -37,6 +37,9 @@ handler.post(async (req, res) => {
     featured,
     topPick,
     date,
+    authorId,
+    tags,
+    topicsId,
   } = req.body;
 
   BigInt.prototype.toJSON = function () {
@@ -56,14 +59,22 @@ handler.post(async (req, res) => {
       featured,
       topPick,
       date,
+      author: {
+        connect: {
+          id: authorId,
+        },
+      },
+      topics: {
+        connect: {
+          id: topicsId,
+        },
+      },
+      tags: {
+        connect: tags,
+      },
       created_at: new Date().toISOString(),
       upadted_at: new Date().toISOString(),
       published: false,
-      author: {
-        connect: {
-          id: "caa11e37-4321-47ae-a2a6-3b7db97c9533",
-        },
-      },
     },
   });
 

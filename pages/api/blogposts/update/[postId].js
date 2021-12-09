@@ -4,10 +4,7 @@ import nc from "next-connect";
 const { blogposts } = new PrismaClient();
 
 // middlewares
-import {
-  sanitizeRequest,
-  resolveQueryParams,
-} from "../../../../middleware/sanitizeRequest";
+import { sanitizeRequest } from "../../../../middleware/sanitizeRequest";
 import { updateblogpostvalidations } from "../../../../middleware/blogposts/createBlogpost";
 
 const handler = nc({
@@ -46,51 +43,49 @@ handler.patch(async (req, res) => {
     topPick,
     date,
     authorId,
+    tags,
+    topicsId,
   } = req.body;
 
-  const curr_blogpost = await blogposts.findUnique({
+  const currData = await blogposts.findUnique({
     select: {
-      title: true,
-      slug: true,
-      metaDescription: true,
-      excerpt: true,
-      content: true,
-      banner: true,
-      banneralt: true,
-      minuteRead: true,
-      featured: true,
-      topPick: true,
-      date: true,
       authorId: true,
+      topicsId: true,
     },
     where: {
       id: +postId,
     },
   });
 
-  // console.log("current post", curr_blogpost);
   const updated_post = await blogposts.update({
     where: {
       id: +postId,
     },
     data: {
-      title: title === undefined ? curr_blogpost.title : title,
-      slug: slug === undefined ? curr_blogpost.slug : slug,
-      excerpt: excerpt === undefined ? curr_blogpost.excerpt : excerpt,
-      content: content === undefined ? curr_blogpost.content : content,
-      featured: featured === undefined ? curr_blogpost.featured : featured,
-      topPick: topPick === undefined ? curr_blogpost.topPick : topPick,
-      date: date === undefined ? curr_blogpost.date : date,
-      banner: banner === undefined ? curr_blogpost.banner : banner,
-      banneralt: banneralt === undefined ? curr_blogpost.banneralt : banneralt,
-      metaDescription:
-        metaDescription === undefined
-          ? curr_blogpost.metaDescription
-          : metaDescription,
-      minuteRead:
-        minuteRead === undefined ? curr_blogpost.minuteRead : minuteRead,
-      upadted_at: new Date().toISOString(),
-      authorId: authorId === undefined ? curr_blogpost.authorId : authorId,
+      title,
+      slug,
+      excerpt,
+      content,
+      featured,
+      topPick,
+      date,
+      banner,
+      banneralt,
+      metaDescription,
+      minuteRead,
+      author: {
+        connect: {
+          id: !authorId ? currData.authorId : authorId,
+        },
+      },
+      topics: {
+        connect: {
+          id: !topicsId ? currData.topicsId : topicsId,
+        },
+      },
+      tags: {
+        set: tags,
+      },
     },
   });
   res.status(200).json({ blogpost: updated_post, msg: "updated" });

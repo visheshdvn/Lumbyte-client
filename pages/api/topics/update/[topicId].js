@@ -1,14 +1,11 @@
 import { PrismaClient } from "@prisma/client";
 import nc from "next-connect";
 
-const { tags } = new PrismaClient();
+const { topics } = new PrismaClient();
 
 // middlewares
-import {
-  sanitizeRequest,
-  // resolveQueryParams,
-} from "../../../../middleware/sanitizeRequest";
-import { updatetagsvalidations } from "../../../../middleware/tags/createUpdateTag";
+import { sanitizeRequest } from "../../../../middleware/sanitizeRequest";
+import { updateTopicsValidations } from "../../../../middleware/topics/createUpdateTopics";
 
 const handler = nc({
   onError: (err, req, res) => {
@@ -20,30 +17,29 @@ const handler = nc({
   },
 });
 
-// let tagId;
+// let topicId;
 handler.use(sanitizeRequest());
 handler.use((req, res, next) => {
   req.params = {};
-  req.params.tagId = req.query.tagId;
+  req.params.topicId = req.query.topicId;
   next();
 });
 // handler.use(resolveQueryParams());
-handler.use(updatetagsvalidations());
+handler.use(updateTopicsValidations());
 
 // controller
 handler.patch(async (req, res) => {
-  const { tagId } = req.params;
-  console.log(tagId);
+  const { topicId } = req.params;
+  console.log(topicId);
   console.log(req.body);
-  const { tagname, color, metaDescription, ogimg, ogalt } = req.body;
+  const { topicname, metaDescription, ogimg, ogalt } = req.body;
 
-  const updated_tag = await tags.update({
+  const updated_tag = await topics.update({
     where: {
-      id: +tagId,
+      id: +topicId,
     },
     data: {
-      tagname,
-      color,
+      topicname,
       metaDescription,
       ogimg,
       ogalt,
