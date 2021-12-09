@@ -1,0 +1,21 @@
+export declare enum BlogpostsScalarFieldEnum {
+    id = "id",
+    title = "title",
+    slug = "slug",
+    metaDescription = "metaDescription",
+    excerpt = "excerpt",
+    content = "content",
+    banner = "banner",
+    banneralt = "banneralt",
+    minuteRead = "minuteRead",
+    featured = "featured",
+    topPick = "topPick",
+    date = "date",
+    authorId = "authorId",
+    topicsId = "topicsId",
+    created_at = "created_at",
+    upadted_at = "upadted_at",
+    published_at = "published_at",
+    published = "published",
+    blocked = "blocked"
+}

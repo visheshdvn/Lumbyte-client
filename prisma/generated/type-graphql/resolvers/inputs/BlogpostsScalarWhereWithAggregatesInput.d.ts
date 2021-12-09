@@ -1,0 +1,32 @@
+import { BoolNullableWithAggregatesFilter } from "../inputs/BoolNullableWithAggregatesFilter";
+import { BoolWithAggregatesFilter } from "../inputs/BoolWithAggregatesFilter";
+import { DateTimeNullableWithAggregatesFilter } from "../inputs/DateTimeNullableWithAggregatesFilter";
+import { DateTimeWithAggregatesFilter } from "../inputs/DateTimeWithAggregatesFilter";
+import { IntNullableWithAggregatesFilter } from "../inputs/IntNullableWithAggregatesFilter";
+import { IntWithAggregatesFilter } from "../inputs/IntWithAggregatesFilter";
+import { StringNullableWithAggregatesFilter } from "../inputs/StringNullableWithAggregatesFilter";
+import { StringWithAggregatesFilter } from "../inputs/StringWithAggregatesFilter";
+export declare class BlogpostsScalarWhereWithAggregatesInput {
+    AND?: BlogpostsScalarWhereWithAggregatesInput[] | undefined;
+    OR?: BlogpostsScalarWhereWithAggregatesInput[] | undefined;
+    NOT?: BlogpostsScalarWhereWithAggregatesInput[] | undefined;
+    id?: IntWithAggregatesFilter | undefined;
+    title?: StringWithAggregatesFilter | undefined;
+    slug?: StringWithAggregatesFilter | undefined;
+    metaDescription?: StringNullableWithAggregatesFilter | undefined;
+    excerpt?: StringNullableWithAggregatesFilter | undefined;
+    content?: StringNullableWithAggregatesFilter | undefined;
+    banner?: StringNullableWithAggregatesFilter | undefined;
+    banneralt?: StringNullableWithAggregatesFilter | undefined;
+    minuteRead?: IntNullableWithAggregatesFilter | undefined;
+    featured?: BoolNullableWithAggregatesFilter | undefined;
+    topPick?: BoolNullableWithAggregatesFilter | undefined;
+    date?: DateTimeNullableWithAggregatesFilter | undefined;
+    authorId?: StringNullableWithAggregatesFilter | undefined;
+    topicsId?: IntNullableWithAggregatesFilter | undefined;
+    created_at?: DateTimeWithAggregatesFilter | undefined;
+    upadted_at?: DateTimeWithAggregatesFilter | undefined;
+    published_at?: DateTimeNullableWithAggregatesFilter | undefined;
+    published?: BoolWithAggregatesFilter | undefined;
+    blocked?: BoolWithAggregatesFilter | undefined;
+}

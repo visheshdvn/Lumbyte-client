@@ -1,0 +1,12 @@
+export { AggregateAdminAccountArgs } from "./AggregateAdminAccountArgs";
+export { CreateAdminAccountArgs } from "./CreateAdminAccountArgs";
+export { CreateManyAdminAccountArgs } from "./CreateManyAdminAccountArgs";
+export { DeleteAdminAccountArgs } from "./DeleteAdminAccountArgs";
+export { DeleteManyAdminAccountArgs } from "./DeleteManyAdminAccountArgs";
+export { FindFirstAdminAccountArgs } from "./FindFirstAdminAccountArgs";
+export { FindManyAdminAccountArgs } from "./FindManyAdminAccountArgs";
+export { FindUniqueAdminAccountArgs } from "./FindUniqueAdminAccountArgs";
+export { GroupByAdminAccountArgs } from "./GroupByAdminAccountArgs";
+export { UpdateAdminAccountArgs } from "./UpdateAdminAccountArgs";
+export { UpdateManyAdminAccountArgs } from "./UpdateManyAdminAccountArgs";
+export { UpsertAdminAccountArgs } from "./UpsertAdminAccountArgs";

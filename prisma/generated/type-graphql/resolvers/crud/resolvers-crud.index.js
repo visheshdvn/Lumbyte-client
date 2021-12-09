@@ -1,0 +1,17 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.UserCrudResolver = exports.TopicsCrudResolver = exports.TagsCrudResolver = exports.CommentsCrudResolver = exports.BlogpostsCrudResolver = exports.AdminAccountCrudResolver = exports.AccountCrudResolver = void 0;
+var AccountCrudResolver_1 = require("./Account/AccountCrudResolver");
+Object.defineProperty(exports, "AccountCrudResolver", { enumerable: true, get: function () { return AccountCrudResolver_1.AccountCrudResolver; } });
+var AdminAccountCrudResolver_1 = require("./AdminAccount/AdminAccountCrudResolver");
+Object.defineProperty(exports, "AdminAccountCrudResolver", { enumerable: true, get: function () { return AdminAccountCrudResolver_1.AdminAccountCrudResolver; } });
+var BlogpostsCrudResolver_1 = require("./Blogposts/BlogpostsCrudResolver");
+Object.defineProperty(exports, "BlogpostsCrudResolver", { enumerable: true, get: function () { return BlogpostsCrudResolver_1.BlogpostsCrudResolver; } });
+var CommentsCrudResolver_1 = require("./Comments/CommentsCrudResolver");
+Object.defineProperty(exports, "CommentsCrudResolver", { enumerable: true, get: function () { return CommentsCrudResolver_1.CommentsCrudResolver; } });
+var TagsCrudResolver_1 = require("./Tags/TagsCrudResolver");
+Object.defineProperty(exports, "TagsCrudResolver", { enumerable: true, get: function () { return TagsCrudResolver_1.TagsCrudResolver; } });
+var TopicsCrudResolver_1 = require("./Topics/TopicsCrudResolver");
+Object.defineProperty(exports, "TopicsCrudResolver", { enumerable: true, get: function () { return TopicsCrudResolver_1.TopicsCrudResolver; } });
+var UserCrudResolver_1 = require("./User/UserCrudResolver");
+Object.defineProperty(exports, "UserCrudResolver", { enumerable: true, get: function () { return UserCrudResolver_1.UserCrudResolver; } });

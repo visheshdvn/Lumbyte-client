@@ -1,0 +1,31 @@
+import { GraphQLResolveInfo } from "graphql";
+import { AggregateAdminAccountArgs } from "./args/AggregateAdminAccountArgs";
+import { CreateAdminAccountArgs } from "./args/CreateAdminAccountArgs";
+import { CreateManyAdminAccountArgs } from "./args/CreateManyAdminAccountArgs";
+import { DeleteAdminAccountArgs } from "./args/DeleteAdminAccountArgs";
+import { DeleteManyAdminAccountArgs } from "./args/DeleteManyAdminAccountArgs";
+import { FindFirstAdminAccountArgs } from "./args/FindFirstAdminAccountArgs";
+import { FindManyAdminAccountArgs } from "./args/FindManyAdminAccountArgs";
+import { FindUniqueAdminAccountArgs } from "./args/FindUniqueAdminAccountArgs";
+import { GroupByAdminAccountArgs } from "./args/GroupByAdminAccountArgs";
+import { UpdateAdminAccountArgs } from "./args/UpdateAdminAccountArgs";
+import { UpdateManyAdminAccountArgs } from "./args/UpdateManyAdminAccountArgs";
+import { UpsertAdminAccountArgs } from "./args/UpsertAdminAccountArgs";
+import { AdminAccount } from "../../../models/AdminAccount";
+import { AdminAccountGroupBy } from "../../outputs/AdminAccountGroupBy";
+import { AffectedRowsOutput } from "../../outputs/AffectedRowsOutput";
+import { AggregateAdminAccount } from "../../outputs/AggregateAdminAccount";
+export declare class AdminAccountCrudResolver {
+    adminAccount(ctx: any, info: GraphQLResolveInfo, args: FindUniqueAdminAccountArgs): Promise<AdminAccount | null>;
+    findFirstAdminAccount(ctx: any, info: GraphQLResolveInfo, args: FindFirstAdminAccountArgs): Promise<AdminAccount | null>;
+    adminAccounts(ctx: any, info: GraphQLResolveInfo, args: FindManyAdminAccountArgs): Promise<AdminAccount[]>;
+    createAdminAccount(ctx: any, info: GraphQLResolveInfo, args: CreateAdminAccountArgs): Promise<AdminAccount>;
+    createManyAdminAccount(ctx: any, info: GraphQLResolveInfo, args: CreateManyAdminAccountArgs): Promise<AffectedRowsOutput>;
+    deleteAdminAccount(ctx: any, info: GraphQLResolveInfo, args: DeleteAdminAccountArgs): Promise<AdminAccount | null>;
+    updateAdminAccount(ctx: any, info: GraphQLResolveInfo, args: UpdateAdminAccountArgs): Promise<AdminAccount | null>;
+    deleteManyAdminAccount(ctx: any, info: GraphQLResolveInfo, args: DeleteManyAdminAccountArgs): Promise<AffectedRowsOutput>;
+    updateManyAdminAccount(ctx: any, info: GraphQLResolveInfo, args: UpdateManyAdminAccountArgs): Promise<AffectedRowsOutput>;
+    upsertAdminAccount(ctx: any, info: GraphQLResolveInfo, args: UpsertAdminAccountArgs): Promise<AdminAccount>;
+    aggregateAdminAccount(ctx: any, info: GraphQLResolveInfo, args: AggregateAdminAccountArgs): Promise<AggregateAdminAccount>;
+    groupByAdminAccount(ctx: any, info: GraphQLResolveInfo, args: GroupByAdminAccountArgs): Promise<AdminAccountGroupBy[]>;
+}

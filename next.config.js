@@ -1,4 +1,4 @@
-const { PHASE_DEVELOPMENT_SERVER } = require("next/constants")
+const { PHASE_DEVELOPMENT_SERVER } = require("next/constants");
 
 module.exports = (phase, { defaultConfig }) => {
   if (phase === PHASE_DEVELOPMENT_SERVER) {
@@ -9,13 +9,14 @@ module.exports = (phase, { defaultConfig }) => {
         // NEXT_PUBLIC_GA_ID: "G-3BNNCK0DEL",
       },
       images: {
-        domains: [
-          "localhost",
-          "i.ibb.co",
-          "172.26.188.242",
-        ],
+        domains: ["localhost", "i.ibb.co", "172.26.188.242"],
       },
-    }
+      reactStrictMode: true,
+      webpack: function (config, options) {
+        config.experiments = { topLevelAwait: true };
+        return config;
+      },
+    };
   }
 
   return {
@@ -25,10 +26,7 @@ module.exports = (phase, { defaultConfig }) => {
       NEXT_PUBLIC_GA_ID: "G-3BNNCK0DEL",
     },
     images: {
-      domains: [
-        "i.ibb.co",
-        "admin.lumbytes.com",
-      ],
+      domains: ["i.ibb.co", "admin.lumbytes.com"],
     },
-  }
-}
+  };
+};

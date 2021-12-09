@@ -1,0 +1,31 @@
+import { BlogpostsAvgAggregate } from "../outputs/BlogpostsAvgAggregate";
+import { BlogpostsCountAggregate } from "../outputs/BlogpostsCountAggregate";
+import { BlogpostsMaxAggregate } from "../outputs/BlogpostsMaxAggregate";
+import { BlogpostsMinAggregate } from "../outputs/BlogpostsMinAggregate";
+import { BlogpostsSumAggregate } from "../outputs/BlogpostsSumAggregate";
+export declare class BlogpostsGroupBy {
+    id: number;
+    title: string;
+    slug: string;
+    metaDescription: string | null;
+    excerpt: string | null;
+    content: string | null;
+    banner: string | null;
+    banneralt: string | null;
+    minuteRead: number | null;
+    featured: boolean | null;
+    topPick: boolean | null;
+    date: Date | null;
+    authorId: string | null;
+    topicsId: number | null;
+    created_at: Date;
+    upadted_at: Date;
+    published_at: Date | null;
+    published: boolean;
+    blocked: boolean;
+    _count: BlogpostsCountAggregate | null;
+    _avg: BlogpostsAvgAggregate | null;
+    _sum: BlogpostsSumAggregate | null;
+    _min: BlogpostsMinAggregate | null;
+    _max: BlogpostsMaxAggregate | null;
+}

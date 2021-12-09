@@ -1,0 +1,31 @@
+import { Account } from "../models/Account";
+import { Tags } from "../models/Tags";
+import { Topics } from "../models/Topics";
+import { User } from "../models/User";
+import { BlogpostsCount } from "../resolvers/outputs/BlogpostsCount";
+export declare class Blogposts {
+    id: number;
+    title: string;
+    slug: string;
+    metaDescription?: string | null;
+    excerpt?: string | null;
+    content?: string | null;
+    banner?: string | null;
+    banneralt?: string | null;
+    minuteRead?: number | null;
+    featured?: boolean | null;
+    topPick?: boolean | null;
+    date?: Date | null;
+    author?: User | null;
+    authorId?: string | null;
+    topics?: Topics | null;
+    topicsId?: number | null;
+    tags?: Tags[];
+    savedBy?: Account[];
+    created_at: Date;
+    upadted_at: Date;
+    published_at?: Date | null;
+    published: boolean;
+    blocked: boolean;
+    _count?: BlogpostsCount | null;
+}

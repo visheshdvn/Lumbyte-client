@@ -1,0 +1,31 @@
+import { GraphQLResolveInfo } from "graphql";
+import { AggregateTopicsArgs } from "./args/AggregateTopicsArgs";
+import { CreateManyTopicsArgs } from "./args/CreateManyTopicsArgs";
+import { CreateTopicsArgs } from "./args/CreateTopicsArgs";
+import { DeleteManyTopicsArgs } from "./args/DeleteManyTopicsArgs";
+import { DeleteTopicsArgs } from "./args/DeleteTopicsArgs";
+import { FindFirstTopicsArgs } from "./args/FindFirstTopicsArgs";
+import { FindManyTopicsArgs } from "./args/FindManyTopicsArgs";
+import { FindUniqueTopicsArgs } from "./args/FindUniqueTopicsArgs";
+import { GroupByTopicsArgs } from "./args/GroupByTopicsArgs";
+import { UpdateManyTopicsArgs } from "./args/UpdateManyTopicsArgs";
+import { UpdateTopicsArgs } from "./args/UpdateTopicsArgs";
+import { UpsertTopicsArgs } from "./args/UpsertTopicsArgs";
+import { Topics } from "../../../models/Topics";
+import { AffectedRowsOutput } from "../../outputs/AffectedRowsOutput";
+import { AggregateTopics } from "../../outputs/AggregateTopics";
+import { TopicsGroupBy } from "../../outputs/TopicsGroupBy";
+export declare class TopicsCrudResolver {
+    findUniqueTopics(ctx: any, info: GraphQLResolveInfo, args: FindUniqueTopicsArgs): Promise<Topics | null>;
+    findFirstTopics(ctx: any, info: GraphQLResolveInfo, args: FindFirstTopicsArgs): Promise<Topics | null>;
+    findManyTopics(ctx: any, info: GraphQLResolveInfo, args: FindManyTopicsArgs): Promise<Topics[]>;
+    createTopics(ctx: any, info: GraphQLResolveInfo, args: CreateTopicsArgs): Promise<Topics>;
+    createManyTopics(ctx: any, info: GraphQLResolveInfo, args: CreateManyTopicsArgs): Promise<AffectedRowsOutput>;
+    deleteTopics(ctx: any, info: GraphQLResolveInfo, args: DeleteTopicsArgs): Promise<Topics | null>;
+    updateTopics(ctx: any, info: GraphQLResolveInfo, args: UpdateTopicsArgs): Promise<Topics | null>;
+    deleteManyTopics(ctx: any, info: GraphQLResolveInfo, args: DeleteManyTopicsArgs): Promise<AffectedRowsOutput>;
+    updateManyTopics(ctx: any, info: GraphQLResolveInfo, args: UpdateManyTopicsArgs): Promise<AffectedRowsOutput>;
+    upsertTopics(ctx: any, info: GraphQLResolveInfo, args: UpsertTopicsArgs): Promise<Topics>;
+    aggregateTopics(ctx: any, info: GraphQLResolveInfo, args: AggregateTopicsArgs): Promise<AggregateTopics>;
+    groupByTopics(ctx: any, info: GraphQLResolveInfo, args: GroupByTopicsArgs): Promise<TopicsGroupBy[]>;
+}

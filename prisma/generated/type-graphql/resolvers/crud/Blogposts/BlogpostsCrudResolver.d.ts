@@ -1,0 +1,31 @@
+import { GraphQLResolveInfo } from "graphql";
+import { AggregateBlogpostsArgs } from "./args/AggregateBlogpostsArgs";
+import { CreateBlogpostsArgs } from "./args/CreateBlogpostsArgs";
+import { CreateManyBlogpostsArgs } from "./args/CreateManyBlogpostsArgs";
+import { DeleteBlogpostsArgs } from "./args/DeleteBlogpostsArgs";
+import { DeleteManyBlogpostsArgs } from "./args/DeleteManyBlogpostsArgs";
+import { FindFirstBlogpostsArgs } from "./args/FindFirstBlogpostsArgs";
+import { FindManyBlogpostsArgs } from "./args/FindManyBlogpostsArgs";
+import { FindUniqueBlogpostsArgs } from "./args/FindUniqueBlogpostsArgs";
+import { GroupByBlogpostsArgs } from "./args/GroupByBlogpostsArgs";
+import { UpdateBlogpostsArgs } from "./args/UpdateBlogpostsArgs";
+import { UpdateManyBlogpostsArgs } from "./args/UpdateManyBlogpostsArgs";
+import { UpsertBlogpostsArgs } from "./args/UpsertBlogpostsArgs";
+import { Blogposts } from "../../../models/Blogposts";
+import { AffectedRowsOutput } from "../../outputs/AffectedRowsOutput";
+import { AggregateBlogposts } from "../../outputs/AggregateBlogposts";
+import { BlogpostsGroupBy } from "../../outputs/BlogpostsGroupBy";
+export declare class BlogpostsCrudResolver {
+    findUniqueBlogposts(ctx: any, info: GraphQLResolveInfo, args: FindUniqueBlogpostsArgs): Promise<Blogposts | null>;
+    findFirstBlogposts(ctx: any, info: GraphQLResolveInfo, args: FindFirstBlogpostsArgs): Promise<Blogposts | null>;
+    findManyBlogposts(ctx: any, info: GraphQLResolveInfo, args: FindManyBlogpostsArgs): Promise<Blogposts[]>;
+    createBlogposts(ctx: any, info: GraphQLResolveInfo, args: CreateBlogpostsArgs): Promise<Blogposts>;
+    createManyBlogposts(ctx: any, info: GraphQLResolveInfo, args: CreateManyBlogpostsArgs): Promise<AffectedRowsOutput>;
+    deleteBlogposts(ctx: any, info: GraphQLResolveInfo, args: DeleteBlogpostsArgs): Promise<Blogposts | null>;
+    updateBlogposts(ctx: any, info: GraphQLResolveInfo, args: UpdateBlogpostsArgs): Promise<Blogposts | null>;
+    deleteManyBlogposts(ctx: any, info: GraphQLResolveInfo, args: DeleteManyBlogpostsArgs): Promise<AffectedRowsOutput>;
+    updateManyBlogposts(ctx: any, info: GraphQLResolveInfo, args: UpdateManyBlogpostsArgs): Promise<AffectedRowsOutput>;
+    upsertBlogposts(ctx: any, info: GraphQLResolveInfo, args: UpsertBlogpostsArgs): Promise<Blogposts>;
+    aggregateBlogposts(ctx: any, info: GraphQLResolveInfo, args: AggregateBlogpostsArgs): Promise<AggregateBlogposts>;
+    groupByBlogposts(ctx: any, info: GraphQLResolveInfo, args: GroupByBlogpostsArgs): Promise<BlogpostsGroupBy[]>;
+}
