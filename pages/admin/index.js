@@ -10,5 +10,14 @@ const index = () => {
     </div>
   );
 };
-
 export default index;
+
+export async function getServerSideProps(context) {
+  return {
+    redirect: {
+      destination: "/admin/blogposts",
+      permanent: false,
+    },
+    props: {}, // will be passed to the page component as props
+  };
+}

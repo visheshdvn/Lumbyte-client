@@ -11,12 +11,20 @@ class MyDocument extends Document {
     return (
       <Html className="dark" lang="en">
         <Head>
-          <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
+          <link
+            rel="preconnect"
+            href="https://fonts.gstatic.com"
+            crossOrigin="true"
+          />
 
           {/* new fonts */}
-          <link rel="preconnect" href="https://fonts.googleapis.com" />
           <link
-            href="https://fonts.googleapis.com/css2?family=Antonio:wght@700&family=Open+Sans+Condensed:wght@300;700&family=Raleway+Dots&family=Raleway:wght@400;900&display=swap"
+            rel="preconnect"
+            href="https://fonts.googleapis.com"
+            crossOrigin="true"
+          />
+          <link
+            href="https://fonts.googleapis.com/css2?family=Antonio:wght@700&family=Open+Sans+Condensed:wght@300;700&family=Quicksand:wght@400;600;700&family=Raleway+Dots&family=Raleway:wght@500;600;900&display=swap"
             rel="stylesheet"
           />
           <link rel="shortcut icon" href="/logo/FavIcon2.png" />
@@ -39,7 +47,7 @@ class MyDocument extends Document {
             }}
           />
         </Head>
-        <body className="dark:bg-darkGray md:pt-113 pt-20">
+        <body>
           <Main />
           <NextScript />
         </body>

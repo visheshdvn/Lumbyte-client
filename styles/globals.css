@@ -7,10 +7,18 @@
 }
 
 body {
-  @apply text-grayMain dark:text-whiteMain dark:bg-darkGray md:pt-113 pt-20;
+  @apply text-grayMain dark:text-whiteMain dark:bg-darkGray;
+}
+
+.body-top-spacing {
+  @apply md:pt-113 pt-20;
 }
 
 /* utility classes */
+
+.clearfix {
+  @apply flow-root;
+}
 
 .between-rel-parent {
   @apply absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2;

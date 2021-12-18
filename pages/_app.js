@@ -1,8 +1,10 @@
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 import * as gtag from "../lib/gtag";
-// import { Provider } from "next-auth/client";
 import { SessionProvider } from "next-auth/react";
+import axios from "axios";
+
+axios.defaults.baseURL="http://localhost:3000/api"
 
 import "../styles/globals.css";
 import Navbar from "../components/Navbar";
@@ -23,7 +25,7 @@ function MyApp({ Component, pageProps }) {
       router.events.off("routeChangeComplete", handleRouteChange);
     };
   }, [router.events]);
-
+  
   return (
     <SessionProvider session={pageProps.session}>
       <ApolloProvider client={client}>

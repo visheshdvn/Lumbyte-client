@@ -18,6 +18,7 @@ module.exports = {
       "raleway-dot": ["Raleway Dots"],
       "open-sans": ["Open Sans Condensed", ...defaultTheme.fontFamily.sans],
       mono: [...defaultTheme.fontFamily.mono],
+      adminPrimary: ["Quicksand", ...defaultTheme.fontFamily.serif],
     },
     colors: {
       white: "white",
@@ -29,9 +30,12 @@ module.exports = {
       grayMain: "#262611",
       darkGray: "#121212",
       margins: "rgba(117,117,117, 0.25)",
+      // default colors
       blue: colors.blue,
       yellow: colors.yellow,
       purple: colors.purple,
+      slate: colors.slate,
+      green: colors.green,
       // old
       current: "currentColor",
       lightBlue: colors.lightBlue,

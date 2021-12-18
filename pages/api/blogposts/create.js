@@ -59,21 +59,19 @@ handler.post(async (req, res) => {
       featured,
       topPick,
       date,
-      author: {
+      author: authorId && {
         connect: {
           id: authorId,
         },
       },
-      topics: {
+      topics: topicsId && {
         connect: {
           id: topicsId,
         },
       },
-      tags: {
+      tags: tags && {
         connect: tags,
       },
-      created_at: new Date().toISOString(),
-      upadted_at: new Date().toISOString(),
       published: false,
     },
   });
