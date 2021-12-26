@@ -24,14 +24,17 @@ body {
   @apply absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2;
 }
 
-.horizontal-spacing {
-  @apply xl:px-0 lg:px-5 md:px-3 px-2;
+.unstyled-input {
+  @apply border-none focus:outline-0;
 }
 
-.clearfix::after {
-  content: "";
-  clear: both;
-  display: table;
+.admin-bool-btn {
+  @apply py-2 w-14 text-sm font-raleway font-medium;
+}
+/*  */
+
+.horizontal-spacing {
+  @apply xl:px-0 lg:px-5 md:px-3 px-2;
 }
 
 .blog-link {
@@ -148,4 +151,33 @@ ul.spaced li:not(:last-child) {
 
 .special-dividers:not(:nth-of-type(1)) {
   @apply mt-5;
+}
+
+/* editorjs editable */
+h2.ce-header[contenteditable="true"] {
+  @apply text-4xl font-open-sans font-bold mb-6;
+}
+
+h3.ce-header[contenteditable="true"] {
+  @apply text-3xl font-open-sans font-bold mb-4;
+}
+
+h4.ce-header[contenteditable="true"] {
+  @apply lg:text-xl font-open-sans font-bold mb-2;
+}
+
+div.ce-paragraph[contenteditable="true"] {
+  @apply mb-8 lg:text-lg lg:leading-8;
+}
+
+ul.cdx-list--unordered[contenteditable="true"] li.cdx-list__item {
+  @apply lg:text-lg lg:leading-8 mb-3 p-0;
+}
+
+ol.cdx-list--ordered[contenteditable="true"] li.cdx-list__item {
+  @apply lg:text-lg lg:leading-8 mb-3 p-0;
+}
+
+.cdx-block[contenteditable="true"] {
+  @apply p-0 list-inside;
 }

@@ -30,6 +30,7 @@ module.exports = {
       grayMain: "#262611",
       darkGray: "#121212",
       margins: "rgba(117,117,117, 0.25)",
+      "black-10": "rgba(0,0,0,0.1)",
       // default colors
       blue: colors.blue,
       yellow: colors.yellow,
@@ -38,7 +39,7 @@ module.exports = {
       green: colors.green,
       // old
       current: "currentColor",
-      lightBlue: colors.lightBlue,
+      lightBlue: colors.sky,
       gray: colors.gray,
       trueGray: colors.trueGray,
       red: colors.red,

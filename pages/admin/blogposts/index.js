@@ -15,7 +15,7 @@ const Blogposts = ({ blogposts }) => {
       <div className="flex bg-whiteMain">
         <Sidebar />
         <div className="flex-1 pt-12 px-5">
-          <div className="">
+          <div className="text-gray-800">
             <h1 className="text-2.75xl font-adminPrimary font-bold">
               Blogposts
             </h1>
@@ -35,7 +35,7 @@ const Blogposts = ({ blogposts }) => {
           <div className="mt-5">
             <table className="table-auto border w-full">
               <thead>
-                <tr className="bg-gray-100 font-adminPrimary text-sm font-semibold text-left">
+                <tr className="bg-gray-100 font-adminPrimary text-sm font-semibold text-left text-gray-800">
                   <td className="opacity-0">S</td>
                   <th className="py-4">Id</th>
                   <th>Slug</th>
@@ -66,7 +66,7 @@ function TableContents({ data }) {
     <Link passHref href={`/admin/blogposts/${id}`}>
       {/* <a> */}
       <tr
-        className="border-b font-raleway font-medium text-xs bg-white cursor-pointer"
+        className="border-b font-raleway font-medium text-xs bg-white cursor-pointer text-gray-800"
         key={data.id}
       >
         <td className="opacity-0">S</td>
