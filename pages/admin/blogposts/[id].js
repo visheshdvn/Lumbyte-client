@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
-import Sidebar from "../../../components/adminPanel/leftSideBar";
-import Link from "next/link";
 import { useRouter } from "next/router";
+import axios from "axios";
 import _ from "lodash";
-// editorjs tools
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+// components
+import Sidebar from "../../../components/adminPanel/leftSideBar";
+import FormattedDate from "../../../components/micro/formattedDate";
 
 let editor;
 const update = ({ initialContent }) => {
@@ -25,12 +27,11 @@ const update = ({ initialContent }) => {
     date,
     tags,
     author,
-    upadted_at,
+    updated_at,
     created_at,
   } = initialContent;
   const initialContentBody = JSON.parse(content);
 
-  let stateUpdated = false;
   const [updatedContent, setUpdateContent] = useState({
     ...initialContent,
     content: initialContentBody,
@@ -82,7 +83,6 @@ const update = ({ initialContent }) => {
   }, []);
 
   function updateblogdata(e) {
-    stateUpdated = true;
     setUpdateContent({
       ...updatedContent,
       [e.target.name]: e.target.value,
@@ -104,13 +104,15 @@ const update = ({ initialContent }) => {
       );
 
     if (noChange) {
-      alert("No Change in the content");
+      toast.info("No Change in the content");
       return;
     }
-    
-    payload.date = payload.created_at
 
-    console.log(payload);
+    payload.date = payload.created_at;
+    if (!payload.author) {
+      payload.author = {};
+    }
+
     try {
       let res = await axios.patch(
         `/blogposts/update/${router.query.id}`,
@@ -120,21 +122,31 @@ const update = ({ initialContent }) => {
         }
       );
       console.log(res);
+      toast.success("Changes saved Successfully ⭐");
     } catch (err) {
       console.error("error", err.toJSON());
+      toast.error("Error")
     }
   }
 
   return (
     <>
+      <ToastContainer
+        position="top-center"
+        autoClose={3000}
+        hideProgressBar={true}
+      />
       <div className="flex">
         <Sidebar />
         <div className="flex-1 pt-12 pr-5 pl-80">
           <div className="flow-root mb-10">
-            <h1 className="text-2xl font-adminPrimary font-bold">
-              Create new blogpost
+            <h1 className="text-2xl font-adminPrimary font-bold mb-1">
+              Edit blogpost
             </h1>
-            <div className="float-right mb-3">
+            <div className="float-left font-adminPrimary text-sm font-semibold">
+              Last edited: <FormattedDate date={updatedContent.updated_at} />
+            </div>
+            <div className="float-right">
               <button
                 type="button"
                 className="bg-[#1da1f2] border w-28 py-1 font-raleway font-semibold text-base text-white rounded"
@@ -177,6 +189,19 @@ const update = ({ initialContent }) => {
               </h2>
               <div className="mb-8">
                 <label className="font-adminPrimary text-base font-semibold">
+                  Slug
+                </label>
+                <input
+                  type="text"
+                  placeholder="enter slug"
+                  className="bg-white w-full h-8 focus:outline-0 border border-black-10 px-1 mt-1"
+                  name="slug"
+                  value={updatedContent.slug}
+                  onChange={(e) => updateblogdata(e)}
+                />
+              </div>
+              <div className="mb-8">
+                <label className="font-adminPrimary text-base font-semibold">
                   Meta Description
                 </label>
                 <textarea
@@ -217,19 +242,7 @@ const update = ({ initialContent }) => {
                   max={30}
                 />
               </div>
-              <div className="mb-8">
-                <label className="font-adminPrimary text-base font-semibold">
-                  Slug
-                </label>
-                <input
-                  type="text"
-                  placeholder="enter slug"
-                  className="bg-white w-full h-8 focus:outline-0 border border-black-10 px-1 mt-1"
-                  name="slug"
-                  value={updatedContent.slug}
-                  onChange={(e) => updateblogdata(e)}
-                />
-              </div>
+              
 
               <div className="flex">
                 <div className="flex-1">

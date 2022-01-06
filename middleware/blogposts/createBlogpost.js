@@ -154,7 +154,9 @@ export const createblogpostvalidations = () => {
       return next();
     }
 
-    return res.status(422).json({ errors: errors.array() });
+    console.log("error", errors.array());
+    //422
+    return res.status(400).json({ errors: errors.array() });
   };
 };
 

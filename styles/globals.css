@@ -31,7 +31,11 @@ body {
 .admin-bool-btn {
   @apply py-2 w-14 text-sm font-raleway font-medium;
 }
-/*  */
+
+.required-field::before {
+  content: "* ";
+  @apply -ml-3 text-red-600 text-xl pt-1;
+}
 
 .horizontal-spacing {
   @apply xl:px-0 lg:px-5 md:px-3 px-2;

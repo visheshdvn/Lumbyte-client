@@ -13,7 +13,7 @@ CREATE TABLE "Account" (
     "px365" VARCHAR(50),
     "userId" TEXT NOT NULL,
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "upadted_at" TIMESTAMP(3) NOT NULL,
+    "updated_at" TIMESTAMP(3) NOT NULL,
     "disabled" BOOLEAN NOT NULL DEFAULT false,
 
     CONSTRAINT "Account_pkey" PRIMARY KEY ("id")
@@ -25,7 +25,7 @@ CREATE TABLE "AdminAccount" (
     "password" VARCHAR(200) NOT NULL,
     "userId" TEXT NOT NULL,
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "upadted_at" TIMESTAMP(3) NOT NULL,
+    "updated_at" TIMESTAMP(3) NOT NULL,
     "restricted" BOOLEAN NOT NULL DEFAULT false,
 
     CONSTRAINT "AdminAccount_pkey" PRIMARY KEY ("id")
@@ -48,7 +48,7 @@ CREATE TABLE "Blogposts" (
     "authorId" TEXT,
     "topicsId" INTEGER,
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "upadted_at" TIMESTAMP(3) NOT NULL,
+    "updated_at" TIMESTAMP(3) NOT NULL,
     "published_at" TIMESTAMP(3),
     "published" BOOLEAN NOT NULL DEFAULT false,
     "blocked" BOOLEAN NOT NULL DEFAULT false,
@@ -61,7 +61,7 @@ CREATE TABLE "Comments" (
     "id" SERIAL NOT NULL,
     "content" VARCHAR(200) NOT NULL,
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "upadted_at" TIMESTAMP(3) NOT NULL,
+    "updated_at" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "Comments_pkey" PRIMARY KEY ("id")
 );
@@ -79,9 +79,7 @@ CREATE TABLE "User" (
     "phone" VARCHAR(15),
     "role" VARCHAR(50) NOT NULL DEFAULT E'public',
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "upadted_at" TIMESTAMP(3) NOT NULL,
-    "published_at" TIMESTAMP(3),
-    "published" BOOLEAN NOT NULL DEFAULT false,
+    "updated_at" TIMESTAMP(3) NOT NULL,
     "adminGrant" BOOLEAN NOT NULL DEFAULT false,
 
     CONSTRAINT "User_pkey" PRIMARY KEY ("id")
@@ -96,7 +94,7 @@ CREATE TABLE "Tags" (
     "ogimg" VARCHAR(250),
     "ogalt" VARCHAR(30),
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "upadted_at" TIMESTAMP(3) NOT NULL,
+    "updated_at" TIMESTAMP(3) NOT NULL,
     "published_at" TIMESTAMP(3),
     "published" BOOLEAN NOT NULL DEFAULT false,
 
@@ -111,7 +109,7 @@ CREATE TABLE "Topics" (
     "ogimg" VARCHAR(250),
     "ogalt" VARCHAR(30),
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "upadted_at" TIMESTAMP(3) NOT NULL,
+    "updated_at" TIMESTAMP(3) NOT NULL,
     "published_at" TIMESTAMP(3),
     "published" BOOLEAN NOT NULL DEFAULT false,
 

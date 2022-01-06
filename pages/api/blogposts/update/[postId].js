@@ -1,7 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 import nc from "next-connect";
 
-const { blogposts } = new PrismaClient();
+const { blogposts, user } = new PrismaClient();
 
 // middlewares
 import { sanitizeRequest } from "../../../../middleware/sanitizeRequest";
@@ -57,8 +57,20 @@ handler.patch(async (req, res) => {
     },
   });
 
+  let lumbytesUID;
+  if (!author.id) {
+    console.log("here");
+    lumbytesUID = await user.findUnique({
+      select: {
+        id: true,
+      },
+      where: {
+        username: "lumbytes",
+      },
+    });
+  }
   console.log("currdata: ", currData);
-
+  
   const updated_post = await blogposts.update({
     where: {
       id: +postId,
@@ -77,7 +89,7 @@ handler.patch(async (req, res) => {
       minuteRead,
       author: {
         connect: {
-          id: !author.id ? currData.authorId : author.id,
+          id: !author.id ? currData.authorId || lumbytesUID.id : author.id,
         },
       },
       // topics: {

@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import axios from "axios";
 import Sidebar from "../../../components/adminPanel/leftSideBar";
-import Link from "next/link";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 // editorjs tools
 
 let editor;
@@ -77,19 +78,30 @@ const create = () => {
       content: JSON.stringify(content),
       minuteRead: +blogdata.minuteRead,
     };
-    console.log(payload);
-    let res;
+
+    if (!payload.slug || !payload.title) {
+      console.log(payload);
+      toast.warn("Slug and Title cannot be null ⚠️", {theme: "light"});
+      return;
+    }
+
     try {
-      res = await axios.post("/blogposts/create", payload, {
+      const res = await axios.post("/blogposts/create", payload, {
         headers: { "Content-Type": "application/json" },
       });
-      console.log(res);
+      toast.success("Post created 🌟");
     } catch (err) {
-      console.error("error", err.toJSON());
+      console.log("error", err.toJSON());
     }
   }
+
   return (
     <>
+      <ToastContainer
+        position="top-center"
+        autoClose={3000}
+        hideProgressBar={true}
+      />
       <div className="flex">
         <Sidebar />
         <div className="flex-1 pt-12 pr-5 pl-80">
@@ -139,6 +151,19 @@ const create = () => {
                 Metadata
               </h2>
               <div className="mb-8">
+                <label className="font-adminPrimary text-base font-semibold required-field">
+                  Slug
+                </label>
+                <input
+                  type="text"
+                  placeholder="enter slug"
+                  className="bg-white w-full h-8 focus:outline-0 border border-black-10 px-1 mt-1"
+                  name="slug"
+                  value={blogdata.slug}
+                  onChange={(e) => updateblogdata(e)}
+                />
+              </div>
+              <div className="mb-8">
                 <label className="font-adminPrimary text-base font-semibold">
                   Meta Description
                 </label>
@@ -178,19 +203,6 @@ const create = () => {
                   onChange={(e) => updateblogdata(e)}
                   min={1}
                   max={30}
-                />
-              </div>
-              <div className="mb-8">
-                <label className="font-adminPrimary text-base font-semibold">
-                  Slug
-                </label>
-                <input
-                  type="text"
-                  placeholder="enter slug"
-                  className="bg-white w-full h-8 focus:outline-0 border border-black-10 px-1 mt-1"
-                  name="slug"
-                  value={blogdata.slug}
-                  onChange={(e) => updateblogdata(e)}
                 />
               </div>
 

@@ -28,14 +28,11 @@ handler.post(async (req, res) => {
       username,
       firstname,
       lastname,
-      upadted_at: now,
       role: username === "lumbytes" ? "superuser" : "public",
       publicAccount: {
         // connectOrCreate: {}
         create: {
           password,
-          created_at: now,
-          upadted_at: now,
         },
       },
     },

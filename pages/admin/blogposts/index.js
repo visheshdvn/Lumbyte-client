@@ -3,13 +3,13 @@ import React, { useState } from "react";
 import axios from "axios";
 import Sidebar from "../../../components/adminPanel/leftSideBar";
 import Link from "next/link";
+import FormattedDate from "../../../components/micro/formattedDate";
 
 function capitalize(str) {
   return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
 const Blogposts = ({ blogposts }) => {
-  console.log(blogposts);
   return (
     <>
       <div className="flex">
@@ -61,7 +61,7 @@ const Blogposts = ({ blogposts }) => {
 };
 
 function TableContents({ data }) {
-  const { id, slug, title, featured, topPick, date, published } = data;
+  const { id, slug, title, featured, topPick, date, published, created_at } = data;
   return (
     <Link passHref href={`/admin/blogposts/${id}`}>
       {/* <a> */}
@@ -79,7 +79,7 @@ function TableContents({ data }) {
         <td className={topPick ? "text-green-600" : "text-red-600"}>
           {capitalize(topPick.toString())}
         </td>
-        <td>{date}</td>
+        <td><FormattedDate date={created_at} /></td>
         <td className={published ? "text-green-600" : "text-red-600"}>
           <div className="flex">
             <h5

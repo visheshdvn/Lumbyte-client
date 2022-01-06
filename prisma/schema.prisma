@@ -25,7 +25,7 @@ model Account {
   savedPosts Blogposts[]
   // default fields
   created_at DateTime    @default(now())
-  upadted_at DateTime    @updatedAt
+  updated_at DateTime    @updatedAt
   // superuser actions
   disabled   Boolean     @default(false)
 }
@@ -38,7 +38,7 @@ model AdminAccount {
   userId     String   @unique
   // defaults
   created_at DateTime @default(now())
-  upadted_at DateTime @updatedAt
+  updated_at DateTime @updatedAt
   //superuser actions
   restricted Boolean  @default(false)
 }
@@ -65,7 +65,7 @@ model Blogposts {
   savedBy         Account[]
   // defaults
   created_at      DateTime  @default(now())
-  upadted_at      DateTime  @updatedAt
+  updated_at      DateTime  @updatedAt
   published_at    DateTime?
   // published
   published       Boolean   @default(false)
@@ -78,7 +78,7 @@ model Comments {
   content    String   @db.VarChar(200)
   // defaults
   created_at DateTime @default(now())
-  upadted_at DateTime @updatedAt
+  updated_at DateTime @updatedAt
 }
 
 model User {
@@ -98,7 +98,7 @@ model User {
   adminAccount  AdminAccount?
   // default fields
   created_at    DateTime      @default(now())
-  upadted_at    DateTime      @updatedAt
+  updated_at    DateTime      @updatedAt
   // superuser actions
   adminGrant    Boolean       @default(false)
 }
@@ -114,7 +114,7 @@ model Tags {
   blogposts       Blogposts[]
   // defaults
   created_at      DateTime    @default(now())
-  upadted_at      DateTime    @updatedAt
+  updated_at      DateTime    @updatedAt
   published_at    DateTime?
   // published?
   published       Boolean     @default(false)
@@ -130,7 +130,7 @@ model Topics {
   blogposts       Blogposts[]
   // defaults
   created_at      DateTime    @default(now())
-  upadted_at      DateTime    @updatedAt
+  updated_at      DateTime    @updatedAt
   published_at    DateTime?
   // published?
   published       Boolean     @default(false)
