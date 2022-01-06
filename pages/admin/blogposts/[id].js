@@ -113,7 +113,7 @@ const update = ({ initialContent }) => {
     console.log(payload);
     try {
       let res = await axios.patch(
-        `/blogposts/update/4`,
+        `/blogposts/update/${router.query.id}`,
         payload,
         {
           headers: { "Content-Type": "application/json" },
