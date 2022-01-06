@@ -120,6 +120,8 @@ handler.get(async (req, res) => {
             : false
           : false,
       author: true,
+      upadted_at: true,
+      created_at: true
     },
     where: {
       // published: true,

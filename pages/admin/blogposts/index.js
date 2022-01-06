@@ -12,9 +12,9 @@ const Blogposts = ({ blogposts }) => {
   console.log(blogposts);
   return (
     <>
-      <div className="flex bg-whiteMain">
+      <div className="flex">
         <Sidebar />
-        <div className="flex-1 pt-12 px-5">
+        <div className="flex-1 pt-12 px-5 pl-80">
           <div className="text-gray-800">
             <h1 className="text-2.75xl font-adminPrimary font-bold">
               Blogposts
@@ -25,7 +25,7 @@ const Blogposts = ({ blogposts }) => {
           </div>
           {/* add new button */}
           <div className="flex justify-end mt-24">
-            <Link passHref href="#">
+            <Link passHref href="/admin/blogposts/create">
               <a className="bg-green-600 px-3 py-1 rounded text-white font-adminPrimary font-semibold text-base hover:ring-2 focus:ring-2 ring-green-600 ring-opacity-50">
                 + Add new blogpost
               </a>

@@ -42,7 +42,7 @@ handler.patch(async (req, res) => {
     featured,
     topPick,
     date,
-    authorId,
+    author,
     tags,
     topicsId,
   } = req.body;
@@ -56,6 +56,8 @@ handler.patch(async (req, res) => {
       id: +postId,
     },
   });
+
+  console.log("currdata: ", currData);
 
   const updated_post = await blogposts.update({
     where: {
@@ -75,14 +77,14 @@ handler.patch(async (req, res) => {
       minuteRead,
       author: {
         connect: {
-          id: !authorId ? currData.authorId : authorId,
+          id: !author.id ? currData.authorId : author.id,
         },
       },
-      topics: {
-        connect: {
-          id: !topicsId ? currData.topicsId : topicsId,
-        },
-      },
+      // topics: {
+      //   connect: {
+      //     id: !topicsId ? currData.topicsId || undefined : topicsId,
+      //   },
+      // },
       tags: {
         set: tags,
       },
