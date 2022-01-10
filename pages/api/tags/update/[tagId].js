@@ -49,7 +49,7 @@ handler.patch(async (req, res) => {
       ogalt,
     },
   });
-  res.status(200).json({ tag: updated_tag, msg: "updated" });
+  res.status(200).json({ content: updated_tag, msg: "updated" });
 });
 
 export default handler;

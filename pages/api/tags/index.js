@@ -87,6 +87,12 @@ handler.get(async (req, res) => {
               }
             : false
           : false,
+      published:
+        _select && Array.isArray(_select)
+          ? _select.includes("published")
+            ? true
+            : false
+          : false,
     },
     where: {
       published: true,

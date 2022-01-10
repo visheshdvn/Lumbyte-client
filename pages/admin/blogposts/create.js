@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import dynamic from "next/dynamic";
 import axios from "axios";
 import Sidebar from "../../../components/adminPanel/leftSideBar";
 import { ToastContainer, toast } from "react-toastify";
@@ -45,7 +44,7 @@ const create = () => {
       },
       readOnly: false,
     });
-    console.log(editor);
+
     return () => {
       editor.destroy();
     };
@@ -81,7 +80,7 @@ const create = () => {
 
     if (!payload.slug || !payload.title) {
       console.log(payload);
-      toast.warn("Slug and Title cannot be null ⚠️", {theme: "light"});
+      toast.warn("Slug and Title cannot be null ⚠️", { theme: "light" });
       return;
     }
 

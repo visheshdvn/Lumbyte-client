@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import Head from "next/head";
 import { useRouter } from "next/router";
 import axios from "axios";
 import _ from "lodash";
@@ -7,6 +8,11 @@ import "react-toastify/dist/ReactToastify.css";
 // components
 import Sidebar from "../../../components/adminPanel/leftSideBar";
 import FormattedDate from "../../../components/micro/formattedDate";
+// elements
+import {
+  PublishButton,
+  SaveButton,
+} from "../../../components/elements/buttons/buttons";
 
 let editor;
 const update = ({ initialContent }) => {
@@ -90,6 +96,7 @@ const update = ({ initialContent }) => {
   }
 
   async function saveBlogpost() {
+    console.log("saving");
     let content = await editor.save();
     let payload = {
       ...updatedContent,
@@ -125,12 +132,16 @@ const update = ({ initialContent }) => {
       toast.success("Changes saved Successfully ⭐");
     } catch (err) {
       console.error("error", err.toJSON());
-      toast.error("Error")
+      toast.error("Error");
     }
   }
 
   return (
     <>
+      <Head>
+        <meta name="robots" content="noindex" />
+        <meta name="googlebot" content="noindex"></meta>
+      </Head>
       <ToastContainer
         position="top-center"
         autoClose={3000}
@@ -138,7 +149,7 @@ const update = ({ initialContent }) => {
       />
       <div className="flex">
         <Sidebar />
-        <div className="flex-1 pt-12 pr-5 pl-80">
+        <div className="admin-primary-layout">
           <div className="flow-root mb-10">
             <h1 className="text-2xl font-adminPrimary font-bold mb-1">
               Edit blogpost
@@ -147,19 +158,11 @@ const update = ({ initialContent }) => {
               Last edited: <FormattedDate date={updatedContent.updated_at} />
             </div>
             <div className="float-right">
-              <button
-                type="button"
-                className="bg-[#1da1f2] border w-28 py-1 font-raleway font-semibold text-base text-white rounded"
-              >
-                Publish
-              </button>
-              <button
-                type="button"
-                className="bg-[#16A34A] border w-28 py-1 ml-4 font-raleway font-semibold text-base text-white rounded"
-                onClick={saveBlogpost}
-              >
-                Save
-              </button>
+              <PublishButton
+                text="Publish"
+                onClickHandler={() => console.log("clicked")}
+              />
+              <SaveButton text="Save" onClickHandler={saveBlogpost} />
             </div>
           </div>
           {/* content body */}
@@ -188,13 +191,13 @@ const update = ({ initialContent }) => {
                 Metadata
               </h2>
               <div className="mb-8">
-                <label className="font-adminPrimary text-base font-semibold">
+                <label className="font-adminPrimary text-base font-semibold required-field">
                   Slug
                 </label>
                 <input
                   type="text"
                   placeholder="enter slug"
-                  className="bg-white w-full h-8 focus:outline-0 border border-black-10 px-1 mt-1"
+                  className="bg-white w-full h-10 focus:outline-0 border border-black-10 px-1 mt-1 font-raleway font-medium text-sm"
                   name="slug"
                   value={updatedContent.slug}
                   onChange={(e) => updateblogdata(e)}
@@ -207,7 +210,7 @@ const update = ({ initialContent }) => {
                 <textarea
                   type="text"
                   placeholder="write under 150 characters..."
-                  className="bg-white w-full h-20 focus:outline-0 border border-black-10 px-1 mt-1"
+                  className="bg-white w-full h-28 focus:outline-0 border border-black-10 px-1 mt-1 font-raleway font-normal text-sm"
                   name="metaDescription"
                   value={updatedContent.metaDescription}
                   onChange={(e) => updateblogdata(e)}
@@ -221,7 +224,7 @@ const update = ({ initialContent }) => {
                 <textarea
                   type="text"
                   placeholder="write under 150 characters..."
-                  className="bg-white w-full h-20 focus:outline-0 border border-black-10 px-1 mt-1"
+                  className="bg-white w-full h-28 focus:outline-0 border border-black-10 px-1 mt-1 font-raleway font-normal text-sm"
                   name="excerpt"
                   value={updatedContent.excerpt}
                   onChange={(e) => updateblogdata(e)}
@@ -234,7 +237,7 @@ const update = ({ initialContent }) => {
                 </label>
                 <input
                   type="number"
-                  className="bg-white w-full h-8 focus:outline-0 border border-black-10 px-1 mt-1"
+                  className="bg-white w-full h-10 focus:outline-0 border border-black-10 px-1 mt-1 font-raleway font-normal text-sm"
                   name="minuteRead"
                   value={updatedContent.minuteRead}
                   onChange={(e) => updateblogdata(e)}
@@ -242,7 +245,6 @@ const update = ({ initialContent }) => {
                   max={30}
                 />
               </div>
-              
 
               <div className="flex">
                 <div className="flex-1">

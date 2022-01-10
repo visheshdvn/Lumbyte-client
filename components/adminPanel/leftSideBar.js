@@ -6,7 +6,7 @@ import { useTheme } from "next-themes";
 const LeftSideBar = () => {
   const { theme, setTheme } = useTheme();
   useEffect(() => {
-    setTheme("light")
+    setTheme("light");
   }, [theme]);
 
   return (
@@ -24,8 +24,8 @@ const LeftSideBar = () => {
           <ul className="text-gray-400">
             <NavItem text="Dashboard" link="/admin" />
             <NavItem text="Blogposts" link="/admin/blogposts" />
-            <NavItem text="Tags" link="#" />
-            <NavItem text="Topics" link="#" />
+            <NavItem text="Tags" link="/admin/tags" />
+            <NavItem text="Topics" link="/admin/topics" />
           </ul>
         </div>
       </div>

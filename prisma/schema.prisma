@@ -106,7 +106,7 @@ model User {
 model Tags {
   id              Int         @id @unique @default(autoincrement())
   tagname         String      @unique @db.VarChar(40)
-  color           String?     @db.VarChar(25)
+  color           String?     @db.VarChar(7) @default("#3B82F6")
   metaDescription String?     @db.VarChar(200)
   ogimg           String?     @db.VarChar(250)
   ogalt           String?     @db.VarChar(30)
