@@ -43,7 +43,7 @@ handler.post(async (req, res) => {
     },
   });
 
-  res.status(200).json({ tag, status: "created" });
+  res.status(200).json({ data: {...tag}, status: "created" });
 });
 
 export default handler;
