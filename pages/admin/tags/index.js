@@ -1,18 +1,19 @@
-import React, { useState } from "react";
+import React from "react";
 import axios from "axios";
 import Sidebar from "../../../components/adminPanel/leftSideBar";
 import Link from "next/link";
+// utilities
+import NoIndex from "../../../utils/noIndex";
 
 const Tags = ({ tags }) => {
   return (
     <>
+      <NoIndex />
       <div className="flex">
         <Sidebar />
         <div className="flex-1 pt-12 px-5 pl-80">
           <div className="text-gray-800">
-            <h1 className="text-2.75xl font-adminPrimary font-bold">
-              Tags
-            </h1>
+            <h1 className="text-2.75xl font-adminPrimary font-bold">Tags</h1>
             <h2 className="font-adminPrimary text-base font-semibold">
               {tags.length} tags found.
             </h2>
@@ -52,9 +53,8 @@ const Tags = ({ tags }) => {
 };
 
 function TableContents({ tag }) {
-  console.log(tag)
-  const { id, tagname, color, published } =
-    tag;
+  console.log(tag);
+  const { id, tagname, color, published } = tag;
   return (
     <Link passHref href={`/admin/tags/${id}`}>
       {/* <a> */}
@@ -89,7 +89,7 @@ function TableContents({ tag }) {
 export default Tags;
 
 export async function getServerSideProps(context) {
-  const {data} = await axios.get("/tags?_select=published");
+  const { data } = await axios.get("/tags?_select=published");
   // console.log(data);
 
   return {

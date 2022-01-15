@@ -25,7 +25,7 @@ const checkEmailPassword = [
         })
         .then((user) => {
           if (user.length > 0) {
-            return Promise.reject("User already exists");
+            return Promise.reject("Email already registered");
           } else {
             return Promise.resolve("email valid");
           }
@@ -39,19 +39,21 @@ const checkEmailPassword = [
   check("username", "username should be a non empty string")
     .isString()
     .custom((username) => {
-      return user.findMany({
-        where: {
-          username,
-        },
-      }).then(user => {
-        if (user.length > 0) {
+      return user
+        .findMany({
+          where: {
+            username,
+          },
+        })
+        .then((user) => {
           if (user.length > 0) {
-            return Promise.reject("User already exists");
-          } else {
-            return Promise.resolve("Success");
+            if (user.length > 0) {
+              return Promise.reject("Username already exists");
+            } else {
+              return Promise.resolve("Success");
+            }
           }
-        }
-      })
+        });
     }),
 ];
 

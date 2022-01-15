@@ -21,16 +21,14 @@ handler.use(hashPassword());
 handler.post(async (req, res) => {
   const { email, password, username, firstname, lastname } = req.body;
 
-  const now = new Date().toISOString();
   const newuser = await user.create({
     data: {
       email,
       username,
       firstname,
       lastname,
-      role: username === "lumbytes" ? "superuser" : "public",
-      publicAccount: {
-        // connectOrCreate: {}
+      role: username === "lumbytes" ? "SUPERUSER" : "PUBLIC",
+      account: {
         create: {
           password,
         },
@@ -46,7 +44,7 @@ handler.post(async (req, res) => {
       about: true,
       email: true,
       role: true,
-      publicAccount: {
+      account: {
         select: {
           password: true,
         },

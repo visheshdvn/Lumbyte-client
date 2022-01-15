@@ -4,11 +4,13 @@ import {
   signIn,
   getSession,
   getCsrfToken,
-  useSession
+  useSession,
 } from "next-auth/react";
+// utilities
+import NoIndex from "../components/NoIndex";
 
 const Login = ({ providers, csrfToken }) => {
-  const { data: session, status } = useSession()
+  const { data: session, status } = useSession();
   console.log(csrfToken);
   const [formdata, updateFormData] = useState({
     login: "",

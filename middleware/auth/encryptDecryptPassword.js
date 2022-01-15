@@ -1,4 +1,4 @@
-import { hash } from "bcrypt";
+import { hash, compare } from "bcrypt";
 
 export const hashPassword = () => {
   return async (req, res, next) => {
@@ -6,4 +6,8 @@ export const hashPassword = () => {
     req.body.password = hashedPassword;
     next();
   };
+};
+
+export const comparePassword = async (plainTextPassword, hashedPassword) => {
+  return await compare(plainTextPassword, hashedPassword);
 };

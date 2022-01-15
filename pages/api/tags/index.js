@@ -95,7 +95,7 @@ handler.get(async (req, res) => {
           : false,
     },
     where: {
-      published: true,
+      // published: true,
       id: _where && _where.id ? +_where.id || undefined : undefined,
       tagname:
         _where && _where.tagname

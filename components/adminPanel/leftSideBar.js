@@ -20,7 +20,7 @@ const LeftSideBar = () => {
           <h1 className="text-center text-xl font-semibold">Vishesh Dhawan</h1>
           <h2 className="text-center text-sm font-normal">Superuser</h2>
         </div>
-        <div className="between-rel-parent">
+        <div className="between-rel-paren absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
           <ul className="text-gray-400">
             <NavItem text="Dashboard" link="/admin" />
             <NavItem text="Blogposts" link="/admin/blogposts" />

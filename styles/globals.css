@@ -14,53 +14,6 @@ body {
   @apply md:pt-113 pt-20;
 }
 
-/* utility classes */
-
-.clearfix {
-  @apply flow-root;
-}
-
-.between-rel-parent {
-  @apply absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2;
-}
-
-.unstyled-input {
-  @apply border-none focus:outline-0;
-}
-
-.admin-bool-btn {
-  @apply py-2 w-14 text-sm font-raleway font-medium;
-}
-
-.required-field::before {
-  content: "* ";
-  @apply -ml-3 text-red-600 text-xl pt-1;
-}
-
-.horizontal-spacing {
-  @apply xl:px-0 lg:px-5 md:px-3 px-2;
-}
-
-.blog-link {
-  @apply font-semibold text-lightBlue-600;
-}
-
-.divider-col {
-  border-color: rgba(0, 0, 0, 0.2);
-}
-
-ul.spaced li:not(:last-child) {
-  @apply mb-5;
-}
-
-.margin-tags:not(:last-of-type) {
-  @apply mr-4;
-}
-
-.admin-primary-layout {
-  @apply flex-1 pt-12 pr-5 pl-80;
-}
-
 /* broad headings */
 
 .wide-head {

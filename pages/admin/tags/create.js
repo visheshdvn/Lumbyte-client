@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Head from "next/head";
 import axios from "axios";
-import _ from "lodash";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 // components
@@ -11,6 +10,8 @@ import {
   PublishButton,
   SaveButton,
 } from "../../../components/elements/buttons/buttons";
+// utilities
+import NoIndex from "../../../utils/noIndex";
 
 const createTag = ({}) => {
   const [tagData, settagData] = useState({
@@ -27,8 +28,6 @@ const createTag = ({}) => {
   }
 
   const updateTagData = async () => {
-    // const noChange = _.isEqual(initialTagData, tagData);
-
     // TODO - validate client side data
 
     if (!tagData.tagname || !tagData.metaDescription) {
@@ -55,10 +54,7 @@ const createTag = ({}) => {
 
   return (
     <>
-      <Head>
-        <meta name="robots" content="noindex" />
-        <meta name="googlebot" content="noindex"></meta>
-      </Head>
+      <NoIndex />
       <ToastContainer
         position="top-center"
         autoClose={3000}

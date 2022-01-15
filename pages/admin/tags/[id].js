@@ -21,14 +21,14 @@ const update = ({ initialTagData }) => {
     ...initialTagData,
   });
 
-  function updateblogdata(e) {
+  function updateTagdata(e) {
     settagData({
       ...tagData,
       [e.target.name]: e.target.value,
     });
   }
 
-  const updateTagData = async () => {
+  const saveTagData = async () => {
     const noChange = _.isEqual(initialTagData, tagData);
 
     // TODO - validate client side data
@@ -72,7 +72,7 @@ const update = ({ initialTagData }) => {
                 text="Publish"
                 onClickHandler={() => toast.info("No action assigned.")}
               />
-              <SaveButton text="Save" onClickHandler={updateTagData} />
+              <SaveButton text="Save" onClickHandler={saveTagData} />
             </div>
           </div>
           <div
@@ -90,7 +90,7 @@ const update = ({ initialTagData }) => {
                   className="bg-white w-full h-10 focus:outline-0 border border-black-10 px-1 mt-1 font-raleway font-medium text-sm"
                   name="tagname"
                   value={tagData.tagname}
-                  onChange={(e) => updateblogdata(e)}
+                  onChange={(e) => updateTagdata(e)}
                 />
               </div>
               <div className="mb-8 flex-1 pr-8">
@@ -103,7 +103,7 @@ const update = ({ initialTagData }) => {
                   className="bg-white w-full h-10 focus:outline-0 border border-black-10 px-1 mt-1 font-raleway font-medium text-sm"
                   name="color"
                   value={tagData.color}
-                  onChange={(e) => updateblogdata(e)}
+                  onChange={(e) => updateTagdata(e)}
                   maxLength={7}
                 />
               </div>
@@ -119,7 +119,7 @@ const update = ({ initialTagData }) => {
                   className="bg-white w-full h-28 focus:outline-0 border border-black-10 px-1 mt-1 font-raleway font-normal text-sm"
                   name="metaDescription"
                   value={tagData.metaDescription}
-                  onChange={(e) => updateblogdata(e)}
+                  onChange={(e) => updateTagdata(e)}
                   maxLength={150}
                 />
               </div>

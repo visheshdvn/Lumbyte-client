@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useSession } from "next-auth/react";
 // import axios from "../../../lib/axios";
 import axios from "axios";
 import Sidebar from "../../../components/adminPanel/leftSideBar";
@@ -10,6 +11,14 @@ function capitalize(str) {
 }
 
 const Blogposts = ({ blogposts }) => {
+  const { data: session, status } = useSession();
+  if (status === "loading") {
+    return <p>Loading</p>;
+  }
+
+  const role = session.user.role;
+  console.log(session);
+
   return (
     <>
       <div className="flex">
@@ -61,7 +70,8 @@ const Blogposts = ({ blogposts }) => {
 };
 
 function TableContents({ data }) {
-  const { id, slug, title, featured, topPick, date, published, created_at } = data;
+  const { id, slug, title, featured, topPick, date, published, created_at } =
+    data;
   return (
     <Link passHref href={`/admin/blogposts/${id}`}>
       {/* <a> */}
@@ -79,7 +89,9 @@ function TableContents({ data }) {
         <td className={topPick ? "text-green-600" : "text-red-600"}>
           {capitalize(topPick.toString())}
         </td>
-        <td><FormattedDate date={created_at} /></td>
+        <td>
+          <FormattedDate date={created_at} />
+        </td>
         <td className={published ? "text-green-600" : "text-red-600"}>
           <div className="flex">
             <h5
