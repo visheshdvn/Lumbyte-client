@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useRouter } from "next/router";
-import { SessionProvider } from "next-auth/react";
+import { SessionProvider, useSession } from "next-auth/react";
 // third party libraries
 import axios from "axios";
 import * as gtag from "../lib/gtag";
@@ -17,7 +17,9 @@ import "../styles/utilitiy.css";
 // component
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import AccessDenied from "../components/accessDenied";
 
+// import Auth from "../utils/protected-page";
 axios.defaults.baseURL = "http://localhost:3000/api";
 
 function MyApp({ Component, pageProps }) {
@@ -37,12 +39,36 @@ function MyApp({ Component, pageProps }) {
       <ApolloProvider client={client}>
         <ThemeProvider attribute="class">
           {/* {router.pathname.startsWith("/admin") ? null : <Navbar />} */}
-          <Component {...pageProps} />
+          {Component.auth ? (
+            <Auth roles={Component.auth.roles}>
+              <Component {...pageProps} />
+            </Auth>
+          ) : (
+            <Component {...pageProps} />
+          )}
+
           {/* {router.pathname.startsWith("/admin") ? null : <Footer />} */}
         </ThemeProvider>
       </ApolloProvider>
     </SessionProvider>
   );
+}
+
+function Auth({ children, roles }) {
+  const { data: session, status } = useSession({ required: true });
+  const isUser = !!session?.user;
+
+  if (isUser && status === "authenticated") {
+    console.log("1", roles);
+    console.log("2", session.user.role);
+    if (roles.includes(session.user.role)) {
+      return children;
+    }
+    // return router.push("/accessDenied");
+    return <AccessDenied />;
+  }
+
+  return <div>Loading...</div>;
 }
 
 export default MyApp;

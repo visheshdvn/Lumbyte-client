@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";
+import { PrismaClient } from "@prisma/client";
 import axios from "axios";
 import _ from "lodash";
 import { ToastContainer, toast } from "react-toastify";
@@ -15,6 +16,8 @@ import {
 } from "../../../components/elements/buttons/buttons";
 
 let editor;
+const { blogposts } = new PrismaClient();
+
 const update = ({ initialContent }) => {
   const router = useRouter();
 
@@ -318,13 +321,16 @@ const update = ({ initialContent }) => {
   );
 };
 
+update.auth = {
+  roles: ["SUPERUSER"],
+};
 export default update;
 
 export async function getServerSideProps({ params }) {
   const id = params.id;
-  const { data } = await axios.get(`/blogposts?_where[id]=${id}`);
+  console.log("id", id);
 
-  if (data.length < 1) {
+  if (!parseInt(id)) {
     return {
       redirect: {
         destination: "/404",
@@ -333,9 +339,38 @@ export async function getServerSideProps({ params }) {
     };
   }
 
+  let data = await blogposts.findUnique({
+    where: { id: +id },
+    select: {
+      id: true,
+      title: true,
+      slug: true,
+      excerpt: true,
+      metaDescription: true,
+      content: true,
+      minuteRead: true,
+      topPick: true,
+      featured: true,
+      date: true,
+      tags: true,
+      author: true,
+    },
+  });
+
+  if (!data) {
+    return {
+      redirect: {
+        destination: "/404",
+        permanent: false,
+      },
+    };
+  }
+
+  data = JSON.parse(JSON.stringify(data));
+
   return {
     props: {
-      initialContent: data[0],
+      initialContent: data,
     },
   };
 }

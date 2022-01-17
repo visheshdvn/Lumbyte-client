@@ -1,6 +1,5 @@
 import React from "react";
 import Link from "next/link";
-import { getSession } from "next-auth/react";
 
 const index = () => {
   return (
@@ -11,18 +10,14 @@ const index = () => {
     </div>
   );
 };
+
+index.auth = {
+  roles: ["SUPERUSER"],
+};
 export default index;
 
+
 export async function getServerSideProps(context) {
-  const session = await getSession(context);
-  if (!session) {
-    return {
-      redirect: {
-        destination: "/api/auth/signin",
-        permanent: false,
-      },
-    };
-  }
   
   return {
     redirect: {

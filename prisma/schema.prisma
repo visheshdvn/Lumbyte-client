@@ -54,7 +54,7 @@ model Blogposts {
   id              Int       @id @default(autoincrement())
   title           String    @db.VarChar(150)
   slug            String    @unique
-  metaDescription String?   @db.VarChar(200)
+  metaDescription String?   @default("") @db.VarChar(200)
   excerpt         String?   @db.VarChar(150)
   content         String?   @unique
   banner          String?   @db.VarChar(255)
@@ -114,7 +114,7 @@ model Tags {
   id              Int         @id @unique @default(autoincrement())
   tagname         String      @unique @db.VarChar(40)
   color           String?     @default("#3B82F6") @db.VarChar(7)
-  metaDescription String?     @db.VarChar(200)
+  metaDescription String?     @default("") @db.VarChar(200)
   ogimg           String?     @db.VarChar(250)
   ogalt           String?     @db.VarChar(30)
   // relations
@@ -130,7 +130,7 @@ model Tags {
 model Topics {
   id              Int         @id @default(autoincrement())
   topicname       String?     @unique @db.VarChar(50)
-  metaDescription String?     @db.VarChar(200)
+  metaDescription String?     @default("") @db.VarChar(200)
   ogimg           String?     @db.VarChar(250)
   ogalt           String?     @db.VarChar(30)
   // relations

@@ -275,4 +275,8 @@ const create = () => {
   );
 };
 
+create.auth = {
+  roles: ["SUPERUSER"],
+};
+
 export default create;

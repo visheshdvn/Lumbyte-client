@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";
+import { PrismaClient } from "@prisma/client";
 import axios from "axios";
 import _ from "lodash";
 import { ToastContainer, toast } from "react-toastify";
@@ -12,6 +13,8 @@ import {
   PublishButton,
   SaveButton,
 } from "../../../components/elements/buttons/buttons";
+
+const { tags } = new PrismaClient();
 
 const update = ({ initialTagData }) => {
   const router = useRouter();
@@ -132,13 +135,35 @@ const update = ({ initialTagData }) => {
   );
 };
 
+update.auth = {
+  roles: ["SUPERUSER"],
+};
 export default update;
 
 export async function getServerSideProps({ params }) {
   const id = params.id;
-  const { data } = await axios.get(`/tags?_where[id]=${id}`);
+  if (!parseInt(id)) {
+    return {
+      redirect: {
+        destination: "/404",
+        permanent: false,
+      },
+    };
+  }
 
-  if (data.length < 1) {
+  const data = await tags.findUnique({
+    where: { id: +id },
+    select: {
+      id: true,
+      tagname: true,
+      color: true,
+      metaDescription: true,
+      ogalt: true,
+      ogimg: true,
+    },
+  });
+
+  if (!data) {
     return {
       redirect: {
         destination: "/404",
@@ -150,7 +175,7 @@ export async function getServerSideProps({ params }) {
 
   return {
     props: {
-      initialTagData: data[0],
+      initialTagData: data,
     },
   };
 }

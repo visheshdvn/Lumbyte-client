@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import { useSession } from "next-auth/react";
-// import axios from "../../../lib/axios";
+import { PrismaClient } from "@prisma/client";
 import axios from "axios";
-import Sidebar from "../../../components/adminPanel/leftSideBar";
 import Link from "next/link";
+// custom components
+import Sidebar from "../../../components/adminPanel/leftSideBar";
 import FormattedDate from "../../../components/micro/formattedDate";
+
+const { blogposts } = new PrismaClient();
 
 function capitalize(str) {
   return str.charAt(0).toUpperCase() + str.slice(1);
@@ -16,8 +19,8 @@ const Blogposts = ({ blogposts }) => {
     return <p>Loading</p>;
   }
 
-  const role = session.user.role;
-  console.log(session);
+  const role = session?.user.role;
+  console.log(role);
 
   return (
     <>
@@ -112,15 +115,36 @@ function TableContents({ data }) {
   );
 }
 
+Blogposts.auth = {
+  roles: ["SUPERUSER"],
+};
+
 export default Blogposts;
 
 export async function getServerSideProps(context) {
-  const { data } = await axios.get(
-    "/blogposts?_select=featured&_select=published&_select=date&_select=topPick"
-  );
-  // console.log(data);
+  // const { data } = await axios.get(
+  //   "/blogposts?_select=featured&_select=published&_select=date&_select=topPick"
+  // );
+
+  const data = await blogposts.findMany({
+    select: {
+      id: true,
+      slug: true,
+      title: true,
+      featured: true,
+      topPick: true,
+      date: true,
+      published: true,
+      author: true,
+      updated_at: true,
+      created_at: true,
+    },
+  });
+  let json = JSON.stringify(data);
+  json = JSON.parse(json);
+  console.log(json);
 
   return {
-    props: { blogposts: data },
+    props: { blogposts: json },
   };
 }

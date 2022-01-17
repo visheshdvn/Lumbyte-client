@@ -2,8 +2,11 @@ import React from "react";
 import axios from "axios";
 import Sidebar from "../../../components/adminPanel/leftSideBar";
 import Link from "next/link";
+import { PrismaClient } from "@prisma/client";
 // utilities
 import NoIndex from "../../../utils/noIndex";
+
+const { tags } = new PrismaClient();
 
 const Tags = ({ tags }) => {
   return (
@@ -86,11 +89,24 @@ function TableContents({ tag }) {
   );
 }
 
+Tags.auth = {
+  roles: ["SUPERUSER"],
+};
 export default Tags;
 
 export async function getServerSideProps(context) {
-  const { data } = await axios.get("/tags?_select=published");
-  // console.log(data);
+
+  const data = await tags.findMany({
+    select: {
+      id: true,
+      tagname: true,
+      color: true,
+      published: true,
+    },
+    orderBy: {
+      tagname: "asc",
+    },
+  });
 
   return {
     props: { tags: data },

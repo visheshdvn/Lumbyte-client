@@ -23,7 +23,6 @@ handler.use(sanitizeRequest());
 handler.use(resolveQueryParams());
 
 handler.get(async (req, res) => {
-  console.log(req.query);
   let { skip, take, _select, _where } = req.query;
 
   if (typeof _select === "string") {
@@ -95,7 +94,7 @@ handler.get(async (req, res) => {
           : false,
     },
     where: {
-      // published: true,
+      published: true,
       id: _where && _where.id ? +_where.id || undefined : undefined,
       tagname:
         _where && _where.tagname
