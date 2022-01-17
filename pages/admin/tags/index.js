@@ -56,7 +56,6 @@ const Tags = ({ tags }) => {
 };
 
 function TableContents({ tag }) {
-  console.log(tag);
   const { id, tagname, color, published } = tag;
   return (
     <Link passHref href={`/admin/tags/${id}`}>
@@ -95,7 +94,6 @@ Tags.auth = {
 export default Tags;
 
 export async function getServerSideProps(context) {
-
   const data = await tags.findMany({
     select: {
       id: true,

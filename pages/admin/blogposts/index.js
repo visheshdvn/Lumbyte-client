@@ -142,7 +142,6 @@ export async function getServerSideProps(context) {
   });
   let json = JSON.stringify(data);
   json = JSON.parse(json);
-  console.log(json);
 
   return {
     props: { blogposts: json },

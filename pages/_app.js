@@ -59,12 +59,10 @@ function Auth({ children, roles }) {
   const isUser = !!session?.user;
 
   if (isUser && status === "authenticated") {
-    console.log("1", roles);
-    console.log("2", session.user.role);
     if (roles.includes(session.user.role)) {
       return children;
     }
-    // return router.push("/accessDenied");
+    
     return <AccessDenied />;
   }
 

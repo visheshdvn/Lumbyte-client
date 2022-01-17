@@ -124,7 +124,7 @@ handler.get(async (req, res) => {
       created_at: true
     },
     where: {
-      // published: true,
+      published: true,
       id: _where && _where.id ? +_where.id || undefined : undefined,
       slug: _where && _where.slug ? encodeURIComponent(_where.slug) : undefined,
       featured:
