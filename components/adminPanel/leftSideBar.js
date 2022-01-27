@@ -28,6 +28,7 @@ const LeftSideBar = () => {
             <NavItem text="Blogposts" link="/admin/blogposts" />
             <NavItem text="Tags" link="/admin/tags" />
             <NavItem text="Topics" link="/admin/topics" />
+            <NavItem text="Media" link="/admin/media" />
           </ul>
         </div>
         <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 borde w-60 flex text-white">
@@ -44,7 +45,7 @@ const LeftSideBar = () => {
           <div className="flex items-center">
             <Popover className="relative">
               <Popover.Button>
-                <i class="arrow up"></i>
+                <i className="arrow up"></i>
               </Popover.Button>
               <Popover.Panel className="absolute z-10 -top-16 -left-20 bg-white rounded-lg overflow-hidden px-2 py-1 border-2 border-black">
                 <div className="w-24 text-grayMain text-center">

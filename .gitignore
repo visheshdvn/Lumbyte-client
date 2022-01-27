@@ -33,4 +33,4 @@ yarn-error.log*
 # vercel
 .vercel
 
-tailwind.config2.jss
+/public/media

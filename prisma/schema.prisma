@@ -88,6 +88,24 @@ model Comments {
   updated_at DateTime @updatedAt
 }
 
+model Images {
+  id         String   @id @default(uuid())
+  url        String   @db.VarChar(300)
+  name       String   @default("") @db.VarChar(150)
+  // default
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+}
+
+model Videos {
+  id         String   @id @default(uuid())
+  url        String   @db.VarChar(300)
+  name       String   @db.VarChar(150)
+  // default
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+}
+
 model User {
   id           String        @id @default(uuid())
   firstname    String        @db.VarChar(50)
