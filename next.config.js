@@ -7,10 +7,6 @@ module.exports = (phase, { defaultConfig }) => {
         HOSTNAME: "localhost:1337",
         PROTOCOL: "http",
         // NEXT_PUBLIC_GA_ID: "G-3BNNCK0DEL",
-        AWS_SECRET_ACCESS_KEY: "VE9z+834sYZnzjzYBzJ48NovpufoWUoThlhYG/5k",
-        AWS_ACCESS_KEY_ID: "AKIAROJ2IL4J2ONMWONC",
-        AWS_REGION: "eu-west-1",
-        AWS_S3_BUCKET: "lumbytesblog",
       },
       images: {
         domains: ["localhost", "i.ibb.co", "172.26.188.242"],
