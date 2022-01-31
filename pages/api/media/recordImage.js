@@ -1,5 +1,8 @@
+import { PrismaClient } from "@prisma/client";
 import nc from "next-connect";
 import aws from "aws-sdk";
+
+const { images } = new PrismaClient();
 
 const AWS_REGION = process.env.AWS_REGION;
 aws.config.update({
@@ -13,7 +16,10 @@ let s3 = new aws.S3();
 const myBucket = process.env.AWS_S3_BUCKET;
 
 // middlewares
-import { sanitizeRequest } from "../../../middleware/sanitizeRequest";
+import {
+  sanitizeRequest,
+  resolveQueryParams,
+} from "../../../middleware/sanitizeRequest";
 
 const handler = nc({
   onError: (err, req, res) => {
@@ -25,32 +31,26 @@ const handler = nc({
   },
 });
 
-handler.use(sanitizeRequest());
+// handler.use(sanitizeRequest());
+// handler.use(resolveQueryParams());
+// handler.use(createblogpostvalidations());
 
 handler.post(async (req, res) => {
-  const { contentType, filename } = req.body;
-  let nameparts = filename.split(".");
-  const extension = nameparts.pop();
+  console.log(req.body);
+  const { url, name } = req.body;
 
-  let name = nameparts.join(".") + "-" + Date.now() + "." + extension;
-
-  const s3params = {
-    ContentType: contentType,
-    Key: name,
-    Bucket: myBucket,
-  };
-
-  s3.getSignedUrl("putObject", s3params, async (err, url) => {
-    if (err) {
-      return res.status(500).send("Error while signing the url");
-    }
-
-    res.status(200).json({
-      method: "put",
+  const recordedImage = await images.create({
+    data: {
       url,
-      fields: {},
-    });
+      name: name,
+    },
+    select: {
+      url: true,
+      name: true,
+    },
   });
+
+  return res.status(200).json({ data: recordedImage, status: "OK" });
 });
 
 export default handler;

@@ -25,21 +25,6 @@ const uppyMedia = () => {
     })
       .use(AwsS3, {
         getUploadParameters: (file) => {
-          // return fetch("/api/media/upload", {
-          //   method: "POST",
-          //   headers: {
-          //     accept: "application/json",
-          //     "content-type": "application/json",
-          //   },
-          //   body: {
-          //     filename: file.name,
-          //     contentType: file.type,
-          //     metadata: {
-          //       name: file.meta["name"],
-          //       caption: file.meta["caption"],
-          //     },
-          //   },
-          // })
           return axios
             .post(
               "/media/getSignedURL",
@@ -59,15 +44,13 @@ const uppyMedia = () => {
               }
             )
             .then((res) => {
-              console.log("data", res);
-              const {
-                data: { uploader },
-              } = res;
+              const { data } = res;
+              console.log("data", data);
 
               return {
-                method: uploader.method,
-                url: uploader.url,
-                fields: uploader.fields,
+                method: data.method,
+                url: data.url,
+                fields: data.fields,
                 headers: {
                   "Content-Type": file.type,
                 },
@@ -80,6 +63,29 @@ const uppyMedia = () => {
           return toast.error("Upload failed");
         }
         toast.success("Upload complete!");
+      })
+      .on("upload-success", async (file, data) => {
+        console.log("data", data);
+        console.log("file", file);
+
+        const payload = {
+          url: data.body.location,
+          name: file.name,
+        };
+
+        try {
+          const res = await axios.post("/media/recordImage", payload, {
+            headers: {
+              accept: "application/json",
+              "content-type": "application/json",
+            },
+          });
+
+          console.log("res", res);
+          toast.success("Image successfully recorded!");
+        } catch (error) {
+          toast.error("Error recording image");
+        }
       });
   }, []);
 
