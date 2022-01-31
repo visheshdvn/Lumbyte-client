@@ -10,12 +10,12 @@ import { developmentInstance } from "../../utils/axios";
 
 const axios = developmentInstance;
 
-const uppyMedia = () => {
+const createUploader = ({ state, setState }) => {
   const uppy = useUppy(() => {
     return new Uppy({
       restrictions: {
-        maxNumberOfFiles: 10,
-        maxFileSize: 1048576 * 1.5 * 10,
+        maxNumberOfFiles: 1,
+        maxFileSize: 1048576 * 1, // 1048576 * n = n MB
         allowedFileTypes: [".jpg", ".jpeg", ".png", ".gif"],
       },
       autoProceed: false,
@@ -42,7 +42,6 @@ const uppyMedia = () => {
             )
             .then((res) => {
               const { data } = res;
-              console.log("data", data);
 
               return {
                 method: data.method,
@@ -68,21 +67,20 @@ const uppyMedia = () => {
         };
 
         try {
-          const res = await axios.post("/media/recordImage", payload, {
+          await axios.post("/media/recordImage", payload, {
             headers: {
               accept: "application/json",
               "content-type": "application/json",
             },
           });
-
           toast.success("Image successfully recorded!");
+          setState({ ...state, banner: data.body.location });
         } catch (error) {
           toast.error("Error recording image");
         }
-      });
+      })
+      .on("upload-error", () => toast.error("Upload failed!"));
   }, []);
-
-  uppy.on("upload-error", () => toast.error("Upload failed!"));
 
   return (
     <>
@@ -111,4 +109,4 @@ const uppyMedia = () => {
   );
 };
 
-export default uppyMedia;
+export default createUploader;

@@ -1,8 +1,4 @@
-import React, { useState } from "react";
-import { useSession } from "next-auth/react";
-// import { PrismaClient } from "@prisma/client";
-import axios from "axios";
-import Link from "next/link";
+import React from "react";
 import Head from "next/head";
 
 // custom components

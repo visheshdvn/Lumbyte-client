@@ -37,6 +37,7 @@ module.exports = {
       purple: colors.purple,
       slate: colors.slate,
       green: colors.green,
+      zinc: colors.zinc,
       // old
       current: "currentColor",
       lightBlue: colors.sky,

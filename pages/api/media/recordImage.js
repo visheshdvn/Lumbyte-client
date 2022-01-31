@@ -15,12 +15,6 @@ aws.config.update({
 let s3 = new aws.S3();
 const myBucket = process.env.AWS_S3_BUCKET;
 
-// middlewares
-import {
-  sanitizeRequest,
-  resolveQueryParams,
-} from "../../../middleware/sanitizeRequest";
-
 const handler = nc({
   onError: (err, req, res) => {
     console.log(err.stack);
@@ -30,10 +24,6 @@ const handler = nc({
     res.status(404).end("Page is not found");
   },
 });
-
-// handler.use(sanitizeRequest());
-// handler.use(resolveQueryParams());
-// handler.use(createblogpostvalidations());
 
 handler.post(async (req, res) => {
   console.log(req.body);

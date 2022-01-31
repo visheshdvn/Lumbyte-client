@@ -181,6 +181,21 @@ const update = ({ initialContent }) => {
                   onChange={(e) => updateblogdata(e)}
                 />
               </div>
+              {/* banner */}
+              <div style={{ maxWidth: "720px" }} className="mx-auto mb-8">
+                {console.log("updatedContent.banner", updatedContent.banner)}
+                <div
+                  style={{
+                    backgroundImage: `url(${updatedContent.banner})`,
+                  }}
+                  className="bg-zinc-100 w-full h-96 relative rounded-md flex justify-center bg-cover bg-center"
+                >
+                  {/* <img
+                    src={updatedContent.banner}
+                    className="absolute h-full"
+                  /> */}
+                </div>
+              </div>
               {/* editor */}
               <div
                 id="editorjs"
@@ -354,6 +369,7 @@ export async function getServerSideProps({ params }) {
       date: true,
       tags: true,
       author: true,
+      banner: true,
     },
   });
 

@@ -3,10 +3,13 @@ import axios from "axios";
 import Sidebar from "../../../components/adminPanel/leftSideBar";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import BannerUploader from "../../../components/uploaders/createBlogUploader";
+import { useTheme } from "next-themes";
 // editorjs tools
-
 let editor;
 const create = () => {
+  const { theme } = useTheme();
+  console.log("theme", theme);
   useEffect(() => {
     // imports
     const EditorJS = require("@editorjs/editorjs");
@@ -50,7 +53,6 @@ const create = () => {
     };
   }, []);
 
-  let stateUpdated = false;
   const [blogdata, setBlogdata] = useState({
     title: "",
     slug: "",
@@ -59,10 +61,11 @@ const create = () => {
     minuteRead: 1,
     topPick: false,
     featured: false,
+    banner: "",
   });
 
   function updateblogdata(e) {
-    stateUpdated = true;
+    // stateUpdated = true;
     setBlogdata({
       ...blogdata,
       [e.target.name]: e.target.value,
@@ -79,25 +82,26 @@ const create = () => {
     };
 
     if (!payload.slug || !payload.title) {
-      console.log(payload);
-      toast.warn("Slug and Title cannot be null ⚠️", { theme: "light" });
+      toast.warn("Slug and Title cannot be null ⚠️", { theme });
       return;
     }
 
     try {
-      const res = await axios.post("/blogposts/create", payload, {
+      await axios.post("/blogposts/create", payload, {
         headers: { "Content-Type": "application/json" },
       });
-      toast.success("Post created 🌟");
+      toast.success("Post created 🌟", { theme });
     } catch (err) {
-      console.log("error", err.toJSON());
+      err.response.data.errors.map((error) => {
+        toast.error(error.msg);
+      });
     }
   }
 
   return (
     <>
       <ToastContainer
-        position="top-center"
+        position="top-right"
         autoClose={3000}
         hideProgressBar={true}
       />
@@ -136,6 +140,16 @@ const create = () => {
                   name="title"
                   onChange={(e) => updateblogdata(e)}
                 />
+              </div>
+              {/* Image uploader / Management */}
+              <div style={{ maxWidth: "720px" }} className="mx-auto mb-8">
+                {!blogdata.banner ? (
+                  <BannerUploader state={blogdata} setState={setBlogdata} />
+                ) : (
+                  <div className="bg-zinc-100 w-full h-96 relative rounded-md flex justify-center">
+                    <img src={blogdata.banner} className="absolute h-full" />
+                  </div>
+                )}
               </div>
               {/* editor */}
               <div
