@@ -92,7 +92,7 @@ const createUploader = ({ state, setState }) => {
       <div id="MyWebcam">
         <Dashboard
           uppy={uppy}
-          height={430}
+          height={450}
           showProgressDetails={true}
           closeModalOnClickOutside={true}
           proudlyDisplayPoweredByUppy={false}

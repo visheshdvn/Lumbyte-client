@@ -9,7 +9,6 @@ import { updateblogpostvalidations } from "../../../../middleware/blogposts/crea
 
 const handler = nc({
   onError: (err, req, res) => {
-    console.log(err.stack);
     res.status(500).json({ msg: "Server Error" });
   },
   onNoMatch: (req, res, next) => {
@@ -44,7 +43,6 @@ handler.patch(async (req, res) => {
     date,
     author,
     tags,
-    topicsId,
   } = req.body;
 
   const currData = await blogposts.findUnique({
@@ -58,8 +56,7 @@ handler.patch(async (req, res) => {
   });
 
   let lumbytesUID;
-  if (!author.id) {
-    console.log("here");
+  if (!author) {
     lumbytesUID = await user.findUnique({
       select: {
         id: true,
@@ -69,8 +66,7 @@ handler.patch(async (req, res) => {
       },
     });
   }
-  console.log("currdata: ", currData);
-  
+
   const updated_post = await blogposts.update({
     where: {
       id: +postId,
@@ -92,11 +88,6 @@ handler.patch(async (req, res) => {
           id: !author.id ? currData.authorId || lumbytesUID.id : author.id,
         },
       },
-      // topics: {
-      //   connect: {
-      //     id: !topicsId ? currData.topicsId || undefined : topicsId,
-      //   },
-      // },
       tags: {
         set: tags,
       },

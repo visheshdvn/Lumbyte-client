@@ -5,10 +5,14 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import BannerUploader from "../../../components/uploaders/createBlogUploader";
 import { useTheme } from "next-themes";
+import { useSession } from "next-auth/react";
 // editorjs tools
 let editor;
 const create = () => {
   const { theme } = useTheme();
+  const { data: session, status } = useSession();
+  console.log(session);
+
   console.log("theme", theme);
   useEffect(() => {
     // imports
@@ -31,7 +35,15 @@ const create = () => {
             levels: [2, 3, 4],
           },
         },
-        image: ImageTool,
+        image: {
+          class: ImageTool,
+          config: {
+            endpoints: {
+              byUrl: "http://localhost:3000/api/media/fetchURL", // Your endpoint that provides uploading by Url
+            },
+            types: "image/*",
+          },
+        },
         list: {
           class: List,
           inlineToolbar: true,
@@ -62,6 +74,7 @@ const create = () => {
     topPick: false,
     featured: false,
     banner: "",
+    banneralt: "",
   });
 
   function updateblogdata(e) {
@@ -79,6 +92,7 @@ const create = () => {
       ...blogdata,
       content: JSON.stringify(content),
       minuteRead: +blogdata.minuteRead,
+      authorId: session.user.id,
     };
 
     if (!payload.slug || !payload.title) {
@@ -87,6 +101,7 @@ const create = () => {
     }
 
     try {
+      console.log("cerate payload", payload);
       await axios.post("/blogposts/create", payload, {
         headers: { "Content-Type": "application/json" },
       });
@@ -163,6 +178,32 @@ const create = () => {
               <h2 className="font-adminPrimary font-bold text-xl text-center mb-8">
                 Metadata
               </h2>
+              <div className="mb-8">
+                <label className="font-adminPrimary text-base font-semibold required-field">
+                  Banner URL
+                </label>
+                <input
+                  type="text"
+                  placeholder="enter banner URL"
+                  className="bg-white w-full h-10 focus:outline-0 border border-black-10 px-1 mt-1 font-raleway font-medium text-sm"
+                  name="banner"
+                  value={blogdata.banner}
+                  onChange={(e) => updateblogdata(e)}
+                />
+              </div>
+              <div className="mb-8">
+                <label className="font-adminPrimary text-base font-semibold required-field">
+                  Banner alt
+                </label>
+                <input
+                  type="text"
+                  placeholder="enter banner alt"
+                  className="bg-white w-full h-10 focus:outline-0 border border-black-10 px-1 mt-1 font-raleway font-medium text-sm"
+                  name="banneralt"
+                  value={blogdata.banneralt}
+                  onChange={(e) => updateblogdata(e)}
+                />
+              </div>
               <div className="mb-8">
                 <label className="font-adminPrimary text-base font-semibold required-field">
                   Slug

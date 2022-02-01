@@ -68,7 +68,6 @@ const LeftSideBar = () => {
 function NavItem({ text, icon, link }) {
   const router = useRouter();
   let path = router.pathname.replace("/admin/", "");
-  console.log("sidebar rendering");
 
   const conditionalClass = path.toLowerCase().startsWith(text.toLowerCase())
     ? "bg-slate-800 text-white"

@@ -1,19 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 import nc from "next-connect";
-import aws from "aws-sdk";
 
 const { images } = new PrismaClient();
-
-const AWS_REGION = process.env.AWS_REGION;
-aws.config.update({
-  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-  region: AWS_REGION,
-  signatureVersion: "v4",
-});
-
-let s3 = new aws.S3();
-const myBucket = process.env.AWS_S3_BUCKET;
 
 const handler = nc({
   onError: (err, req, res) => {

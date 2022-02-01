@@ -2,18 +2,22 @@ import React, { useEffect, useState } from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { PrismaClient } from "@prisma/client";
-import axios from "axios";
+// import axios from "axios";
+import { developmentInstance } from "../../../utils/axios";
 import _ from "lodash";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 // components
 import Sidebar from "../../../components/adminPanel/leftSideBar";
 import FormattedDate from "../../../components/micro/formattedDate";
+import BannerUploader from "../../../components/uploaders/createBlogUploader";
 // elements
 import {
   PublishButton,
   SaveButton,
 } from "../../../components/elements/buttons/buttons";
+
+const axios = developmentInstance;
 
 let editor;
 const { blogposts } = new PrismaClient();
@@ -21,24 +25,7 @@ const { blogposts } = new PrismaClient();
 const update = ({ initialContent }) => {
   const router = useRouter();
 
-  const {
-    id,
-    slug,
-    title,
-    excerpt,
-    metaDescription,
-    content,
-    banner,
-    banneralt,
-    minuteRead,
-    featured,
-    topPick,
-    date,
-    tags,
-    author,
-    updated_at,
-    created_at,
-  } = initialContent;
+  const { content } = initialContent;
   const initialContentBody = JSON.parse(content);
 
   const [updatedContent, setUpdateContent] = useState({
@@ -55,6 +42,7 @@ const update = ({ initialContent }) => {
     const List = require("@editorjs/list");
     const Delimiter = require("@editorjs/delimiter");
     const ImageTool = require("@editorjs/image");
+    const LinkTool = require("@editorjs/link");
     // configs
     editor = new EditorJS({
       holder: "editorjs",
@@ -68,7 +56,15 @@ const update = ({ initialContent }) => {
             levels: [2, 3, 4],
           },
         },
-        image: ImageTool,
+        image: {
+          class: ImageTool,
+          config: {
+            endpoints: {
+              byUrl: "http://localhost:3000/api/media/fetchURL", // Your endpoint that provides uploading by Url
+            },
+            types: "image/*",
+          },
+        },
         list: {
           class: List,
           inlineToolbar: true,
@@ -78,14 +74,13 @@ const update = ({ initialContent }) => {
           inlineToolbar: true,
           config: {
             preserveBlank: false,
-            placeholder: "Let's write something amazing 🔥",
+            placeholder: "Click here to write something amazing 🔥",
           },
         },
       },
       readOnly: false,
       data: initialContentBody,
     });
-    console.log(editor);
     return () => {
       editor.destroy();
     };
@@ -124,6 +119,7 @@ const update = ({ initialContent }) => {
     }
 
     try {
+      console.log("payload", payload);
       let res = await axios.patch(
         `/blogposts/update/${router.query.id}`,
         payload,
@@ -181,21 +177,24 @@ const update = ({ initialContent }) => {
                   onChange={(e) => updateblogdata(e)}
                 />
               </div>
-              {/* banner */}
+
+              {/* Image uploader / Management */}
               <div style={{ maxWidth: "720px" }} className="mx-auto mb-8">
-                {console.log("updatedContent.banner", updatedContent.banner)}
-                <div
-                  style={{
-                    backgroundImage: `url(${updatedContent.banner})`,
-                  }}
-                  className="bg-zinc-100 w-full h-96 relative rounded-md flex justify-center bg-cover bg-center"
-                >
-                  {/* <img
-                    src={updatedContent.banner}
-                    className="absolute h-full"
-                  /> */}
-                </div>
+                {!updatedContent.banner ? (
+                  <BannerUploader
+                    state={updatedContent}
+                    setState={setUpdateContent}
+                  />
+                ) : (
+                  <div
+                    style={{
+                      backgroundImage: `url(${updatedContent.banner})`,
+                    }}
+                    className="bg-zinc-100 aspect-w-16 aspect-h-10 relative rounded-md flex justify-center bg-cover bg-center"
+                  ></div>
+                )}
               </div>
+
               {/* editor */}
               <div
                 id="editorjs"
@@ -210,6 +209,32 @@ const update = ({ initialContent }) => {
               </h2>
               <div className="mb-8">
                 <label className="font-adminPrimary text-base font-semibold required-field">
+                  Banner URL
+                </label>
+                <input
+                  type="text"
+                  placeholder="enter banner URL"
+                  className="bg-white w-full h-10 focus:outline-0 border border-black-10 px-1 mt-1 font-raleway font-medium text-sm"
+                  name="banner"
+                  value={updatedContent.banner}
+                  onChange={(e) => updateblogdata(e)}
+                />
+              </div>
+              <div className="mb-8">
+                <label className="font-adminPrimary text-base font-semibold required-field">
+                  Banner alt
+                </label>
+                <input
+                  type="text"
+                  placeholder="enter banner alt"
+                  className="bg-white w-full h-10 focus:outline-0 border border-black-10 px-1 mt-1 font-raleway font-medium text-sm"
+                  name="banneralt"
+                  value={updatedContent.banneralt}
+                  onChange={(e) => updateblogdata(e)}
+                />
+              </div>
+              <div className="mb-8">
+                <label className="font-adminPrimary text-base font-semibold required-field">
                   Slug
                 </label>
                 <input
@@ -217,7 +242,7 @@ const update = ({ initialContent }) => {
                   placeholder="enter slug"
                   className="bg-white w-full h-10 focus:outline-0 border border-black-10 px-1 mt-1 font-raleway font-medium text-sm"
                   name="slug"
-                  value={updatedContent.slug}
+                  value={decodeURIComponent(updatedContent.slug)}
                   onChange={(e) => updateblogdata(e)}
                 />
               </div>
@@ -370,6 +395,7 @@ export async function getServerSideProps({ params }) {
       tags: true,
       author: true,
       banner: true,
+      banneralt: true,
     },
   });
 
