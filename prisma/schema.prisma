@@ -142,7 +142,7 @@ model Tags {
   updated_at      DateTime    @updatedAt
   published_at    DateTime?
   // published?
-  published       Boolean     @default(false)
+  published       Boolean     @default(true)
 }
 
 model Topics {

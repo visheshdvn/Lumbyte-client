@@ -7,12 +7,14 @@ import * as gtag from "../lib/gtag";
 import { ApolloProvider } from "@apollo/client";
 import client from "../apollo-client";
 import { ThemeProvider } from "next-themes";
+import { ToastContainer } from "react-toastify";
 
 // css
 import "../styles/components.css";
 import "../styles/form.css";
 import "../styles/globals.css";
 import "../styles/utilitiy.css";
+import "../styles/editorjs.css";
 
 // component
 import Navbar from "../components/Navbar";
@@ -35,22 +37,29 @@ function MyApp({ Component, pageProps }) {
   }, [router.events]);
 
   return (
-    <SessionProvider session={pageProps.session}>
-      <ApolloProvider client={client}>
-        <ThemeProvider attribute="class">
-          {/* {router.pathname.startsWith("/admin") ? null : <Navbar />} */}
-          {Component.auth ? (
-            <Auth roles={Component.auth.roles}>
+    <>
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={true}
+      />
+      <SessionProvider session={pageProps.session}>
+        <ApolloProvider client={client}>
+          <ThemeProvider attribute="class">
+            {/* {router.pathname.startsWith("/admin") ? null : <Navbar />} */}
+            {Component.auth ? (
+              <Auth roles={Component.auth.roles}>
+                <Component {...pageProps} />
+              </Auth>
+            ) : (
               <Component {...pageProps} />
-            </Auth>
-          ) : (
-            <Component {...pageProps} />
-          )}
+            )}
 
-          {/* {router.pathname.startsWith("/admin") ? null : <Footer />} */}
-        </ThemeProvider>
-      </ApolloProvider>
-    </SessionProvider>
+            {/* {router.pathname.startsWith("/admin") ? null : <Footer />} */}
+          </ThemeProvider>
+        </ApolloProvider>
+      </SessionProvider>
+    </>
   );
 }
 
@@ -62,7 +71,7 @@ function Auth({ children, roles }) {
     if (roles.includes(session.user.role)) {
       return children;
     }
-    
+
     return <AccessDenied />;
   }
 

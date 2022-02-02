@@ -3,10 +3,13 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import { useTheme } from "next-themes";
 import { Popover } from "@headlessui/react";
-import { signOut } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 
 const LeftSideBar = () => {
+  const { data: session, status } = useSession();
+  const { user } = session;
   const { theme, setTheme } = useTheme();
+  
   useEffect(() => {
     setTheme("light");
   }, [theme]);
@@ -38,9 +41,9 @@ const LeftSideBar = () => {
           ></div>
           <div className="flex-col flex-1 justify-around">
             <h4 className="text-base font-semibold font-adminPrimary">
-              Vishesh Dhawan
+              {user.firstname || "" + " " + user.lastname || ""}
             </h4>
-            <h5 className="text-xs font-medium font-adminPrimary">Superuser</h5>
+            <h5 className="text-xs font-medium font-adminPrimary">{user.role.toLowerCase()}</h5>
           </div>
           <div className="flex items-center">
             <Popover className="relative">

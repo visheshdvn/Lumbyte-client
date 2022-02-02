@@ -11,7 +11,6 @@ let editor;
 const create = () => {
   const { theme } = useTheme();
   const { data: session, status } = useSession();
-  console.log(session);
 
   console.log("theme", theme);
   useEffect(() => {
@@ -115,11 +114,11 @@ const create = () => {
 
   return (
     <>
-      <ToastContainer
+      {/* <ToastContainer
         position="top-right"
         autoClose={3000}
         hideProgressBar={true}
-      />
+      /> */}
       <div className="flex">
         <Sidebar />
         <div className="flex-1 pt-12 pr-5 pl-80">

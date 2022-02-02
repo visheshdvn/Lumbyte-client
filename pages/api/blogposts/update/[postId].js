@@ -1,7 +1,8 @@
 import { PrismaClient } from "@prisma/client";
 import nc from "next-connect";
 
-const { blogposts, user } = new PrismaClient();
+const prisma = new PrismaClient();
+const { blogposts, user } = prisma
 
 // middlewares
 import { sanitizeRequest } from "../../../../middleware/sanitizeRequest";
@@ -9,6 +10,7 @@ import { updateblogpostvalidations } from "../../../../middleware/blogposts/crea
 
 const handler = nc({
   onError: (err, req, res) => {
+    console.log(err);
     res.status(500).json({ msg: "Server Error" });
   },
   onNoMatch: (req, res, next) => {

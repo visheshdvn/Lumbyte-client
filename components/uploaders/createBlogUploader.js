@@ -84,11 +84,6 @@ const createUploader = ({ state, setState }) => {
 
   return (
     <>
-      <ToastContainer
-        position="top-right"
-        autoClose={3000}
-        hideProgressBar={true}
-      />
       <div id="MyWebcam">
         <Dashboard
           uppy={uppy}

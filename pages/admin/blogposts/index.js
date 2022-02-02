@@ -19,9 +19,6 @@ const Blogposts = ({ blogposts }) => {
     return <p>Loading</p>;
   }
 
-  const role = session?.user.role;
-  console.log(role);
-
   return (
     <>
       <div className="flex">
@@ -138,6 +135,9 @@ export async function getServerSideProps(context) {
       author: true,
       updated_at: true,
       created_at: true,
+    },
+    orderBy: {
+      id: "desc",
     },
   });
   let json = JSON.stringify(data);

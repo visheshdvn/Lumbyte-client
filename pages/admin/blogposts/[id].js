@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";
+// third party libraries
 import { PrismaClient } from "@prisma/client";
-// import axios from "axios";
 import { developmentInstance } from "../../../utils/axios";
 import _ from "lodash";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 // components
+import Select from "../../../components/elements/dropdownSelect/adminSelect";
 import Sidebar from "../../../components/adminPanel/leftSideBar";
 import FormattedDate from "../../../components/micro/formattedDate";
 import BannerUploader from "../../../components/uploaders/createBlogUploader";
@@ -16,13 +17,19 @@ import {
   PublishButton,
   SaveButton,
 } from "../../../components/elements/buttons/buttons";
+// utilities
+import {
+  tagsToOptions,
+  optionsToTags,
+  tagIdFromTags,
+} from "../../../utils/mutateTags";
 
 const axios = developmentInstance;
-
 let editor;
-const { blogposts } = new PrismaClient();
+const prisma = new PrismaClient();
+const { blogposts, tags } = prisma;
 
-const update = ({ initialContent }) => {
+const update = ({ initialContent, allTags }) => {
   const router = useRouter();
 
   const { content } = initialContent;
@@ -42,7 +49,6 @@ const update = ({ initialContent }) => {
     const List = require("@editorjs/list");
     const Delimiter = require("@editorjs/delimiter");
     const ImageTool = require("@editorjs/image");
-    const LinkTool = require("@editorjs/link");
     // configs
     editor = new EditorJS({
       holder: "editorjs",
@@ -93,6 +99,14 @@ const update = ({ initialContent }) => {
     });
   }
 
+  function updateTagHandler(option) {
+    const newTags = [...optionsToTags(option)];
+    setUpdateContent({
+      ...updatedContent,
+      tags: newTags,
+    });
+  }
+
   async function saveBlogpost() {
     console.log("saving");
     let content = await editor.save();
@@ -117,17 +131,12 @@ const update = ({ initialContent }) => {
     if (!payload.author) {
       payload.author = {};
     }
+    payload.tags = tagIdFromTags(payload.tags);
 
     try {
-      console.log("payload", payload);
-      let res = await axios.patch(
-        `/blogposts/update/${router.query.id}`,
-        payload,
-        {
-          headers: { "Content-Type": "application/json" },
-        }
-      );
-      console.log(res);
+      await axios.patch(`/blogposts/update/${router.query.id}`, payload, {
+        headers: { "Content-Type": "application/json" },
+      });
       toast.success("Changes saved Successfully ⭐");
     } catch (err) {
       console.error("error", err.toJSON());
@@ -141,11 +150,7 @@ const update = ({ initialContent }) => {
         <meta name="robots" content="noindex" />
         <meta name="googlebot" content="noindex"></meta>
       </Head>
-      <ToastContainer
-        position="top-center"
-        autoClose={3000}
-        hideProgressBar={true}
-      />
+      {/* Body */}
       <div className="flex">
         <Sidebar />
         <div className="admin-primary-layout">
@@ -159,7 +164,7 @@ const update = ({ initialContent }) => {
             <div className="float-right">
               <PublishButton
                 text="Publish"
-                onClickHandler={() => console.log("clicked")}
+                onClickHandler={() => toast.info("Publish clicked")}
               />
               <SaveButton text="Save" onClickHandler={saveBlogpost} />
             </div>
@@ -207,45 +212,24 @@ const update = ({ initialContent }) => {
               <h2 className="font-adminPrimary font-bold text-xl text-center mb-8">
                 Metadata
               </h2>
-              <div className="mb-8">
-                <label className="font-adminPrimary text-base font-semibold required-field">
-                  Banner URL
-                </label>
-                <input
-                  type="text"
-                  placeholder="enter banner URL"
-                  className="bg-white w-full h-10 focus:outline-0 border border-black-10 px-1 mt-1 font-raleway font-medium text-sm"
-                  name="banner"
-                  value={updatedContent.banner}
-                  onChange={(e) => updateblogdata(e)}
-                />
-              </div>
-              <div className="mb-8">
-                <label className="font-adminPrimary text-base font-semibold required-field">
-                  Banner alt
-                </label>
-                <input
-                  type="text"
-                  placeholder="enter banner alt"
-                  className="bg-white w-full h-10 focus:outline-0 border border-black-10 px-1 mt-1 font-raleway font-medium text-sm"
-                  name="banneralt"
-                  value={updatedContent.banneralt}
-                  onChange={(e) => updateblogdata(e)}
-                />
-              </div>
-              <div className="mb-8">
-                <label className="font-adminPrimary text-base font-semibold required-field">
-                  Slug
-                </label>
-                <input
-                  type="text"
-                  placeholder="enter slug"
-                  className="bg-white w-full h-10 focus:outline-0 border border-black-10 px-1 mt-1 font-raleway font-medium text-sm"
-                  name="slug"
-                  value={decodeURIComponent(updatedContent.slug)}
-                  onChange={(e) => updateblogdata(e)}
-                />
-              </div>
+              <InlineTextField
+                label="Banner URL"
+                name="banner"
+                value={updatedContent.banner}
+                onChangeHandler={updateblogdata}
+              />
+              <InlineTextField
+                label="Banner alt"
+                name="banneralt"
+                value={updatedContent.banneralt}
+                onChangeHandler={updateblogdata}
+              />
+              <InlineTextField
+                label="Slug"
+                name="slug"
+                value={updatedContent.slug}
+                onChangeHandler={updateblogdata}
+              />
               <div className="mb-8">
                 <label className="font-adminPrimary text-base font-semibold">
                   Meta Description
@@ -289,7 +273,7 @@ const update = ({ initialContent }) => {
                 />
               </div>
 
-              <div className="flex">
+              <div className="flex mb-8">
                 <div className="flex-1">
                   <label className="font-adminPrimary text-base font-semibold">
                     Top Pick
@@ -353,6 +337,16 @@ const update = ({ initialContent }) => {
                   </div>
                 </div>
               </div>
+              <div className="mb-8">
+                <label className="font-adminPrimary text-base font-semibold mb-4">
+                  Tags
+                </label>
+                <Select
+                  allOptions={tagsToOptions(allTags)}
+                  preSelected={tagsToOptions(initialContent.tags)}
+                  onChangeHandler={updateTagHandler}
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -364,11 +358,29 @@ const update = ({ initialContent }) => {
 update.auth = {
   roles: ["SUPERUSER"],
 };
+
 export default update;
+
+function InlineTextField({ label, name, value, onChangeHandler }) {
+  return (
+    <div className="mb-8">
+      <label className="font-adminPrimary text-base font-semibold required-field">
+        {label || ""}
+      </label>
+      <input
+        type="text"
+        placeholder={`enter ${label.toLowerCase()}`}
+        className="bg-white w-full h-10 focus:outline-0 border border-black-10 px-1 mt-1 font-raleway font-medium text-sm"
+        name={name}
+        value={decodeURIComponent(value || "")}
+        onChange={onChangeHandler}
+      />
+    </div>
+  );
+}
 
 export async function getServerSideProps({ params }) {
   const id = params.id;
-  console.log("id", id);
 
   if (!parseInt(id)) {
     return {
@@ -392,14 +404,28 @@ export async function getServerSideProps({ params }) {
       topPick: true,
       featured: true,
       date: true,
-      tags: true,
+      tags: {
+        select: {
+          id: true,
+          tagname: true,
+        },
+      },
       author: true,
       banner: true,
       banneralt: true,
+      updated_at: true,
+    },
+  });
+
+  let allTags = await tags.findMany({
+    select: {
+      id: true,
+      tagname: true,
     },
   });
 
   if (!data) {
+    prisma.$disconnect();
     return {
       redirect: {
         destination: "/404",
@@ -410,9 +436,11 @@ export async function getServerSideProps({ params }) {
 
   data = JSON.parse(JSON.stringify(data));
 
+  prisma.$disconnect();
   return {
     props: {
       initialContent: data,
+      allTags,
     },
   };
 }
