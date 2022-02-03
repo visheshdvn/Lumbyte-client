@@ -16,6 +16,7 @@ import BannerUploader from "../../../components/uploaders/createBlogUploader";
 import {
   PublishButton,
   SaveButton,
+  UnPublishButton,
 } from "../../../components/elements/buttons/buttons";
 // utilities
 import {
@@ -162,10 +163,17 @@ const update = ({ initialContent, allTags }) => {
               Last edited: <FormattedDate date={updatedContent.updated_at} />
             </div>
             <div className="float-right">
-              <PublishButton
-                text="Publish"
-                onClickHandler={() => toast.info("Publish clicked")}
-              />
+              {updatedContent.published ? (
+                <UnPublishButton
+                text={`UnPublish`}
+                  onClickHandler={() => toast.info("Unpublish clicked")}
+                />
+              ) : (
+                <PublishButton
+                  text="Publish"
+                  onClickHandler={() => toast.info("Publish clicked")}
+                />
+              )}
               <SaveButton text="Save" onClickHandler={saveBlogpost} />
             </div>
           </div>
@@ -231,7 +239,7 @@ const update = ({ initialContent, allTags }) => {
                 onChangeHandler={updateblogdata}
               />
               <div className="mb-8">
-                <label className="font-adminPrimary text-base font-semibold">
+                <label className="font-adminPrimary text-base font-semibold required-field">
                   Meta Description
                 </label>
                 <textarea
@@ -245,7 +253,7 @@ const update = ({ initialContent, allTags }) => {
                 />
               </div>
               <div className="mb-8">
-                <label className="font-adminPrimary text-base font-semibold">
+                <label className="font-adminPrimary text-base font-semibold required-field">
                   Excerpt
                 </label>
                 <textarea
@@ -414,6 +422,7 @@ export async function getServerSideProps({ params }) {
       banner: true,
       banneralt: true,
       updated_at: true,
+      published: true,
     },
   });
 

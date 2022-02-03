@@ -12,11 +12,11 @@ export const PublishButton = ({ text, onClickHandler }) => {
   );
 };
 
-export const unPublishButton = ({ text, onClickHandler }) => {
+export const UnPublishButton = ({ text, onClickHandler }) => {
   return (
     <button
       type="button"
-      className="border bg-red-500 w-28 py-1 font-raleway font-semibold text-base text-white rounded"
+      className="border bg-red-500 w-28 py-1 font-raleway font-semibold text-sm text-white rounded"
       onClick={onClickHandler}
     >
       {text}
@@ -28,7 +28,7 @@ export const SaveButton = ({ text, onClickHandler }) => {
   return (
     <button
       type="button"
-      className="bg-[#16A34A] w-28 py-1 ml-4 font-raleway font-semibold text-base text-white rounded"
+      className="bg-[#16A34A] w-28 py-1 ml-4 font-raleway font-semibold text-sm text-white rounded"
       onClick={onClickHandler}
     >
       {text}
