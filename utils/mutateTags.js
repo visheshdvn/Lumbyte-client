@@ -5,7 +5,6 @@ export function tagsToOptions(tags) {
       label: tag.tagname,
     };
   });
-
   return options;
 }
 
@@ -26,6 +25,5 @@ export function tagIdFromTags(tags) {
       id: tag.id,
     };
   });
-  console.log("tagIds", tagIds);
   return tagIds;
 }
