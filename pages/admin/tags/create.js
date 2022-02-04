@@ -138,4 +138,5 @@ const createTag = ({}) => {
 createTag.auth = {
   roles: ["SUPERUSER"],
 };
+
 export default createTag;

@@ -64,6 +64,7 @@ function MyApp({ Component, pageProps }) {
 }
 
 function Auth({ children, roles }) {
+
   const { data: session, status } = useSession({ required: true });
   const isUser = !!session?.user;
 

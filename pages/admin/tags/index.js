@@ -91,6 +91,7 @@ function TableContents({ tag }) {
 Tags.auth = {
   roles: ["SUPERUSER"],
 };
+
 export default Tags;
 
 export async function getServerSideProps(context) {

@@ -445,7 +445,6 @@ export async function getServerSideProps({ params }) {
 
   data = JSON.parse(JSON.stringify(data));
 
-  prisma.$disconnect();
   return {
     props: {
       initialContent: data,

@@ -31,4 +31,8 @@ const media = () => {
   );
 };
 
+media.auth = {
+  roles: ["SUPERUSER"],
+};
+
 export default media;

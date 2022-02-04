@@ -14,6 +14,7 @@ const index = () => {
 index.auth = {
   roles: ["SUPERUSER"],
 };
+
 export default index;
 
 
