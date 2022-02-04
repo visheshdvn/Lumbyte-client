@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import { useSession } from "next-auth/react";
 import { PrismaClient } from "@prisma/client";
-import axios from "axios";
 import Link from "next/link";
 // custom components
 import Sidebar from "../../../components/adminPanel/leftSideBar";

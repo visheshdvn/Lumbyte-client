@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Head from "next/head";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";

@@ -3,7 +3,7 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 // third party libraries
 import { PrismaClient } from "@prisma/client";
-import { developmentInstance } from "../../../utils/axios";
+import axios from "../../../utils/axios";
 import _ from "lodash";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -24,8 +24,11 @@ import {
   optionsToTags,
   tagIdFromTags,
 } from "../../../utils/mutateTags";
+import {
+  publishBlogpost,
+  unPublishBlogpost,
+} from "../../../utils/togglePublish";
 
-const axios = developmentInstance;
 let editor;
 const prisma = new PrismaClient();
 const { blogposts, tags } = prisma;
@@ -86,7 +89,7 @@ const update = ({ initialContent, allTags }) => {
         },
       },
       readOnly: false,
-      data: initialContentBody,
+      data: updatedContent.content,
     });
     return () => {
       editor.destroy();
@@ -155,23 +158,35 @@ const update = ({ initialContent, allTags }) => {
       <div className="flex">
         <Sidebar />
         <div className="admin-primary-layout">
-          <div className="flow-root mb-10">
-            <h1 className="text-2xl font-adminPrimary font-bold mb-1">
+          <div className="mb-10 flow-root">
+            <h1 className="font-adminPrimary mb-1 text-2xl font-bold">
               Edit blogpost
             </h1>
-            <div className="float-left font-adminPrimary text-sm font-semibold">
+            <div className="font-adminPrimary float-left text-sm font-semibold">
               Last edited: <FormattedDate date={updatedContent.updated_at} />
             </div>
             <div className="float-right">
               {updatedContent.published ? (
                 <UnPublishButton
-                text={`UnPublish`}
-                  onClickHandler={() => toast.info("Unpublish clicked")}
+                  text={`UnPublish`}
+                  onClickHandler={() =>
+                    unPublishBlogpost(
+                      router.query.id,
+                      updatedContent,
+                      setUpdateContent
+                    )
+                  }
                 />
               ) : (
                 <PublishButton
                   text="Publish"
-                  onClickHandler={() => toast.info("Publish clicked")}
+                  onClickHandler={() =>
+                    publishBlogpost(
+                      router.query.id,
+                      updatedContent,
+                      setUpdateContent
+                    )
+                  }
                 />
               )}
               <SaveButton text="Save" onClickHandler={saveBlogpost} />
@@ -180,10 +195,10 @@ const update = ({ initialContent, allTags }) => {
           {/* content body */}
           <div className="grid grid-cols-4 gap-4">
             <div className="col-span-3">
-              <div className="px-10 flex justify-center">
+              <div className="flex justify-center px-10">
                 <input
                   style={{ maxWidth: "720px" }}
-                  className="unstyled-input bg-white w-full text-5xl font-raleway font-black mb-10 text-center"
+                  className="unstyled-input font-raleway mb-10 w-full bg-white text-center text-5xl font-black"
                   placeholder="Enter title..."
                   value={updatedContent.title}
                   name="title"
@@ -203,7 +218,7 @@ const update = ({ initialContent, allTags }) => {
                     style={{
                       backgroundImage: `url(${updatedContent.banner})`,
                     }}
-                    className="bg-zinc-100 aspect-w-16 aspect-h-10 relative rounded-md flex justify-center bg-cover bg-center"
+                    className="aspect-w-16 aspect-h-10 relative flex justify-center rounded-md bg-zinc-100 bg-cover bg-center"
                   ></div>
                 )}
               </div>
@@ -211,13 +226,13 @@ const update = ({ initialContent, allTags }) => {
               {/* editor */}
               <div
                 id="editorjs"
-                className="col-span-2 editorjs-editable font-serif"
+                className="editorjs-editable col-span-2 font-serif"
               ></div>
             </div>
 
             {/* metadata column */}
-            <div className="col-span-1 bg-[#fafafa] px-5 py-6 border-black-10">
-              <h2 className="font-adminPrimary font-bold text-xl text-center mb-8">
+            <div className="border-black-10 col-span-1 bg-[#fafafa] px-5 py-6">
+              <h2 className="font-adminPrimary mb-8 text-center text-xl font-bold">
                 Metadata
               </h2>
               <InlineTextField
@@ -239,13 +254,13 @@ const update = ({ initialContent, allTags }) => {
                 onChangeHandler={updateblogdata}
               />
               <div className="mb-8">
-                <label className="font-adminPrimary text-base font-semibold required-field">
+                <label className="font-adminPrimary required-field text-base font-semibold">
                   Meta Description
                 </label>
                 <textarea
                   type="text"
                   placeholder="write under 150 characters..."
-                  className="bg-white w-full h-28 focus:outline-0 border border-black-10 px-1 mt-1 font-raleway font-normal text-sm"
+                  className="border-black-10 font-raleway mt-1 h-28 w-full border bg-white px-1 text-sm font-normal focus:outline-0"
                   name="metaDescription"
                   value={updatedContent.metaDescription}
                   onChange={(e) => updateblogdata(e)}
@@ -253,13 +268,13 @@ const update = ({ initialContent, allTags }) => {
                 />
               </div>
               <div className="mb-8">
-                <label className="font-adminPrimary text-base font-semibold required-field">
+                <label className="font-adminPrimary required-field text-base font-semibold">
                   Excerpt
                 </label>
                 <textarea
                   type="text"
                   placeholder="write under 150 characters..."
-                  className="bg-white w-full h-28 focus:outline-0 border border-black-10 px-1 mt-1 font-raleway font-normal text-sm"
+                  className="border-black-10 font-raleway mt-1 h-28 w-full border bg-white px-1 text-sm font-normal focus:outline-0"
                   name="excerpt"
                   value={updatedContent.excerpt}
                   onChange={(e) => updateblogdata(e)}
@@ -272,7 +287,7 @@ const update = ({ initialContent, allTags }) => {
                 </label>
                 <input
                   type="number"
-                  className="bg-white w-full h-10 focus:outline-0 border border-black-10 px-1 mt-1 font-raleway font-normal text-sm"
+                  className="border-black-10 font-raleway mt-1 h-10 w-full border bg-white px-1 text-sm font-normal focus:outline-0"
                   name="minuteRead"
                   value={updatedContent.minuteRead}
                   onChange={(e) => updateblogdata(e)}
@@ -281,7 +296,7 @@ const update = ({ initialContent, allTags }) => {
                 />
               </div>
 
-              <div className="flex mb-8">
+              <div className="mb-8 flex">
                 <div className="flex-1">
                   <label className="font-adminPrimary text-base font-semibold">
                     Top Pick
@@ -290,7 +305,7 @@ const update = ({ initialContent, allTags }) => {
                     <button
                       className={`admin-bool-btn ${
                         updatedContent.topPick
-                          ? "text-white bg-green-600"
+                          ? "bg-green-600 text-white"
                           : "bg-white"
                       } `}
                       onClick={() =>
@@ -302,7 +317,7 @@ const update = ({ initialContent, allTags }) => {
                     <button
                       className={`admin-bool-btn ${
                         !updatedContent.topPick
-                          ? "text-white bg-red-600"
+                          ? "bg-red-600 text-white"
                           : "bg-white"
                       }`}
                       onClick={() =>
@@ -321,7 +336,7 @@ const update = ({ initialContent, allTags }) => {
                     <button
                       className={`admin-bool-btn ${
                         updatedContent.featured
-                          ? "text-white bg-green-600"
+                          ? "bg-green-600 text-white"
                           : "bg-white"
                       }`}
                       onClick={() =>
@@ -333,7 +348,7 @@ const update = ({ initialContent, allTags }) => {
                     <button
                       className={`admin-bool-btn ${
                         !updatedContent.featured
-                          ? "text-white bg-red-600"
+                          ? "bg-red-600 text-white"
                           : "bg-white"
                       }`}
                       onClick={() =>
@@ -346,7 +361,7 @@ const update = ({ initialContent, allTags }) => {
                 </div>
               </div>
               <div className="mb-8">
-                <label className="font-adminPrimary text-base font-semibold mb-4">
+                <label className="font-adminPrimary mb-4 text-base font-semibold">
                   Tags
                 </label>
                 <Select
@@ -372,13 +387,13 @@ export default update;
 function InlineTextField({ label, name, value, onChangeHandler }) {
   return (
     <div className="mb-8">
-      <label className="font-adminPrimary text-base font-semibold required-field">
+      <label className="font-adminPrimary required-field text-base font-semibold">
         {label || ""}
       </label>
       <input
         type="text"
         placeholder={`enter ${label.toLowerCase()}`}
-        className="bg-white w-full h-10 focus:outline-0 border border-black-10 px-1 mt-1 font-raleway font-medium text-sm"
+        className="border-black-10 font-raleway mt-1 h-10 w-full border bg-white px-1 text-sm font-medium focus:outline-0"
         name={name}
         value={decodeURIComponent(value || "")}
         onChange={onChangeHandler}

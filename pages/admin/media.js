@@ -3,7 +3,6 @@ import Head from "next/head";
 
 // custom components
 import Sidebar from "../../components/adminPanel/leftSideBar";
-import FormattedDate from "../../components/micro/formattedDate";
 import UppyMedia from "../../components/uploaders/uppyMedia";
 
 const media = () => {
@@ -17,7 +16,7 @@ const media = () => {
       </Head>
       <div className="flex">
         <Sidebar />
-        <div className="flex-1 pt-12 px-5 pl-96">
+        <div className="flex-1 px-5 pt-12 pl-96">
           <h1 className="text-2.75xl font-adminPrimary font-bold">Media</h1>
 
           <div className="flex justify-center">

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import axios from "../../../utils/axios";
 import Sidebar from "../../../components/adminPanel/leftSideBar";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import BannerUploader from "../../../components/uploaders/createBlogUploader";
 import { useTheme } from "next-themes";
@@ -122,20 +122,20 @@ const create = () => {
       <div className="flex">
         <Sidebar />
         <div className="flex-1 pt-12 pr-5 pl-80">
-          <div className="flow-root mb-10">
-            <h1 className="text-2xl font-adminPrimary font-bold">
+          <div className="mb-10 flow-root">
+            <h1 className="font-adminPrimary text-2xl font-bold">
               Create new blogpost
             </h1>
             <div className="float-right mb-3">
               <button
                 type="button"
-                className="bg-[#1da1f2] border w-28 py-1 font-raleway font-semibold text-base text-white rounded"
+                className="font-raleway w-28 rounded border bg-[#1da1f2] py-1 text-base font-semibold text-white"
               >
                 Publish
               </button>
               <button
                 type="button"
-                className="bg-[#16A34A] border w-28 py-1 ml-4 font-raleway font-semibold text-base text-white rounded"
+                className="font-raleway ml-4 w-28 rounded border bg-[#16A34A] py-1 text-base font-semibold text-white"
                 onClick={saveBlogpost}
               >
                 Save
@@ -145,10 +145,10 @@ const create = () => {
           {/* body */}
           <div className="grid grid-cols-4 gap-4">
             <div className="col-span-3">
-              <div className="px-10 flex justify-center">
+              <div className="flex justify-center px-10">
                 <input
                   style={{ maxWidth: "720px" }}
-                  className="unstyled-input bg-white w-full text-5xl font-raleway font-black mb-10 text-center"
+                  className="unstyled-input font-raleway mb-10 w-full bg-white text-center text-5xl font-black"
                   placeholder="Enter title..."
                   value={blogdata.title}
                   name="title"
@@ -160,7 +160,7 @@ const create = () => {
                 {!blogdata.banner ? (
                   <BannerUploader state={blogdata} setState={setBlogdata} />
                 ) : (
-                  <div className="bg-zinc-100 w-full h-96 relative rounded-md flex justify-center">
+                  <div className="relative flex h-96 w-full justify-center rounded-md bg-zinc-100">
                     <img src={blogdata.banner} className="absolute h-full" />
                   </div>
                 )}
@@ -168,49 +168,49 @@ const create = () => {
               {/* editor */}
               <div
                 id="editorjs"
-                className="col-span-2 editorjs-editable font-serif"
+                className="editorjs-editable col-span-2 font-serif"
               ></div>
             </div>
 
             {/* metadata column */}
-            <div className="col-span-1 bg-[#fafafa] px-5 py-6 border-black-10">
-              <h2 className="font-adminPrimary font-bold text-xl text-center mb-8">
+            <div className="border-black-10 col-span-1 bg-[#fafafa] px-5 py-6">
+              <h2 className="font-adminPrimary mb-8 text-center text-xl font-bold">
                 Metadata
               </h2>
               <div className="mb-8">
-                <label className="font-adminPrimary text-base font-semibold required-field">
+                <label className="font-adminPrimary required-field text-base font-semibold">
                   Banner URL
                 </label>
                 <input
                   type="text"
                   placeholder="enter banner URL"
-                  className="bg-white w-full h-10 focus:outline-0 border border-black-10 px-1 mt-1 font-raleway font-medium text-sm"
+                  className="border-black-10 font-raleway mt-1 h-10 w-full border bg-white px-1 text-sm font-medium focus:outline-0"
                   name="banner"
                   value={blogdata.banner}
                   onChange={(e) => updateblogdata(e)}
                 />
               </div>
               <div className="mb-8">
-                <label className="font-adminPrimary text-base font-semibold required-field">
+                <label className="font-adminPrimary required-field text-base font-semibold">
                   Banner alt
                 </label>
                 <input
                   type="text"
                   placeholder="enter banner alt"
-                  className="bg-white w-full h-10 focus:outline-0 border border-black-10 px-1 mt-1 font-raleway font-medium text-sm"
+                  className="border-black-10 font-raleway mt-1 h-10 w-full border bg-white px-1 text-sm font-medium focus:outline-0"
                   name="banneralt"
                   value={blogdata.banneralt}
                   onChange={(e) => updateblogdata(e)}
                 />
               </div>
               <div className="mb-8">
-                <label className="font-adminPrimary text-base font-semibold required-field">
+                <label className="font-adminPrimary required-field text-base font-semibold">
                   Slug
                 </label>
                 <input
                   type="text"
                   placeholder="enter slug"
-                  className="bg-white w-full h-8 focus:outline-0 border border-black-10 px-1 mt-1"
+                  className="border-black-10 mt-1 h-8 w-full border bg-white px-1 focus:outline-0"
                   name="slug"
                   value={blogdata.slug}
                   onChange={(e) => updateblogdata(e)}
@@ -223,7 +223,7 @@ const create = () => {
                 <textarea
                   type="text"
                   placeholder="write under 150 characters..."
-                  className="bg-white w-full h-20 focus:outline-0 border border-black-10 px-1 mt-1"
+                  className="border-black-10 mt-1 h-20 w-full border bg-white px-1 focus:outline-0"
                   name="metaDescription"
                   value={blogdata.metaDescription}
                   onChange={(e) => updateblogdata(e)}
@@ -237,7 +237,7 @@ const create = () => {
                 <textarea
                   type="text"
                   placeholder="write under 150 characters..."
-                  className="bg-white w-full h-20 focus:outline-0 border border-black-10 px-1 mt-1"
+                  className="border-black-10 mt-1 h-20 w-full border bg-white px-1 focus:outline-0"
                   name="excerpt"
                   value={blogdata.excerpt}
                   onChange={(e) => updateblogdata(e)}
@@ -250,7 +250,7 @@ const create = () => {
                 </label>
                 <input
                   type="number"
-                  className="bg-white w-full h-8 focus:outline-0 border border-black-10 px-1 mt-1"
+                  className="border-black-10 mt-1 h-8 w-full border bg-white px-1 focus:outline-0"
                   name="minuteRead"
                   value={blogdata.minuteRead}
                   onChange={(e) => updateblogdata(e)}
@@ -268,7 +268,7 @@ const create = () => {
                     <button
                       className={`admin-bool-btn ${
                         blogdata.topPick
-                          ? "text-white bg-green-600"
+                          ? "bg-green-600 text-white"
                           : "bg-white"
                       } `}
                       onClick={() =>
@@ -279,7 +279,7 @@ const create = () => {
                     </button>
                     <button
                       className={`admin-bool-btn ${
-                        !blogdata.topPick ? "text-white bg-red-600" : "bg-white"
+                        !blogdata.topPick ? "bg-red-600 text-white" : "bg-white"
                       }`}
                       onClick={() =>
                         setBlogdata({ ...blogdata, topPick: false })
@@ -297,7 +297,7 @@ const create = () => {
                     <button
                       className={`admin-bool-btn ${
                         blogdata.featured
-                          ? "text-white bg-green-600"
+                          ? "bg-green-600 text-white"
                           : "bg-white"
                       }`}
                       onClick={() =>
@@ -309,7 +309,7 @@ const create = () => {
                     <button
                       className={`admin-bool-btn ${
                         !blogdata.featured
-                          ? "text-white bg-red-600"
+                          ? "bg-red-600 text-white"
                           : "bg-white"
                       }`}
                       onClick={() =>

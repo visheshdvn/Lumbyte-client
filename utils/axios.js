@@ -10,4 +10,9 @@ const productionInstance = axios.create({
   timeout: 1000,
 });
 
-export { developmentInstance, productionInstance };
+const exportedInstane =
+  process.env.NODE_ENV === "development"
+    ? developmentInstance
+    : productionInstance;
+
+export default exportedInstane;

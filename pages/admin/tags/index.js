@@ -1,5 +1,4 @@
 import React from "react";
-import axios from "axios";
 import Sidebar from "../../../components/adminPanel/leftSideBar";
 import Link from "next/link";
 import { PrismaClient } from "@prisma/client";
@@ -59,7 +58,6 @@ function TableContents({ tag }) {
   const { id, tagname, color, published } = tag;
   return (
     <Link passHref href={`/admin/tags/${id}`}>
-      {/* <a> */}
       <tr
         className="border-b font-raleway font-medium text-xs bg-white cursor-pointer text-gray-800"
         key={tag.id}
@@ -83,7 +81,6 @@ function TableContents({ tag }) {
         </td>
         <td className="opacity-0">controls</td>
       </tr>
-      {/* </a> */}
     </Link>
   );
 }
