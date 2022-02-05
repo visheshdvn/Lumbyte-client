@@ -2,6 +2,11 @@ generator client {
   provider = "prisma-client-js"
 }
 
+generator jsonSchema {
+  provider = "prisma-json-schema-generator"
+  output   = "../prisma/generated/jsonSchema"
+}
+
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
@@ -51,41 +56,45 @@ model AdminAccount {
 }
 
 model Blogposts {
-  id              Int       @id @default(autoincrement())
-  title           String    @db.VarChar(150)
-  slug            String    @unique
-  metaDescription String?   @default("") @db.VarChar(200)
-  excerpt         String?   @db.VarChar(150)
-  content         String?   @unique
-  banner          String?   @db.VarChar(255)
-  banneralt       String?   @db.VarChar(255)
-  minuteRead      Int?      @default(1) @db.SmallInt
-  featured        Boolean?  @default(false) // top articles overall
-  topPick         Boolean?  @default(false) // top articles in their category
-  date            DateTime? @db.Timestamp(0)
+  id              Int        @id @default(autoincrement())
+  title           String     @db.VarChar(150)
+  slug            String     @unique
+  metaDescription String?    @default("") @db.VarChar(200)
+  excerpt         String?    @db.VarChar(150)
+  content         String?    @unique
+  banner          String?    @db.VarChar(255)
+  banneralt       String?    @db.VarChar(255)
+  minuteRead      Int?       @default(1) @db.SmallInt
+  featured        Boolean?   @default(false) // top articles overall
+  topPick         Boolean?   @default(false) // top articles in their category
+  date            DateTime?  @db.Timestamp(0)
   // relations
-  author          User?     @relation(fields: [authorId], references: [id], onDelete: SetNull)
+  author          User?      @relation(fields: [authorId], references: [id], onDelete: SetNull)
   authorId        String?
-  topics          Topics?   @relation(fields: [topicsId], references: [id], onDelete: SetNull)
+  topics          Topics?    @relation(fields: [topicsId], references: [id], onDelete: SetNull)
   topicsId        Int?
   tags            Tags[]
   savedBy         Account[]
+  comments        Comments[]
   // defaults
-  created_at      DateTime  @default(now())
-  updated_at      DateTime  @updatedAt
+  created_at      DateTime   @default(now())
+  updated_at      DateTime   @updatedAt
   published_at    DateTime?
   // published
-  published       Boolean   @default(false)
+  published       Boolean    @default(false)
   // superuser actions
-  blocked         Boolean   @default(false)
+  blocked         Boolean    @default(false)
 }
 
 model Comments {
-  id         Int      @id @default(autoincrement())
-  content    String   @db.VarChar(200)
+  id         Int        @id @default(autoincrement())
+  content    String     @db.VarChar(200)
+  // relation
+  comment    Blogposts? @relation(fields: [commentId], references: [id], onDelete: SetNull)
+  commentId  Int
   // defaults
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
+  created_at DateTime   @default(now())
+  updated_at DateTime   @updatedAt
 }
 
 model Images {
@@ -132,9 +141,10 @@ model Tags {
   id              Int         @id @unique @default(autoincrement())
   tagname         String      @unique @db.VarChar(40)
   color           String?     @default("#3B82F6") @db.VarChar(7)
-  metaDescription String?     @default("") @db.VarChar(200)
+  metaDescription String      @default("") @db.VarChar(200)
+  // opengraph
+  ogTitle         String?     @default("") @db.VarChar(55)
   ogimg           String?     @db.VarChar(250)
-  ogalt           String?     @db.VarChar(30)
   // relations
   blogposts       Blogposts[]
   // defaults

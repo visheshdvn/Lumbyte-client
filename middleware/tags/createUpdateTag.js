@@ -91,9 +91,7 @@ export const createtagsvalidations = () => {
 
 export const updatetagsvalidations = () => {
   return async (req, res, next) => {
-    await Promise.all(
-      updateTagChecks.map((validation) => validation.run(req))
-    );
+    await Promise.all(updateTagChecks.map((validation) => validation.run(req)));
 
     const errors = validationResult(req);
     if (errors.isEmpty()) {

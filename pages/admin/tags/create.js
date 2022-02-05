@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 // components
 import Sidebar from "../../../components/adminPanel/leftSideBar";
@@ -8,7 +8,9 @@ import Sidebar from "../../../components/adminPanel/leftSideBar";
 import {
   PublishButton,
   SaveButton,
+  UnPublishButton,
 } from "../../../components/elements/buttons/buttons";
+import { AdminInlineTextInput } from "../../../components/elements/input/text";
 // utilities
 import NoIndex from "../../../utils/noIndex";
 
@@ -17,6 +19,8 @@ const createTag = ({}) => {
     tagname: "",
     color: "",
     metaDescription: "",
+    ogimg: "",
+    ogTitle: "",
   });
 
   function updateblogdata(e) {
@@ -29,16 +33,15 @@ const createTag = ({}) => {
   const updateTagData = async () => {
     // TODO - validate client side data
 
-    if (!tagData.tagname || !tagData.metaDescription) {
-      toast.info("tagname or meta description invalid");
+    if (!tagData.tagname) {
+      toast.info("tagname invalid");
       return;
     }
 
     let reqObj = { ...tagData };
 
     if (!tagData.color) {
-      reqObj.color = "#000000";
-      settagData({ ...tagData, color: "#000000" });
+      settagData({ ...tagData, color: "#3B82F6" });
     }
 
     try {
@@ -54,71 +57,71 @@ const createTag = ({}) => {
   return (
     <>
       <NoIndex />
-      <ToastContainer
-        position="top-center"
-        autoClose={3000}
-        hideProgressBar={true}
-      />
-      <div className="flex bg-offWhite h-screen">
+      <div className="bg-offWhite flex h-screen">
         <Sidebar />
         <div className="admin-primary-layout">
-          <div className="flow-root mb-10">
-            <h1 className="text-2xl font-adminPrimary font-bold mb-1">
+          <div className="mb-10 flow-root">
+            <h1 className="font-adminPrimary mb-1 text-2xl font-bold">
               Create a new tag
             </h1>
-            <div className="float-left font-adminPrimary text-sm font-semibold">
+            <div className="font-adminPrimary float-left text-sm font-semibold">
               {/* Last edited: <FormattedDate date={updatedContent.updated_at} /> */}
             </div>
             <div className="float-right">
-              <PublishButton
+              {/* <PublishButton
                 text="Publish"
                 onClickHandler={() => toast.info("No action assigned.")}
-              />
+              /> */}
               <SaveButton text="Save" onClickHandler={updateTagData} />
             </div>
           </div>
           <div
             style={{ maxWidth: "1044px" }}
-            className="bg-white border border-black-10 p-8"
+            className="border-black-10 border bg-white p-8"
           >
             <div className="flex">
-              <div className="mb-8 flex-1 pr-8">
-                <label className="font-adminPrimary text-base font-semibold required-field">
-                  Tag Name
-                </label>
-                <input
-                  type="text"
-                  placeholder="enter tag name"
-                  className="bg-white w-full h-10 focus:outline-0 border border-black-10 px-1 mt-1 font-raleway font-medium text-sm"
-                  name="tagname"
-                  value={tagData.tagname}
-                  onChange={(e) => updateblogdata(e)}
-                />
-              </div>
-              <div className="mb-8 flex-1 pr-8">
-                <label className="font-adminPrimary text-base font-semibold">
-                  Color
-                </label>
-                <input
-                  type="text"
-                  placeholder="default: #000000"
-                  className="bg-white w-full h-10 focus:outline-0 border border-black-10 px-1 mt-1 font-raleway font-medium text-sm"
-                  name="color"
-                  value={tagData.color}
-                  onChange={(e) => updateblogdata(e)}
-                  maxLength={7}
-                />
-              </div>
+              <AdminInlineTextInput
+                label="Tag Name"
+                name="tagname"
+                value={tagData.tagname}
+                onChangeHandler={updateblogdata}
+                placeholder="Enter tag name"
+                required
+              />
+              <AdminInlineTextInput
+                label="Color"
+                name="color"
+                value={tagData.color}
+                onChangeHandler={updateblogdata}
+                placeholder="default: #3B82F6"
+                maxLength={7}
+              />
+            </div>
+            <div className="flex">
+              <AdminInlineTextInput
+                label="Og Image"
+                name="ogimg"
+                value={tagData.ogimg}
+                onChangeHandler={updateblogdata}
+                placeholder="Enter opengraph image url"
+              />
+              <AdminInlineTextInput
+                label="Og Title"
+                name="ogTitle"
+                value={tagData.ogTitle}
+                onChangeHandler={updateblogdata}
+                placeholder="Enter opengraph Title"
+              />
             </div>
             <div className="">
               <div style={{ maxWidth: "450px" }} className="mb-8 pr-8">
-                <label className="font-adminPrimary text-base font-semibold required-field">
+                <label className="font-adminPrimary text-base font-semibold">
                   Meta Description
                 </label>
                 <textarea
                   type="text"
                   placeholder="write under 150 characters..."
-                  className="bg-white w-full h-28 focus:outline-0 border border-black-10 px-1 mt-1 font-raleway font-normal text-sm"
+                  className="border-black-10 font-raleway mt-1 h-28 w-full border bg-white px-1 text-sm font-normal focus:outline-0"
                   name="metaDescription"
                   value={tagData.metaDescription}
                   onChange={(e) => updateblogdata(e)}
@@ -135,7 +138,7 @@ const createTag = ({}) => {
 };
 
 createTag.auth = {
-  roles: ["SUPERUSER"],
+  roles: ["SUPERUSER", "ADMIN"],
 };
 
 export default createTag;
