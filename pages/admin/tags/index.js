@@ -13,7 +13,7 @@ const Tags = ({ tags }) => {
       <NoIndex />
       <div className="flex">
         <Sidebar />
-        <div className="flex-1 pt-12 px-5 pl-80">
+        <div className="flex-1 px-5 pt-12 pl-80">
           <div className="text-gray-800">
             <h1 className="text-2.75xl font-adminPrimary font-bold">Tags</h1>
             <h2 className="font-adminPrimary text-base font-semibold">
@@ -21,18 +21,18 @@ const Tags = ({ tags }) => {
             </h2>
           </div>
           {/* add new button */}
-          <div className="flex justify-end mt-24">
+          <div className="mt-24 flex justify-end">
             <Link passHref href="/admin/tags/create">
-              <a className="bg-green-600 px-3 py-1 rounded text-white font-adminPrimary font-semibold text-base hover:ring-2 focus:ring-2 ring-green-600 ring-opacity-50">
+              <a className="font-adminPrimary rounded bg-green-600 px-3 py-1 text-base font-semibold text-white ring-green-600 ring-opacity-50 hover:ring-2 focus:ring-2">
                 + Create new tag
               </a>
             </Link>
           </div>
           {/* all tags grid */}
           <div className="mt-5">
-            <table className="table-auto border w-full">
+            <table className="w-full table-auto border">
               <thead>
-                <tr className="bg-gray-100 font-adminPrimary text-sm font-semibold text-left text-gray-800">
+                <tr className="font-adminPrimary bg-gray-100 text-left text-sm font-semibold text-gray-800">
                   <td className="opacity-0">S</td>
                   <th className="py-4">Id</th>
                   <th>Tagname</th>
@@ -59,7 +59,7 @@ function TableContents({ tag }) {
   return (
     <Link passHref href={`/admin/tags/${id}`}>
       <tr
-        className="border-b font-raleway font-medium text-xs bg-white cursor-pointer text-gray-800"
+        className="font-raleway cursor-pointer border-b bg-white text-xs font-medium text-gray-800"
         key={tag.id}
       >
         <td className="opacity-0">S</td>
@@ -86,7 +86,7 @@ function TableContents({ tag }) {
 }
 
 Tags.auth = {
-  roles: ["SUPERUSER"],
+  roles: ["SUPERUSER", "ADMIN"],
 };
 
 export default Tags;

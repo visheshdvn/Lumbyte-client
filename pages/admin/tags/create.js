@@ -23,7 +23,7 @@ const createTag = ({}) => {
     ogTitle: "",
   });
 
-  function updateblogdata(e) {
+  function updateTagdata(e) {
     settagData({
       ...tagData,
       [e.target.name]: e.target.value,
@@ -84,7 +84,7 @@ const createTag = ({}) => {
                 label="Tag Name"
                 name="tagname"
                 value={tagData.tagname}
-                onChangeHandler={updateblogdata}
+                onChangeHandler={updateTagdata}
                 placeholder="Enter tag name"
                 required
               />
@@ -92,7 +92,7 @@ const createTag = ({}) => {
                 label="Color"
                 name="color"
                 value={tagData.color}
-                onChangeHandler={updateblogdata}
+                onChangeHandler={updateTagdata}
                 placeholder="default: #3B82F6"
                 maxLength={7}
               />
@@ -102,14 +102,14 @@ const createTag = ({}) => {
                 label="Og Image"
                 name="ogimg"
                 value={tagData.ogimg}
-                onChangeHandler={updateblogdata}
+                onChangeHandler={updateTagdata}
                 placeholder="Enter opengraph image url"
               />
               <AdminInlineTextInput
                 label="Og Title"
                 name="ogTitle"
                 value={tagData.ogTitle}
-                onChangeHandler={updateblogdata}
+                onChangeHandler={updateTagdata}
                 placeholder="Enter opengraph Title"
               />
             </div>
@@ -124,7 +124,7 @@ const createTag = ({}) => {
                   className="border-black-10 font-raleway mt-1 h-28 w-full border bg-white px-1 text-sm font-normal focus:outline-0"
                   name="metaDescription"
                   value={tagData.metaDescription}
-                  onChange={(e) => updateblogdata(e)}
+                  onChange={(e) => updateTagdata(e)}
                   maxLength={150}
                 />
               </div>

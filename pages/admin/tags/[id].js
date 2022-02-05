@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { PrismaClient } from "@prisma/client";
 import axios from "axios";
 import _ from "lodash";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 // components
 import Sidebar from "../../../components/adminPanel/leftSideBar";
@@ -12,13 +12,14 @@ import Sidebar from "../../../components/adminPanel/leftSideBar";
 import {
   PublishButton,
   SaveButton,
+  UnPublishButton,
 } from "../../../components/elements/buttons/buttons";
+import { AdminInlineTextInput } from "../../../components/elements/input/text";
 
 const { tags } = new PrismaClient();
 
-const update = ({ initialTagData }) => {
+const Update = ({ initialTagData }) => {
   const router = useRouter();
-  console.log(initialTagData);
 
   const [tagData, settagData] = useState({
     ...initialTagData,
@@ -38,15 +39,16 @@ const update = ({ initialTagData }) => {
 
     if (noChange) {
       toast.info("no change in the content");
-    } else {
-      const { data } = await axios.patch(
-        `/tags/update/${router.query.id}`,
-        tagData
-      );
-      console.log(data);
-      settagData({ ...tagData, ...data.content });
-      toast.success("Updated");
+      return;
     }
+
+    const { data } = await axios.patch(
+      `/tags/update/${router.query.id}`,
+      tagData
+    );
+
+    settagData({ ...tagData, ...data.content });
+    toast.success("Updated");
   };
 
   return (
@@ -55,71 +57,80 @@ const update = ({ initialTagData }) => {
         <meta name="robots" content="noindex" />
         <meta name="googlebot" content="noindex"></meta>
       </Head>
-      <ToastContainer
-        position="top-center"
-        autoClose={3000}
-        hideProgressBar={true}
-      />
-      <div className="flex bg-offWhite h-screen">
+
+      <div className="bg-offWhite flex h-screen">
         <Sidebar />
         <div className="admin-primary-layout">
-          <div className="flow-root mb-10">
-            <h1 className="text-2xl font-adminPrimary font-bold mb-1">
+          <div className="mb-10 flow-root">
+            <h1 className="font-adminPrimary mb-1 text-2xl font-bold">
               Edit tag
             </h1>
-            <div className="float-left font-adminPrimary text-sm font-semibold">
+            <div className="font-adminPrimary float-left text-sm font-semibold">
               {/* Last edited: <FormattedDate date={updatedContent.updated_at} /> */}
             </div>
             <div className="float-right">
-              <PublishButton
-                text="Publish"
-                onClickHandler={() => toast.info("No action assigned.")}
-              />
+              {!tagData.published ? (
+                <PublishButton
+                  text="Publish"
+                  onClickHandler={() => toast.info("No action assigned.")}
+                />
+              ) : (
+                <UnPublishButton
+                  text="unPublish"
+                  onClickHandler={() => toast.info("No action assigned")}
+                />
+              )}
+
               <SaveButton text="Save" onClickHandler={saveTagData} />
             </div>
           </div>
           <div
             style={{ maxWidth: "1044px" }}
-            className="bg-white border border-black-10 p-8"
+            className="border-black-10 border bg-white p-8"
           >
             <div className="flex">
-              <div className="mb-8 flex-1 pr-8">
-                <label className="font-adminPrimary text-base font-semibold required-field">
-                  Tag Name
-                </label>
-                <input
-                  type="text"
-                  placeholder="enter slug"
-                  className="bg-white w-full h-10 focus:outline-0 border border-black-10 px-1 mt-1 font-raleway font-medium text-sm"
-                  name="tagname"
-                  value={tagData.tagname}
-                  onChange={(e) => updateTagdata(e)}
-                />
-              </div>
-              <div className="mb-8 flex-1 pr-8">
-                <label className="font-adminPrimary text-base font-semibold required-field">
-                  Color
-                </label>
-                <input
-                  type="text"
-                  placeholder="#000000"
-                  className="bg-white w-full h-10 focus:outline-0 border border-black-10 px-1 mt-1 font-raleway font-medium text-sm"
-                  name="color"
-                  value={tagData.color}
-                  onChange={(e) => updateTagdata(e)}
-                  maxLength={7}
-                />
-              </div>
+              <AdminInlineTextInput
+                label="Tag Name"
+                name="tagname"
+                value={tagData.tagname}
+                onChangeHandler={updateTagdata}
+                placeholder="Enter tag name"
+                required
+              />
+              <AdminInlineTextInput
+                label="Color"
+                name="color"
+                value={tagData.color}
+                onChangeHandler={updateTagdata}
+                placeholder="default: #3B82F6"
+                maxLength={7}
+              />
+            </div>
+            <div className="flex">
+              <AdminInlineTextInput
+                label="Og Image"
+                name="ogimg"
+                value={tagData.ogimg}
+                onChangeHandler={updateTagdata}
+                placeholder="Enter opengraph image url"
+              />
+              <AdminInlineTextInput
+                label="Og Title"
+                name="ogTitle"
+                value={tagData.ogTitle}
+                onChangeHandler={updateTagdata}
+                placeholder="Enter opengraph Title"
+              />
             </div>
             <div className="">
               <div style={{ maxWidth: "450px" }} className="mb-8 pr-8">
-                <label className="font-adminPrimary text-base font-semibold required-field">
+                <label className="font-adminPrimary required-field text-base font-semibold">
                   Meta Description
                 </label>
                 <textarea
                   type="text"
                   placeholder="write under 150 characters..."
-                  className="bg-white w-full h-28 focus:outline-0 border border-black-10 px-1 mt-1 font-raleway font-normal text-sm"
+                  className="border-black-10 font-raleway mt-1 h-28 w-full border bg-white px-1 text-sm font-normal focus:outline-0"
                   name="metaDescription"
                   value={tagData.metaDescription}
                   onChange={(e) => updateTagdata(e)}
@@ -135,10 +146,11 @@ const update = ({ initialTagData }) => {
   );
 };
 
-update.auth = {
+Update.auth = {
   roles: ["SUPERUSER"],
 };
-export default update;
+
+export default Update;
 
 export async function getServerSideProps({ params }) {
   const id = params.id;
@@ -158,8 +170,9 @@ export async function getServerSideProps({ params }) {
       tagname: true,
       color: true,
       metaDescription: true,
-      ogalt: true,
       ogimg: true,
+      ogTitle: true,
+      published: true,
     },
   });
 
@@ -171,7 +184,6 @@ export async function getServerSideProps({ params }) {
       },
     };
   }
-  console.log(data);
 
   return {
     props: {

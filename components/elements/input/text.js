@@ -9,7 +9,6 @@ export const AdminInlineTextInput = ({
   required,
   maxLength,
 }) => {
-  console.log(maxLength);
   return (
     <div className="mb-8 flex-1 pr-8">
       <label

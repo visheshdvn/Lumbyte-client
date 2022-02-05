@@ -68,6 +68,7 @@ model Blogposts {
   featured        Boolean?   @default(false) // top articles overall
   topPick         Boolean?   @default(false) // top articles in their category
   date            DateTime?  @db.Timestamp(0)
+  commenting      Boolean    @default(true)
   // relations
   author          User?      @relation(fields: [authorId], references: [id], onDelete: SetNull)
   authorId        String?
@@ -144,7 +145,7 @@ model Tags {
   metaDescription String      @default("") @db.VarChar(200)
   // opengraph
   ogTitle         String?     @default("") @db.VarChar(55)
-  ogimg           String?     @db.VarChar(250)
+  ogimg           String?     @default("") @db.VarChar(250)
   // relations
   blogposts       Blogposts[]
   // defaults

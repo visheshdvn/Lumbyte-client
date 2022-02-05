@@ -184,6 +184,10 @@
           ],
           "format": "date-time"
         },
+        "commenting": {
+          "type": "boolean",
+          "default": true
+        },
         "author": {
           "anyOf": [
             {
@@ -447,7 +451,8 @@
           "type": [
             "string",
             "null"
-          ]
+          ],
+          "default": ""
         },
         "blogposts": {
           "type": "array",
