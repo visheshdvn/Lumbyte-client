@@ -13,7 +13,6 @@ let s3 = new aws.S3();
 const myBucket = process.env.AWS_S3_BUCKET;
 
 // middlewares
-import { sanitizeRequest } from "../../../middleware/sanitizeRequest";
 
 const handler = nc({
   onError: (err, req, res) => {
@@ -25,9 +24,8 @@ const handler = nc({
   },
 });
 
-handler.use(sanitizeRequest());
-
 handler.post(async (req, res) => {
+  console.log("req.body", req.body);
   const { contentType, filename } = req.body;
   let nameparts = filename.split(".");
   const extension = nameparts.pop();
@@ -46,9 +44,12 @@ handler.post(async (req, res) => {
     }
 
     res.status(200).json({
-      method: "put",
       url,
-      fields: {},
+      filename: name,
+      filetype: contentType,
+      fileurl: `https://${myBucket}.s3.${
+        process.env.AWS_REGION
+      }.amazonaws.com/${encodeURIComponent(name)}`,
     });
   });
 });

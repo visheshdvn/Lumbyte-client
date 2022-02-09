@@ -61,7 +61,7 @@ model Blogposts {
   slug            String     @unique
   metaDescription String?    @default("") @db.VarChar(200)
   excerpt         String?    @db.VarChar(150)
-  content         String?    @unique
+  content         String?
   banner          String?    @db.VarChar(255)
   banneralt       String?    @db.VarChar(255)
   minuteRead      Int?       @default(1) @db.SmallInt

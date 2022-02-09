@@ -20,7 +20,7 @@ const create = () => {
     const Paragraph = require("@editorjs/paragraph");
     const List = require("@editorjs/list");
     const Delimiter = require("@editorjs/delimiter");
-    const ImageTool = require("@editorjs/image");
+    // const ImageTool = require("@editorjs/image");
     // configs
     editor = new EditorJS({
       holder: "editorjs",
@@ -34,15 +34,15 @@ const create = () => {
             levels: [2, 3, 4],
           },
         },
-        image: {
-          class: ImageTool,
-          config: {
-            endpoints: {
-              byUrl: "http://localhost:3000/api/media/fetchURL", // Your endpoint that provides uploading by Url
-            },
-            types: "image/*",
-          },
-        },
+        // image: {
+        //   class: ImageTool,
+        //   config: {
+        //     endpoints: {
+        //       byUrl: "http://localhost:3000/api/media/fetchURL", // Your endpoint that provides uploading by Url
+        //     },
+        //     types: "image/*",
+        //   },
+        // },
         list: {
           class: List,
           inlineToolbar: true,

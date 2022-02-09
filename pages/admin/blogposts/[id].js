@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Head from "next/head";
 import { useRouter } from "next/router";
 // third party libraries
 import { PrismaClient } from "@prisma/client";
@@ -12,6 +11,9 @@ import Select from "../../../components/elements/dropdownSelect/adminSelect";
 import Sidebar from "../../../components/adminPanel/leftSideBar";
 import FormattedDate from "../../../components/micro/formattedDate";
 import BannerUploader from "../../../components/uploaders/createBlogUploader";
+import Timeline from "../../../components/editorjs-tools/timeline/tool";
+import ImageTool from "../../../components/editorjs-tools/image/index";
+
 // elements
 import {
   PublishButton,
@@ -28,6 +30,7 @@ import {
   publishBlogpost,
   unPublishBlogpost,
 } from "../../../utils/togglePublish";
+import NoIndex from "../../../utils/noIndex";
 
 let editor;
 const prisma = new PrismaClient();
@@ -52,11 +55,14 @@ const update = ({ initialContent, allTags }) => {
     const Paragraph = require("@editorjs/paragraph");
     const List = require("@editorjs/list");
     const Delimiter = require("@editorjs/delimiter");
-    const ImageTool = require("@editorjs/image");
+    const InlineCode = require("@editorjs/inline-code");
+    const CodeTool = require("@editorjs/code");
+    // const ImageTool = require('@editorjs/image');
     // configs
     editor = new EditorJS({
       holder: "editorjs",
       tools: {
+        code: CodeTool,
         delimiter: Delimiter,
         header: {
           class: Header,
@@ -75,6 +81,12 @@ const update = ({ initialContent, allTags }) => {
             types: "image/*",
           },
         },
+        // image: ImageTool,
+        timeline: Timeline,
+        inlineCode: {
+          class: InlineCode,
+          shortcut: "CMD+SHIFT+M",
+        },
         list: {
           class: List,
           inlineToolbar: true,
@@ -88,8 +100,8 @@ const update = ({ initialContent, allTags }) => {
           },
         },
       },
-      readOnly: false,
       data: updatedContent.content,
+      readOnly: true,
     });
     return () => {
       editor.destroy();
@@ -150,10 +162,7 @@ const update = ({ initialContent, allTags }) => {
 
   return (
     <>
-      <Head>
-        <meta name="robots" content="noindex" />
-        <meta name="googlebot" content="noindex"></meta>
-      </Head>
+      <NoIndex />
       {/* Body */}
       <div className="flex">
         <Sidebar />
@@ -223,7 +232,7 @@ const update = ({ initialContent, allTags }) => {
                 )}
               </div>
 
-              {/* editor */}
+              {/* editor holder */}
               <div
                 id="editorjs"
                 className="editorjs-editable col-span-2 font-serif"

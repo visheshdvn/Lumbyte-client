@@ -1,14 +1,12 @@
 import React from "react";
 import Uppy from "@uppy/core";
 import { Dashboard, useUppy } from "@uppy/react";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import AwsS3 from "@uppy/aws-s3";
 import "@uppy/core/dist/style.css";
 import "@uppy/dashboard/dist/style.css";
-import { developmentInstance } from "../../utils/axios";
-
-const axios = developmentInstance;
+import axios from "../../utils/axios";
 
 const uppyMedia = () => {
   const uppy = useUppy(() => {
@@ -24,7 +22,7 @@ const uppyMedia = () => {
         getUploadParameters: (file) => {
           return axios
             .post(
-              "/media/getSignedURL",
+              "/media/getSignedUrlUppy",
               {
                 filename: file.name,
                 contentType: file.type,
@@ -86,11 +84,6 @@ const uppyMedia = () => {
 
   return (
     <>
-      <ToastContainer
-        position="top-right"
-        autoClose={3000}
-        hideProgressBar={true}
-      />
       <div id="MyWebcam">
         <Dashboard
           uppy={uppy}
