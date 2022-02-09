@@ -3,7 +3,6 @@ import { useDropzone } from "react-dropzone";
 import { uploadFile } from "./uploader";
 
 const Ui = ({ api, data, config, readOnly, updateData }) => {
-  console.log("readOnly", readOnly);
   const [files, setFiles] = useState([]);
   const [uiData, setUiData] = useState({ ...data });
 
@@ -71,17 +70,17 @@ const Ui = ({ api, data, config, readOnly, updateData }) => {
   return (
     <div className="mb-8">
       {!readOnly && !uiData.file && (
-        <div className="mb-2 h-44 w-full rounded-sm border bg-zinc-50 p-1 text-center">
+        <div className="h-44 w-full rounded-sm bg-zinc-50 p-1 text-center mb-4">
           <div
             {...getRootProps({ className: "dropzone" })}
-            className="flex h-full items-center justify-center rounded-sm border"
+            className="flex h-full items-center justify-center rounded-sm border text-zinc-400"
           >
             <input {...getInputProps()} />
             <p>Drag 'n' drop some files here, or click to select files</p>
           </div>
         </div>
       )}
-      {uiData.file ? <img src={uiData.file.url} alt={uiData.alt} /> : null}
+      {uiData.file ? <img src={uiData.file.url} alt={uiData.alt} className="mb-4" /> : null}
 
       {/* editable elements */}
       {!readOnly && editableControls}

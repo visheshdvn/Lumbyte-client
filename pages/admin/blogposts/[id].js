@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useRouter } from "next/router";
 // third party libraries
 import { PrismaClient } from "@prisma/client";
@@ -38,6 +38,7 @@ const { blogposts, tags } = prisma;
 
 const update = ({ initialContent, allTags }) => {
   const router = useRouter();
+  const titleRef = useRef(null);
 
   const { content } = initialContent;
   const initialContentBody = JSON.parse(content);
@@ -72,16 +73,7 @@ const update = ({ initialContent, allTags }) => {
             levels: [2, 3, 4],
           },
         },
-        image: {
-          class: ImageTool,
-          config: {
-            endpoints: {
-              byUrl: "http://localhost:3000/api/media/fetchURL", // Your endpoint that provides uploading by Url
-            },
-            types: "image/*",
-          },
-        },
-        // image: ImageTool,
+        image: ImageTool,
         timeline: Timeline,
         inlineCode: {
           class: InlineCode,
@@ -101,7 +93,7 @@ const update = ({ initialContent, allTags }) => {
         },
       },
       data: updatedContent.content,
-      readOnly: true,
+      readOnly: false,
     });
     return () => {
       editor.destroy();
@@ -124,11 +116,13 @@ const update = ({ initialContent, allTags }) => {
   }
 
   async function saveBlogpost() {
+    // console.log("title values", titleRef.current.textContent);
     console.log("saving");
     let content = await editor.save();
     let payload = {
       ...updatedContent,
       content: JSON.stringify(content),
+      title: titleRef.current.textContent,
     };
 
     const noChange =
@@ -150,9 +144,16 @@ const update = ({ initialContent, allTags }) => {
     payload.tags = tagIdFromTags(payload.tags);
 
     try {
-      await axios.patch(`/blogposts/update/${router.query.id}`, payload, {
-        headers: { "Content-Type": "application/json" },
-      });
+      const { data } = await axios.patch(
+        `/blogposts/update/${router.query.id}`,
+        payload,
+        {
+          headers: { "Content-Type": "application/json" },
+        }
+      );
+      console.log("savedvalues", data.blogpost);
+      initialContent = data.blogpost;
+      setUpdateContent({ ...data.blogpost });
       toast.success("Changes saved Successfully ⭐");
     } catch (err) {
       console.error("error", err.toJSON());
@@ -205,14 +206,30 @@ const update = ({ initialContent, allTags }) => {
           <div className="grid grid-cols-4 gap-4">
             <div className="col-span-3">
               <div className="flex justify-center px-10">
-                <input
+                {/* <input
                   style={{ maxWidth: "720px" }}
                   className="unstyled-input font-raleway mb-10 w-full bg-white text-center text-5xl font-black"
                   placeholder="Enter title..."
                   value={updatedContent.title}
                   name="title"
                   onChange={(e) => updateblogdata(e)}
-                />
+                /> */}
+                <div
+                  ref={titleRef}
+                  contentEditable="true"
+                  style={{ maxWidth: "720px" }}
+                  className="unstyled-input font-raleway mb-10 w-full bg-white text-center text-5xl font-black"
+                  // onInput={(e) => console.log(e.target.textContent)}
+                  onInput={(e) => {
+                    e.preventDefault();
+                    // setUpdateContent({
+                    //   ...updatedContent,
+                    //   title: e.target.textContent,
+                    // });
+                  }}
+                >
+                  {updatedContent.title}
+                </div>
               </div>
 
               {/* Image uploader / Management */}

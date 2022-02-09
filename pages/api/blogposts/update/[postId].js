@@ -2,7 +2,7 @@ import { PrismaClient } from "@prisma/client";
 import nc from "next-connect";
 
 const prisma = new PrismaClient();
-const { blogposts, user } = prisma
+const { blogposts, user } = prisma;
 
 // middlewares
 import { sanitizeRequest } from "../../../../middleware/sanitizeRequest";
@@ -93,6 +93,29 @@ handler.patch(async (req, res) => {
       tags: {
         set: tags,
       },
+    },
+    select: {
+      id: true,
+      title: true,
+      slug: true,
+      excerpt: true,
+      metaDescription: true,
+      content: true,
+      minuteRead: true,
+      topPick: true,
+      featured: true,
+      date: true,
+      tags: {
+        select: {
+          id: true,
+          tagname: true,
+        },
+      },
+      author: true,
+      banner: true,
+      banneralt: true,
+      updated_at: true,
+      published: true,
     },
   });
   res.status(200).json({ blogpost: updated_post, msg: "updated" });
