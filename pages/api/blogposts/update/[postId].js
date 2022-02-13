@@ -29,6 +29,7 @@ handler.use((req, res, next) => {
 handler.use(updateblogpostvalidations());
 
 handler.patch(async (req, res) => {
+  console.log("inside edit")
   const { postId } = req.params;
   // implement express validator
   const {

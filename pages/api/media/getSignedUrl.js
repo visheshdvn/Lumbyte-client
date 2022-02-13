@@ -10,7 +10,7 @@ aws.config.update({
 });
 
 let s3 = new aws.S3();
-const myBucket = process.env.AWS_S3_BUCKET;
+const myBucket = process.env.AWS_S3_BUCKET_CONTENT;
 
 // middlewares
 

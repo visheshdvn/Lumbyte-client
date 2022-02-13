@@ -6,6 +6,9 @@ export const sanitizeRequest = () => {
     if (req.body.title) {
       req.body.title = req.body.title.trim();
     }
+    if (req.body.minuteRead) {
+      req.body.minuteRead = +req.body.minuteRead;
+    }
     if (req.body.slug) {
       req.body.slug = encodeURIComponent(req.body.slug.trim());
     }

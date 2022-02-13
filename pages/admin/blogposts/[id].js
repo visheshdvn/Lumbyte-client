@@ -11,8 +11,9 @@ import Select from "../../../components/elements/dropdownSelect/adminSelect";
 import Sidebar from "../../../components/adminPanel/leftSideBar";
 import FormattedDate from "../../../components/micro/formattedDate";
 import BannerUploader from "../../../components/uploaders/createBlogUploader";
-import Timeline from "../../../components/editorjs-tools/timeline/tool";
-import ImageTool from "../../../components/editorjs-tools/image/index";
+import EditBanner from "../../../components/uploaders/editBanner";
+import Timeline from "../../../components/editor-tools/timeline/tool";
+import ImageTool from "../../../components/editor-tools/image/index";
 
 // elements
 import {
@@ -116,7 +117,6 @@ const update = ({ initialContent, allTags }) => {
   }
 
   async function saveBlogpost() {
-    // console.log("title values", titleRef.current.textContent);
     console.log("saving");
     let content = await editor.save();
     let payload = {
@@ -144,6 +144,7 @@ const update = ({ initialContent, allTags }) => {
     payload.tags = tagIdFromTags(payload.tags);
 
     try {
+      console.log("sending request");
       const { data } = await axios.patch(
         `/blogposts/update/${router.query.id}`,
         payload,
@@ -151,12 +152,11 @@ const update = ({ initialContent, allTags }) => {
           headers: { "Content-Type": "application/json" },
         }
       );
-      console.log("savedvalues", data.blogpost);
       initialContent = data.blogpost;
       setUpdateContent({ ...data.blogpost });
       toast.success("Changes saved Successfully ⭐");
     } catch (err) {
-      console.error("error", err.toJSON());
+      console.error("error", err);
       toast.error("Error");
     }
   }
@@ -248,6 +248,8 @@ const update = ({ initialContent, allTags }) => {
                   ></div>
                 )}
               </div>
+
+              {/* <EditBanner /> */}
 
               {/* editor holder */}
               <div

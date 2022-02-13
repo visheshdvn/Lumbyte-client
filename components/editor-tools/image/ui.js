@@ -63,14 +63,14 @@ const Ui = ({ api, data, config, readOnly, updateData }) => {
 
   const readOnlyControls = (
     <>
-      <div className="text-center pt-1 text-zinc-600">{uiData.caption}</div>
+      <div className="pt-1 text-center text-zinc-600">{uiData.caption}</div>
     </>
   );
 
   return (
     <div className="mb-8">
       {!readOnly && !uiData.file && (
-        <div className="h-44 w-full rounded-sm bg-zinc-50 p-1 text-center mb-4">
+        <div className="mb-4 h-44 w-full rounded-sm bg-zinc-50 p-1 text-center">
           <div
             {...getRootProps({ className: "dropzone" })}
             className="flex h-full items-center justify-center rounded-sm border text-zinc-400"
@@ -80,7 +80,11 @@ const Ui = ({ api, data, config, readOnly, updateData }) => {
           </div>
         </div>
       )}
-      {uiData.file ? <img src={uiData.file.url} alt={uiData.alt} className="mb-4" /> : null}
+      {uiData.file ? (
+        <div className="mb-4 flex justify-center">
+          <img src={uiData.file.url} alt={uiData.alt} className="" />
+        </div>
+      ) : null}
 
       {/* editable elements */}
       {!readOnly && editableControls}

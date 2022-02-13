@@ -7,7 +7,7 @@ const baseUrl = process.env.NODE_ENV
 export async function uploadFile(file) {
   try {
     const urlObj = await axios.post(
-      `${baseUrl}/media/getSignedUrlContentImage`,
+      `${baseUrl}/media/getSignedUrl`,
       {
         contentType: file.type,
         filename: file.name,

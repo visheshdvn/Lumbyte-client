@@ -11,20 +11,20 @@
 }
 
 .admin-bool-btn {
-  @apply py-2 w-14 text-sm font-raleway font-medium;
+  @apply font-raleway w-14 py-2 text-sm font-medium;
 }
 
 .required-field::before {
   content: "* ";
-  @apply -ml-3 text-red-600 text-xl pt-1;
+  @apply -ml-3 pt-1 text-xl text-red-600;
 }
 
 .horizontal-spacing {
-  @apply xl:px-0 lg:px-5 md:px-3 px-2;
+  @apply px-2 md:px-3 lg:px-5 xl:px-0;
 }
 
 .blog-link {
-  @apply font-semibold text-lightBlue-600;
+  @apply text-lightBlue-600 font-semibold;
 }
 
 .divider-col {
@@ -53,4 +53,13 @@ ul.spaced li:not(:last-child) {
 .up {
   transform: rotate(-135deg);
   -webkit-transform: rotate(-135deg);
+}
+
+/* image uploaders */
+.banner-overlay-parent:hover .banner-overlay {
+  @apply opacity-80;
+}
+
+.banner-overlay {
+  @apply absolute bg-darkGray transform opacity-0 transition-all duration-300 text-white h-16 w-16 right-0 top-0;
 }

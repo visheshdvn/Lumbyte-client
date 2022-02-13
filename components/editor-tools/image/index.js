@@ -72,13 +72,10 @@ export default class ImageTool {
   }
 
   save() {
-    console.log("saving data", this.data);
     return this.data;
   }
 
   validate(savedData) {
-    console.log("inside validate", savedData);
-
     if (this.data && this.data.file && this.data.file.url) {
       return true;
     }
