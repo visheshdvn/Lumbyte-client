@@ -14,6 +14,7 @@ import BannerUploader from "../../../components/uploaders/createBlogUploader";
 import EditBanner from "../../../components/uploaders/editBanner";
 import Timeline from "../../../components/editor-tools/timeline/tool";
 import ImageTool from "../../../components/editor-tools/image/index";
+import Quote from "../../../components/editor-tools/quote/quote";
 
 // elements
 import {
@@ -46,7 +47,7 @@ const update = ({ initialContent, allTags }) => {
 
   const [updatedContent, setUpdateContent] = useState({
     ...initialContent,
-    content: initialContentBody,
+    content: {...initialContentBody},
   });
 
   // initialize editor
@@ -92,6 +93,7 @@ const update = ({ initialContent, allTags }) => {
             placeholder: "Click here to write something amazing 🔥",
           },
         },
+        quote: Quote,
       },
       data: updatedContent.content,
       readOnly: false,
@@ -124,6 +126,9 @@ const update = ({ initialContent, allTags }) => {
       content: JSON.stringify(content),
       title: titleRef.current.textContent,
     };
+
+    console.log("initial content body", initialContentBody.blocks)
+    console.log("new content body", content.blocks)
 
     const noChange =
       _.isEqual(content.blocks, initialContentBody.blocks) &&
@@ -206,27 +211,12 @@ const update = ({ initialContent, allTags }) => {
           <div className="grid grid-cols-4 gap-4">
             <div className="col-span-3">
               <div className="flex justify-center px-10">
-                {/* <input
-                  style={{ maxWidth: "720px" }}
-                  className="unstyled-input font-raleway mb-10 w-full bg-white text-center text-5xl font-black"
-                  placeholder="Enter title..."
-                  value={updatedContent.title}
-                  name="title"
-                  onChange={(e) => updateblogdata(e)}
-                /> */}
                 <div
                   ref={titleRef}
                   contentEditable="true"
                   style={{ maxWidth: "720px" }}
                   className="unstyled-input font-raleway mb-10 w-full bg-white text-center text-5xl font-black"
-                  // onInput={(e) => console.log(e.target.textContent)}
-                  onInput={(e) => {
-                    e.preventDefault();
-                    // setUpdateContent({
-                    //   ...updatedContent,
-                    //   title: e.target.textContent,
-                    // });
-                  }}
+                  suppressContentEditableWarning={true}
                 >
                   {updatedContent.title}
                 </div>
