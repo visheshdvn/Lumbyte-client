@@ -2,8 +2,10 @@ import Head from "next/head";
 
 import BroadPeek from "../components/PostPeek/broad";
 import Latest from "../components/PostPeek/latest";
-
+import axios from "../utils/axios";
 import { getIndexPageData } from "../graphql/Queries";
+
+const MAX_RESPONSE = 20;
 
 export default function Home({ latest, latestSide, readMore }) {
   return (
@@ -49,11 +51,12 @@ export default function Home({ latest, latestSide, readMore }) {
           content="https://lumbytes.com/logo/ogImage.png"
         />
       </Head>
-
-      <Latest big={latest} side={latestSide} />
+      <div className="body-top-spacing">
+        <Latest big={latest} side={latestSide} />
+      </div>
 
       <section className="body-font">
-        <div className="container mx-auto horizontal-spacing">
+        <div className="horizontal-spacing container mx-auto">
           <h1 className="wide-head">Read more</h1>
           {readMore.map((item) => (
             <BroadPeek data={item} key={item.slug} />
@@ -66,15 +69,26 @@ export default function Home({ latest, latestSide, readMore }) {
 
 export async function getStaticProps() {
   console.log("Re-Generating...");
+
+  // const {
+  //   data: { latest, latestSide, featured, readMore },
+  // } = await getIndexPageData(0, 10);
+
   const {
-    data: { latest, latestSide, featured, readMore },
-  } = await getIndexPageData(0, 10);
+    data: { data },
+    status,
+  } = await axios.get(`/blogposts?take=${MAX_RESPONSE}`);
+
+  const latest = data.slice(0, 1);
+  const latestSide = data.slice(1, 4);
+  // const featured = data.slice(4, 6);
+  const readMore = data.slice(4, 20);
 
   return {
     props: {
       latest: latest[0],
       latestSide,
-      featured,
+      // featured,
       readMore,
     },
     revalidate: 14400,

@@ -135,14 +135,14 @@ handler.get(async (req, res) => {
           ? { some: { OR: _where.tags, published: true } }
           : undefined,
     },
-    skip: +skip || undefined,
-    take: +take || undefined,
+    skip: +skip || 0,
+    take: +take || 20,
     orderBy: {
       id: "desc",
     },
   });
 
-  res.status("200").json(blog);
+  res.status("200").json({status: "success", data: blog});
 });
 
 export default handler;

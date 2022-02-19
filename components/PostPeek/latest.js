@@ -6,42 +6,43 @@ import FormattedDate from "../micro/formattedDate";
 import ShowTags from "../micro/showTags";
 
 const Latest = ({ big, side }) => {
-  const { title, tags, banner, date, slug, author } = big;
+  // console.log("side", side);
+  const { title, tags, banner, banneralt, date, slug, author } = big;
 
   return (
     <div
       style={{ minHeight: "12rem" }}
-      className="grid gap-1 grid-cols-12 container xl:h-100 h-auto mx-auto horizontal-spacing xl:mt-12 xl:mb-12 lg:mt-5 lg:mb-11 md:mt-0 md:mb-10 sm:mt-4 mt-3 mb-14"
+      className="xl:h-100 horizontal-spacing container mx-auto mt-3 mb-14 grid h-auto grid-cols-12 gap-1 sm:mt-4 md:mt-0 md:mb-10 lg:mt-5 lg:mb-11 xl:mt-12 xl:mb-12"
     >
-      <div className="xl:col-span-9 col-span-12 overflow-hidden">
-        <div className="h-full w-full flex flex-wrap relative">
-          <a href={`/post/${slug}`} className="sm:relative w-full h-full">
-            <img
-              src={getValidImageURL(banner.url)}
-              alt={banner.alternativeText}
+      <div className="col-span-12 overflow-hidden xl:col-span-9">
+        <div className="relative flex h-full w-full flex-wrap">
+          <a href={`/post/${slug}`} className="h-full w-full sm:relative">
+            {/* <img
+              src={getValidImageURL(banner)}
+              alt={banneralt}
               className="transform scale-105 hidden sm:block"
+            /> */}
+            <Image
+              src={banner}
+              alt={banneralt}
+              layout="fill"
+              className="hidden object-cover object-center sm:block"
+              placeholder="blur"
+              blurDataURL={banner}
             />
-            {/* <Image
-                src={getValidImageURL(banner.url)}
-                alt={banner.alternativeText}
-                layout="fill"
-                className="object-cover object-center hidden sm:block"
-                placeholder="blur"
-                blurDataURL={getValidImageURL(banner.url)}
-              /> */}
             <div
               style={{
-                backgroundImage: `url(${getValidImageURL(banner.url)})`,
+                backgroundImage: `url(${banner})`,
                 backgroundPosition: "center",
                 backgroundSize: "cover",
               }}
-              className="border h-96 w-screen sm:hidden"
+              className="h-96 w-screen border sm:hidden"
             ></div>
           </a>
 
           <div
             style={{ backgroundColor: "rgba(38, 38, 17, 0.85)" }}
-            className="lg:w-4/5 w-11/12 absolute bottom-8 md:px-5 md:py-6 px-4 py-5"
+            className="absolute bottom-8 w-11/12 px-4 py-5 text-zinc-50 md:px-5 md:py-6 lg:w-4/5"
           >
             <div className="flex">
               {tags.map((tag) => (
@@ -53,13 +54,14 @@ const Latest = ({ big, side }) => {
               ))}
             </div>
             <a href={`/post/${slug}`}>
-              <h1 className="text-whiteMain font-raleway font-black lg:my-4 sm:my-3 my-2 leading-tight xl:text-4xl lg:text-3.75 md:text-2.75xl sm:text-3xl text-2xl">
+              <h1 className="text-whiteMain font-raleway lg:text-3.75 md:text-2.75xl my-2 text-2xl font-black leading-tight sm:my-3 sm:text-3xl lg:my-4 xl:text-4xl">
                 {title}
               </h1>
             </a>
             <div className="flex items-center">
-              <h4 className="font-open-sans text-whiteMain lg:text-lg md:text-lg text-sm font-bold">
-                {author.firstname + " " + author.lastname}
+              <h4 className="font-open-sans text-whiteMain text-sm font-bold md:text-lg lg:text-lg">
+                <span>{author.firstname}</span>
+                {author.lastname ? <span>{" " + author.lastname}</span> : null}
               </h4>
               <div
                 style={{ width: "1px", height: "15px" }}
@@ -72,7 +74,7 @@ const Latest = ({ big, side }) => {
           </div>
         </div>
       </div>
-      <div className="xl:col-span-3 col-span-12 pl-3 mt-4 md:mt-4 lg:mt-5 xl:mt-0">
+      <div className="col-span-12 mt-4 pl-3 md:mt-4 lg:mt-5 xl:col-span-3 xl:mt-0">
         {side.map((item) => (
           <SideHeads
             title={item.title}
@@ -89,24 +91,24 @@ const Latest = ({ big, side }) => {
 
 function SideHeads({ title, date, slug, author }) {
   return (
-    <div className="text-grayMain dark:text-whiteMain hover:opacity-70 dark:hover:text-gray-400 special-dividers">
+    <div className="text-grayMain dark:text-whiteMain special-dividers hover:opacity-70 dark:hover:text-gray-400">
       <a href={`/post/${slug}`} className="">
         <h1
           // style={{ fontSize: "32px" }}
-          className="font-raleway font-black leading-tight xl:text-3.5 lg:text-3.75 md:text-2.75xl sm:text-3xl text-2xl text-center md:text-left"
+          className="font-raleway xl:text-3.5 lg:text-3.75 md:text-2.75xl text-center text-2xl font-black leading-tight sm:text-3xl md:text-left"
         >
           {title}
         </h1>
       </a>
-      <div className="flex items-center pt-1 justify-center md:justify-start">
-        <h4 className="font-open-sans md:text-lg text-sm font-bold">
+      <div className="flex items-center justify-center pt-1 md:justify-start">
+        <h4 className="font-open-sans text-sm font-bold md:text-lg">
           {author.firstname + " " + author.lastname}
         </h4>
         <div
           style={{ width: "1px", height: "15px" }}
-          className="mx-2 bg-margins"
+          className="bg-margins mx-2"
         />
-        <h5 className="font-light text-sm">
+        <h5 className="text-sm font-light">
           <FormattedDate date={date} />
         </h5>
       </div>

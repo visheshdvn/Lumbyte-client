@@ -14,6 +14,7 @@ module.exports = (phase, { defaultConfig }) => {
           "i.ibb.co",
           "172.26.188.242",
           "lumbytesblog.s3.eu-west-1.amazonaws.com",
+          "lumbytesblog-banners-development.s3.eu-west-1.amazonaws.com",
         ],
       },
     };

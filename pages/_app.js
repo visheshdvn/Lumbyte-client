@@ -46,7 +46,7 @@ function MyApp({ Component, pageProps }) {
       <SessionProvider session={pageProps.session}>
         <ApolloProvider client={client}>
           <ThemeProvider attribute="class">
-            {/* {router.pathname.startsWith("/admin") ? null : <Navbar />} */}
+            {router.pathname.startsWith("/admin") ? null : <Navbar />}
             {Component.auth ? (
               <Auth roles={Component.auth.roles}>
                 <Component {...pageProps} />
