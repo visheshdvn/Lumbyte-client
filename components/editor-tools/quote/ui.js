@@ -20,10 +20,8 @@ const Ui = ({
   const [uiData, setUiData] = useState(data);
   const [authorField, setAuthor] = useState(data.author);
 
-  // const readOnlyMarkup = ()
-
-  return (
-    <div className="mb-8 rounded-r border-l-2 border-zinc-800 bg-neutral-50 py-3 px-5">
+  const editableMarkup = (
+    <>
       <p
         contentEditable={true}
         suppressContentEditableWarning={true}
@@ -45,6 +43,22 @@ const Ui = ({
           }}
         />
       </p>
+    </>
+  );
+
+  const readOnlyMarkup = (
+    <>
+      <q className="mb-0 font-serif text-lg md:leading-8 md:text-xl italic outline-none">{data.text}</q>
+      {authorField && (
+        <p className="mt-3 font-serif italic text-right">{"~ " + authorField}</p>
+      )}
+    </>
+  );
+
+  return (
+    <div className="mb-8 rounded-r border-l-2 border-zinc-800 bg-neutral-50 py-3 px-5">
+      {!readOnly && editableMarkup}
+      {readOnly && readOnlyMarkup}
     </div>
   );
 };
