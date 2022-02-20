@@ -9,7 +9,6 @@ import { getValidImageURL } from "../../utils/checkValidURL";
 const BroadPeek = ({
   data: { excerpt, title, slug, author, tags, banner, banneralt, date },
 }) => {
-  
   return (
     <article className="mb-16 flex sm:mb-16 md:mb-20 lg:mb-24">
       <Link href={`/post/${slug}`}>
@@ -61,7 +60,10 @@ const BroadPeek = ({
               </p>
               <div className="flex items-center justify-center">
                 <h4 className="font-open-sans font-bold lg:text-lg xl:text-xl">
-                  {author.firstname + " " + author.lastname}
+                  <span>{author.firstname}</span>
+                  {author.lastname ? (
+                    <span>{" " + author.lastname}</span>
+                  ) : null}
                 </h4>
                 <div
                   style={{ width: "1px", height: "15px" }}

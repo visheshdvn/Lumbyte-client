@@ -102,7 +102,8 @@ function SideHeads({ title, date, slug, author }) {
       </a>
       <div className="flex items-center justify-center pt-1 md:justify-start">
         <h4 className="font-open-sans text-sm font-bold md:text-lg">
-          {author.firstname + " " + author.lastname}
+          <span>{author.firstname}</span>
+          {author.lastname ? <span>{" " + author.lastname}</span> : null}
         </h4>
         <div
           style={{ width: "1px", height: "15px" }}
