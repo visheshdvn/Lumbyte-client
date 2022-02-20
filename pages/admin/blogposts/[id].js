@@ -12,7 +12,6 @@ import Sidebar from "../../../components/adminPanel/leftSideBar";
 import FormattedDate from "../../../components/micro/formattedDate";
 import BannerUploader from "../../../components/uploaders/createBlogUploader";
 import EditBanner from "../../../components/uploaders/editBanner";
-import Timeline from "../../../components/editor-tools/timeline/tool";
 import ImageTool from "../../../components/editor-tools/image/index";
 import Quote from "../../../components/editor-tools/quote/quote";
 
@@ -76,7 +75,6 @@ const update = ({ initialContent, allTags }) => {
           },
         },
         image: ImageTool,
-        timeline: Timeline,
         inlineCode: {
           class: InlineCode,
           shortcut: "CMD+SHIFT+M",
@@ -397,7 +395,7 @@ const update = ({ initialContent, allTags }) => {
 };
 
 update.auth = {
-  roles: ["SUPERUSER"],
+  roles: ["SUPERUSER", "ADMIN"],
 };
 
 export default update;

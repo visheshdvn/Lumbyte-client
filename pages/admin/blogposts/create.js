@@ -330,7 +330,7 @@ const create = () => {
 };
 
 create.auth = {
-  roles: ["SUPERUSER"],
+  roles: ["SUPERUSER", "ADMIN"],
 };
 
 export default create;

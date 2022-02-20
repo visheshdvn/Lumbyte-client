@@ -17,7 +17,7 @@ import "../styles/utilitiy.css";
 import "../styles/editorjs.css";
 
 // component
-import Navbar from "../components/Navbar";
+import Navbar from "../components/elements/navbar/Navbar-client";
 import Footer from "../components/Footer";
 import AccessDenied from "../components/accessDenied";
 
@@ -46,7 +46,7 @@ function MyApp({ Component, pageProps }) {
       <SessionProvider session={pageProps.session}>
         <ApolloProvider client={client}>
           <ThemeProvider attribute="class">
-            {router.pathname.startsWith("/admin") ? null : <Navbar />}
+            {/* {router.pathname.startsWith("/admin") ? null : <Navbar />} */}
             {Component.auth ? (
               <Auth roles={Component.auth.roles}>
                 <Component {...pageProps} />
@@ -64,7 +64,6 @@ function MyApp({ Component, pageProps }) {
 }
 
 function Auth({ children, roles }) {
-
   const { data: session, status } = useSession({ required: true });
   const isUser = !!session?.user;
 

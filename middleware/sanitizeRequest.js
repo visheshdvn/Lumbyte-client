@@ -10,7 +10,7 @@ export const sanitizeRequest = () => {
       req.body.minuteRead = +req.body.minuteRead;
     }
     if (req.body.slug) {
-      req.body.slug = encodeURIComponent(req.body.slug.trim());
+      req.body.slug = req.body.slug.trim();
     }
     if (
       req.body.metaDescription &&

@@ -112,7 +112,7 @@ function TableContents({ data }) {
 }
 
 Blogposts.auth = {
-  roles: ["SUPERUSER"],
+  roles: ["SUPERUSER", "ADMIN"],
 };
 
 export default Blogposts;

@@ -1,35 +1,37 @@
-/* 
-* editorjs editable
-*/
+/* global */
+div.codex-editor__redactor {
+  @apply pb-10;
+}
+
+div.ce-block__content {
+  @apply w-full max-w-3xl;
+}
 
 /* headings */
 h2.ce-header {
-  @apply text-4xl font-open-sans font-bold mb-6;
+  @apply font-open-sans mb-8 pt-2 text-4xl font-bold;
 }
 
 h3.ce-header {
-  @apply text-3xl font-open-sans font-bold mb-4;
+  @apply font-open-sans mb-6 pt-2 text-3xl font-bold;
 }
 
 h4.ce-header {
-  @apply lg:text-xl font-open-sans font-bold mb-2;
+  @apply font-open-sans mb-4 pt-2 font-bold lg:text-xl;
 }
 
-/*  */
+/* paragraph */
 div.ce-paragraph {
-  @apply mb-8 lg:text-lg lg:leading-8;
+  @apply mb-10 p-0 font-serif text-lg md:text-xl md:leading-8;
 }
 
-ul.cdx-block {
-  @apply pl-6;
+/* lists */
+.cdx-list {
+  @apply mb-9 list-inside list-disc;
 }
 
-ul.cdx-list--unordered li.cdx-list__item {
-  @apply lg:text-lg lg:leading-8 mb-3 p-0;
-}
-
-ol.cdx-list--ordered li.cdx-list__item {
-  @apply lg:text-lg lg:leading-8 mb-3 p-0;
+.cdx-list li.cdx-list__item {
+  @apply mb-5 p-0 font-serif text-lg md:text-xl md:leading-8;
 }
 
 /* 

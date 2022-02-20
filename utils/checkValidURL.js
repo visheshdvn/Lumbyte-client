@@ -11,10 +11,18 @@ export function isValidURL(str) {
   return !!pattern.test(str);
 }
 
+// console.log(process.env.PORT);
+
 export function getValidImageURL(url) {
   if (isValidURL(url)) {
     return url;
   } else {
-    return `${process.env.PROTOCOL}://${process.env.HOSTNAME}${url}`;
+    let nurl;
+    if (process.env.NODE_ENV == "development") {
+      nurl = `http://localhost:3000${url}`;
+    } else {
+      nurl = `https://lumbytes.com${url}`;
+    }
+    return nurl;
   }
 }

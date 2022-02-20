@@ -4,16 +4,15 @@ module.exports = (phase, { defaultConfig }) => {
   if (phase === PHASE_DEVELOPMENT_SERVER) {
     return {
       env: {
-        HOSTNAME: "localhost:1337",
-        PROTOCOL: "http",
+        HOSTNAME: "admin.lumbytes.com",
+        PROTOCOL: "https",
         // NEXT_PUBLIC_GA_ID: "G-3BNNCK0DEL",
       },
       images: {
         domains: [
           "localhost",
-          "i.ibb.co",
-          "172.26.188.242",
-          "lumbytesblog.s3.eu-west-1.amazonaws.com",
+          "admin.lumbytes.com",
+          "lumbytesblog-content-development.s3.eu-west-1.amazonaws.com",
           "lumbytesblog-banners-development.s3.eu-west-1.amazonaws.com",
         ],
       },
@@ -27,7 +26,11 @@ module.exports = (phase, { defaultConfig }) => {
       NEXT_PUBLIC_GA_ID: "G-3BNNCK0DEL",
     },
     images: {
-      domains: ["i.ibb.co", "admin.lumbytes.com"],
+      domains: [
+        "admin.lumbytes.com",
+        "lumbytesblog-banners.s3.eu-west-1.amazonaws.com",
+        "lumbytesblog-content.s3.eu-west-1.amazonaws.com",
+      ],
     },
   };
 };

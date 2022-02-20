@@ -91,6 +91,7 @@ handler.put(async (req, res) => {
     where: { id: +id },
     data: {
       published: true,
+      published_at: new Date().toISOString()
     },
   });
 
