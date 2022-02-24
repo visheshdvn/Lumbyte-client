@@ -454,6 +454,13 @@
           ],
           "default": ""
         },
+        "ogAlt": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": ""
+        },
         "blogposts": {
           "type": "array",
           "items": {

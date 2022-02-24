@@ -1,7 +1,9 @@
 import React from "react";
 import { useRouter } from "next/router";
 import Head from "next/head";
+import { PrismaClient } from "@prisma/client";
 
+// components
 import WidePeek from "../../components/PostPeek/wide";
 import SmallPeek from "../../components/PostPeek/smaller";
 import BroadPeek from "../../components/PostPeek/broad";
@@ -10,7 +12,9 @@ import { getAllTags, getTagPageData } from "../../graphql/topicPageQueries";
 import { isValidURL } from "../../utils/checkValidURL";
 import { hexToRGB } from "../../utils/colorConversions";
 
-const Topic = ({ posts, theme, metaDescription, ogImg }) => {
+const { tags, blogposts } = new PrismaClient();
+
+const Topic = ({ posts, theme, metaDescription, ogImg, ogAlt }) => {
   const router = useRouter();
   if (router.isFallback) {
     return <div>Loading...</div>;
@@ -69,24 +73,24 @@ const Topic = ({ posts, theme, metaDescription, ogImg }) => {
         />
       </Head>
 
-      <header className="flex items-center justify-center horizontal-spacing xl:pt-10 lg:pt-3 md:pt-1 pt-4 xl:mb-16 lg:mb-14 md:mb-12 mb-10">
-        <div className="container horizontal-spacing mx-auto my-auto relative lg:h-48 md:h-40 sm:h-32 h-28 bg-grayMain dark:bg-gray-800 overflow-hidden">
+      <header className="horizontal-spacing mb-10 flex items-center justify-center pt-4 md:mb-12 md:pt-1 lg:mb-14 lg:pt-3 xl:mb-16 xl:pt-10">
+        <div className="horizontal-spacing bg-grayMain container relative mx-auto my-auto h-28 overflow-hidden dark:bg-gray-800 sm:h-32 md:h-40 lg:h-48">
           <h1
             style={{ color: `${theme}` }}
-            className="font-raleway-dot select-none between-rel-parent uppercase tracking-widest opacity-20 lg:text-10xl md:text-9xl sm:text-8xl text-8xl"
+            className="font-raleway-dot between-rel-parent lg:text-10xl select-none text-8xl uppercase tracking-widest opacity-20 sm:text-8xl md:text-9xl"
           >
             {tag}
           </h1>
           <h1
             style={{ color: `${theme}` }}
-            className="between-rel-parent select-none font-mono lowercase font-bold tracking-custom xl:text-6xl md:text-5xl sm:text-4.5xl text-3xl text-center"
+            className="between-rel-parent tracking-custom sm:text-4.5xl select-none text-center font-mono text-3xl font-bold lowercase md:text-5xl xl:text-6xl"
           >
             {"#" + tag}
           </h1>
         </div>
       </header>
       <section className="body-font">
-        <div className="container mx-auto horizontal-spacing">
+        <div className="horizontal-spacing container mx-auto">
           {posts.map((post) => (
             <BroadPeek data={post} key={post.slug} />
           ))}
@@ -104,11 +108,53 @@ export async function getStaticProps(context) {
     params: { tag },
   } = context;
 
-  const {
-    data: { buildData, posts },
-  } = await getTagPageData(tag, 0, 10);
+  const pageBuildData = await tags.findUnique({
+    select: {
+      color: true,
+      ogimg: true,
+      ogAlt: true,
+      metaDescription: true,
+    },
+    where: {
+      tagname: tag,
+    },
+  });
 
-  if (posts.length === 0 && buildData.length === 0) {
+  let posts = await blogposts.findMany({
+    where: {
+      tags: {
+        some: {
+          tagname: tag,
+        },
+      },
+    },
+    select: {
+      title: true,
+      excerpt: true,
+      slug: true,
+      published_at: true,
+      banner: true,
+      banneralt: true,
+      tags: {
+        select: {
+          tagname: true,
+          color: true,
+        },
+      },
+      author: {
+        select: {
+          firstname: true,
+          lastname: true,
+        },
+      },
+      created_at: true,
+      published_at: true,
+    },
+  });
+
+  posts = JSON.parse(JSON.stringify(posts));
+
+  if (posts.length === 0) {
     return {
       notFound: true,
     };
@@ -116,9 +162,10 @@ export async function getStaticProps(context) {
 
   return {
     props: {
-      theme: buildData[0].color,
-      metaDescription: buildData[0].metaDescription,
-      ogImg: buildData[0].ogImg,
+      theme: pageBuildData.color,
+      ogImg: pageBuildData.ogimg,
+      ogAlt: pageBuildData.ogAlt,
+      metaDescription: pageBuildData.metaDescription,
       posts,
     },
     revalidate: 86400,

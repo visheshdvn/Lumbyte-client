@@ -115,6 +115,15 @@ const Update = ({ initialTagData }) => {
                 placeholder="Enter opengraph image url"
               />
               <AdminInlineTextInput
+                label="Og Alt text"
+                name="ogAlt"
+                value={tagData.ogAlt}
+                onChangeHandler={updateTagdata}
+                placeholder="Enter opengraph alt text"
+              />
+            </div>
+            <div className="flex">
+              <AdminInlineTextInput
                 label="Og Title"
                 name="ogTitle"
                 value={tagData.ogTitle}
@@ -147,7 +156,7 @@ const Update = ({ initialTagData }) => {
 };
 
 Update.auth = {
-  roles: ["SUPERUSER"],
+  roles: ["SUPERUSER", "ADMIN"],
 };
 
 export default Update;

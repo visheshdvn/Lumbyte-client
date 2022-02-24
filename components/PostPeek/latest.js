@@ -17,11 +17,6 @@ const Latest = ({ big, side }) => {
       <div className="col-span-12 overflow-hidden xl:col-span-9">
         <div className="relative flex h-full w-full flex-wrap">
           <a href={`/post/${slug}`} className="h-full w-full sm:relative">
-            {/* <img
-              src={getValidImageURL(banner)}
-              alt={banneralt}
-              className="transform scale-105 hidden sm:block"
-            /> */}
             <Image
               src={banner}
               alt={banneralt}

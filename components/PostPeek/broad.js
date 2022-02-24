@@ -7,7 +7,17 @@ import ShowTags from "../../components/micro/showTags";
 import { getValidImageURL } from "../../utils/checkValidURL";
 
 const BroadPeek = ({
-  data: { excerpt, title, slug, author, tags, banner, banneralt, date },
+  data: {
+    excerpt,
+    title,
+    slug,
+    author,
+    tags,
+    banner,
+    banneralt,
+    published_at,
+    created_at,
+  },
 }) => {
   return (
     <article className="mb-16 flex sm:mb-16 md:mb-20 lg:mb-24">
@@ -70,7 +80,7 @@ const BroadPeek = ({
                   className="bg-margins mx-2"
                 />
                 <h5 className="font-light">
-                  <FormattedDate date={date} />
+                  <FormattedDate date={published_at || created_at} />
                 </h5>
               </div>
             </div>

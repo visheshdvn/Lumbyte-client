@@ -62,7 +62,6 @@ export default function Home({ latest, latestSide, readMore }) {
         <div className="horizontal-spacing container mx-auto">
           <h1 className="wide-head">Read more</h1>
           {readMore.map((item) => {
-            // console.log("item", item);
             return <BroadPeek data={item} key={item.slug} />;
           })}
         </div>
