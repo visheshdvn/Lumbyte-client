@@ -9,7 +9,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 // components
 import Select from "../../../components/elements/dropdownSelect/adminSelect";
-import Sidebar from "../../../components/adminPanel/leftSideBar";
+import Sidebar from "../../../components/elements/sideBar/leftSideBar";
 import FormattedDate from "../../../components/micro/formattedDate";
 import BannerUploader from "../../../components/uploaders/createBlogUploader";
 import EditBanner from "../../../components/uploaders/editBanner";
@@ -45,6 +45,8 @@ const update = ({ initialContent, allTags }) => {
   const { content } = initialContent;
   const initialContentBody = JSON.parse(content);
 
+  const [file, setFile] = useState(null);
+  console.log("file", file);
   const [updatedContent, setUpdateContent] = useState({
     ...initialContent,
     content: { ...initialContentBody },
@@ -239,7 +241,7 @@ const update = ({ initialContent, allTags }) => {
                 )}
               </div>
 
-              <EditBanner />
+              {/* <EditBanner setFile={setFile} /> */}
 
               {/* editor holder */}
               <div

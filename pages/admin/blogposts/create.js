@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "../../../utils/axios";
-import Sidebar from "../../../components/adminPanel/leftSideBar";
+import Sidebar from "../../../components/elements/sideBar/leftSideBar";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import BannerUploader from "../../../components/uploaders/createBlogUploader";
@@ -12,7 +12,6 @@ const create = () => {
   const { theme } = useTheme();
   const { data: session, status } = useSession();
 
-  console.log("theme", theme);
   useEffect(() => {
     // imports
     const EditorJS = require("@editorjs/editorjs");

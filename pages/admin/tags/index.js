@@ -1,5 +1,5 @@
 import React from "react";
-import Sidebar from "../../../components/adminPanel/leftSideBar";
+import Sidebar from "../../../components/elements/sideBar/leftSideBar";
 import Link from "next/link";
 import { PrismaClient } from "@prisma/client";
 // utilities

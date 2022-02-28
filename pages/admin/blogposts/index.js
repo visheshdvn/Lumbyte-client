@@ -4,7 +4,7 @@ import { PrismaClient } from "@prisma/client";
 import Link from "next/link";
 import Head from "next/head";
 // custom components
-import Sidebar from "../../../components/adminPanel/leftSideBar";
+import Sidebar from "../../../components/elements/sideBar/leftSideBar";
 import FormattedDate from "../../../components/micro/formattedDate";
 
 const { blogposts } = new PrismaClient();

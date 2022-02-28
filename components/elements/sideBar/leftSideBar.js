@@ -9,7 +9,7 @@ const LeftSideBar = () => {
   const { data: session, status } = useSession();
   const { user } = session;
   const { theme, setTheme } = useTheme();
-  
+
   useEffect(() => {
     setTheme("light");
   }, [theme]);
@@ -17,44 +17,44 @@ const LeftSideBar = () => {
   return (
     <div
       style={{ maxWidth: "312px", minWidth: "312px" }}
-      className="h-screen flex items-center justify-center fixed"
+      className="fixed flex h-screen items-center justify-center"
     >
-      <div className="h-full w-full bg-[#161619] relative pl-8">
-        <div className="text-white border border-white h-40 w-40 absolute left-1/2 transform -translate-x-1/2 top-10 font-adminPrimary font">
+      <div className="relative h-full w-full bg-[#161619] pl-8">
+        <div className="font-adminPrimary font absolute left-1/2 top-10 h-40 w-40 -translate-x-1/2 transform border border-white text-white">
           <div>Image here</div>
           <h1 className="text-center text-xl font-semibold">Vishesh Dhawan</h1>
           <h2 className="text-center text-sm font-normal">Superuser</h2>
         </div>
-        <div className="between-rel-paren absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+        <div className="between-rel-paren absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transform">
           <ul className="text-gray-400">
             <NavItem text="Dashboard" link="/admin" />
             <NavItem text="Blogposts" link="/admin/blogposts" />
             <NavItem text="Tags" link="/admin/tags" />
-            <NavItem text="Topics" link="/admin/topics" />
-            <NavItem text="Media" link="/admin/media" />
           </ul>
         </div>
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 borde w-60 flex text-white">
+        <div className="borde absolute bottom-8 left-1/2 flex w-60 -translate-x-1/2 transform text-white">
           <div
             style={{ backgroundImage: "url(/me.jpg)" }}
-            className="h-12 w-12 bg-cover bg-center rounded-xl mr-4"
+            className="mr-4 h-12 w-12 rounded-xl bg-cover bg-center"
           ></div>
-          <div className="flex-col flex-1 justify-around">
-            <h4 className="text-base font-semibold font-adminPrimary">
+          <div className="flex-1 flex-col justify-around">
+            <h4 className="font-adminPrimary text-base font-semibold">
               {user.firstname || "" + " " + user.lastname || ""}
             </h4>
-            <h5 className="text-xs font-medium font-adminPrimary">{user.role.toLowerCase()}</h5>
+            <h5 className="font-adminPrimary text-xs font-medium">
+              {user.role.toLowerCase()}
+            </h5>
           </div>
           <div className="flex items-center">
             <Popover className="relative">
               <Popover.Button>
                 <i className="arrow up"></i>
               </Popover.Button>
-              <Popover.Panel className="absolute z-10 -top-16 -left-20 bg-white rounded-lg overflow-hidden px-2 py-1 border-2 border-black">
-                <div className="w-24 text-grayMain text-center">
+              <Popover.Panel className="absolute -top-16 -left-20 z-10 overflow-hidden rounded-lg border-2 border-black bg-white px-2 py-1">
+                <div className="text-grayMain w-24 text-center">
                   <button
                     onClick={() => signOut()}
-                    className="rounded-lg text-sm font-adminPrimary font-semibold"
+                    className="font-adminPrimary rounded-lg text-sm font-semibold"
                   >
                     Sign Out
                   </button>
@@ -78,7 +78,7 @@ function NavItem({ text, icon, link }) {
   return (
     <ul>
       <div
-        className={`h-14 w-60 rounded-2xl flex items-center pl-5 font-adminPrimary font-semibold ${conditionalClass}`}
+        className={`font-adminPrimary flex h-14 w-60 items-center rounded-2xl pl-5 font-semibold ${conditionalClass}`}
       >
         <Link href={link} passHref>
           <a>{text}</a>

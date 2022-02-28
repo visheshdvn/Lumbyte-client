@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDropzone } from "react-dropzone";
 
-const EditBanner = () => {
+const EditBanner = ({ setFile }) => {
   const [files, setFiles] = useState([]);
   const [displayEditOptions, setDisplayEditOptions] = useState(false);
 
@@ -16,6 +16,7 @@ const EditBanner = () => {
           })
         )
       );
+      setFile(acceptedFiles[0]);
     },
     maxFiles: 1,
     noKeyboard: true,
@@ -38,7 +39,10 @@ const EditBanner = () => {
               <div className="relative h-full w-full">
                 <button
                   className="absolute top-1/2 left-1/2 h-2/5 w-2/5 -translate-x-1/2 -translate-y-1/2 transform"
-                  onClick={() => setDisplayEditOptions(false)}
+                  onClick={() => {
+                    setFile(null);
+                    setDisplayEditOptions(false);
+                  }}
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"

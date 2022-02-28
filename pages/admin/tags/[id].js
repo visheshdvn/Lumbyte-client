@@ -7,7 +7,7 @@ import _ from "lodash";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 // components
-import Sidebar from "../../../components/adminPanel/leftSideBar";
+import Sidebar from "../../../components/elements/sideBar/leftSideBar";
 // elements
 import {
   PublishButton,
