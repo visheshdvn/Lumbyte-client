@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useRouter } from "next/router";
+import Head from "next/head";
 // third party libraries
 import { PrismaClient } from "@prisma/client";
 import axios from "../../../utils/axios";
@@ -46,7 +47,7 @@ const update = ({ initialContent, allTags }) => {
 
   const [updatedContent, setUpdateContent] = useState({
     ...initialContent,
-    content: {...initialContentBody},
+    content: { ...initialContentBody },
   });
 
   // initialize editor
@@ -125,9 +126,6 @@ const update = ({ initialContent, allTags }) => {
       title: titleRef.current.textContent,
     };
 
-    console.log("initial content body", initialContentBody.blocks)
-    console.log("new content body", content.blocks)
-
     const noChange =
       _.isEqual(content.blocks, initialContentBody.blocks) &&
       _.isEqual(
@@ -166,6 +164,10 @@ const update = ({ initialContent, allTags }) => {
 
   return (
     <>
+      <Head>
+        <title>Admin | Blogposts</title>
+      </Head>
+
       <NoIndex />
       {/* Body */}
       <div className="flex">
@@ -237,7 +239,7 @@ const update = ({ initialContent, allTags }) => {
                 )}
               </div>
 
-              {/* <EditBanner /> */}
+              <EditBanner />
 
               {/* editor holder */}
               <div
@@ -421,17 +423,8 @@ function InlineTextField({ label, name, value, onChangeHandler }) {
 export async function getServerSideProps({ params }) {
   const id = params.id;
 
-  if (!parseInt(id)) {
-    return {
-      redirect: {
-        destination: "/404",
-        permanent: false,
-      },
-    };
-  }
-
   let data = await blogposts.findUnique({
-    where: { id: +id },
+    where: { id },
     select: {
       id: true,
       title: true,

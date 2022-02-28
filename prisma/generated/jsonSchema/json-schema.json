@@ -117,6 +117,9 @@
       "type": "object",
       "properties": {
         "id": {
+          "type": "string"
+        },
+        "n": {
           "type": "integer"
         },
         "title": {

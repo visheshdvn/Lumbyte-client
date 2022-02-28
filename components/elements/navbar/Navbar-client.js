@@ -50,6 +50,7 @@ export default function Navbar() {
 
   return (
     <>
+      <div className="body-top-spacing"></div>
       <Disclosure
         as="nav"
         style={{
@@ -60,16 +61,16 @@ export default function Navbar() {
               : "0px"
           }`,
         }}
-        className="bg-white w-full fixed dark:bg-darkGray z-40"
+        className="dark:bg-darkGray fixed z-40 w-full bg-white"
       >
         {/* ${navbarHidden ? "-top-16" : "top-0"}  */}
         {({ open }) => (
           <>
-            <div id="hidebar" className="container horizontal-spacing mx-auto">
-              <div className="relative flex items-center justify-between h-auto">
-                <div className="absolute inset-y-0 left-0 items-center fle md:hidden hidden">
+            <div id="hidebar" className="horizontal-spacing container mx-auto">
+              <div className="relative flex h-auto items-center justify-between">
+                <div className="fle absolute inset-y-0 left-0 hidden items-center md:hidden">
                   {/* Mobile menu button*/}
-                  <Disclosure.Button className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
+                  <Disclosure.Button className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
                     <span className="sr-only">Open main menu</span>
                     {open ? (
                       <XIcon className="block h-6 w-6" aria-hidden="true" />
@@ -78,11 +79,11 @@ export default function Navbar() {
                     )}
                   </Disclosure.Button>
                 </div>
-                <div className="flex-1 flex items-center justify-center md:items-stretch">
+                <div className="flex flex-1 items-center justify-center md:items-stretch">
                   {/* <div className="flex-shrink-0 flex items-center"> */}
                   <Link href="/" passHref>
                     <a className="font-antonio font-bold lg:-my-1">
-                      <h1 className="leading-none select-none lg:pt-3 lg:pb-4 pt-1 pb-2 tracking-custom xl:text-4.75xl md:text-4xl text-3xl -mr-3">
+                      <h1 className="tracking-custom xl:text-4.75xl -mr-3 select-none pt-1 pb-2 text-3xl leading-none md:text-4xl lg:pt-3 lg:pb-4">
                         LUMBYTES
                       </h1>
                     </a>
@@ -91,10 +92,10 @@ export default function Navbar() {
                 </div>
               </div>
             </div>
-            <div className="bg-grayMain dark:bg-gray-800 md:py-2.5 sm:py-2 py-2">
-              <div className="container mx-auto horizontal-spacing flex">
-                <div className="md:block flex-1 items-center">
-                  <div className="w-min border-r border-whiteMain-50">
+            <div className="bg-grayMain py-2 dark:bg-gray-800 sm:py-2 md:py-2.5">
+              <div className="horizontal-spacing container mx-auto flex">
+                <div className="flex-1 items-center md:block">
+                  <div className="border-whiteMain-50 w-min border-r">
                     <a
                       href="/tags/web"
                       className={`nav-link ${
@@ -132,16 +133,16 @@ export default function Navbar() {
                   {/* search widget */}
                   <div
                     id="searchControl"
-                    className="relative align-middle mr-4 hidden md:fle"
+                    className="md:fle relative mr-4 hidden align-middle"
                   >
                     <button
                       onClick={searchClickButtonHandler}
                       id="searchButton"
-                      className="w-12 h-full absolute focus:outline-none right-0 bg-white z-10"
+                      className="absolute right-0 z-10 h-full w-12 bg-white focus:outline-none"
                     >
                       <span className="sr-only">Search form</span>
                       <SearchIcon
-                        className="h-6 m-auto cursor-pointer"
+                        className="m-auto h-6 cursor-pointer"
                         aria-hidden="true"
                       />
                     </button>
@@ -151,7 +152,7 @@ export default function Navbar() {
                       id="searchInput"
                       ref={searchInputFieldRef}
                       name="searchbar"
-                      className="bg-white border-none focus:outline-none py-1 pr-0 w-12 z-0"
+                      className="z-0 w-12 border-none bg-white py-1 pr-0 focus:outline-none"
                       value={searchValue}
                       onChange={() =>
                         setSearchValue(searchInputFieldRef.current.value)
@@ -165,7 +166,7 @@ export default function Navbar() {
                     onChange={() => {
                       setEnabled(!enabled);
                     }}
-                    className="inline-flex items-center w-6 focus:outline-none cursor-pointer mr-5"
+                    className="mr-5 inline-flex w-6 cursor-pointer items-center focus:outline-none"
                   >
                     <span className="sr-only">Switch theme mode</span>
                     <div className="absolute">
@@ -177,7 +178,7 @@ export default function Navbar() {
 
                   {/* social icons */}
                   {/* facebook link */}
-                  <div className="flex border-l border-whiteMain-50 py-1">
+                  <div className="border-whiteMain-50 flex border-l py-1">
                     <Link href="https://www.facebook.com/lumbytes">
                       <a
                         target="_blank"
@@ -206,7 +207,7 @@ export default function Navbar() {
                         <svg
                           version="1.1"
                           viewBox="0 0 512 512"
-                          className="ml-2 lg:h-5.5 h-5"
+                          className="lg:h-5.5 ml-2 h-5"
                           fill="#fafafa"
                         >
                           <path d="M492,109.5c-17.4,7.7-36,12.9-55.6,15.3c20-12,35.4-31,42.6-53.6c-18.7,11.1-39.4,19.2-61.5,23.5  C399.8,75.8,374.6,64,346.8,64c-53.5,0-96.8,43.4-96.8,96.9c0,7.6,0.8,15,2.5,22.1C172,179,100.6,140.4,52.9,81.7  c-8.3,14.3-13.1,31-13.1,48.7c0,33.6,17.1,63.3,43.1,80.7C67,210.7,52,206.3,39,199c0,0.4,0,0.8,0,1.2c0,47,33.4,86.1,77.7,95  c-8.1,2.2-16.7,3.4-25.5,3.4c-6.2,0-12.3-0.6-18.2-1.8c12.3,38.5,48.1,66.5,90.5,67.3c-33.1,26-74.9,41.5-120.3,41.5  c-7.8,0-15.5-0.5-23.1-1.4C62.9,432,113.8,448,168.4,448C346.6,448,444,300.3,444,172.2c0-4.2-0.1-8.4-0.3-12.5  C462.6,146,479,128.9,492,109.5z" />
@@ -219,7 +220,7 @@ export default function Navbar() {
             </div>
 
             <Disclosure.Panel className="lg:hidden">
-              <div className="px-2 pt-2 pb-3 space-y-1">customize me</div>
+              <div className="space-y-1 px-2 pt-2 pb-3">customize me</div>
             </Disclosure.Panel>
           </>
         )}
@@ -232,7 +233,7 @@ function Divider() {
   return (
     <div
       style={{ width: "1px" }}
-      className="border-red-500 bg-red-500 h-full inline-block -mx-1"
+      className="-mx-1 inline-block h-full border-red-500 bg-red-500"
     />
   );
 }

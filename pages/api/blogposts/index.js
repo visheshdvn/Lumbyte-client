@@ -139,11 +139,11 @@ handler.get(async (req, res) => {
     skip: +skip || 0,
     take: +take || 20,
     orderBy: {
-      id: "desc",
+      n: "desc",
     },
   });
 
-  res.status("200").json({status: "success", data: blog});
+  res.status("200").json({ status: "success", data: blog });
 });
 
 export default handler;

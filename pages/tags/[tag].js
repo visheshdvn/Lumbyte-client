@@ -8,7 +8,9 @@ import WidePeek from "../../components/PostPeek/wide";
 import SmallPeek from "../../components/PostPeek/smaller";
 import BroadPeek from "../../components/PostPeek/broad";
 import { getAllTags, getTagPageData } from "../../graphql/topicPageQueries";
+import Navbar from "../../components/elements/navbar/Navbar-client";
 
+// utility functions
 import { isValidURL } from "../../utils/checkValidURL";
 import { hexToRGB } from "../../utils/colorConversions";
 
@@ -73,17 +75,21 @@ const Topic = ({ posts, theme, metaDescription, ogImg, ogAlt }) => {
         />
       </Head>
 
+      {/* <div className="body-top-spacing"> */}
+        <Navbar />
+      {/* </div> */}
+
       <header className="horizontal-spacing mb-10 flex items-center justify-center pt-4 md:mb-12 md:pt-1 lg:mb-14 lg:pt-3 xl:mb-16 xl:pt-10">
         <div className="horizontal-spacing bg-grayMain container relative mx-auto my-auto h-28 overflow-hidden dark:bg-gray-800 sm:h-32 md:h-40 lg:h-48">
           <h1
             style={{ color: `${theme}` }}
-            className="font-raleway-dot between-rel-parent lg:text-10xl select-none text-8xl uppercase tracking-widest opacity-20 sm:text-8xl md:text-9xl"
+            className="font-raleway-dot lg:text-10xl absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transform select-none text-8xl uppercase tracking-widest opacity-20 sm:text-8xl md:text-9xl"
           >
             {tag}
           </h1>
           <h1
             style={{ color: `${theme}` }}
-            className="between-rel-parent tracking-custom sm:text-4.5xl select-none text-center font-mono text-3xl font-bold lowercase md:text-5xl xl:text-6xl"
+            className="tracking-custom sm:text-4.5xl absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transform select-none text-center font-mono text-3xl font-bold lowercase md:text-5xl xl:text-6xl"
           >
             {"#" + tag}
           </h1>

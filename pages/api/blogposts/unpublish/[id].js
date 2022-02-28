@@ -25,22 +25,9 @@ handler.use((req, res, next) => {
 handler.put(async (req, res) => {
   console.log(req.params);
   const { id } = req.params;
-  console.log("id", id);
-
-  if (isNaN(id)) {
-    return res.status(400).json({ msg: "Invalid id" });
-  }
-
-  const post = await blogposts.findUnique({
-    where: { id: +id },
-    select: {
-      published: true,
-    },
-  });
-  console.log(post);
 
   await blogposts.update({
-    where: { id: +id },
+    where: { id },
     data: {
       published: false,
     },

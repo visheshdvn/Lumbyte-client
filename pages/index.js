@@ -54,9 +54,7 @@ export default function Home({ latest, latestSide, readMore }) {
 
       <Navbar />
 
-      <div className="body-top-spacing">
-        <Latest big={latest} side={latestSide} />
-      </div>
+      <Latest big={latest} side={latestSide} />
 
       <section className="body-font">
         <div className="horizontal-spacing container mx-auto">

@@ -56,8 +56,9 @@ model AdminAccount {
 }
 
 model Blogposts {
-  // opengraph properties are extracted from he blogpodt itself
-  id              Int        @id @default(autoincrement())
+  // opengraph properties are extracted from he blogpost itself
+  id              String     @id @default(uuid())
+  n               BigInt     @default(autoincrement()) @db.BigInt
   title           String     @db.VarChar(150)
   slug            String     @unique
   metaDescription String?    @default("") @db.VarChar(200)
@@ -93,7 +94,7 @@ model Comments {
   content    String     @db.VarChar(200)
   // relation
   comment    Blogposts? @relation(fields: [commentId], references: [id], onDelete: SetNull)
-  commentId  Int
+  commentId  String
   // defaults
   created_at DateTime   @default(now())
   updated_at DateTime   @updatedAt

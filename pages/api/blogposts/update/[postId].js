@@ -29,7 +29,6 @@ handler.use((req, res, next) => {
 handler.use(updateblogpostvalidations());
 
 handler.patch(async (req, res) => {
-  console.log("inside edit")
   const { postId } = req.params;
   // implement express validator
   const {
@@ -54,7 +53,7 @@ handler.patch(async (req, res) => {
       topicsId: true,
     },
     where: {
-      id: +postId,
+      id: postId,
     },
   });
 
@@ -72,7 +71,7 @@ handler.patch(async (req, res) => {
 
   const updated_post = await blogposts.update({
     where: {
-      id: +postId,
+      id: postId,
     },
     data: {
       title,

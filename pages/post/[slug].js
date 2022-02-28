@@ -16,6 +16,7 @@ import FormattedDate from "../../components/micro/formattedDate";
 import ShowTags from "../../components/micro/showTags";
 import { getValidImageURL } from "../../utils/checkValidURL";
 import ReadOnlyEditor from "../../components/elements/editor/readOnlyEditor";
+import Navbar from "../../components/elements/navbar/Navbar-client";
 
 // prisma
 import { PrismaClient } from "@prisma/client";
@@ -70,6 +71,8 @@ const Post = ({ postData, readMore }) => {
         <meta name="twitter:card" value="summary_large_image" />
       </Head>
 
+      <Navbar />
+      
       <div className="horizontal-spacing container mx-auto pt-5 md:pt-4 lg:pt-6 xl:pt-8">
         <header style={{ maxWidth: "850px" }} className="mx-auto">
           <div className="mb-5 flex items-center sm:hidden">
