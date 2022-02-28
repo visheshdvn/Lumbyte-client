@@ -127,7 +127,7 @@ const updateBlogpostValidationChecks = [
           where: {
             slug,
             id: {
-              not: +req.params.postId,
+              not: req.params.postId,
             },
           },
         })
