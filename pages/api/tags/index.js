@@ -47,9 +47,9 @@ handler.get(async (req, res) => {
             ? true
             : false
           : true,
-      ogalt:
+      ogAlt:
         _select && Array.isArray(_select)
-          ? _select.includes("ogalt")
+          ? _select.includes("ogAlt")
             ? true
             : false
           : true,

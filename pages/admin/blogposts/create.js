@@ -3,12 +3,20 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useTheme } from "next-themes";
 import { useSession } from "next-auth/react";
+import Router from "next/router";
 // components
 import Sidebar from "../../../components/elements/sideBar/leftSideBar";
-import BannerUploader from "../../../components/uploaders/createBlogUploader";
+import Select from "../../../components/elements/dropdownSelect/adminSelect";
+import EditBanner from "../../../components/uploaders/editBanner";
 // utils
 import axios from "../../../utils/axios";
 import { MetaBlogposts } from "../../../utils/metaTags/admin/meta";
+import {
+  tagsToOptions,
+  optionsToTags,
+  tagIdFromTags,
+} from "../../../utils/mutateTags";
+import uploadImage from "../../../utils/uploadImage/uploader";
 
 // editorjs tools
 let editor;
@@ -67,6 +75,14 @@ const create = () => {
     };
   }, []);
 
+  const [allTags, setAllTags] = useState([]);
+  useEffect(async () => {
+    let { data } = await axios.get("/tags?_select=tagname");
+    setAllTags(data);
+  }, [allTags]);
+
+  const [file, setFile] = useState(null);
+
   const [blogdata, setBlogdata] = useState({
     title: "",
     slug: "",
@@ -79,8 +95,15 @@ const create = () => {
     banneralt: "",
   });
 
+  function updateTagHandler(option) {
+    const newTags = tagIdFromTags([...optionsToTags(option)]);
+    setBlogdata({
+      ...blogdata,
+      tags: newTags,
+    });
+  }
+
   function updateblogdata(e) {
-    // stateUpdated = true;
     setBlogdata({
       ...blogdata,
       [e.target.name]: e.target.value,
@@ -88,6 +111,18 @@ const create = () => {
   }
 
   async function saveBlogpost() {
+    let uploadedUrl = null;
+    if (file) {
+      const { status, responseData } = await uploadImage(file);
+
+      if (status === "OK") {
+        uploadedUrl = responseData.url;
+      } else {
+        toast.error("could not upload banner Image");
+        return;
+      }
+    }
+    //
     let payload = {};
     let content = await editor.save();
     payload = {
@@ -95,6 +130,7 @@ const create = () => {
       content: JSON.stringify(content),
       minuteRead: +blogdata.minuteRead,
       authorId: session.user.id,
+      banner: uploadedUrl || "",
     };
 
     if (!payload.slug || !payload.title) {
@@ -103,11 +139,16 @@ const create = () => {
     }
 
     try {
-      console.log("cerate payload", payload);
-      await axios.post("/blogposts/create", payload, {
+      const {
+        data: {
+          blogpost: { id },
+        },
+      } = await axios.post("/blogposts/create", payload, {
         headers: { "Content-Type": "application/json" },
       });
       toast.success("Post created 🌟", { theme });
+      console.log("data returned", id);
+      Router.push(`/admin/blogposts/${id}`);
     } catch (err) {
       err.response.data.errors.map((error) => {
         toast.error(error.msg);
@@ -117,8 +158,8 @@ const create = () => {
 
   return (
     <>
-      <MetaBlogposts />
-      
+      <MetaBlogposts title="Create Blogpost" />
+
       {/* body */}
       <div className="flex">
         <Sidebar />
@@ -158,14 +199,9 @@ const create = () => {
               </div>
               {/* Image uploader / Management */}
               <div style={{ maxWidth: "720px" }} className="mx-auto mb-8">
-                {!blogdata.banner ? (
-                  <BannerUploader state={blogdata} setState={setBlogdata} />
-                ) : (
-                  <div className="relative flex h-96 w-full justify-center rounded-md bg-zinc-100">
-                    <img src={blogdata.banner} className="absolute h-full" />
-                  </div>
-                )}
+                <EditBanner setFile={setFile} />
               </div>
+
               {/* editor */}
               <div
                 id="editorjs"
@@ -178,45 +214,24 @@ const create = () => {
               <h2 className="font-adminPrimary mb-8 text-center text-xl font-bold">
                 Metadata
               </h2>
-              <div className="mb-8">
-                <label className="font-adminPrimary required-field text-base font-semibold">
-                  Banner URL
-                </label>
-                <input
-                  type="text"
-                  placeholder="enter banner URL"
-                  className="border-black-10 font-raleway mt-1 h-10 w-full border bg-white px-1 text-sm font-medium focus:outline-0"
-                  name="banner"
-                  value={blogdata.banner}
-                  onChange={(e) => updateblogdata(e)}
-                />
-              </div>
-              <div className="mb-8">
-                <label className="font-adminPrimary required-field text-base font-semibold">
-                  Banner alt
-                </label>
-                <input
-                  type="text"
-                  placeholder="enter banner alt"
-                  className="border-black-10 font-raleway mt-1 h-10 w-full border bg-white px-1 text-sm font-medium focus:outline-0"
-                  name="banneralt"
-                  value={blogdata.banneralt}
-                  onChange={(e) => updateblogdata(e)}
-                />
-              </div>
-              <div className="mb-8">
-                <label className="font-adminPrimary required-field text-base font-semibold">
-                  Slug
-                </label>
-                <input
-                  type="text"
-                  placeholder="enter slug"
-                  className="border-black-10 mt-1 h-8 w-full border bg-white px-1 focus:outline-0"
-                  name="slug"
-                  value={blogdata.slug}
-                  onChange={(e) => updateblogdata(e)}
-                />
-              </div>
+              <InlineTextField
+                label="Banner URL"
+                name="banner"
+                value={blogdata.banner}
+                onChangeHandler={updateblogdata}
+              />
+              <InlineTextField
+                label="Banner alt"
+                name="banneralt"
+                value={blogdata.banneralt}
+                onChangeHandler={updateblogdata}
+              />
+              <InlineTextField
+                label="Slug"
+                name="slug"
+                value={blogdata.slug}
+                onChangeHandler={updateblogdata}
+              />
               <div className="mb-8">
                 <label className="font-adminPrimary text-base font-semibold">
                   Meta Description
@@ -260,7 +275,7 @@ const create = () => {
                 />
               </div>
 
-              <div className="flex">
+              <div className="mb-8 flex">
                 <div className="flex-1">
                   <label className="font-adminPrimary text-base font-semibold">
                     Top Pick
@@ -322,6 +337,15 @@ const create = () => {
                   </div>
                 </div>
               </div>
+              <div className="mb-8">
+                <label className="font-adminPrimary mb-4 text-base font-semibold">
+                  Tags
+                </label>
+                <Select
+                  allOptions={tagsToOptions(allTags)}
+                  onChangeHandler={updateTagHandler}
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -333,5 +357,23 @@ const create = () => {
 create.auth = {
   roles: ["SUPERUSER", "ADMIN"],
 };
+
+function InlineTextField({ label, name, value, onChangeHandler }) {
+  return (
+    <div className="mb-8">
+      <label className="font-adminPrimary required-field text-base font-semibold">
+        {label || ""}
+      </label>
+      <input
+        type="text"
+        placeholder={`enter ${label.toLowerCase()}`}
+        className="border-black-10 font-raleway mt-1 h-10 w-full border bg-white px-1 text-sm font-medium focus:outline-0"
+        name={name}
+        value={decodeURIComponent(value || "")}
+        onChange={onChangeHandler}
+      />
+    </div>
+  );
+}
 
 export default create;

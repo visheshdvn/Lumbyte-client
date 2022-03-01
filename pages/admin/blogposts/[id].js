@@ -9,7 +9,6 @@ import "react-toastify/dist/ReactToastify.css";
 import Select from "../../../components/elements/dropdownSelect/adminSelect";
 import Sidebar from "../../../components/elements/sideBar/leftSideBar";
 import FormattedDate from "../../../components/micro/formattedDate";
-import BannerUploader from "../../../components/uploaders/createBlogUploader";
 import EditBanner from "../../../components/uploaders/editBanner";
 import ImageTool from "../../../components/editor-tools/image/index";
 import Quote from "../../../components/editor-tools/quote/quote";
@@ -121,7 +120,7 @@ const update = ({ initialContent, allTags }) => {
 
   async function saveBlogpost() {
     console.log("saving");
-    const uploadedUrl = null;
+    let uploadedUrl = null;
     if (file) {
       console.log("saving banner");
       const { status, responseData } = await uploadImage(file);
@@ -180,7 +179,7 @@ const update = ({ initialContent, allTags }) => {
 
   return (
     <>
-      <MetaBlogposts />
+      <MetaBlogposts title="Edit Blogpost" />
 
       {/* Body */}
       <div className="flex">

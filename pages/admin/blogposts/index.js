@@ -89,7 +89,7 @@ function TableContents({ data }) {
         <td className="opacity-0">S</td>
         <td className="py-4">{n}</td>
         <td className="py-4">{decodeURIComponent(slug)}</td>
-        <td rowSpan={2}>{title}</td>
+        <td>{title}</td>
         <td className={data.featured ? "text-green-600" : "text-red-600"}>
           {capitalize(featured.toString())}
         </td>
