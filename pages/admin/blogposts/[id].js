@@ -1,9 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useRouter } from "next/router";
-import Head from "next/head";
 // third party libraries
 import { PrismaClient } from "@prisma/client";
-import axios from "../../../utils/axios";
 import _ from "lodash";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -15,7 +13,6 @@ import BannerUploader from "../../../components/uploaders/createBlogUploader";
 import EditBanner from "../../../components/uploaders/editBanner";
 import ImageTool from "../../../components/editor-tools/image/index";
 import Quote from "../../../components/editor-tools/quote/quote";
-
 // elements
 import {
   PublishButton,
@@ -33,6 +30,9 @@ import {
   unPublishBlogpost,
 } from "../../../utils/togglePublish";
 import { MetaBlogposts } from "../../../utils/metaTags/admin/meta";
+// utils
+import axios from "../../../utils/axios";
+import uploadImage from "../../../utils/uploadImage/uploader";
 
 let editor;
 const prisma = new PrismaClient();
@@ -46,6 +46,7 @@ const update = ({ initialContent, allTags }) => {
   const initialContentBody = JSON.parse(content);
 
   const [file, setFile] = useState(null);
+
   const [updatedContent, setUpdateContent] = useState({
     ...initialContent,
     content: { ...initialContentBody },
@@ -120,11 +121,25 @@ const update = ({ initialContent, allTags }) => {
 
   async function saveBlogpost() {
     console.log("saving");
+    const uploadedUrl = null;
+    if (file) {
+      console.log("saving banner");
+      const { status, responseData } = await uploadImage(file);
+
+      if (status === "OK") {
+        uploadedUrl = responseData.url;
+      } else {
+        toast.error("could not upload banner Image");
+        return;
+      }
+    }
+
     let content = await editor.save();
     let payload = {
       ...updatedContent,
       content: JSON.stringify(content),
       title: titleRef.current.textContent,
+      banner: uploadedUrl || updatedContent.banner,
     };
 
     const noChange =
@@ -166,7 +181,7 @@ const update = ({ initialContent, allTags }) => {
   return (
     <>
       <MetaBlogposts />
-      
+
       {/* Body */}
       <div className="flex">
         <Sidebar />
@@ -222,22 +237,11 @@ const update = ({ initialContent, allTags }) => {
 
               {/* Image uploader / Management */}
               <div style={{ maxWidth: "720px" }} className="mx-auto mb-8">
-                {!updatedContent.banner ? (
-                  <BannerUploader
-                    state={updatedContent}
-                    setState={setUpdateContent}
-                  />
-                ) : (
-                  <div
-                    style={{
-                      backgroundImage: `url(${updatedContent.banner})`,
-                    }}
-                    className="aspect-w-16 aspect-h-10 relative flex justify-center rounded-md bg-zinc-100 bg-cover bg-center"
-                  ></div>
-                )}
+                <EditBanner
+                  setFile={setFile}
+                  bannerUrl={updatedContent.banner}
+                />
               </div>
-
-              {/* <EditBanner setFile={setFile} /> */}
 
               {/* editor holder */}
               <div

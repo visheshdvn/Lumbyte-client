@@ -14,7 +14,7 @@ export async function uploadFile(file) {
       }
     );
     const {
-      data: { url, filename, filetype, fileurl },
+      data: { url, filename, fileurl },
     } = urlObj;
 
     await axios.put(url, file, {

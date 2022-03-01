@@ -10,7 +10,7 @@ aws.config.update({
 });
 
 let s3 = new aws.S3();
-const myBucket = process.env.AWS_S3_BUCKET_CONTENT;
+const myBucket = process.env.AWS_S3_BUCKET_BANNERS;
 
 // middlewares
 
@@ -25,7 +25,6 @@ const handler = nc({
 });
 
 handler.post(async (req, res) => {
-  console.log("req.body", req.body);
   const { contentType, filename } = req.body;
   let nameparts = filename.split(".");
   const extension = nameparts.pop();
