@@ -16,7 +16,6 @@ const handler = nc({
 });
 
 handler.use((req, res, next) => {
-  console.log("req.query", req.query);
   req.params = {};
   req.params.id = req.query.id;
   next();

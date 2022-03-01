@@ -2,10 +2,11 @@ import React from "react";
 import { useSession } from "next-auth/react";
 import { PrismaClient } from "@prisma/client";
 import Link from "next/link";
-import Head from "next/head";
 // custom components
 import Sidebar from "../../../components/elements/sideBar/leftSideBar";
 import FormattedDate from "../../../components/micro/formattedDate";
+// utils
+import { MetaBlogposts } from "../../../utils/metaTags/admin/meta";
 
 const { blogposts } = new PrismaClient();
 
@@ -21,9 +22,10 @@ const Blogposts = ({ blogposts }) => {
 
   return (
     <>
-      <Head>
-        <title>Admin | Blogposts</title>
-      </Head>
+      {/* head */}
+      <MetaBlogposts />
+
+      {/* body */}
       <div className="flex">
         <Sidebar />
         <div className="flex-1 px-5 pt-12 pl-80">
@@ -49,8 +51,8 @@ const Blogposts = ({ blogposts }) => {
               <thead>
                 <tr className="font-adminPrimary bg-gray-100 text-left text-sm font-semibold text-gray-800">
                   <td className="opacity-0">S</td>
-                  {/* <th className="py-4">Id</th> */}
-                  <th>Slug</th>
+                  <th>S.No</th>
+                  <th className="py-4">Slug</th>
                   <th rowSpan={2}>Title</th>
                   <th>Featured</th>
                   <th>Top Pick</th>
@@ -74,7 +76,7 @@ const Blogposts = ({ blogposts }) => {
 };
 
 function TableContents({ data }) {
-  const { id, slug, title, featured, topPick, date, published, created_at } =
+  const { id, slug, title, featured, topPick, date, published, created_at, n } =
     data;
 
   return (
@@ -85,7 +87,7 @@ function TableContents({ data }) {
         key={data.id}
       >
         <td className="opacity-0">S</td>
-        {/* <td className="py-4">{id}</td> */}
+        <td className="py-4">{n}</td>
         <td className="py-4">{decodeURIComponent(slug)}</td>
         <td rowSpan={2}>{title}</td>
         <td className={data.featured ? "text-green-600" : "text-red-600"}>
@@ -124,6 +126,10 @@ Blogposts.auth = {
 export default Blogposts;
 
 export async function getServerSideProps(context) {
+  BigInt.prototype.toJSON = function () {
+    return Number(this);
+  };
+
   const data = await blogposts.findMany({
     select: {
       id: true,
@@ -136,6 +142,7 @@ export async function getServerSideProps(context) {
       author: true,
       updated_at: true,
       created_at: true,
+      n: true,
     },
     orderBy: {
       n: "desc",

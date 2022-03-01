@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from "react";
-import axios from "../../../utils/axios";
-import Sidebar from "../../../components/elements/sideBar/leftSideBar";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import BannerUploader from "../../../components/uploaders/createBlogUploader";
 import { useTheme } from "next-themes";
 import { useSession } from "next-auth/react";
+// components
+import Sidebar from "../../../components/elements/sideBar/leftSideBar";
+import BannerUploader from "../../../components/uploaders/createBlogUploader";
+// utils
+import axios from "../../../utils/axios";
+import { MetaBlogposts } from "../../../utils/metaTags/admin/meta";
+
 // editorjs tools
 let editor;
 const create = () => {
@@ -113,11 +117,9 @@ const create = () => {
 
   return (
     <>
-      {/* <ToastContainer
-        position="top-right"
-        autoClose={3000}
-        hideProgressBar={true}
-      /> */}
+      <MetaBlogposts />
+      
+      {/* body */}
       <div className="flex">
         <Sidebar />
         <div className="flex-1 pt-12 pr-5 pl-80">

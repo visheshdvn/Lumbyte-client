@@ -23,7 +23,6 @@ handler.use((req, res, next) => {
 });
 
 handler.put(async (req, res) => {
-  console.log(req.params);
   const { id } = req.params;
 
   await blogposts.update({

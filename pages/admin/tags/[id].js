@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import Head from "next/head";
+import React, { useState } from "react";
 import { useRouter } from "next/router";
 import { PrismaClient } from "@prisma/client";
 import axios from "axios";
@@ -15,6 +14,8 @@ import {
   UnPublishButton,
 } from "../../../components/elements/buttons/buttons";
 import { AdminInlineTextInput } from "../../../components/elements/input/text";
+// utils
+import { MetaTags } from "../../../utils/metaTags/admin/meta";
 
 const { tags } = new PrismaClient();
 
@@ -53,11 +54,10 @@ const Update = ({ initialTagData }) => {
 
   return (
     <>
-      <Head>
-        <meta name="robots" content="noindex" />
-        <meta name="googlebot" content="noindex"></meta>
-      </Head>
+      {/* head */}
+      <MetaTags title="Edit tag" />
 
+      {/* body */}
       <div className="bg-offWhite flex h-screen">
         <Sidebar />
         <div className="admin-primary-layout">

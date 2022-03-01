@@ -28,7 +28,6 @@ handler.use((req, res, next) => {
 handler.use(resolveQueryParams());
 
 handler.get(async (req, res) => {
-  console.log(req.query);
   let { skip, take, _select, _where } = req.query;
 
   if (typeof _select === "string") {

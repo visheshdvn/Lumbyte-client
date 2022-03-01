@@ -12,7 +12,7 @@ import {
 } from "../../../components/elements/buttons/buttons";
 import { AdminInlineTextInput } from "../../../components/elements/input/text";
 // utilities
-import NoIndex from "../../../utils/noIndex";
+import { MetaTags } from "../../../utils/metaTags/admin/meta";
 
 const createTag = ({}) => {
   const [tagData, settagData] = useState({
@@ -56,7 +56,10 @@ const createTag = ({}) => {
 
   return (
     <>
-      <NoIndex />
+      {/* head */}
+      <MetaTags title="Create Tag" />
+
+      {/* body */}
       <div className="bg-offWhite flex h-screen">
         <Sidebar />
         <div className="admin-primary-layout">

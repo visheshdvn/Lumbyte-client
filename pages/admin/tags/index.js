@@ -1,16 +1,20 @@
 import React from "react";
-import Sidebar from "../../../components/elements/sideBar/leftSideBar";
 import Link from "next/link";
 import { PrismaClient } from "@prisma/client";
 // utilities
-import NoIndex from "../../../utils/noIndex";
+import Sidebar from "../../../components/elements/sideBar/leftSideBar";
+// utils
+import { MetaTags } from "../../../utils/metaTags/admin/meta";
 
 const { tags } = new PrismaClient();
 
 const Tags = ({ tags }) => {
   return (
     <>
-      <NoIndex />
+      {/* head */}
+      <MetaTags />
+
+      {/* body */}
       <div className="flex">
         <Sidebar />
         <div className="flex-1 px-5 pt-12 pl-80">

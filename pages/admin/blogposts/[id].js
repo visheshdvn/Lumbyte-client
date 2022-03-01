@@ -32,7 +32,7 @@ import {
   publishBlogpost,
   unPublishBlogpost,
 } from "../../../utils/togglePublish";
-import NoIndex from "../../../utils/noIndex";
+import { MetaBlogposts } from "../../../utils/metaTags/admin/meta";
 
 let editor;
 const prisma = new PrismaClient();
@@ -46,7 +46,6 @@ const update = ({ initialContent, allTags }) => {
   const initialContentBody = JSON.parse(content);
 
   const [file, setFile] = useState(null);
-  console.log("file", file);
   const [updatedContent, setUpdateContent] = useState({
     ...initialContent,
     content: { ...initialContentBody },
@@ -166,11 +165,8 @@ const update = ({ initialContent, allTags }) => {
 
   return (
     <>
-      <Head>
-        <title>Admin | Blogposts</title>
-      </Head>
-
-      <NoIndex />
+      <MetaBlogposts />
+      
       {/* Body */}
       <div className="flex">
         <Sidebar />
