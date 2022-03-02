@@ -7,7 +7,7 @@ import ShowTags from "../micro/showTags";
 
 const Latest = ({ big, side }) => {
   // console.log("side", side);
-  const { title, tags, banner, banneralt, date, slug, author } = big;
+  const { title, tags, banner, banneralt, published_at, slug, author } = big;
 
   return (
     <div
@@ -63,7 +63,7 @@ const Latest = ({ big, side }) => {
                 className="bg-whiteMain-50 mx-2"
               />
               <h5 className="text-whiteMain font-light">
-                <FormattedDate date={date} />
+                <FormattedDate date={published_at} />
               </h5>
             </div>
           </div>
@@ -73,7 +73,7 @@ const Latest = ({ big, side }) => {
         {side.map((item) => (
           <SideHeads
             title={item.title}
-            date={item.date}
+            date={item.published_at}
             slug={item.slug}
             author={author}
             key={item.slug}

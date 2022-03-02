@@ -119,7 +119,16 @@ handler.get(async (req, res) => {
             ? true
             : false
           : false,
-      author: true,
+      author: {
+        select: {
+          id: true,
+          firstname: true,
+          lastname: true,
+          username: true,
+          dp: true,
+          dpalt: true,
+        }
+      },
       updated_at: true,
       created_at: true,
       published_at: true,

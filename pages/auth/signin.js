@@ -7,7 +7,7 @@ import {
   useSession,
 } from "next-auth/react";
 // utilities
-import NoIndex from "../components/NoIndex";
+import NoIndex from "../../utils/metaTags/admin/noIndex";
 
 const Login = ({ providers, csrfToken }) => {
   const { data: session, status } = useSession();
@@ -43,40 +43,43 @@ const Login = ({ providers, csrfToken }) => {
   }
 
   return (
-    <div>
-      <button onClick={logproviders}>providers</button>
-      <form>
-        <input name="csrfToken" type="hidden" defaultValue={csrfToken} />
-        <div>
-          <label htmlFor="username_field">Enter Email:</label>
+    <>
+      <NoIndex />
+      <div>
+        <button onClick={logproviders}>providers</button>
+        <form>
+          <input name="csrfToken" type="hidden" defaultValue={csrfToken} />
+          <div>
+            <label htmlFor="username_field">Enter Email:</label>
+            <input
+              id="username_field"
+              type="text"
+              name="login"
+              autoCorrect="false"
+              className="border-2 border-black"
+              onChange={(e) => updateformData(e)}
+            />
+          </div>
+          <div>
+            <label htmlFor="password_field">Enter Password:</label>
+            <input
+              id="login_main"
+              type="password"
+              name="password"
+              autoCorrect="false"
+              className="border-2 border-black"
+              onChange={(e) => updateformData(e)}
+            />
+          </div>
           <input
-            id="username_field"
-            type="text"
-            name="login"
-            autoCorrect="false"
-            className="border-2 border-black"
-            onChange={(e) => updateformData(e)}
+            type="button"
+            className="rounded border border-purple-800 px-3 py-1 hover:bg-purple-800 hover:text-white focus:outline-none"
+            onClick={(e) => submitHandler(e)}
+            value="Submit"
           />
-        </div>
-        <div>
-          <label htmlFor="password_field">Enter Password:</label>
-          <input
-            id="login_main"
-            type="password"
-            name="password"
-            autoCorrect="false"
-            className="border-2 border-black"
-            onChange={(e) => updateformData(e)}
-          />
-        </div>
-        <input
-          type="button"
-          className="border border-purple-800 px-3 py-1 rounded hover:bg-purple-800 hover:text-white focus:outline-none"
-          onClick={(e) => submitHandler(e)}
-          value="Submit"
-        />
-      </form>
-    </div>
+        </form>
+      </div>
+    </>
   );
 };
 

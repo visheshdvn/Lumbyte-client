@@ -30,6 +30,8 @@ module.exports = (phase, { defaultConfig }) => {
         "admin.lumbytes.com",
         "lumbytesblog-banners.s3.eu-west-1.amazonaws.com",
         "lumbytesblog-content.s3.eu-west-1.amazonaws.com",
+        "lumbytesblog-content-development.s3.eu-west-1.amazonaws.com",
+        "lumbytesblog-banners-development.s3.eu-west-1.amazonaws.com",
       ],
     },
   };

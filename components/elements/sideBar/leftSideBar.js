@@ -39,7 +39,7 @@ const LeftSideBar = () => {
           ></div>
           <div className="flex-1 flex-col justify-around">
             <h4 className="font-adminPrimary text-base font-semibold">
-              {user.firstname || "" + " " + user.lastname || ""}
+              {user.firstname} {user.lastname || ""}
             </h4>
             <h5 className="font-adminPrimary text-xs font-medium">
               {user.role.toLowerCase()}

@@ -1,0 +1,11 @@
+<!-- DATABASE_URL="postgresql://lumbytes:lumbytesDB2021@localhost:5433/dummyproduction" -->
+DATABASE_URL="postgresql://lumbytes:lumbytesDB2021@localhost:5433/lumbytes"
+NEXTAUTH_URL=http://localhost:3000
+
+AWS_SECRET_ACCESS_KEY="crVebCd0oI/luTi9pMzc3/+agNi6zJpSjC+H5RmI"
+AWS_ACCESS_KEY_ID="AKIAROJ2IL4J7WMQOS45"
+AWS_REGION="eu-west-1"
+
+AWS_S3_BUCKET_BANNERS="lumbytesblog-banners"
+AWS_S3_BUCKET_CONTENT="lumbytesblog-content"
+AWS_S3_BUCKET_GENERAL="lumbytes-general"

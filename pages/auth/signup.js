@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 // third party packages
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 // utilities
-import NoIndex from "../../utils/noIndex";
+import NoIndex from "../../utils/metaTags/admin/noIndex";
 // components
-import Navbar from "../../components/Navbar";
 
 const SignUp = () => {
   const [details, setDetails] = useState({
@@ -59,76 +58,70 @@ const SignUp = () => {
   return (
     <>
       <NoIndex />
-      <ToastContainer
-        position="top-right"
-        autoClose={3000}
-        // hideProgressBar={true}
-      />
-      <Navbar />
       <div className="body-top-spacing relative h-screen">
-        <div className="border absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-2">
-          <div className="flex-1 mx-2 mb-5">
-            <label className="block text-xs font-raleway font-semibold mb-1">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transform border p-2">
+          <div className="mx-2 mb-5 flex-1">
+            <label className="font-raleway mb-1 block text-xs font-semibold">
               First name
             </label>
             <input
               type="text"
               name="firstname"
-              className="border border-black-10 rounded-sm focus:outline-none w-60 py-2 px-2"
+              className="border-black-10 w-60 rounded-sm border py-2 px-2 focus:outline-none"
               value={details.firstname}
               onChange={updateDetails}
             />
           </div>
-          <div className="flex-1 mx-2 mb-5">
-            <label className="block text-xs font-raleway font-semibold mb-1">
+          <div className="mx-2 mb-5 flex-1">
+            <label className="font-raleway mb-1 block text-xs font-semibold">
               Last name
             </label>
             <input
               type="text"
               name="lastname"
-              className="border border-black-10 rounded-sm focus:outline-none w-60 py-2 px-2"
+              className="border-black-10 w-60 rounded-sm border py-2 px-2 focus:outline-none"
               value={details.lastname}
               onChange={updateDetails}
             />
           </div>
-          <div className="flex-1 mx-2 mb-5">
-            <label className="block text-xs font-raleway font-semibold mb-1">
+          <div className="mx-2 mb-5 flex-1">
+            <label className="font-raleway mb-1 block text-xs font-semibold">
               Username
             </label>
             <input
               type="text"
               name="username"
-              className="border border-black-10 rounded-sm focus:outline-none w-60 py-2 px-2"
+              className="border-black-10 w-60 rounded-sm border py-2 px-2 focus:outline-none"
               value={details.username}
               onChange={updateDetails}
             />
           </div>
-          <div className="mx-2 mb-5 relative">
-            <label className="block text-xs font-raleway font-semibold mb-1">
+          <div className="relative mx-2 mb-5">
+            <label className="font-raleway mb-1 block text-xs font-semibold">
               Email
             </label>
             <input
               type="email"
               name="email"
-              className="border border-black-10 rounded-sm focus:outline-none w-60 py-2 px-2"
+              className="border-black-10 w-60 rounded-sm border py-2 px-2 focus:outline-none"
               value={details.email}
               onChange={updateDetails}
             />
-            <p className="text-xs absolute hidden text-red-600">Error</p>
+            <p className="absolute hidden text-xs text-red-600">Error</p>
           </div>
-          <div className="flex-1 mx-2 mb-5">
+          <div className="mx-2 mb-5 flex-1">
             <label className="block">Password</label>
             <input
               type="password"
               name="password"
-              className="border border-black-10 rounded-sm focus:outline-none w-60 py-2 px-2"
+              className="border-black-10 w-60 rounded-sm border py-2 px-2 focus:outline-none"
               value={details.password}
               onChange={updateDetails}
             />
           </div>
           <div className="flex justify-center">
             <button
-              className="border border-blue-600 py-2 px-4 bg-blue-600 text-white hover:bg-blue-500 font-semibold"
+              className="border border-blue-600 bg-blue-600 py-2 px-4 font-semibold text-white hover:bg-blue-500"
               onClick={registerUser}
             >
               Sign Up!
