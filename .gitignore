@@ -36,3 +36,4 @@ yarn-error.log*
 .vercel
 
 /public/media
+docker-compose.yml
