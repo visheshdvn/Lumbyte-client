@@ -4,8 +4,6 @@ import { SessionProvider, useSession } from "next-auth/react";
 // third party libraries
 import axios from "axios";
 import * as gtag from "../lib/gtag";
-import { ApolloProvider } from "@apollo/client";
-import client from "../apollo-client";
 import { ThemeProvider } from "next-themes";
 import { ToastContainer } from "react-toastify";
 
@@ -17,8 +15,6 @@ import "../styles/utilitiy.css";
 import "../styles/editorjs.css";
 
 // component
-import Navbar from "../components/elements/navbar/Navbar-client";
-import Footer from "../components/Footer";
 import AccessDenied from "../components/accessDenied";
 
 // import Auth from "../utils/protected-page";
@@ -44,20 +40,18 @@ function MyApp({ Component, pageProps }) {
         hideProgressBar={true}
       />
       <SessionProvider session={pageProps.session}>
-        <ApolloProvider client={client}>
-          <ThemeProvider attribute="class">
-            {/* {router.pathname.startsWith("/admin") ? null : <Navbar />} */}
-            {Component.auth ? (
-              <Auth roles={Component.auth.roles}>
-                <Component {...pageProps} />
-              </Auth>
-            ) : (
+        <ThemeProvider attribute="class">
+          {/* {router.pathname.startsWith("/admin") ? null : <Navbar />} */}
+          {Component.auth ? (
+            <Auth roles={Component.auth.roles}>
               <Component {...pageProps} />
-            )}
+            </Auth>
+          ) : (
+            <Component {...pageProps} />
+          )}
 
-            {/* {router.pathname.startsWith("/admin") ? null : <Footer />} */}
-          </ThemeProvider>
-        </ApolloProvider>
+          {/* {router.pathname.startsWith("/admin") ? null : <Footer />} */}
+        </ThemeProvider>
       </SessionProvider>
     </>
   );
