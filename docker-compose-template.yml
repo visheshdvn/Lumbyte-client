@@ -1,0 +1,18 @@
+version: "3.14"
+
+services:
+  postgres:
+    container_name: <container_name>
+    image: postgres:14.0
+    environment:
+      POSTGRES_USER: <username>
+      POSTGRES_DB: <database_name>
+      POSTGRES_PASSWORD: <db_password>
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    ports:
+      - "5433:5433"
+    restart: always
+
+volumes:
+  postgres:
