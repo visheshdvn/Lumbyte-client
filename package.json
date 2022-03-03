@@ -9,7 +9,6 @@
     "export": "next build && next export"
   },
   "dependencies": {
-    "@apollo/client": "^3.3.16",
     "@editorjs/editorjs": "^2.22.2",
     "@editorjs/header": "^2.6.2",
     "@editorjs/list": "^1.6.2",
@@ -29,7 +28,6 @@
     "next": "^12.0.7",
     "next-auth": "^4.1.0",
     "next-connect": "^0.11.0",
-    "next-mdx-remote": "^3.0.1",
     "next-themes": "^0.0.14",
     "qs": "^6.10.2",
     "react": "17.0.2",
@@ -37,7 +35,6 @@
     "react-dropzone": "^12.0.1",
     "react-select": "^5.2.2",
     "react-share": "^4.4.0",
-    "react-syntax-highlighter": "^15.4.3",
     "react-toastify": "^8.1.0"
   },
   "devDependencies": {
@@ -53,7 +50,6 @@
     "postcss-nested": "^5.0.6",
     "prettier-plugin-tailwindcss": "^0.1.5",
     "prisma": "^3.6.0",
-    "prisma-json-schema-generator": "^1.6.3",
     "tailwindcss": "^3.0.1"
   }
 }
