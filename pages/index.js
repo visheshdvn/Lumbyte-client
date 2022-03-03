@@ -8,8 +8,6 @@ import Navbar from "../components/elements/navbar/Navbar-client";
 import axios from "../utils/axios";
 const MAX_RESPONSE = 20;
 
-console.log(process.env.AWS_S3_BUCKET_BANNERS);
-
 export default function Home({ latest, latestSide, readMore }) {
   return (
     <>
