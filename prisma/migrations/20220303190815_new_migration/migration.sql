@@ -1,3 +1,6 @@
+-- CreateEnum
+CREATE TYPE "Role" AS ENUM ('SUPERUSER', 'ADMIN', 'CREATOR', 'PUBLIC');
+
 -- CreateTable
 CREATE TABLE "Account" (
     "id" TEXT NOT NULL,
@@ -33,10 +36,11 @@ CREATE TABLE "AdminAccount" (
 
 -- CreateTable
 CREATE TABLE "Blogposts" (
-    "id" SERIAL NOT NULL,
+    "id" TEXT NOT NULL,
+    "n" BIGSERIAL NOT NULL,
     "title" VARCHAR(150) NOT NULL,
     "slug" TEXT NOT NULL,
-    "metaDescription" VARCHAR(200),
+    "metaDescription" VARCHAR(200) DEFAULT E'',
     "excerpt" VARCHAR(150),
     "content" TEXT,
     "banner" VARCHAR(255),
@@ -45,6 +49,7 @@ CREATE TABLE "Blogposts" (
     "featured" BOOLEAN DEFAULT false,
     "topPick" BOOLEAN DEFAULT false,
     "date" TIMESTAMP(0),
+    "commenting" BOOLEAN NOT NULL DEFAULT true,
     "authorId" TEXT,
     "topicsId" INTEGER,
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -60,10 +65,33 @@ CREATE TABLE "Blogposts" (
 CREATE TABLE "Comments" (
     "id" SERIAL NOT NULL,
     "content" VARCHAR(200) NOT NULL,
+    "commentId" TEXT NOT NULL,
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updated_at" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "Comments_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "Images" (
+    "id" TEXT NOT NULL,
+    "url" VARCHAR(300) NOT NULL,
+    "name" VARCHAR(150) NOT NULL DEFAULT E'',
+    "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updated_at" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "Images_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "Videos" (
+    "id" TEXT NOT NULL,
+    "url" VARCHAR(300) NOT NULL,
+    "name" VARCHAR(150) NOT NULL,
+    "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updated_at" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "Videos_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -77,7 +105,7 @@ CREATE TABLE "User" (
     "dpalt" TEXT,
     "email" VARCHAR(50) NOT NULL,
     "phone" VARCHAR(15),
-    "role" VARCHAR(50) NOT NULL DEFAULT E'public',
+    "role" "Role" NOT NULL DEFAULT E'PUBLIC',
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updated_at" TIMESTAMP(3) NOT NULL,
     "adminGrant" BOOLEAN NOT NULL DEFAULT false,
@@ -89,14 +117,15 @@ CREATE TABLE "User" (
 CREATE TABLE "Tags" (
     "id" SERIAL NOT NULL,
     "tagname" VARCHAR(40) NOT NULL,
-    "color" VARCHAR(25),
-    "metaDescription" VARCHAR(200),
-    "ogimg" VARCHAR(250),
-    "ogalt" VARCHAR(30),
+    "color" VARCHAR(7) DEFAULT E'#3B82F6',
+    "metaDescription" VARCHAR(200) NOT NULL DEFAULT E'',
+    "ogTitle" VARCHAR(55) DEFAULT E'',
+    "ogimg" VARCHAR(250) DEFAULT E'',
+    "ogAlt" VARCHAR(55) DEFAULT E'',
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updated_at" TIMESTAMP(3) NOT NULL,
     "published_at" TIMESTAMP(3),
-    "published" BOOLEAN NOT NULL DEFAULT false,
+    "published" BOOLEAN NOT NULL DEFAULT true,
 
     CONSTRAINT "Tags_pkey" PRIMARY KEY ("id")
 );
@@ -105,7 +134,7 @@ CREATE TABLE "Tags" (
 CREATE TABLE "Topics" (
     "id" SERIAL NOT NULL,
     "topicname" VARCHAR(50),
-    "metaDescription" VARCHAR(200),
+    "metaDescription" VARCHAR(200) DEFAULT E'',
     "ogimg" VARCHAR(250),
     "ogalt" VARCHAR(30),
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -119,12 +148,12 @@ CREATE TABLE "Topics" (
 -- CreateTable
 CREATE TABLE "_AccountToBlogposts" (
     "A" TEXT NOT NULL,
-    "B" INTEGER NOT NULL
+    "B" TEXT NOT NULL
 );
 
 -- CreateTable
 CREATE TABLE "_BlogpostsToTags" (
-    "A" INTEGER NOT NULL,
+    "A" TEXT NOT NULL,
     "B" INTEGER NOT NULL
 );
 
@@ -136,9 +165,6 @@ CREATE UNIQUE INDEX "AdminAccount_userId_key" ON "AdminAccount"("userId");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Blogposts_slug_key" ON "Blogposts"("slug");
-
--- CreateIndex
-CREATE UNIQUE INDEX "Blogposts_content_key" ON "Blogposts"("content");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "User_username_key" ON "User"("username");
@@ -181,6 +207,9 @@ ALTER TABLE "Blogposts" ADD CONSTRAINT "Blogposts_authorId_fkey" FOREIGN KEY ("a
 
 -- AddForeignKey
 ALTER TABLE "Blogposts" ADD CONSTRAINT "Blogposts_topicsId_fkey" FOREIGN KEY ("topicsId") REFERENCES "Topics"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Comments" ADD CONSTRAINT "Comments_commentId_fkey" FOREIGN KEY ("commentId") REFERENCES "Blogposts"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "_AccountToBlogposts" ADD FOREIGN KEY ("A") REFERENCES "Account"("id") ON DELETE CASCADE ON UPDATE CASCADE;

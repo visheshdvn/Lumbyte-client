@@ -1,6 +1,5 @@
 import React from "react";
 import Image from "next/image";
-import Link from "next/link";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import {
@@ -8,8 +7,6 @@ import {
   FacebookShareButton,
   LinkedinShareButton,
 } from "react-share";
-
-import { getSimilarPosts } from "../../graphql/postPageQueries";
 
 // custom components
 import FormattedDate from "../../components/micro/formattedDate";

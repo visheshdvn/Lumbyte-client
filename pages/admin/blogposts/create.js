@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useTheme } from "next-themes";
@@ -24,6 +24,7 @@ const create = () => {
   const { theme } = useTheme();
   const { data: session, status } = useSession();
 
+  // initialoze editor
   useEffect(() => {
     // imports
     const EditorJS = require("@editorjs/editorjs");
@@ -75,6 +76,7 @@ const create = () => {
     };
   }, []);
 
+  // tags display
   const [allTags, setAllTags] = useState([]);
   useEffect(async () => {
     let { data } = await axios.get("/tags?_select=tagname");
@@ -82,6 +84,7 @@ const create = () => {
   }, [allTags]);
 
   const [file, setFile] = useState(null);
+  const titleRef = useRef(null);
 
   const [blogdata, setBlogdata] = useState({
     title: "",
@@ -131,6 +134,7 @@ const create = () => {
       minuteRead: +blogdata.minuteRead,
       authorId: session.user.id,
       banner: uploadedUrl || "",
+      title: titleRef.current.textContent,
     };
 
     if (!payload.slug || !payload.title) {
@@ -147,12 +151,12 @@ const create = () => {
         headers: { "Content-Type": "application/json" },
       });
       toast.success("Post created 🌟", { theme });
-      console.log("data returned", id);
       Router.push(`/admin/blogposts/${id}`);
     } catch (err) {
-      err.response.data.errors.map((error) => {
-        toast.error(error.msg);
-      });
+      toast.error("Could not create post", { theme });
+      // err.response.data.errors.map((error) => {
+      //   toast.error(error.msg);
+      // });
     }
   }
 
@@ -188,14 +192,16 @@ const create = () => {
           <div className="grid grid-cols-4 gap-4">
             <div className="col-span-3">
               <div className="flex justify-center px-10">
-                <input
+                <div
+                  ref={titleRef}
+                  contentEditable="true"
+                  suppressContentEditableWarning={true}
                   style={{ maxWidth: "720px" }}
                   className="unstyled-input font-raleway mb-10 w-full bg-white text-center text-5xl font-black"
-                  placeholder="Enter title..."
-                  value={blogdata.title}
-                  name="title"
-                  onChange={(e) => updateblogdata(e)}
-                />
+                  onInput={(e) => console.log(e)}
+                >
+                  {blogdata.title}
+                </div>
               </div>
               {/* Image uploader / Management */}
               <div style={{ maxWidth: "720px" }} className="mx-auto mb-8">
