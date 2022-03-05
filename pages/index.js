@@ -4,8 +4,8 @@ import { PrismaClient } from "@prisma/client";
 import BroadPeek from "../components/PostPeek/broad";
 import Latest from "../components/PostPeek/latest";
 import Navbar from "../components/elements/navbar/Navbar-client";
-// utilities
-import axios from "../utils/axios";
+import Footer from "../components/elements/footer/Footer";
+
 const MAX_RESPONSE = 20;
 
 export default function Home({ latest, latestSide, readMore }) {
@@ -65,6 +65,8 @@ export default function Home({ latest, latestSide, readMore }) {
           })}
         </div>
       </section>
+
+      <Footer />
     </>
   );
 }

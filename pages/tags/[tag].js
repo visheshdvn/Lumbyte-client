@@ -4,15 +4,12 @@ import Head from "next/head";
 import { PrismaClient } from "@prisma/client";
 
 // components
-import WidePeek from "../../components/PostPeek/wide";
-import SmallPeek from "../../components/PostPeek/smaller";
 import BroadPeek from "../../components/PostPeek/broad";
-import { getAllTags, getTagPageData } from "../../graphql/topicPageQueries";
 import Navbar from "../../components/elements/navbar/Navbar-client";
+import Footer from "../../components/elements/footer/Footer";
 
 // utility functions
 import { isValidURL } from "../../utils/checkValidURL";
-import { hexToRGB } from "../../utils/colorConversions";
 
 const { tags, blogposts } = new PrismaClient();
 
@@ -76,7 +73,7 @@ const Topic = ({ posts, theme, metaDescription, ogImg, ogAlt }) => {
       </Head>
 
       {/* <div className="body-top-spacing"> */}
-        <Navbar />
+      <Navbar />
       {/* </div> */}
 
       <header className="horizontal-spacing mb-10 flex items-center justify-center pt-4 md:mb-12 md:pt-1 lg:mb-14 lg:pt-3 xl:mb-16 xl:pt-10">
@@ -102,6 +99,9 @@ const Topic = ({ posts, theme, metaDescription, ogImg, ogAlt }) => {
           ))}
         </div>
       </section>
+
+      {/* footer */}
+      <Footer />
     </>
   );
 };
@@ -179,10 +179,14 @@ export async function getStaticProps(context) {
 }
 
 export async function getStaticPaths() {
-  const { data } = await getAllTags();
+  const data = await tags.findMany({
+    select: {
+      tagname: true,
+    },
+  });
 
   return {
-    paths: data.tags.map((item) => ({ params: { tag: item.tagname } })),
+    paths: data.map((item) => ({ params: { tag: item.tagname } })),
     fallback: true,
   };
 }

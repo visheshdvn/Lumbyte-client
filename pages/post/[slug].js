@@ -14,6 +14,7 @@ import ShowTags from "../../components/micro/showTags";
 import { getValidImageURL } from "../../utils/checkValidURL";
 import ReadOnlyEditor from "../../components/elements/editor/readOnlyEditor";
 import Navbar from "../../components/elements/navbar/Navbar-client";
+import Footer from "../../components/elements/footer/Footer";
 
 // prisma
 import { PrismaClient } from "@prisma/client";
@@ -69,7 +70,7 @@ const Post = ({ postData, readMore }) => {
       </Head>
 
       <Navbar />
-      
+
       <div className="horizontal-spacing container mx-auto pt-5 md:pt-4 lg:pt-6 xl:pt-8">
         <header style={{ maxWidth: "850px" }} className="mx-auto">
           <div className="mb-5 flex items-center sm:hidden">
@@ -270,6 +271,9 @@ const Post = ({ postData, readMore }) => {
           </section>
         ) : null} */}
       </div>
+
+      {/* Footer */}
+      <Footer />
     </>
   );
 };
@@ -349,7 +353,6 @@ export async function getStaticProps(context) {
     },
   });
 
-  await prisma.$disconnect();
   blogpost = JSON.parse(JSON.stringify(blogpost));
 
   if (!blogpost) {
