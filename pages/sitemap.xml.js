@@ -1,53 +1,25 @@
-import fs from "fs"
-import client from "../apollo-client"
-import { gql } from "@apollo/client"
+import fs from "fs";
+import { PrismaClient } from "@prisma/client";
 
-const Sitemap = () => {}
-
-async function getSlugs() {
-  const data = await client.query({
-    query: gql`
-      query {
-        blogposts {
-          slug
-          updated_at
-        }
-      }
-    `,
-  })
-
-  return data
-}
-
-async function getAllTopicNames() {
-  const data = await client.query({
-    query: gql`
-      query getAllTopics {
-        topics {
-          topicname
-          updated_at
-        }
-      }
-    `,
-  })
-
-  return data
-}
-
-console.log(process.cwd())
+const Sitemap = () => {};
 
 export async function getServerSideProps({ res }) {
-  const {
-    data: { blogposts },
-  } = await getSlugs()
-  const {
-    data: { topics },
-  } = await getAllTopicNames()
+  const { blogposts } = new PrismaClient();
+
+  const posts = await blogposts.findMany({
+    select: {
+      slug: true,
+      updated_at: true,
+    },
+    where: {
+      published: true,
+    },
+  });
 
   const baseUrl = {
     development: "http://localhost:3000",
     production: "https://lumbytes.com",
-  }[process.env.NODE_ENV]
+  }[process.env.NODE_ENV];
 
   const staticPages = fs
     .readdirSync("pages")
@@ -69,12 +41,12 @@ export async function getServerSideProps({ res }) {
         "package.json",
         "package-lock.json",
         "out",
-      ].includes(staticPage)
+        "admin",
+      ].includes(staticPage);
     })
     .map((staticPagePath) => {
-      console.log(staticPagePath);
-      return `${baseUrl}/${staticPagePath.replace(".js", "")}`
-    })
+      return `${baseUrl}/${staticPagePath.replace(".js", "")}`;
+    });
 
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
     <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
@@ -93,43 +65,31 @@ export async function getServerSideProps({ res }) {
               <changefreq>monthly</changefreq>
               <priority>0.5</priority>
             </url>
-          `
+          `;
         })
         .join("")}
-      ${blogposts
+      ${posts
         .map(({ slug, updated_at }) => {
           return `
             <url>
-              <loc>${baseUrl}/post/${slug}</loc>
+              <loc>${baseUrl}/post/${encodeURIComponent(slug)}</loc>
               <lastmod>${new Date(updated_at).toISOString()}</lastmod>
               <changefreq>daily</changefreq>
               <priority>1.0</priority>
             </url>
-          `
-        })
-        .join("")}
-      ${topics
-        .map(({ topicname, updated_at }) => {
-          return `
-            <url>
-              <loc>${baseUrl}/topic/${encodeURIComponent(topicname)}</loc>
-              <lastmod>${new Date(updated_at).toISOString()}</lastmod>
-              <changefreq>monthly</changefreq>
-              <priority>0.8</priority>
-            </url>
-          `
+          `;
         })
         .join("")}
     </urlset>
-  `
+  `;
 
-  res.setHeader("Content-Type", "text/xml")
-  res.write(sitemap)
-  res.end()
+  res.setHeader("Content-Type", "text/xml");
+  res.write(sitemap);
+  res.end();
 
   return {
     props: {},
-  }
+  };
 }
 
-export default Sitemap
+export default Sitemap;
