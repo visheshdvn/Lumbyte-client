@@ -9,11 +9,8 @@ import Footer from "../components/elements/footer/Footer";
 const MAX_RESPONSE = 20;
 
 export default function Home({ latest, latestSide, readMore }) {
-
-  if (!latest || !latestSide || !readMore) {
-    return (
-      <h1>No Data</h1>
-    )
+  if (!latest.length || !latestSide.length || !readMore.length) {
+    return <h1>No Data</h1>;
   }
 
   return (
