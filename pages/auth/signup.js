@@ -2,7 +2,7 @@ import React, { useState } from "react";
 // third party packages
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import axios from "axios";
+import axios from "../../utils/axios";
 // utilities
 import NoIndex from "../../utils/metaTags/admin/noIndex";
 // components
