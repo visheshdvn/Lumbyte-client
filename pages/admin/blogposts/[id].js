@@ -122,7 +122,6 @@ const update = ({ initialContent, allTags }) => {
     console.log("saving");
     let uploadedUrl = null;
     if (file) {
-      console.log("saving banner");
       const { status, responseData } = await uploadImage(file);
 
       if (status === "OK") {
@@ -131,6 +130,8 @@ const update = ({ initialContent, allTags }) => {
         toast.error("could not upload banner Image");
         return;
       }
+
+      setFile(null);
     }
 
     let content = await editor.save();

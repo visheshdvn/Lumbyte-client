@@ -4,7 +4,6 @@ import { toast } from "react-toastify";
 export async function publishBlogpost(postId, state, setState) {
   try {
     const res = await axios.put(`blogposts/publish/${postId}`);
-    console.log(res.data);
     setState({ ...state, published: true });
     toast.success("Blogpost published successfully");
   } catch (err) {
