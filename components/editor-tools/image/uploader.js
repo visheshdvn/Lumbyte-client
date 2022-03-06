@@ -1,8 +1,9 @@
 import axios from "axios";
 
-const baseUrl = process.env.NODE_ENV
-  ? "http://localhost:3000/api"
-  : "https://lumbytes.com/api";
+const baseUrl = {
+  "development":"http://localhost:3000/api",
+  "production": "https://lumbytes.com/api"
+}[process.env.NODE_ENV]
 
 export async function uploadFile(file) {
   try {
