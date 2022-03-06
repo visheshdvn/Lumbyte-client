@@ -9,6 +9,13 @@ import Footer from "../components/elements/footer/Footer";
 const MAX_RESPONSE = 20;
 
 export default function Home({ latest, latestSide, readMore }) {
+
+  if (!latest || !latestSide || !readMore) {
+    return (
+      <h1>No Data</h1>
+    )
+  }
+
   return (
     <>
       <Head>
@@ -117,6 +124,17 @@ export async function getStaticProps() {
       published: true,
     },
   });
+
+  if (!data) {
+    return {
+      props: {
+        latest: [],
+        latestSide: [],
+        readMore: [],
+      },
+      revalidate: 14400,
+    };
+  }
 
   data = JSON.parse(JSON.stringify(data));
   const latest = data.slice(0, 1);
