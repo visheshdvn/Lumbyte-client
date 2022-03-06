@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import axios from "axios";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 // components
@@ -12,6 +11,7 @@ import {
 } from "../../../components/elements/buttons/buttons";
 import { AdminInlineTextInput } from "../../../components/elements/input/text";
 // utilities
+import axios from "../../../utils/axios";
 import { MetaTags } from "../../../utils/metaTags/admin/meta";
 
 const createTag = ({}) => {
