@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { PrismaClient } from "@prisma/client";
+import "react-toastify/dist/ReactToastify.css";
 // utilities
 import Sidebar from "../../../components/elements/sideBar/leftSideBar";
 // utils
