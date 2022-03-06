@@ -9,7 +9,7 @@ import Footer from "../components/elements/footer/Footer";
 const MAX_RESPONSE = 20;
 
 export default function Home({ latest, latestSide, readMore }) {
-  if (!latest.length || !latestSide.length || !readMore.length) {
+  if (Object.keys(latest).length === 0) {
     return <h1>No Data</h1>;
   }
 
@@ -122,10 +122,10 @@ export async function getStaticProps() {
     },
   });
 
-  if (!data) {
+  if (data.length === 0) {
     return {
       props: {
-        latest: [],
+        latest: {},
         latestSide: [],
         readMore: [],
       },
