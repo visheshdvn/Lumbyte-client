@@ -13,8 +13,7 @@ const LeftSideBar = () => {
   useEffect(() => {
     setTheme("light");
   }, [theme]);
-
-  console.log("user", user)
+  
   return (
     <div
       style={{ maxWidth: "312px", minWidth: "312px" }}
@@ -35,7 +34,7 @@ const LeftSideBar = () => {
         </div>
         <div className="borde absolute bottom-8 left-1/2 flex w-60 -translate-x-1/2 transform text-white">
           <div
-            style={{ backgroundImage: "url(/me.jpg)" }}
+            style={{ backgroundImage: `url(${user.dp})` }}
             className="mr-4 h-12 w-12 rounded-xl bg-cover bg-center"
           ></div>
           <div className="flex-1 flex-col justify-around">
