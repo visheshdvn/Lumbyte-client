@@ -1,6 +1,6 @@
 /* global */
 div.codex-editor__redactor {
-  @apply pb-10;
+  padding-bottom: 2rem!important;
 }
 
 div.ce-block__content {
