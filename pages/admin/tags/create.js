@@ -12,7 +12,7 @@ import {
 import { AdminInlineTextInput } from "../../../components/elements/input/text";
 // utilities
 import axios from "../../../utils/axios";
-import { MetaTags } from "../../../utils/metaTags/admin/meta";
+import { HeadTags } from "../../../utils/headTags/admin/meta";
 
 const createTag = ({}) => {
   const [tagData, settagData] = useState({
@@ -57,7 +57,7 @@ const createTag = ({}) => {
   return (
     <>
       {/* head */}
-      <MetaTags title="Create Tag" />
+      <HeadTags title="Create Tag" />
 
       {/* body */}
       <div className="bg-offWhite flex h-screen">

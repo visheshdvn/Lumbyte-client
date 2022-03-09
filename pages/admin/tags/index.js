@@ -5,7 +5,7 @@ import "react-toastify/dist/ReactToastify.css";
 // utilities
 import Sidebar from "../../../components/elements/sideBar/leftSideBar";
 // utils
-import { MetaTags } from "../../../utils/metaTags/admin/meta";
+import { HeadTags } from "../../../utils/headTags/admin/meta";
 
 const { tags } = new PrismaClient();
 
@@ -13,7 +13,7 @@ const Tags = ({ tags }) => {
   return (
     <>
       {/* head */}
-      <MetaTags />
+      <HeadTags />
 
       {/* body */}
       <div className="flex">

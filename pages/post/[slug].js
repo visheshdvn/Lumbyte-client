@@ -1,6 +1,5 @@
 import React from "react";
 import Image from "next/image";
-import Head from "next/head";
 import { useRouter } from "next/router";
 import {
   TwitterShareButton,
@@ -15,6 +14,7 @@ import { getValidImageURL } from "../../utils/checkValidURL";
 import ReadOnlyEditor from "../../components/elements/editor/readOnlyEditor";
 import Navbar from "../../components/elements/navbar/Navbar-client";
 import Footer from "../../components/elements/footer/Footer";
+import HeadBlogpost from "../../utils/headTags/public/headBlogpost";
 
 // prisma
 import { PrismaClient } from "@prisma/client";
@@ -45,30 +45,14 @@ const Post = ({ postData, readMore }) => {
 
   return (
     <>
-      <Head>
-        <title>{title}</title>
-        <meta name="description" content={metaDescription} />
-        <meta property="og:title" content={title} key="ogtitle" />
-        <meta property="og:type" content="blog" />
-        <meta
-          property="og:url"
-          content={`https://lumbytes.com/post/${encodeURIComponent(slug)}`}
-        />
-        <meta
-          property="og:description"
-          content={metaDescription}
-          key="ogdesc"
-        />
-        <meta
-          property="og:image"
-          content={getValidImageURL(banner)}
-          key="ogimage"
-        />
-        <meta property="og:site_name" content="Lumbytes" />
-        {/* twitter */}
-        <meta name="twitter:card" value="summary_large_image" />
-      </Head>
-
+      <HeadBlogpost
+        slug={slug}
+        title={title}
+        metaDescription={metaDescription}
+        banner={banner}
+        banneralt={banneralt}
+      />
+      
       <Navbar />
 
       <div className="horizontal-spacing container mx-auto pt-5 md:pt-4 lg:pt-6 xl:pt-8">
@@ -83,7 +67,7 @@ const Post = ({ postData, readMore }) => {
             ))}
           </div>
 
-          <h1 className="font-primary text-center text-3xl font-black md:text-5xl md:leading-tight lg:leading-tight lg:text-5.5xl">
+          <h1 className="font-primary lg:text-5.5xl text-center text-3xl font-black md:text-5xl md:leading-tight lg:leading-tight">
             {title}
           </h1>
 

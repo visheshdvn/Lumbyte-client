@@ -10,7 +10,7 @@ import Select from "../../../components/elements/dropdownSelect/adminSelect";
 import EditBanner from "../../../components/uploaders/editBanner";
 // utils
 import axios from "../../../utils/axios";
-import { MetaBlogposts } from "../../../utils/metaTags/admin/meta";
+import { HeadBlogposts } from "../../../utils/headTags/admin/meta";
 import {
   tagsToOptions,
   optionsToTags,
@@ -162,7 +162,7 @@ const create = () => {
 
   return (
     <>
-      <MetaBlogposts title="Create Blogpost" />
+      <HeadBlogposts title="Create Blogpost" />
 
       {/* body */}
       <div className="flex">

@@ -14,7 +14,7 @@ import {
 } from "../../../components/elements/buttons/buttons";
 import { AdminInlineTextInput } from "../../../components/elements/input/text";
 // utils
-import { MetaTags } from "../../../utils/metaTags/admin/meta";
+import { HeadTags } from "../../../utils/headTags/admin/meta";
 import axios from "../../../utils/axios";
 
 const { tags } = new PrismaClient();
@@ -55,7 +55,7 @@ const Update = ({ initialTagData }) => {
   return (
     <>
       {/* head */}
-      <MetaTags title="Edit tag" />
+      <HeadTags title="Edit tag" />
 
       {/* body */}
       <div className="bg-offWhite flex h-screen">

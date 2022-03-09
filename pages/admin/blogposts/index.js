@@ -7,7 +7,7 @@ import Link from "next/link";
 import Sidebar from "../../../components/elements/sideBar/leftSideBar";
 import FormattedDate from "../../../components/micro/formattedDate";
 // utils
-import { MetaBlogposts } from "../../../utils/metaTags/admin/meta";
+import { HeadBlogposts } from "../../../utils/headTags/admin/meta";
 
 const { blogposts } = new PrismaClient();
 
@@ -24,7 +24,7 @@ const Blogposts = ({ blogposts }) => {
   return (
     <>
       {/* head */}
-      <MetaBlogposts />
+      <HeadBlogposts />
 
       {/* body */}
       <div className="flex">

@@ -3,7 +3,7 @@ import Head from "next/head";
 import React from "react";
 import NoIndex from "./noIndex";
 
-export const MetaBlogposts = ({ title }) => {
+export const HeadBlogposts = ({ title }) => {
   return (
     <>
       <Head>
@@ -14,7 +14,7 @@ export const MetaBlogposts = ({ title }) => {
   );
 };
 
-export const MetaTags = ({ title }) => {
+export const HeadTags = ({ title }) => {
   return (
     <>
       <Head>

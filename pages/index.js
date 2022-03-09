@@ -6,6 +6,8 @@ import Latest from "../components/PostPeek/latest";
 import Navbar from "../components/elements/navbar/Navbar-client";
 import Footer from "../components/elements/footer/Footer";
 
+import MetaIndex from "../utils/headTags/public/headIndex";
+
 const MAX_RESPONSE = 20;
 
 export default function Home({ latest, latestSide, readMore }) {
@@ -15,48 +17,7 @@ export default function Home({ latest, latestSide, readMore }) {
 
   return (
     <>
-      <Head>
-        <title>Lumbytes | Home</title>
-        <meta
-          name="description"
-          content="Lumbytes is a technology and programming website. We publish content related to latest happenings in tech industry."
-        />
-        {/* opengraph */}
-        <meta
-          property="og:title"
-          content="Lumbytes - Luminous bytes for luminous minds."
-          key="ogtitle"
-        />
-        <meta property="og:type" content="blog" />
-        <meta property="og:url" content={`https://lumbytes.com`} />
-        <meta
-          property="og:description"
-          content="Lumbytes is a technology and programming website. We publish content related to latest happenings in tech industry."
-          key="ogdesc"
-        />
-        <meta
-          property="og:image"
-          content="https://lumbytes.com/logo/ogImage.png"
-          key="ogimage"
-        />
-        {/* twitter */}
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:site" content="@lumbytes" />
-        <meta
-          name="twitter:title"
-          content="Lumbytes - Luminous bytes for luminous minds."
-        />
-        <meta
-          name="twitter:description"
-          content="Lumbytes is a technology and programming website. We publish content related to latest happenings in tech industry."
-        />
-        <meta name="twitter:creator" content="@visheshdvn" />
-        <meta
-          name="twitter:image:src"
-          content="https://lumbytes.com/logo/ogImage.png"
-        />
-      </Head>
-
+      <MetaIndex />
       <Navbar />
 
       <Latest big={latest} side={latestSide} />

@@ -28,7 +28,7 @@ import {
   publishBlogpost,
   unPublishBlogpost,
 } from "../../../utils/togglePublish";
-import { MetaBlogposts } from "../../../utils/metaTags/admin/meta";
+import { HeadBlogposts } from "../../../utils/headTags/admin/meta";
 // utils
 import axios from "../../../utils/axios";
 import uploadImage from "../../../utils/uploadImage/uploader";
@@ -180,7 +180,7 @@ const update = ({ initialContent, allTags }) => {
 
   return (
     <>
-      <MetaBlogposts title="Edit Blogpost" />
+      <HeadBlogposts title="Edit Blogpost" />
 
       {/* Body */}
       <div className="flex">
