@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "../../utils/axios";
 // utilities
-import NoIndex from "../../utils/metaTags/admin/noIndex";
+import NoIndex from "../../utils/headTags/admin/noIndex";
 // components
 
 const SignUp = () => {
