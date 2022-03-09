@@ -47,20 +47,30 @@ const Latest = ({ big, side }) => {
               ))}
             </div>
             <a href={`/post/${slug}`}>
-              <h1 className="text-whiteMain font-primary lg:text-3.5xl md:text-2.75xl my-0 text-2xl font-black leading-10 sm:my-3 sm:text-3xl md:my-2 lg:my-4 xl:text-3.5xl">
+              <h1 className="text-whiteMain font-primary lg:text-3.5xl md:text-2.75xl xl:text-3.5xl my-0 text-2xl font-black leading-10 sm:my-3 sm:text-3xl md:my-2 lg:my-4">
                 {title}
               </h1>
             </a>
-            <div className="flex items-center">
-              <h4 className="font-open-sans text-whiteMain text-sm font-bold md:text-lg lg:text-lg">
-                <span>{author.firstname}</span>
-                {author.lastname ? <span>{" " + author.lastname}</span> : null}
+            <div className="font-primary flex items-center text-sm">
+              {author.dp && (
+                <div className="relative mr-2 h-5 w-5 overflow-hidden rounded-full">
+                  <Image
+                    src={author.dp}
+                    alt={author.dpalt}
+                    layout="fill"
+                    className="object-cover object-center"
+                    placeholder="blur"
+                    blurDataURL={author.dp}
+                  />
+                </div>
+              )}
+              <h4 className="text-whiteMain font-medium">
+                <span>
+                  {author.firstname} {author.lastname || ""}
+                </span>
               </h4>
-              <div
-                style={{ width: "1px", height: "15px" }}
-                className="bg-whiteMain-50 mx-2"
-              />
-              <h5 className="text-whiteMain font-light">
+              <span className="px-2">•</span>
+              <h5 className="text-whiteMain font-normal">
                 <FormattedDate date={published_at} />
               </h5>
             </div>

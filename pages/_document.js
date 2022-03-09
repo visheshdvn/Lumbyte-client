@@ -31,7 +31,10 @@ class MyDocument extends Document {
             href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap"
             rel="stylesheet"
           />
-          <link rel="shortcut icon" href="/logo/FavIcon2.png" />
+          <link
+            rel="shortcut icon"
+            href="https://lumbytes-general.s3.eu-west-1.amazonaws.com/favIcon-dark.png"
+          />
 
           {/* google analytics */}
           <script
