@@ -7,7 +7,7 @@ import {
   useSession,
 } from "next-auth/react";
 // utilities
-import NoIndex from "../../utils/metaTags/admin/noIndex";
+import NoIndex from "../../utils/headTags/admin/noIndex";
 
 const Login = ({ providers, csrfToken }) => {
   const { data: session, status } = useSession();
