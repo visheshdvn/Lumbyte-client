@@ -100,7 +100,7 @@ export default function Navbar() {
                       href="/tags/web"
                       className={`nav-link ${
                         asPath === "/tags/web"
-                          ? "font-black text-blue-500"
+                          ? "font-bold text-blue-500"
                           : "font-normal text-white hover:text-blue-500"
                       }`}
                     >
@@ -110,7 +110,7 @@ export default function Navbar() {
                       href="/tags/blockchain"
                       className={`nav-link ${
                         asPath === "/tags/blockchain"
-                          ? "font-black text-yellow-500"
+                          ? "font-bold text-yellow-500"
                           : "font-normal text-white hover:text-yellow-500"
                       }`}
                     >
@@ -120,7 +120,7 @@ export default function Navbar() {
                       href="/tags/code"
                       className={`nav-link ${
                         asPath === "/tags/code"
-                          ? "font-black text-purple-600"
+                          ? "font-bold text-purple-600"
                           : "font-normal text-white hover:text-purple-600"
                       }`}
                     >

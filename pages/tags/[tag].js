@@ -94,9 +94,9 @@ const Topic = ({ posts, theme, metaDescription, ogImg, ogAlt }) => {
       </header>
       <section className="body-font">
         <div className="horizontal-spacing container mx-auto">
-          {posts.map((post) => (
-            <BroadPeek data={post} key={post.slug} />
-          ))}
+          {posts.map((post) => {
+            return <BroadPeek data={post} key={post.slug} />;
+          })}
         </div>
       </section>
 
@@ -151,6 +151,9 @@ export async function getStaticProps(context) {
         select: {
           firstname: true,
           lastname: true,
+          dp: true,
+          dpalt: true,
+          username: true,
         },
       },
       created_at: true,

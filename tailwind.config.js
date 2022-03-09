@@ -15,10 +15,11 @@ module.exports = {
       serif: ["Georgia", ...defaultTheme.fontFamily.serif],
       antonio: ["Antonio"],
       raleway: ["Raleway"],
+      primary: ["Poppins", ...defaultTheme.fontFamily.serif],
+      adminPrimary: ["Quicksand", ...defaultTheme.fontFamily.serif],
       "raleway-dot": ["Raleway Dots"],
       "open-sans": ["Open Sans Condensed", ...defaultTheme.fontFamily.sans],
       mono: [...defaultTheme.fontFamily.mono],
-      adminPrimary: ["Quicksand", ...defaultTheme.fontFamily.serif],
     },
     extend: {
       fontSize: {
@@ -28,6 +29,7 @@ module.exports = {
         "4.75xl": "2.75rem",
         "3.5xl": "2rem",
         "2.75xl": "1.75rem",
+        "5.5xl": "52px"
       },
       colors: {
         grayText: "rgb(117, 117, 117)",

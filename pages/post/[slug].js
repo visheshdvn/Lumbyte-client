@@ -83,7 +83,7 @@ const Post = ({ postData, readMore }) => {
             ))}
           </div>
 
-          <h1 className="font-raleway text-center text-4xl font-black md:text-5xl md:leading-tight lg:text-6xl">
+          <h1 className="font-primary text-center text-3xl font-black md:text-5xl md:leading-tight lg:leading-tight lg:text-5.5xl">
             {title}
           </h1>
 

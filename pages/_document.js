@@ -27,6 +27,10 @@ class MyDocument extends Document {
             href="https://fonts.googleapis.com/css2?family=Antonio:wght@700&family=Open+Sans+Condensed:wght@300;700&family=Quicksand:wght@400;600;700&family=Raleway+Dots&family=Raleway:wght@500;600;900&display=swap"
             rel="stylesheet"
           />
+          <link
+            href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap"
+            rel="stylesheet"
+          />
           <link rel="shortcut icon" href="/logo/FavIcon2.png" />
 
           {/* google analytics */}

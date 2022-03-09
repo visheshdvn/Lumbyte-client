@@ -1,7 +1,5 @@
 import React from "react";
-import Link from "next/link";
 import Image from "next/image";
-import { getValidImageURL } from "../../utils/checkValidURL";
 import FormattedDate from "../micro/formattedDate";
 import ShowTags from "../micro/showTags";
 
@@ -12,10 +10,10 @@ const Latest = ({ big, side }) => {
   return (
     <div
       style={{ minHeight: "12rem" }}
-      className="xl:h-100 horizontal-spacing container mx-auto mt-3 mb-14 grid h-auto grid-cols-12 gap-1 sm:mt-4 md:mt-0 md:mb-10 lg:mt-5 lg:mb-11 xl:mt-12 xl:mb-12"
+      className="horizontal-spacing container mx-auto mt-3 mb-14 grid h-auto grid-cols-12 gap-1 sm:mt-4 md:mt-0 md:mb-10 lg:mt-5 lg:mb-11 xl:mt-12 xl:mb-12"
     >
       <div className="col-span-12 overflow-hidden xl:col-span-9">
-        <div className="relative flex h-full w-full flex-wrap">
+        <div className="xl:h-100 relative flex h-48 flex-wrap md:h-96">
           <a href={`/post/${slug}`} className="h-full w-full sm:relative">
             <Image
               src={banner}
@@ -49,7 +47,7 @@ const Latest = ({ big, side }) => {
               ))}
             </div>
             <a href={`/post/${slug}`}>
-              <h1 className="text-whiteMain font-raleway lg:text-3.75 md:text-2.75xl my-2 text-2xl font-black leading-tight sm:my-3 sm:text-3xl lg:my-4 xl:text-4xl">
+              <h1 className="text-whiteMain font-primary lg:text-3.5xl md:text-2.75xl my-0 text-2xl font-black leading-10 sm:my-3 sm:text-3xl md:my-2 lg:my-4 xl:text-3.5xl">
                 {title}
               </h1>
             </a>
@@ -90,7 +88,7 @@ function SideHeads({ title, date, slug, author }) {
       <a href={`/post/${slug}`} className="">
         <h1
           // style={{ fontSize: "32px" }}
-          className="font-raleway xl:text-3.5 lg:text-3.75 md:text-2.75xl text-center text-2xl font-black leading-tight sm:text-3xl md:text-left"
+          className="font-primary xl:text-3.5 lg:text-3.75 md:text-2.75xl text-center text-2xl font-bold leading-tight sm:text-3xl md:text-left"
         >
           {title}
         </h1>
