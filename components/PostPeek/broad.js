@@ -18,7 +18,6 @@ const BroadPeek = ({
     created_at,
   },
 }) => {
-  console.log("dp", dp);
   return (
     <article className="mb-16 flex sm:mb-16 md:mb-20 lg:mb-24">
       <div className="text-grayMain dark:text-whiteMain z-0 grid w-full cursor-pointer grid-cols-12 gap-1 dark:hover:text-gray-400">
@@ -27,16 +26,16 @@ const BroadPeek = ({
             style={{ aspectRatio: "8/5" }}
             className="relative h-44 md:h-32 lg:h-44 xl:h-52"
           >
-            <Link href={`/post/${slug}`}>
+            <a href={`/post/${slug}`}>
               <Image
                 src={banner}
                 alt={banneralt}
                 layout="fill"
-                className="transform object-cover object-center hover:scale-95 transition-all duration-300 hover:rounded-sm"
+                className="transform object-cover object-center transition-all duration-300 hover:scale-95 hover:rounded-sm"
                 placeholder="blur"
                 blurDataURL={banner}
               />
-            </Link>
+            </a>
           </div>
         </div>
         <div className="col-span-12 flex flex-col items-center justify-center py-3 md:col-span-4 md:flex-row md:py-0">
@@ -71,16 +70,18 @@ const BroadPeek = ({
             </p>
             {/* author and date */}
             <div className="font-primary flex items-center justify-center text-sm">
-              <div className="relative mr-2 h-5 w-5 overflow-hidden rounded-full">
-                <Image
-                  src={dp}
-                  alt={dpalt}
-                  layout="fill"
-                  className="object-cover object-center"
-                  placeholder="blur"
-                  blurDataURL={dp}
-                />
-              </div>
+              {dp && (
+                <div className="relative mr-2 h-5 w-5 overflow-hidden rounded-full">
+                  <Image
+                    src={dp}
+                    alt={dpalt}
+                    layout="fill"
+                    className="object-cover object-center"
+                    placeholder="blur"
+                    blurDataURL={dp}
+                  />
+                </div>
+              )}
               <h5 className="font-medium">
                 {firstname} {lastname}
               </h5>
