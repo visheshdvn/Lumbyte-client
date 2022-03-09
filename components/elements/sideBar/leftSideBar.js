@@ -14,6 +14,7 @@ const LeftSideBar = () => {
     setTheme("light");
   }, [theme]);
 
+  console.log("user", user)
   return (
     <div
       style={{ maxWidth: "312px", minWidth: "312px" }}

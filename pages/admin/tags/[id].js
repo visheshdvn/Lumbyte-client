@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useRouter } from "next/router";
 import { PrismaClient } from "@prisma/client";
-import axios from "axios";
 import _ from "lodash";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -16,6 +15,7 @@ import {
 import { AdminInlineTextInput } from "../../../components/elements/input/text";
 // utils
 import { MetaTags } from "../../../utils/metaTags/admin/meta";
+import axios from "../../../utils/axios";
 
 const { tags } = new PrismaClient();
 
