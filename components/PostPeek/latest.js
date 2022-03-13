@@ -4,7 +4,7 @@ import FormattedDate from "../micro/formattedDate";
 import ShowTags from "../micro/showTags";
 
 const Latest = ({ big, side }) => {
-  // console.log("side", side);
+  console.log("side", side);
   const { title, tags, banner, banneralt, published_at, slug, author } = big;
 
   return (
@@ -83,7 +83,8 @@ const Latest = ({ big, side }) => {
             title={item.title}
             date={item.published_at}
             slug={item.slug}
-            author={author}
+            tags={item.tags}
+            author={item.author}
             key={item.slug}
           />
         ))}
@@ -92,31 +93,56 @@ const Latest = ({ big, side }) => {
   );
 };
 
-function SideHeads({ title, date, slug, author }) {
+function SideHeads({ title, date, slug, author, tags }) {
   return (
-    <div className="text-grayMain dark:text-whiteMain special-dividers hover:opacity-70 dark:hover:text-gray-400">
-      <a href={`/post/${slug}`} className="">
-        <h1
-          // style={{ fontSize: "32px" }}
-          className="font-primary xl:text-3.5 lg:text-3.75 md:text-2.75xl text-center text-2xl font-bold leading-tight sm:text-3xl md:text-left"
-        >
-          {title}
-        </h1>
-      </a>
-      <div className="flex items-center justify-center pt-1 md:justify-start">
-        <h4 className="font-open-sans text-sm font-bold md:text-lg">
-          <span>{author.firstname}</span>
-          {author.lastname ? <span>{" " + author.lastname}</span> : null}
-        </h4>
-        <div
-          style={{ width: "1px", height: "15px" }}
-          className="bg-margins mx-2"
-        />
-        <h5 className="text-sm font-light">
-          <FormattedDate date={date} />
-        </h5>
+    // special-dividers
+    <>
+      <div className="text-grayMain dark:text-whiteMain special-dividers dark:hover:text-gray-400">
+        {/* tags */}
+        <div className="flex">
+          {tags.map((tag) => (
+            <ShowTags
+              tagname={tag.tagname}
+              color={tag.color}
+              key={tag.tagname}
+            />
+          ))}
+        </div>
+        {/* title */}
+        <a href={`/post/${slug}`} className="">
+          <h1
+            style={{ lineHeight: "111%" }}
+            className="font-primary md:text-2.75xl text-center text-2xl font-bold hover:opacity-90 sm:text-3xl md:my-3 md:text-left"
+          >
+            {title}
+          </h1>
+        </a>
+        {/* author and date */}
+        <div className="font-primary flex items-center text-sm">
+          {author.dp && (
+            <div className="relative mr-2 h-5 w-5 overflow-hidden rounded-full">
+              <Image
+                src={author.dp}
+                alt={author.dpalt}
+                layout="fill"
+                className="object-cover object-center"
+                placeholder="blur"
+                blurDataURL={author.dp}
+              />
+            </div>
+          )}
+          <h4 className="text-whiteMain font-medium">
+            <span>
+              {author.firstname} {author.lastname || ""}
+            </span>
+          </h4>
+          <span className="px-2">•</span>
+          <h5 className="text-whiteMain font-normal">
+            <FormattedDate date={date} />
+          </h5>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 
