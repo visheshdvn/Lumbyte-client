@@ -4,7 +4,6 @@ import FormattedDate from "../micro/formattedDate";
 import ShowTags from "../micro/showTags";
 
 const Latest = ({ big, side }) => {
-  console.log("side", side);
   const { title, tags, banner, banneralt, published_at, slug, author } = big;
 
   return (
