@@ -48,6 +48,7 @@ const ContentReader = ({ content }) => {
       },
       data: content,
       readOnly: true,
+      logLevel: "ERROR"
     });
     return () => {
       editor.destroy();
