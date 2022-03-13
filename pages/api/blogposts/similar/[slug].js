@@ -36,6 +36,8 @@ handler.get(async (req, res) => {
     _select = null;
   }
 
+  console.log(slug);
+
   const { tags } = await blogposts.findUnique({
     select: {
       tags: {
@@ -48,6 +50,8 @@ handler.get(async (req, res) => {
       slug,
     },
   });
+
+  console.log(tags);
 
   const blog = await blogposts.findMany({
     select: {
@@ -71,7 +75,7 @@ handler.get(async (req, res) => {
           ? _select.includes("content")
             ? true
             : false
-          : true,
+          : false,
       banner:
         _select && Array.isArray(_select)
           ? _select.includes("banner")
@@ -133,12 +137,30 @@ handler.get(async (req, res) => {
       author:
         _select && Array.isArray(_select)
           ? _select.includes("author")
-            ? true
+            ? {
+                select: {
+                  id: true,
+                  username: true,
+                  firstname: true,
+                  lastname: true,
+                  dp: true,
+                  dpalt: true,
+                },
+              }
             : false
-          : true,
+          : {
+              select: {
+                id: true,
+                username: true,
+                firstname: true,
+                lastname: true,
+                dp: true,
+                dpalt: true,
+              },
+            },
     },
     where: {
-      published: false,
+      published: true,
       slug: {
         not: slug,
       },
@@ -151,7 +173,7 @@ handler.get(async (req, res) => {
     skip: +skip || undefined,
     take: +take || undefined,
     orderBy: {
-      id: "desc",
+      n: "desc",
     },
   });
 

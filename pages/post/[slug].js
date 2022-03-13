@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import {
   TwitterShareButton,
@@ -21,7 +22,7 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
-const Post = ({ postData, readMore }) => {
+const Post = ({ postData, similar }) => {
   const router = useRouter();
 
   if (router.isFallback) {
@@ -52,7 +53,7 @@ const Post = ({ postData, readMore }) => {
         banner={banner}
         banneralt={banneralt}
       />
-      
+
       <Navbar />
 
       <div className="horizontal-spacing container mx-auto pt-5 md:pt-4 lg:pt-6 xl:pt-8">
@@ -206,7 +207,7 @@ const Post = ({ postData, readMore }) => {
               {/* author data */}
               <div className="border-grayMain flex border-t-4 border-b-4 py-3 dark:border-gray-400">
                 <div className="flex items-center">
-                  <div className="bg-yellow-75 relative h-24 w-24 overflow-hidden rounded-full lg:h-36 lg:w-36">
+                  <div className="bg-yellow-75 border-grayMain relative h-24 w-24 overflow-hidden rounded-full border-4 dark:border-gray-400 lg:h-36 lg:w-36">
                     <a
                       href="https://www.linkedin.com/in/visheshdvn"
                       target="_blank"
@@ -242,18 +243,18 @@ const Post = ({ postData, readMore }) => {
         </section>
 
         {/* similar here */}
-        {/* {readMore.length > 0 ? (
-          <section className="mb-14 py-3">
+        {similar.length > 0 ? (
+          <section className="mb-20 pt-3">
             <div className="horizontal-spacing container mx-auto">
-              <h1 className="wide-head xl:mt-18 lg:mt-18 mt-16">Read more</h1>
-              <div className="flex flex-col flex-wrap sm:flex-row">
-                {readMore.map((data) => (
+              <h1 className="wide-head xl:mt-18 lg:mt-18 mt-12">Read more</h1>
+              <div className="flex flex-col flex-wrap md:flex-row">
+                {similar.map((data) => (
                   <SimilarArticles key={data.slug} data={data} />
                 ))}
               </div>
             </div>
           </section>
-        ) : null} */}
+        ) : null}
       </div>
 
       {/* Footer */}
@@ -263,36 +264,66 @@ const Post = ({ postData, readMore }) => {
 };
 
 function SimilarArticles({ data }) {
-  const { slug, banner, title, tags } = data;
+  const { slug, banner, title, banneralt, author, minuteRead, published_at } =
+    data;
   return (
-    <a
-      href={`/post/${slug}`}
+    <div
       style={{ minWidth: "x" }}
-      className="col-span-2 mb-5 h-auto w-full px-2 sm:mb-0 sm:h-auto sm:w-1/3 lg:col-auto"
+      className="col-span-2 h-auto w-full px-3 md:mb-0 sm:h-auto md:w-1/3 lg:col-auto mb-10"
     >
-      <div className="scale-parent relative h-44 w-full overflow-hidden rounded-md sm:h-64 md:h-72">
-        <div
-          style={{
-            backgroundImage:
-              "linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.7) 60%, rgba(0,0,0,1) 98%)",
-          }}
-          className="gradient-div absolute top-0 right-0 left-0 bottom-0 z-10"
-        />
-
-        <Image
-          className="object-cover object-center transition-all duration-1000"
-          src={getValidImageURL(banner.url)}
-          alt={banner.alternativeText}
-          layout="fill"
-          placeholder="blur"
-          blurDataURL={getValidImageURL(banner.url)}
-        />
-
-        <h3 className="font-raleway pointer-events-none absolute bottom-2 right-2 left-2 z-20 text-2xl font-black leading-7 text-white sm:text-2xl lg:text-3xl">
-          {title}
-        </h3>
+      <Link href={`/post/${slug}`} passHref>
+        <a>
+          <div className="scale-parent relative h-44 w-full overflow-hidden sm:h-64 md:h-44 xl:h-60">
+            <Image
+              className="object-cover object-center transition-all duration-1000"
+              src={banner}
+              alt={banneralt}
+              layout="fill"
+              placeholder="blur"
+              blurDataURL={banner}
+            />
+          </div>
+        </a>
+      </Link>
+      <div className="my-4 flex">
+        <a
+          href="https://www.linkedin.com/in/visheshdvn"
+          target="_blank"
+          rel="noreferrer"
+        >
+          <div
+            style={{
+              background: `center url(${
+                author.dp || getValidImageURL("/me.jpg")
+              })`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+            }}
+            className="relative float-left h-8 w-8 rounded-full md:h-8 md:w-8"
+          />
+        </a>
+        <div className="font-primary float-left flex flex-col justify-around pl-2">
+          <a
+            href="https://www.linkedin.com/in/visheshdvn"
+            target="_blank"
+            rel="noreferrer"
+            className="text-sm font-bold"
+          >
+            {author.firstname} {author.lastname || ""}
+          </a>
+          <div className="text-grayText flex h-3 items-center overflow-hidden text-xs dark:text-gray-400">
+            <span className="">
+              <FormattedDate date={published_at || created_at} />
+            </span>
+            <span className="mx-2">•</span>
+            <span className="">{minuteRead} min read</span>
+          </div>
+        </div>
       </div>
-    </a>
+      <h3 className="font-primary xl:text-2.75xl font-bold sm:text-2xl sm:leading-7 xl:leading-8">
+        {title}
+      </h3>
+    </div>
   );
 }
 
@@ -345,50 +376,63 @@ export async function getStaticProps(context) {
     };
   }
 
-  const {
-    id,
-    minuteRead,
-    published_at,
-    tags,
-    title,
-    metaDescription,
-    author,
-    banner,
-    banneralt,
-    content,
-    created_at,
-  } = blogpost;
+  let similar = await blogposts.findMany({
+    select: {
+      title: true,
+      slug: true,
+      banner: true,
+      banneralt: true,
+      author: {
+        select: {
+          firstname: true,
+          lastname: true,
+          username: true,
+          dp: true,
+          dpalt: true,
+        },
+      },
+      published_at: true,
+      minuteRead: true,
+    },
+    where: {
+      published: true,
+      slug: {
+        not: slug,
+      },
+      tags: {
+        some: {
+          OR: blogpost.tags,
+          published: true,
+        },
+      },
+    },
+    take: 3,
+    orderBy: {
+      n: "desc",
+    },
+  });
 
-  // let readMore;
-  // if (tags.length > 1) {
-  //   const {
-  //     data: { similar },
-  //   } = await getSimilarPosts(slug, tags[0].tagname, tags[1].tagname);
-  //   readMore = similar;
-  // } else {
-  //   const {
-  //     data: { similar },
-  //   } = await getSimilarPosts(slug, tags[0].tagname, undefined);
-  //   readMore = similar;
-  // }
+  similar = JSON.parse(JSON.stringify(similar));
+
+  prisma.$disconnect();
 
   return {
     props: {
       postData: {
-        id,
+        id: blogpost.id,
         slug,
-        title,
-        author,
-        banner,
-        banneralt,
-        tags,
-        published_at,
-        created_at,
-        metaDescription,
-        minuteRead,
-        content,
+        title: blogpost.title,
+        author: blogpost.author,
+        banner: blogpost.banner,
+        banneralt: blogpost.banneralt,
+        tags: blogpost.tags,
+        published_at: blogpost.published_at,
+        created_at: blogpost.created_at,
+        metaDescription: blogpost.metaDescription,
+        minuteRead: blogpost.minuteRead,
+        content: blogpost.content,
       },
-      // readMore,
+      similar,
     },
     revalidate: 86400,
   };
