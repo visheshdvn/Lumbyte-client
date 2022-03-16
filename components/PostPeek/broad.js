@@ -19,8 +19,8 @@ const BroadPeek = ({
   },
 }) => {
   return (
-    <article className="mb-16 flex sm:mb-16 md:mb-20 lg:mb-24">
-      <div className="text-grayMain dark:text-whiteMain z-0 grid w-full cursor-pointer grid-cols-12 gap-1 dark:hover:text-gray-400">
+    <article className="text-grayMain mb-16 flex dark:text-white sm:mb-16 md:mb-20 lg:mb-24">
+      <div className=" z-0 grid w-full cursor-pointer grid-cols-12 gap-1 ">
         <div className="col-span-12 flex h-auto items-center justify-center md:col-span-4 md:justify-start">
           <div
             style={{ aspectRatio: "8/5" }}

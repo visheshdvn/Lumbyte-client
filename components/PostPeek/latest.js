@@ -34,7 +34,7 @@ const Latest = ({ big, side }) => {
 
           <div
             style={{ backgroundColor: "rgba(38, 38, 17, 0.85)" }}
-            className="absolute bottom-8 w-11/12 px-4 py-5 text-zinc-50 md:px-5 md:py-6 lg:w-4/5"
+            className="absolute bottom-8 w-11/12 px-4 py-5 md:px-5 md:py-6 lg:w-4/5"
           >
             <div className="flex">
               {tags.map((tag) => (
@@ -42,15 +42,16 @@ const Latest = ({ big, side }) => {
                   tagname={tag.tagname}
                   color={tag.color}
                   key={tag.tagname}
+                  textClass="text-zinc-50"
                 />
               ))}
             </div>
             <a href={`/post/${slug}`}>
-              <h1 className="text-whiteMain font-primary lg:text-3.5xl md:text-2.75xl xl:text-3.5xl my-0 text-2xl font-black leading-10 sm:my-3 sm:text-3xl md:my-2 lg:my-4">
+              <h1 className="font-primary lg:text-3.5xl md:text-2.75xl xl:text-3.5xl my-0 text-2xl font-black leading-10 text-zinc-50 sm:my-3 sm:text-3xl md:my-2 lg:my-4">
                 {title}
               </h1>
             </a>
-            <div className="font-primary flex items-center text-sm">
+            <div className="font-primary flex items-center text-sm text-zinc-50">
               {author.dp && (
                 <div className="relative mr-2 h-5 w-5 overflow-hidden rounded-full">
                   <Image
@@ -63,8 +64,8 @@ const Latest = ({ big, side }) => {
                   />
                 </div>
               )}
-              <h4 className="text-whiteMain font-medium">
-                <span>
+              <h4 className="font-medium">
+                <span className="">
                   {author.firstname} {author.lastname || ""}
                 </span>
               </h4>
@@ -96,7 +97,7 @@ function SideHeads({ title, date, slug, author, tags }) {
   return (
     // special-dividers
     <>
-      <div className="text-grayMain dark:text-whiteMain special-dividers dark:hover:text-gray-400">
+      <div className="special-dividers">
         {/* tags */}
         <div className="flex">
           {tags.map((tag) => (

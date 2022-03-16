@@ -3,11 +3,11 @@ import Link from "next/link"
 
 const Footer = () => {
   return (
-    <footer className="body-font bg-grayMain dark:bg-gray-800 dark:bg-opacity-50">
+    <footer className="body-font bg-grayMain dark:bg-black dark:border-t border-zinc-700 dark:bg-opacity-50">
       <div className="container px-5 py-8 mx-auto flex items-center sm:flex-row flex-col">
         <div className="flex title-font font-medium items-center md:justify-start justify-center">
           <div className="flex-shrink-0 flex items-center">
-            <Link href="/">
+            <Link href="/" passHref>
               <a className="items-center flex justify-center overflow-hidden">
                 <img
                   src="/logo/Footer.svg"
@@ -27,7 +27,6 @@ const Footer = () => {
             aria-label="Facebook"
           >
             <svg
-              // style={{ color: "#4267b2" }}
               fill="currentColor"
               strokeLinecap="round"
               strokeLinejoin="round"

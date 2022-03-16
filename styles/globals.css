@@ -7,7 +7,7 @@
 }
 
 body {
-  @apply text-grayMain dark:text-offWhite dark:bg-darkGray;
+  @apply dark:bg-darkGray text-grayMain dark:text-zinc-50;
 }
 
 .body-top-spacing {
@@ -17,13 +17,13 @@ body {
 /* broad headings */
 
 .wide-head {
-  @apply font-antonio font-bold xl:text-4.75xl lg:text-4.5xl md:text-4xl sm:text-4.5xl text-3.5xl tracking-custom uppercase text-center -mr-3 xl:mb-20 lg:mb-18 mb-16 leading-none;
+  @apply font-antonio xl:text-4.75xl lg:text-4.5xl sm:text-4.5xl text-3.5xl tracking-custom lg:mb-18 -mr-3 mb-16 text-center font-bold uppercase leading-none md:text-4xl xl:mb-20;
 }
 
 /* nav links */
 
 .nav-link {
-  @apply uppercase lg:mr-7 sm:mr-5 mr-3 lg:text-lg text-sm font-primary hidden md:inline transition-all duration-300;
+  @apply font-primary mr-3 hidden text-sm uppercase transition-all duration-300 sm:mr-5 md:inline lg:mr-7 lg:text-lg;
 }
 
 /*  */
@@ -73,7 +73,7 @@ body {
 .form-input:valid + .label-name .content-name {
   transform: translateY(-155%);
   color: #3883ca;
-  @apply font-normal text-xl;
+  @apply text-xl font-normal;
 }
 
 .form-input:focus ~ .search-btn,
@@ -88,12 +88,12 @@ body {
 
 /*  */
 .gradient-div:hover + div img {
-  @apply transform scale-110;
+  @apply scale-110 transform;
 }
 
 /* mdx table */
 #special-table thead {
-  @apply bg-gray-800 dark:bg-gray-300 text-white dark:text-gray-800;
+  @apply bg-gray-800 text-white dark:bg-gray-300 dark:text-gray-800;
 }
 
 #special-table thead tr th,
@@ -107,7 +107,7 @@ body {
 
 /* new header */
 .special-dividers:not(:nth-of-type(3)) {
-  @apply border-b border-margins pb-4;
+  @apply border-margins border-b pb-4;
 }
 
 .special-dividers:not(:nth-of-type(1)) {

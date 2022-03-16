@@ -24,7 +24,7 @@ module.exports = {
     extend: {
       fontSize: {
         "10xl": "10rem",
-        7.5: "5rem",
+        "7.5xl": "5rem",
         "4.5xl": "2.5rem",
         "4.75xl": "2.75rem",
         "3.5xl": "2rem",
@@ -38,26 +38,12 @@ module.exports = {
         black: "black",
         transparent: "transparent",
         "yellow-75": "rgba(251,191,36,0.75)",
-        offWhite: "#fafafa",
         "whiteMain-50": "rgba(250, 250, 250, 0.5)",
         grayMain: "#262611",
         darkGray: "#121212",
         margins: "rgba(117,117,117, 0.25)",
         "black-10": "rgba(0,0,0,0.1)",
         // default colors
-        blue: colors.blue,
-        yellow: colors.yellow,
-        purple: colors.purple,
-        slate: colors.slate,
-        green: colors.green,
-        zinc: colors.zinc,
-        // old
-        current: "currentColor",
-        lightBlue: colors.sky,
-        gray: colors.gray,
-        trueGray: colors.trueGray,
-        red: colors.red,
-        cyan: colors.cyan,
       },
       lineHeight: {
         7.5: "1.875rem",

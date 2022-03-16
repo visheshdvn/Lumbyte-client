@@ -42,7 +42,7 @@ const Tag = ({ posts, theme, metaDescription, ogImg, ogAlt, ogTitle }) => {
       {/* </div> */}
 
       <header className="horizontal-spacing mb-10 flex items-center justify-center pt-4 md:mb-12 md:pt-1 lg:mb-14 lg:pt-3 xl:mb-16 xl:pt-10">
-        <div className="horizontal-spacing bg-grayMain container relative mx-auto my-auto h-28 overflow-hidden dark:bg-gray-800 sm:h-32 md:h-40 lg:h-48">
+        <div className="horizontal-spacing bg-grayMain dark:bg-darkGray container relative mx-auto my-auto h-28 overflow-hidden sm:h-32 md:h-40 lg:h-48">
           <h1
             style={{ color: `${theme}` }}
             className="font-raleway-dot lg:text-10xl absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transform select-none text-8xl uppercase tracking-widest opacity-20 sm:text-8xl md:text-9xl"
