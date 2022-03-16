@@ -17,9 +17,6 @@ import "../styles/editorjs.css";
 // component
 import AccessDenied from "../components/accessDenied";
 
-// import Auth from "../utils/protected-page";
-axios.defaults.baseURL = "http://localhost:3000/api";
-
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
   useEffect(() => {
@@ -40,8 +37,11 @@ function MyApp({ Component, pageProps }) {
         hideProgressBar={true}
       />
       <SessionProvider session={pageProps.session}>
-        <ThemeProvider attribute="class">
-          {/* {router.pathname.startsWith("/admin") ? null : <Navbar />} */}
+        <ThemeProvider
+          attribute="class"
+          storageKey="theme"
+          defaultTheme="light"
+        >
           {Component.auth ? (
             <Auth roles={Component.auth.roles}>
               <Component {...pageProps} />
@@ -49,8 +49,6 @@ function MyApp({ Component, pageProps }) {
           ) : (
             <Component {...pageProps} />
           )}
-
-          {/* {router.pathname.startsWith("/admin") ? null : <Footer />} */}
         </ThemeProvider>
       </SessionProvider>
     </>

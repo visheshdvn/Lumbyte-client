@@ -36,14 +36,8 @@ export default function Navbar() {
   };
 
   useEffect(() => {
-    if (enabled) {
-      setTheme("dark");
-    } else {
-      setTheme("light");
-    }
-
     window.addEventListener("scroll", handleScroll);
-  }, [enabled]);
+  }, []);
 
   const router = useRouter();
   const { asPath } = router;
@@ -61,7 +55,7 @@ export default function Navbar() {
               : "0px"
           }`,
         }}
-        className="dark:bg-black fixed z-40 w-full bg-white"
+        className="fixed z-40 w-full bg-white dark:bg-black"
       >
         {/* ${navbarHidden ? "-top-16" : "top-0"}  */}
         {({ open }) => (
@@ -92,7 +86,7 @@ export default function Navbar() {
                 </div>
               </div>
             </div>
-            <div className="bg-grayMain py-2 dark:bg-black sm:py-2 md:py-2.5 dark:border-y border-zinc-700">
+            <div className="bg-grayMain border-zinc-700 py-2 dark:border-y dark:bg-black sm:py-2 md:py-2.5">
               <div className="horizontal-spacing container mx-auto flex">
                 <div className="flex-1 items-center md:block">
                   <div className="border-whiteMain-50 w-min border-r">
@@ -161,17 +155,22 @@ export default function Navbar() {
                   </div>
 
                   {/* theme switch below*/}
+
                   <Switch
-                    checked={enabled}
+                    checked={theme === "dark"}
                     onChange={() => {
-                      setEnabled(!enabled);
+                      if (theme === "light") {
+                        setTheme("dark");
+                      } else {
+                        setTheme("light");
+                      }
                     }}
                     className="mr-5 inline-flex w-6 cursor-pointer items-center focus:outline-none"
                   >
                     <span className="sr-only">Switch theme mode</span>
                     <div className="absolute">
                       <div style={{ paddingBottom: "2px" }} className="text-xl">
-                        {enabled ? "🌞" : "🌒"}
+                        {theme === "dark" ? "🌞" : "🌒"}
                       </div>
                     </div>
                   </Switch>
