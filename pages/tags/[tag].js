@@ -7,13 +7,11 @@ import { PrismaClient } from "@prisma/client";
 import BroadPeek from "../../components/PostPeek/broad";
 import Navbar from "../../components/elements/navbar/Navbar-client";
 import Footer from "../../components/elements/footer/Footer";
-
-// utility functions
-import { isValidURL } from "../../utils/checkValidURL";
+import HeadTags from "../../components/headTags/public/headTags";
 
 const { tags, blogposts } = new PrismaClient();
 
-const Topic = ({ posts, theme, metaDescription, ogImg, ogAlt }) => {
+const Tag = ({ posts, theme, metaDescription, ogImg, ogAlt, ogTitle }) => {
   const router = useRouter();
   if (router.isFallback) {
     return <div>Loading...</div>;
@@ -29,48 +27,15 @@ const Topic = ({ posts, theme, metaDescription, ogImg, ogAlt }) => {
     metaDescription = `Posts tagged ${tag}.`;
   }
 
-  let headImg;
-  if (ogImg !== null) {
-    headImg = isValidURL(ogImg.url)
-      ? ogImg.url
-      : `${process.env.PROTOCOL}://${process.env.HOSTNAME}${ogImg.url}`;
-  } else {
-    headImg = "https://lumbytes.com/topicbg/bg.jpg";
-  }
-
   return (
     <>
-      <Head>
-        <title>Lumbytes | {tag.toUpperCase()}</title>
-        <meta name="description" content={metaDescription} />
-        {/* opengraph */}
-        <meta property="og:type" content="blog" />
-        <meta property="og:image" content={headImg} key="ogimage" />
-        <meta
-          property="og:title"
-          content={`Lumbytes | ${tag.toUpperCase()}`}
-          key="ogtitle"
-        />
-        <meta
-          property="og:url"
-          content={`https://lumbytes.com/tag/${encodeURI(tag)}`}
-        />
-        <meta
-          property="og:description"
-          content={metaDescription}
-          key="ogdesc"
-        />
-        {/* twitter */}
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:site" content="@lumbytes" />
-        <meta name="twitter:description" content={metaDescription} />
-        <meta name="twitter:creator" content="@lumbytes" />
-        <meta name="twitter:image:src" content={headImg} />
-        <meta
-          name="twitter:title"
-          content={`Lumbytes | ${tag.toUpperCase()}`}
-        />
-      </Head>
+      <HeadTags
+        ogImg={ogImg}
+        ogAlt={ogAlt}
+        metaDescription={metaDescription}
+        tagname={tag}
+        title={ogTitle}
+      />
 
       {/* <div className="body-top-spacing"> */}
       <Navbar />
@@ -106,7 +71,7 @@ const Topic = ({ posts, theme, metaDescription, ogImg, ogAlt }) => {
   );
 };
 
-export default Topic;
+export default Tag;
 
 export async function getStaticProps(context) {
   console.log("Re-Generating...");
@@ -119,6 +84,7 @@ export async function getStaticProps(context) {
       color: true,
       ogImg: true,
       ogAlt: true,
+      ogTitle: true,
       metaDescription: true,
     },
     where: {
@@ -175,6 +141,7 @@ export async function getStaticProps(context) {
       ogImg: pageBuildData.ogImg,
       ogAlt: pageBuildData.ogAlt,
       metaDescription: pageBuildData.metaDescription,
+      ogTitle: pageBuildData.ogTitle,
       posts,
     },
     revalidate: 86400,
