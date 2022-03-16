@@ -269,7 +269,7 @@ function SimilarArticles({ data }) {
   return (
     <div
       style={{ minWidth: "x" }}
-      className="col-span-2 h-auto w-full px-3 md:mb-0 sm:h-auto md:w-1/3 lg:col-auto mb-10"
+      className="col-span-2 mb-10 h-auto w-full px-3 sm:h-auto md:mb-0 md:w-1/3 lg:col-auto"
     >
       <Link href={`/post/${slug}`} passHref>
         <a>
@@ -280,7 +280,7 @@ function SimilarArticles({ data }) {
               alt={banneralt}
               layout="fill"
               placeholder="blur"
-              blurDataURL={banner}
+              blurDataURL="https://lumbytes-general.s3.eu-west-1.amazonaws.com/defaultOG-small.png"
             />
           </div>
         </a>

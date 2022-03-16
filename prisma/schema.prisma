@@ -142,7 +142,7 @@ model Tags {
   metaDescription String      @default("") @db.VarChar(200)
   // opengraph
   ogTitle         String?     @default("") @db.VarChar(55)
-  ogimg           String?     @default("") @db.VarChar(250)
+  ogImg           String?     @default("https://lumbytes-general.s3.eu-west-1.amazonaws.com/defaultOG-medium.png") @db.VarChar(250)
   ogAlt           String?     @default("") @db.VarChar(55)
   // relations
   blogposts       Blogposts[]

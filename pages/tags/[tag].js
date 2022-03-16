@@ -117,7 +117,7 @@ export async function getStaticProps(context) {
   const pageBuildData = await tags.findUnique({
     select: {
       color: true,
-      ogimg: true,
+      ogImg: true,
       ogAlt: true,
       metaDescription: true,
     },
@@ -172,7 +172,7 @@ export async function getStaticProps(context) {
   return {
     props: {
       theme: pageBuildData.color,
-      ogImg: pageBuildData.ogimg,
+      ogImg: pageBuildData.ogImg,
       ogAlt: pageBuildData.ogAlt,
       metaDescription: pageBuildData.metaDescription,
       posts,

@@ -33,7 +33,7 @@ const BroadPeek = ({
                 layout="fill"
                 className="transform object-cover object-center transition-all duration-300 hover:scale-95 hover:rounded-sm"
                 placeholder="blur"
-                blurDataURL={banner}
+                blurDataURL="https://lumbytes-general.s3.eu-west-1.amazonaws.com/defaultOG-small.png"
               />
             </a>
           </div>
@@ -78,7 +78,7 @@ const BroadPeek = ({
                     layout="fill"
                     className="object-cover object-center"
                     placeholder="blur"
-                    blurDataURL={dp}
+                    blurDataURL="https://lumbytes-general.s3.eu-west-1.amazonaws.com/defaultOG.png"
                   />
                 </div>
               )}

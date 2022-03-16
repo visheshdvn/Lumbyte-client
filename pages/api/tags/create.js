@@ -25,8 +25,7 @@ handler.use(resolveQueryParams());
 handler.use(createtagsvalidations());
 
 handler.post(async (req, res) => {
-  console.log("req.body", req.body);
-  const { tagname, color, metaDescription, ogimg, ogTitle } = req.body;
+  const { tagname, color, metaDescription, ogImg, ogTitle } = req.body;
 
   BigInt.prototype.toJSON = function () {
     return Number(this);
@@ -37,7 +36,7 @@ handler.post(async (req, res) => {
       tagname,
       color: color || undefined,
       metaDescription: metaDescription || `All about ${tagname}.`,
-      ogimg,
+      ogImg: ogImg || undefined,
       ogTitle,
     },
   });

@@ -33,7 +33,7 @@ handler.use(updatetagsvalidations());
 // controller
 handler.patch(async (req, res) => {
   const { tagId } = req.params;
-  const { tagname, color, metaDescription, ogimg, ogAlt } = req.body;
+  const { tagname, color, metaDescription, ogImg, ogAlt } = req.body;
 
   const updated_tag = await tags.update({
     where: {
@@ -43,7 +43,7 @@ handler.patch(async (req, res) => {
       tagname,
       color,
       metaDescription,
-      ogimg,
+      ogImg,
       ogAlt,
     },
   });

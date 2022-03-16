@@ -19,7 +19,7 @@ const createTag = ({}) => {
     tagname: "",
     color: "",
     metaDescription: "",
-    ogimg: "",
+    ogImg: "",
     ogTitle: "",
   });
 
@@ -103,8 +103,8 @@ const createTag = ({}) => {
             <div className="flex">
               <AdminInlineTextInput
                 label="Og Image"
-                name="ogimg"
-                value={tagData.ogimg}
+                name="ogImg"
+                value={tagData.ogImg}
                 onChangeHandler={updateTagdata}
                 placeholder="Enter opengraph image url"
               />

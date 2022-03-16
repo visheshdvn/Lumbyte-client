@@ -41,9 +41,9 @@ handler.get(async (req, res) => {
             ? true
             : false
           : true,
-      ogimg:
+      ogImg:
         _select && Array.isArray(_select)
-          ? _select.includes("ogimg")
+          ? _select.includes("ogImg")
             ? true
             : false
           : true,

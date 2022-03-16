@@ -109,8 +109,8 @@ const Update = ({ initialTagData }) => {
             <div className="flex">
               <AdminInlineTextInput
                 label="Og Image"
-                name="ogimg"
-                value={tagData.ogimg}
+                name="ogImg"
+                value={tagData.ogImg}
                 onChangeHandler={updateTagdata}
                 placeholder="Enter opengraph image url"
               />
@@ -179,7 +179,7 @@ export async function getServerSideProps({ params }) {
       tagname: true,
       color: true,
       metaDescription: true,
-      ogimg: true,
+      ogImg: true,
       ogTitle: true,
       published: true,
     },

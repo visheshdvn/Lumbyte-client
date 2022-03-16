@@ -20,7 +20,7 @@ const Latest = ({ big, side }) => {
               layout="fill"
               className="hidden object-cover object-center sm:block"
               placeholder="blur"
-              blurDataURL={banner}
+              blurDataURL="https://lumbytes-general.s3.eu-west-1.amazonaws.com/defaultOG-large.png"
             />
             <div
               style={{
