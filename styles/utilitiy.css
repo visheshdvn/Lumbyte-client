@@ -6,10 +6,12 @@
   @apply absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2;
 }
 
+/* remove outlines and borer from input fields */
 .unstyled-input {
   @apply border-none focus:outline-0;
 }
 
+/* true/false buttons in admin panel */
 .admin-bool-btn {
   @apply font-raleway w-14 py-2 text-sm font-medium;
 }
@@ -21,10 +23,6 @@
 
 .horizontal-spacing {
   @apply px-2 md:px-3 lg:px-5 xl:px-0;
-}
-
-.blog-link {
-  @apply text-lightBlue-600 font-semibold;
 }
 
 .divider-col {
