@@ -12,7 +12,7 @@ const HeadTags = ({ ogImg, ogAlt, tagname, metaDescription, title }) => {
       <meta property="og:type" content="blog" />
       <meta property="og:description" content={metaDescription} key="ogdesc" />
       <meta property="og:image" content={ogImg} key="ogimage" />
-      <meta property="og:image:alt" content={ogAlt} />
+      <meta property="og:image:alt" content={ogAlt || "LumBytes Default"} />
       <meta property="og:site_name" content="Lumbytes" />
       <meta
         property="og:url"
@@ -25,7 +25,7 @@ const HeadTags = ({ ogImg, ogAlt, tagname, metaDescription, title }) => {
       <meta name="twitter:creator" content="@visheshdvn" />
       <meta name="twitter:title" content={title} />
       <meta name="twitter:image:src" content={ogImg} />
-      <meta name="twitter:image:alt" content={ogAlt} />
+      <meta name="twitter:image:alt" content={ogAlt || "LumBytes Default"} />
       <meta name="twitter:description" content={metaDescription} />
     </Head>
   );
