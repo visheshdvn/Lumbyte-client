@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { useTheme } from "next-themes";
@@ -9,17 +9,13 @@ const LeftSideBar = () => {
   const { data: session, status } = useSession();
   const { user } = session;
   const { theme, setTheme } = useTheme();
-
-  useEffect(() => {
-    setTheme("light");
-  }, [theme]);
   
   return (
     <div
       style={{ maxWidth: "312px", minWidth: "312px" }}
       className="fixed flex h-screen items-center justify-center"
     >
-      <div className="relative h-full w-full bg-[#161619] pl-8">
+      <div className="relative h-full w-full bg-darkGray dark:bg-black dark:border-r border-zinc-800 pl-8">
         <div className="font-adminPrimary font absolute left-1/2 top-10 h-40 w-40 -translate-x-1/2 transform border border-white text-white">
           <div>Image here</div>
           <h1 className="text-center text-xl font-semibold">Vishesh Dhawan</h1>
@@ -67,6 +63,7 @@ const LeftSideBar = () => {
     </div>
   );
 };
+
 
 function NavItem({ text, icon, link }) {
   const router = useRouter();
