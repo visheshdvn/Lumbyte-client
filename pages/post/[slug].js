@@ -77,39 +77,39 @@ const Post = ({ postData, similar }) => {
             className="my-7 mx-auto md:my-8 lg:my-10"
           >
             <div className="clearfix relative">
-              <a
-                href="https://www.linkedin.com/in/visheshdvn"
-                target="_blank"
-                rel="noreferrer"
-              >
-                <div
-                  style={{
-                    background: `center url(${
-                      dp || getValidImageURL("/me.jpg")
-                    })`,
-                    backgroundSize: "cover",
-                    backgroundPosition: "center",
-                  }}
-                  className="relative float-left h-10 w-10 rounded-full md:h-11 md:w-11"
-                />
-              </a>
-              <div className="float-left flex flex-col justify-around pl-2">
+              <div className="float-left flex">
                 <a
                   href="https://www.linkedin.com/in/visheshdvn"
                   target="_blank"
                   rel="noreferrer"
-                  className="font-roboto text-sm font-bold md:text-base"
                 >
-                  {firstname} {lastname || ""}
+                  <div
+                    style={{
+                      background: `center url(${
+                        dp || getValidImageURL("/me.jpg")
+                      })`,
+                      backgroundSize: "cover",
+                      backgroundPosition: "center",
+                    }}
+                    className="relative float-left h-8 w-8 rounded-full md:h-10 md:w-10 border border-gray-900"
+                  />
                 </a>
-                <div className="text-grayText flex h-3 items-center overflow-hidden dark:text-gray-400">
-                  <span className="font-roboto text-sm">
-                    <FormattedDate date={published_at || created_at} />
-                  </span>
-                  <span className="mx-2">|</span>
-                  <span className="font-roboto text-sm">
-                    {minuteRead} min read
-                  </span>
+                <div className="font-primary float-left flex flex-col justify-around pl-2">
+                  <a
+                    href="https://www.linkedin.com/in/visheshdvn"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="text-base font-bold"
+                  >
+                    {firstname} {lastname || ""}
+                  </a>
+                  <div className="text-grayText flex h-3 items-center text-sm dark:text-gray-400">
+                    <span className="">
+                      <FormattedDate date={published_at || created_at} />
+                    </span>
+                    <span className="mx-2">•</span>
+                    <span className="">{minuteRead} min read</span>
+                  </div>
                 </div>
               </div>
 
@@ -311,7 +311,7 @@ function SimilarArticles({ data }) {
           >
             {author.firstname} {author.lastname || ""}
           </a>
-          <div className="text-grayText flex h-3 items-center overflow-hidden text-xs dark:text-gray-400">
+          <div className="text-grayText flex h-3 items-center text-xs dark:text-gray-400">
             <span className="">
               <FormattedDate date={published_at || created_at} />
             </span>
