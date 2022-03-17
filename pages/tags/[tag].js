@@ -99,6 +99,7 @@ export async function getStaticProps(context) {
           tagname: tag,
         },
       },
+      published: true,
     },
     select: {
       title: true,
@@ -125,6 +126,9 @@ export async function getStaticProps(context) {
       created_at: true,
       published_at: true,
     },
+    orderBy: {
+      n: "desc",
+    }
   });
 
   posts = JSON.parse(JSON.stringify(posts));
