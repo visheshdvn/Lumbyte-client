@@ -22,7 +22,7 @@ export const sanitizeRequest = () => {
       req.body.excerpt = req.body.excerpt.trim();
     }
     if (req.body.tagname) {
-      req.body.tagname = encodeURIComponent(req.body.tagname.trim());
+      req.body.tagname = req.body.tagname.trim();
     }
     if (req.body.topicname) {
       req.body.topicname = encodeURIComponent(req.body.topicname.trim());

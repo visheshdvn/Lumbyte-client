@@ -96,10 +96,7 @@ handler.get(async (req, res) => {
     where: {
       published: true,
       id: _where && _where.id ? +_where.id || undefined : undefined,
-      tagname:
-        _where && _where.tagname
-          ? encodeURIComponent(_where.tagname)
-          : undefined,
+      tagname: _where && _where.tagname ? _where.tagname : undefined,
     },
     skip: +skip || undefined,
     take: +take || undefined,
