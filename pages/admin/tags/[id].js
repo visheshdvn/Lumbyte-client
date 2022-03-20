@@ -4,6 +4,7 @@ import { PrismaClient } from "@prisma/client";
 import _ from "lodash";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useTheme } from "next-themes";
 // components
 import Sidebar from "../../../components/elements/sideBar/leftSideBar";
 import EditCreateTags, {
@@ -15,15 +16,17 @@ import {
   SaveButton,
   UnPublishButton,
 } from "../../../components/elements/buttons/buttons";
-import { AdminInlineTextInput } from "../../../components/elements/input/text";
 // utils
 import { HeadTags } from "../../../utils/headTags/admin/meta";
 import axios from "../../../utils/axios";
+import { unPublishTag, publishTag } from "../../../utils/togglePublish";
 
 const { tags } = new PrismaClient();
 
 const Update = ({ initialTagData }) => {
   const router = useRouter();
+  const { theme } = useTheme();
+  console.log(theme);
 
   const [tagData, settagData] = useState({
     ...initialTagData,
@@ -52,7 +55,7 @@ const Update = ({ initialTagData }) => {
     );
 
     settagData({ ...tagData, ...data.content });
-    toast.success("Updated");
+    toast.success("Updated", { theme });
   };
 
   return (
@@ -67,12 +70,16 @@ const Update = ({ initialTagData }) => {
             {!tagData.published ? (
               <PublishButton
                 text="Publish"
-                onClickHandler={() => toast.info("No action assigned.")}
+                onClickHandler={() =>
+                  publishTag(router.query.id, tagData, settagData, theme)
+                }
               />
             ) : (
               <UnPublishButton
                 text="unPublish"
-                onClickHandler={() => toast.info("No action assigned")}
+                onClickHandler={() =>
+                  unPublishTag(tagData.id, tagData, settagData, theme)
+                }
               />
             )}
 

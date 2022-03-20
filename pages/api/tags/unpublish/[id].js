@@ -23,7 +23,6 @@ handler.use((req, res, next) => {
 
 handler.put(async (req, res) => {
   const { id } = req.params;
-  console.log("id", id);
 
   if (isNaN(id)) {
     return res.status(400).json({ msg: "Invalid id" });
