@@ -4,7 +4,6 @@ import { PrismaClient } from "@prisma/client";
 import "react-toastify/dist/ReactToastify.css";
 // components
 import AdminHomeLayout from "../../../components/layouts/adminHome";
-import Sidebar from "../../../components/elements/sideBar/leftSideBar";
 // utils
 import { HeadTags } from "../../../utils/headTags/admin/meta";
 
@@ -26,7 +25,7 @@ const Tags = ({ tags }) => {
         <div className="mt-5">
           <table className="w-full table-auto border">
             <thead>
-              <tr className="font-adminPrimary bg-gray-100 text-left text-sm font-semibold text-gray-800">
+              <tr className="font-primary bg-gray-100 text-left text-sm font-bold text-gray-800">
                 <td className="opacity-0">S</td>
                 <th className="py-4">Id</th>
                 <th>Tagname</th>
@@ -52,7 +51,7 @@ function TableContents({ tag }) {
   return (
     <Link passHref href={`/admin/tags/${id}`}>
       <tr
-        className="font-raleway cursor-pointer border-b bg-white text-xs font-medium text-gray-800"
+        className="font-primary cursor-pointer border-b bg-white text-xs font-medium text-gray-800"
         key={tag.id}
       >
         <td className="opacity-0">S</td>

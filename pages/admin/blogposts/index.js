@@ -32,12 +32,11 @@ const Blogposts = ({ blogposts }) => {
         count={blogposts.length}
         addNewHref="/admin/blogposts/create"
       >
-
-        {/* alll blogpost grid */}
+        {/* all blogpost grid */}
         <div className="mt-5">
-          <table className="w-full table-auto border">
+          <table className="font-primary w-full table-auto border">
             <thead>
-              <tr className="font-adminPrimary bg-gray-100 text-left text-sm font-semibold text-gray-800">
+              <tr className="bg-gray-100 text-left text-sm font-medium text-gray-800">
                 <td className="opacity-0">S</td>
                 <th>S.No</th>
                 <th className="py-4">Slug</th>
@@ -69,7 +68,7 @@ function TableContents({ data }) {
     <Link passHref href={`/admin/blogposts/${id}`}>
       {/* <a> */}
       <tr
-        className="font-raleway cursor-pointer border-b bg-white text-xs font-medium text-gray-800"
+        className="font-primary cursor-pointer border-b bg-white text-xs font-medium text-gray-800"
         key={data.id}
       >
         <td className="opacity-0">S</td>
