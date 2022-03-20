@@ -14,7 +14,7 @@
     "@editorjs/list": "^1.6.2",
     "@editorjs/paragraph": "^2.8.0",
     "@headlessui/react": "^1.1.1",
-    "@heroicons/react": "^1.0.1",
+    "@heroicons/react": "^1.0.6",
     "@prisma/client": "^3.6.0",
     "@tailwindcss/aspect-ratio": "^0.4.0",
     "@tailwindcss/forms": "^0.4.0",
