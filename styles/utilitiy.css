@@ -3,7 +3,7 @@
 }
 
 .between-rel-parent {
-  @apply absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2;
+  @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transform;
 }
 
 /* remove outlines and borer from input fields */
@@ -13,12 +13,12 @@
 
 /* true/false buttons in admin panel */
 .admin-bool-btn {
-  @apply font-raleway w-14 py-2 text-sm font-medium;
+  @apply w-14 py-2 text-sm font-medium;
 }
 
-.required-field::before {
-  content: "* ";
-  @apply -ml-3 pt-1 text-xl text-red-600;
+.required-field::after {
+  content: " *";
+  @apply mr-3 pt-1 text-xl text-red-600;
 }
 
 .horizontal-spacing {
@@ -35,10 +35,6 @@ ul.spaced li:not(:last-child) {
 
 .margin-tags:not(:last-of-type) {
   @apply mr-4;
-}
-
-.admin-primary-layout {
-  @apply flex-1 pt-12 pr-5 pl-80;
 }
 
 .arrow {
@@ -59,5 +55,5 @@ ul.spaced li:not(:last-child) {
 }
 
 .banner-overlay {
-  @apply absolute bg-darkGray transform opacity-0 transition-all duration-300 text-white h-16 w-16 right-0 top-0;
+  @apply bg-darkGray absolute right-0 top-0 h-16 w-16 transform text-white opacity-0 transition-all duration-300;
 }
