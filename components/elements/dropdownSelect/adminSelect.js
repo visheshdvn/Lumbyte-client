@@ -14,6 +14,7 @@ const adminSelect = ({ allOptions, preSelected, onChangeHandler }) => {
       noOptionsMessage={() => "No tags found"}
       components={makeAnimated()}
       maxMenuHeight={150}
+      className="text-sm"
     />
   );
 };
