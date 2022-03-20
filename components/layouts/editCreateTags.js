@@ -5,7 +5,7 @@ import { AdminInlineTextInput } from "../elements/input/text";
 
 const EditCreateTags = ({ children, title }) => {
   return (
-    <div className="bg-offWhite font-primary flex min-h-screen dark:bg-gray-50 dark:text-gray-800">
+    <div className="font-primary flex min-h-screen dark:bg-gray-50 dark:text-gray-800">
       <SideBar />
       <div className="flex-1 px-5 pt-12">
         <div className="mb-10 flow-root">
