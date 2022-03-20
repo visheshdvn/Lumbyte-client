@@ -4,8 +4,8 @@ import { PrismaClient } from "@prisma/client";
 import "react-toastify/dist/ReactToastify.css";
 import Link from "next/link";
 // custom components
-import Sidebar from "../../../components/elements/sideBar/leftSideBar";
 import FormattedDate from "../../../components/micro/formattedDate";
+import AdminHomeLayout from "../../../components/layouts/adminHome";
 // utils
 import { HeadBlogposts } from "../../../utils/headTags/admin/meta";
 
@@ -27,58 +27,43 @@ const Blogposts = ({ blogposts }) => {
       <HeadBlogposts />
 
       {/* body */}
-      <div className="flex">
-        <Sidebar />
-        <div className="flex-1 px-5 pt-12 pl-80">
-          <div className="text-gray-800">
-            <h1 className="text-2.75xl font-adminPrimary font-bold">
-              Blogposts
-            </h1>
-            <h2 className="font-adminPrimary text-base font-semibold">
-              {blogposts.length} stories found.
-            </h2>
-          </div>
-          {/* add new button */}
-          <div className="mt-24 flex justify-end">
-            <Link passHref href="/admin/blogposts/create">
-              <a className="font-adminPrimary rounded bg-green-600 px-3 py-1 text-base font-semibold text-white ring-green-600 ring-opacity-50 hover:ring-2 focus:ring-2">
-                + Add new blogpost
-              </a>
-            </Link>
-          </div>
-          {/* alll blogpost grid */}
-          <div className="mt-5">
-            <table className="w-full table-auto border">
-              <thead>
-                <tr className="font-adminPrimary bg-gray-100 text-left text-sm font-semibold text-gray-800">
-                  <td className="opacity-0">S</td>
-                  <th>S.No</th>
-                  <th className="py-4">Slug</th>
-                  <th rowSpan={2}>Title</th>
-                  <th>Featured</th>
-                  <th>Top Pick</th>
-                  <th>Date</th>
-                  <th>Status</th>
-                  <th>Controls</th>
-                  <th className="opacity-0">controls</th>
-                </tr>
-              </thead>
-              <tbody>
-                {blogposts.map((data) => (
-                  <TableContents data={data} key={data.id} />
-                ))}
-              </tbody>
-            </table>
-          </div>
+      <AdminHomeLayout
+        title="Blogpost"
+        count={blogposts.length}
+        addNewHref="/admin/blogposts/create"
+      >
+
+        {/* alll blogpost grid */}
+        <div className="mt-5">
+          <table className="w-full table-auto border">
+            <thead>
+              <tr className="font-adminPrimary bg-gray-100 text-left text-sm font-semibold text-gray-800">
+                <td className="opacity-0">S</td>
+                <th>S.No</th>
+                <th className="py-4">Slug</th>
+                <th rowSpan={2}>Title</th>
+                <th>Featured</th>
+                <th>Top Pick</th>
+                <th>Date</th>
+                <th>Status</th>
+                <th>Controls</th>
+                <th className="opacity-0">controls</th>
+              </tr>
+            </thead>
+            <tbody>
+              {blogposts.map((data) => (
+                <TableContents data={data} key={data.id} />
+              ))}
+            </tbody>
+          </table>
         </div>
-      </div>
+      </AdminHomeLayout>
     </>
   );
 };
 
 function TableContents({ data }) {
-  const { id, slug, title, featured, topPick, date, published, created_at, n } =
-    data;
+  const { id, slug, title, featured, topPick, published, created_at, n } = data;
 
   return (
     <Link passHref href={`/admin/blogposts/${id}`}>

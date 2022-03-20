@@ -2,7 +2,8 @@ import React from "react";
 import Link from "next/link";
 import { PrismaClient } from "@prisma/client";
 import "react-toastify/dist/ReactToastify.css";
-// utilities
+// components
+import AdminHomeLayout from "../../../components/layouts/adminHome";
 import Sidebar from "../../../components/elements/sideBar/leftSideBar";
 // utils
 import { HeadTags } from "../../../utils/headTags/admin/meta";
@@ -16,45 +17,32 @@ const Tags = ({ tags }) => {
       <HeadTags />
 
       {/* body */}
-      <div className="flex">
-        <Sidebar />
-        <div className="flex-1 px-5 pt-12 pl-80">
-          <div className="text-gray-800">
-            <h1 className="text-2.75xl font-adminPrimary font-bold">Tags</h1>
-            <h2 className="font-adminPrimary text-base font-semibold">
-              {tags.length} tags found.
-            </h2>
-          </div>
-          {/* add new button */}
-          <div className="mt-24 flex justify-end">
-            <Link passHref href="/admin/tags/create">
-              <a className="font-adminPrimary rounded bg-green-600 px-3 py-1 text-base font-semibold text-white ring-green-600 ring-opacity-50 hover:ring-2 focus:ring-2">
-                + Create new tag
-              </a>
-            </Link>
-          </div>
-          {/* all tags grid */}
-          <div className="mt-5">
-            <table className="w-full table-auto border">
-              <thead>
-                <tr className="font-adminPrimary bg-gray-100 text-left text-sm font-semibold text-gray-800">
-                  <td className="opacity-0">S</td>
-                  <th className="py-4">Id</th>
-                  <th>Tagname</th>
-                  <th>Color</th>
-                  <th>Status</th>
-                  <th className="opacity-0">controls</th>
-                </tr>
-              </thead>
-              <tbody>
-                {tags.map((tag) => (
-                  <TableContents tag={tag} key={tag.id} />
-                ))}
-              </tbody>
-            </table>
-          </div>
+      <AdminHomeLayout
+        title="Tag"
+        count={tags.length}
+        addNewHref="/admin/tags/create"
+      >
+        {/* all tags grid */}
+        <div className="mt-5">
+          <table className="w-full table-auto border">
+            <thead>
+              <tr className="font-adminPrimary bg-gray-100 text-left text-sm font-semibold text-gray-800">
+                <td className="opacity-0">S</td>
+                <th className="py-4">Id</th>
+                <th>Tagname</th>
+                <th>Color</th>
+                <th>Status</th>
+                <th className="opacity-0">controls</th>
+              </tr>
+            </thead>
+            <tbody>
+              {tags.map((tag) => (
+                <TableContents tag={tag} key={tag.id} />
+              ))}
+            </tbody>
+          </table>
         </div>
-      </div>
+      </AdminHomeLayout>
     </>
   );
 };
