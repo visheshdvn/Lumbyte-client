@@ -7,6 +7,7 @@ import Footer from "../../components/elements/footer/Footer";
 import { PrismaClient } from "@prisma/client";
 import ShowTags, { DisplayTags } from "../../components/micro/showTags";
 import FormattedDate from "../../components/micro/formattedDate";
+import UserTags from "../../components/headTags/public/userTags";
 
 const TAKE_IN_REQUEST = 10;
 
@@ -32,6 +33,14 @@ const Me = ({ user }) => {
   return (
     <>
       {/* meta tags */}
+      <UserTags
+        firstname={firstname}
+        lastname={lastname}
+        username={username}
+        about={about}
+        ogImg={dp}
+        ogAlt={dpalt}
+      />
 
       {/* body */}
       <Navbar />
