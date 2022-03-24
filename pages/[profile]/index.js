@@ -42,7 +42,7 @@ const Me = ({ user }) => {
               <img
                 src={dp}
                 alt={dpalt}
-                className="aspect-1 mb-2 h-52 rounded-full"
+                className="aspect-1 border-grayMain mb-2 h-52 rounded-full border-4"
               />
               <h1 className="text-2xl font-bold">
                 {firstname} {lastname || ""}

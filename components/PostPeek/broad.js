@@ -20,7 +20,7 @@ const BroadPeek = ({
 }) => {
   return (
     <article className="text-grayMain mb-16 flex dark:text-white sm:mb-16 md:mb-20 lg:mb-24">
-      <div className=" z-0 grid w-full cursor-pointer grid-cols-12 gap-1 ">
+      <div className=" z-0 grid w-full grid-cols-12 gap-1 ">
         <div className="col-span-12 flex h-auto items-center justify-center md:col-span-4 md:justify-start">
           <div
             style={{ aspectRatio: "8/5" }}
@@ -70,21 +70,25 @@ const BroadPeek = ({
             </p>
             {/* author and date */}
             <div className="font-primary flex items-center justify-center text-sm">
-              {dp && (
-                <div className="relative mr-2 h-5 w-5 overflow-hidden rounded-full">
-                  <Image
-                    src={dp}
-                    alt={dpalt}
-                    layout="fill"
-                    className="object-cover object-center"
-                    placeholder="blur"
-                    blurDataURL="https://lumbytes-general.s3.eu-west-1.amazonaws.com/defaultOG-small.png"
-                  />
-                </div>
-              )}
-              <h5 className="font-medium">
-                {firstname} {lastname}
-              </h5>
+              <Link href={`/${username}`} passHref>
+                <a className="flex">
+                  {dp && (
+                    <div className="relative mr-2 h-5 w-5 overflow-hidden rounded-full">
+                      <Image
+                        src={dp}
+                        alt={dpalt}
+                        layout="fill"
+                        className="object-cover object-center"
+                        placeholder="blur"
+                        blurDataURL="https://lumbytes-general.s3.eu-west-1.amazonaws.com/defaultOG-small.png"
+                      />
+                    </div>
+                  )}
+                  <h5 className="font-medium">
+                    {firstname} {lastname || ""}
+                  </h5>
+                </a>
+              </Link>
               <span className="px-1">•</span>
               <h5 className="font-normal">
                 <FormattedDate date={published_at || created_at} />

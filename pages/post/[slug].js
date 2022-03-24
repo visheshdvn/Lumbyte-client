@@ -78,11 +78,7 @@ const Post = ({ postData, similar }) => {
           >
             <div className="clearfix relative">
               <div className="float-left flex">
-                <a
-                  href="https://www.linkedin.com/in/visheshdvn"
-                  target="_blank"
-                  rel="noreferrer"
-                >
+                <a href={`/${username}`} rel="noreferrer">
                   <div
                     style={{
                       background: `center url(${
@@ -91,13 +87,12 @@ const Post = ({ postData, similar }) => {
                       backgroundSize: "cover",
                       backgroundPosition: "center",
                     }}
-                    className="relative float-left h-8 w-8 rounded-full md:h-10 md:w-10 border border-gray-900"
+                    className="relative float-left h-8 w-8 rounded-full border border-gray-900 md:h-10 md:w-10"
                   />
                 </a>
                 <div className="font-primary float-left flex flex-col justify-around pl-2">
                   <a
-                    href="https://www.linkedin.com/in/visheshdvn"
-                    target="_blank"
+                    href={`/${username}`}
                     rel="noreferrer"
                     className="text-base font-bold"
                   >
@@ -204,14 +199,12 @@ const Post = ({ postData, similar }) => {
               >
                 <ReadOnlyEditor content={JSON.parse(content)} />
               </div>
+
               {/* author data */}
               <div className="border-grayMain flex border-t-4 border-b-4 py-3 dark:border-gray-400">
                 <div className="flex items-center">
                   <div className="bg-yellow-75 border-grayMain relative h-24 w-24 overflow-hidden rounded-full border-4 dark:border-gray-400 lg:h-36 lg:w-36">
-                    <a
-                      href="https://www.linkedin.com/in/visheshdvn"
-                      target="_blank"
-                    >
+                    <a href={`/${username}`}>
                       <Image
                         src={dp || getValidImageURL("/me.jpg")}
                         alt={dpalt}
@@ -224,11 +217,7 @@ const Post = ({ postData, similar }) => {
                   </div>
                 </div>
                 <div className="flex-1 px-4 py-3">
-                  <a
-                    href="https://www.linkedin.com/in/visheshdvn"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
+                  <a href={`/${username}`} rel="noreferrer">
                     <h1 className="font-raleway rounded-md text-3xl font-black leading-8 lg:text-4xl">
                       {firstname} {lastname}
                     </h1>
@@ -264,6 +253,7 @@ const Post = ({ postData, similar }) => {
 };
 
 function SimilarArticles({ data }) {
+  console.log("similar data", data);
   const { slug, banner, title, banneralt, author, minuteRead, published_at } =
     data;
   return (
@@ -286,11 +276,7 @@ function SimilarArticles({ data }) {
         </a>
       </Link>
       <div className="my-4 flex">
-        <a
-          href="https://www.linkedin.com/in/visheshdvn"
-          target="_blank"
-          rel="noreferrer"
-        >
+        <a href={`/${author.username}`} rel="noreferrer">
           <div
             style={{
               background: `center url(${
@@ -304,8 +290,7 @@ function SimilarArticles({ data }) {
         </a>
         <div className="font-primary float-left flex flex-col justify-around pl-2">
           <a
-            href="https://www.linkedin.com/in/visheshdvn"
-            target="_blank"
+            href={`/${author.username}`}
             rel="noreferrer"
             className="text-sm font-bold"
           >
