@@ -253,7 +253,6 @@ const Post = ({ postData, similar }) => {
 };
 
 function SimilarArticles({ data }) {
-  console.log("similar data", data);
   const { slug, banner, title, banneralt, author, minuteRead, published_at } =
     data;
   return (
