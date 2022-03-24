@@ -22,7 +22,7 @@ export default function Home({ latest, latestSide, readMore }) {
 
       <Latest big={latest} side={latestSide} />
 
-      <section className="body-font">
+      <section className="">
         <div className="horizontal-spacing container mx-auto">
           <h1 className="wide-head">Read more</h1>
           {readMore.map((item) => {
