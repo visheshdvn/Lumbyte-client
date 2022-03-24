@@ -74,7 +74,7 @@ const Footer = () => {
 
         <span className="inline-flex sm:ml-auto sm:mt-0 mt-4 justify-center sm:justify-start text-gray-500">
           <Link href="/contact">
-            <a className="text-gray-400 font-serif">Contact</a>
+            <a className="text-gray-400 font-medium">Contact</a>
           </Link>
         </span>
       </div>

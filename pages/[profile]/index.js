@@ -37,23 +37,25 @@ const Me = ({ user }) => {
       <Navbar />
       <div className="horizontal-spacing container mx-auto">
         <div className="my-10 grid grid-cols-4 gap-4">
-          <section className="col-span-1 border-r border-neutral-400 pb-10">
-            <div className="flex flex-col items-center">
+          <section className="col-span-4 border-neutral-400 pb-10 lg:col-span-1 lg:border-r">
+            <div className="lg:flex-col items-center flex">
               <img
                 src={dp}
                 alt={dpalt}
-                className="aspect-1 border-grayMain mb-2 h-52 rounded-full border-4"
+                className="aspect-1 border-grayMain mb-2 rounded-full border-4 lg:h-44 xl:h-52 md:h-32 h-24"
               />
-              <h1 className="text-2xl font-bold">
-                {firstname} {lastname || ""}
-              </h1>
-              <h2 className="font-primary mt-1 text-sm text-neutral-500">
-                {role.toLowerCase()} on LumBytes
-              </h2>
-              <p className="mt-8 px-2 text-center text-sm">{about}</p>
+              <div className="lg:text-center lg:ml-0 md:ml-5 ml-3">
+                <h1 className="lg:text-2xl font-bold md:text-3xl text-2xl">
+                  {firstname} {lastname || ""}
+                </h1>
+                <h2 className="font-primary lg:mt-1 text-sm text-neutral-500">
+                  {role.toLowerCase()} on LumBytes
+                </h2>
+              </div>
+              <p className="mt-8 px-2 text-center text-sm hidden lg:block">{about}</p>
             </div>
           </section>
-          <section className="col-span-3">
+          <section className="col-span-4 lg:col-span-3">
             <div className="mb-10 flex border-b px-5">
               <h4 className="border-b-2 border-gray-900 px-2 text-lg font-bold ">
                 Posts
@@ -88,22 +90,22 @@ function AuthorPagePeek({ data }) {
   return (
     <article className="mb-20">
       <div className="flex">
-        <div className="relative flex-1 pr-5">
+        <div className="relative flex-1 md:pr-3">
           <div className="mb-2 flex">
             <DisplayTags tags={tags} />
           </div>
           <Link href={`/post/${slug}`} prefetch={false}>
             <h1
               style={{ lineHeight: "111%" }}
-              className="mb-1 cursor-pointer text-2xl font-bold"
+              className="mb-1 cursor-pointer md:text-2xl font-bold text-xl"
             >
               {title}
             </h1>
           </Link>
-          <p className="line-clamp-1 mb-10 font-serif">{excerpt}</p>
+          <p className="md:line-clamp-1 mb-10 font-serif hidden">{excerpt}</p>
 
           {/* date time */}
-          <div className="font-primary absolute bottom-1 flex items-center justify-center text-sm">
+          <div className="font-primary md:absolute bottom-1 flex items-center justify-start text-sm mt-3 md:mt-0">
             <h5 className="font-normal">
               <FormattedDate date={published_at || created_at} />
               <span className="px-2">•</span>
@@ -114,7 +116,7 @@ function AuthorPagePeek({ data }) {
         <div className="flex items-center">
           <div
             style={{ backgroundImage: `url(${banner})` }}
-            className="aspect-h-10 aspect-w-16 w-52 bg-cover bg-center"
+            className="lg:aspect-h-10 lg:aspect-w-16 aspect-1 bg-cover bg-center md:w-32 lg:w-52 w-25"
           ></div>
         </div>
       </div>
