@@ -38,21 +38,23 @@ const Me = ({ user }) => {
       <div className="horizontal-spacing container mx-auto">
         <div className="my-10 grid grid-cols-4 gap-4">
           <section className="col-span-4 border-neutral-400 pb-10 lg:col-span-1 lg:border-r">
-            <div className="lg:flex-col items-center flex">
+            <div className="flex items-center lg:flex-col">
               <img
                 src={dp}
                 alt={dpalt}
-                className="aspect-1 border-grayMain mb-2 rounded-full border-4 lg:h-44 xl:h-52 md:h-32 h-24"
+                className="aspect-1 border-grayMain mb-2 h-24 rounded-full border-4 md:h-32 lg:h-44 xl:h-52"
               />
-              <div className="lg:text-center lg:ml-0 md:ml-5 ml-3">
-                <h1 className="lg:text-2xl font-bold md:text-3xl text-2xl">
+              <div className="ml-3 md:ml-5 lg:ml-0 lg:text-center">
+                <h1 className="text-2xl font-bold md:text-3xl lg:text-2xl">
                   {firstname} {lastname || ""}
                 </h1>
-                <h2 className="font-primary lg:mt-1 text-sm text-neutral-500">
+                <h2 className="font-primary text-sm text-neutral-500 lg:mt-1">
                   {role.toLowerCase()} on LumBytes
                 </h2>
               </div>
-              <p className="mt-8 px-2 text-center text-sm hidden lg:block">{about}</p>
+              <p className="mt-8 hidden px-2 text-center text-sm lg:block">
+                {about}
+              </p>
             </div>
           </section>
           <section className="col-span-4 lg:col-span-3">
@@ -88,7 +90,7 @@ function AuthorPagePeek({ data }) {
   } = data;
 
   return (
-    <article className="mb-20">
+    <article className="mb-16 lg:mb-20">
       <div className="flex">
         <div className="relative flex-1 md:pr-3">
           <div className="mb-2 flex">
@@ -97,15 +99,15 @@ function AuthorPagePeek({ data }) {
           <Link href={`/post/${slug}`} prefetch={false}>
             <h1
               style={{ lineHeight: "111%" }}
-              className="mb-1 cursor-pointer md:text-2xl font-bold text-xl"
+              className="mb-1 cursor-pointer text-xl font-bold md:text-2xl"
             >
               {title}
             </h1>
           </Link>
-          <p className="md:line-clamp-1 mb-10 font-serif hidden">{excerpt}</p>
+          <p className="md:line-clamp-1 mb-10 hidden font-serif">{excerpt}</p>
 
           {/* date time */}
-          <div className="font-primary md:absolute bottom-1 flex items-center justify-start text-sm mt-3 md:mt-0">
+          <div className="font-primary bottom-1 mt-3 flex items-center justify-start text-sm md:absolute md:mt-0">
             <h5 className="font-normal">
               <FormattedDate date={published_at || created_at} />
               <span className="px-2">•</span>
@@ -116,7 +118,7 @@ function AuthorPagePeek({ data }) {
         <div className="flex items-center">
           <div
             style={{ backgroundImage: `url(${banner})` }}
-            className="lg:aspect-h-10 lg:aspect-w-16 aspect-1 bg-cover bg-center md:w-32 lg:w-52 w-25"
+            className="lg:aspect-h-10 lg:aspect-w-16 aspect-w-1 aspect-h-1 w-25 bg-cover bg-center md:w-32 lg:w-52"
           ></div>
         </div>
       </div>
