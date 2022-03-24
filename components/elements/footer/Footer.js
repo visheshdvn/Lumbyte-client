@@ -1,29 +1,29 @@
-import React from "react"
-import Link from "next/link"
+import React from "react";
+import Link from "next/link";
 
 const Footer = () => {
   return (
-    <footer className="body-font bg-grayMain dark:bg-black dark:border-t border-zinc-700 dark:bg-opacity-50">
-      <div className="container px-5 py-8 mx-auto flex items-center sm:flex-row flex-col">
-        <div className="flex title-font font-medium items-center md:justify-start justify-center">
-          <div className="flex-shrink-0 flex items-center">
+    <footer className="body-font bg-grayMain border-zinc-700 dark:border-t dark:bg-black dark:bg-opacity-50">
+      <div className="container mx-auto flex flex-col items-center px-5 py-8 sm:flex-row">
+        <div className="title-font flex items-center justify-center font-medium md:justify-start">
+          <div className="flex flex-shrink-0 items-center">
             <Link href="/" passHref>
-              <a className="items-center flex justify-center overflow-hidden">
+              <a className="flex items-center justify-center overflow-hidden">
                 <img
                   src="/logo/Footer.svg"
                   alt="Lumbytes logo"
-                  className="object-cover object-center overflow-visible xl:h-10 lg:h-9 sm:h-8 h-7"
+                  className="h-7 overflow-visible object-cover object-center sm:h-8 lg:h-9 xl:h-10"
                 />
               </a>
             </Link>
           </div>
         </div>
-        <p className="text-sm text-gray-500 sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-whiteMain-50 sm:py-1 sm:mt-0 mt-4 flex">
+        <p className="sm:border-whiteMain-50 mt-4 flex text-sm text-gray-500 sm:ml-4 sm:mt-0 sm:border-l-2 sm:py-1 sm:pl-4">
           <a
             href="https://www.facebook.com/lumbytes"
             target="_blank"
             rel="noopener"
-            className="cursor-pointer mr-3"
+            className="mr-3 cursor-pointer"
             aria-label="Facebook"
           >
             <svg
@@ -31,7 +31,7 @@ const Footer = () => {
               strokeLinecap="round"
               strokeLinejoin="round"
               strokeWidth="2"
-              className="md:w-6 md:h-6 h-5 w-5 text-whiteMain"
+              className="text-whiteMain h-5 w-5 md:h-6 md:w-6"
               viewBox="0 0 24 24"
             >
               <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path>
@@ -41,7 +41,7 @@ const Footer = () => {
             href="https://twitter.com/lumbytes"
             target="_blank"
             rel="noopener"
-            className="cursor-pointer mr-3"
+            className="mr-3 cursor-pointer"
             aria-label="Twitter"
           >
             <svg
@@ -50,7 +50,7 @@ const Footer = () => {
               strokeLinecap="round"
               strokeLinejoin="round"
               strokeWidth="2"
-              className="md:w-6 md:h-6 w-5 h-5 text-whiteMain"
+              className="text-whiteMain h-5 w-5 md:h-6 md:w-6"
               viewBox="0 0 24 24"
             >
               <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"></path>
@@ -72,9 +72,12 @@ const Footer = () => {
           </a> */}
         </p>
 
-        <span className="inline-flex sm:ml-auto sm:mt-0 mt-4 justify-center sm:justify-start text-gray-500">
-          <Link href="/contact">
-            <a className="text-gray-400 font-medium">Contact</a>
+        <span className="mt-4 inline-flex justify-center text-gray-500 sm:ml-auto sm:mt-0 sm:justify-start">
+          <Link href="/about">
+            <a className="font-medium text-gray-400 ml-5">About</a>
+          </Link>
+          <Link href="/about">
+            <a className="font-medium text-gray-400 ml-5">Contact</a>
           </Link>
         </span>
       </div>
@@ -85,7 +88,7 @@ const Footer = () => {
         className="h-1 w-full"
       ></div>
     </footer>
-  )
-}
+  );
+};
 
-export default Footer
+export default Footer;
