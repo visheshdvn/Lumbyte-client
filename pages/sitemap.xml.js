@@ -1,10 +1,13 @@
+// generate sitemap for tags
+// generate sitemap for
 import fs from "fs";
 import { PrismaClient } from "@prisma/client";
 
 const Sitemap = () => {};
 
 export async function getServerSideProps({ res }) {
-  const { blogposts } = new PrismaClient();
+  const prisma = new PrismaClient();
+  const { blogposts, tags } = prisma;
 
   const posts = await blogposts.findMany({
     select: {
@@ -15,6 +18,18 @@ export async function getServerSideProps({ res }) {
       published: true,
     },
   });
+
+  const tagList = await tags.findMany({
+    select: {
+      tagname: true,
+      updated_at: true,
+    },
+    where: {
+      published: true,
+    },
+  });
+
+  prisma.$disconnect();
 
   const baseUrl = {
     development: "http://localhost:3000",
@@ -35,6 +50,9 @@ export async function getServerSideProps({ res }) {
         "topic",
         "api",
         ".next",
+        "auth",
+        "tags",
+        "[profile]",
         "___next_launcher.js",
         "___vc_bridge.js",
         "node_modules",
@@ -73,6 +91,18 @@ export async function getServerSideProps({ res }) {
           return `
             <url>
               <loc>${baseUrl}/post/${encodeURIComponent(slug)}</loc>
+              <lastmod>${new Date(updated_at).toISOString()}</lastmod>
+              <changefreq>daily</changefreq>
+              <priority>1.0</priority>
+            </url>
+          `;
+        })
+        .join("")}
+      ${tagList
+        .map(({ tagname, updated_at }) => {
+          return `
+            <url>
+              <loc>${baseUrl}/tags/${encodeURIComponent(tagname)}</loc>
               <lastmod>${new Date(updated_at).toISOString()}</lastmod>
               <changefreq>daily</changefreq>
               <priority>1.0</priority>
