@@ -26,13 +26,18 @@ const LeftSideBar = () => {
           className="font-primary fixed flex h-screen items-center justify-center"
         >
           <div className="bg-darkGray relative h-full w-full border-zinc-800 pl-8 dark:border-r dark:bg-black">
-            <div className="absolute left-1/2 top-10 h-40 w-40 -translate-x-1/2 transform border border-white text-white">
-              <div>Image here</div>
-              <h1 className="text-center text-xl font-semibold">
-                Vishesh Dhawan
-              </h1>
-              <h2 className="text-center text-sm font-normal">Superuser</h2>
+            {/*  */}
+            <div className="absolute left-1/2 top-10 flex w-60 -translate-x-1/2 transform items-center text-white">
+              <div
+                style={{
+                  backgroundImage: `url(/logo/Logo-SimpletextDark.png)`,
+                }}
+                className="h-12 w-12 rounded-xl border border-zinc-50 bg-cover bg-center"
+              ></div>
+              <div className="mx-4 h-9 items-center border-l"></div>
+              <h4 className="flex items-center text-4xl font-bold">CMS</h4>
             </div>
+            {/*  */}
             <div className="between-rel-paren absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transform">
               <ul className="text-gray-400">
                 <NavItem text="Dashboard" link="/admin" />
@@ -40,7 +45,7 @@ const LeftSideBar = () => {
                 <NavItem text="Tags" link="/admin/tags" />
               </ul>
             </div>
-            <div className="borde absolute bottom-8 left-1/2 flex w-60 -translate-x-1/2 transform text-white">
+            <div className="absolute bottom-8 left-1/2 flex w-60 -translate-x-1/2 transform text-white">
               <div
                 style={{ backgroundImage: `url(${user.dp})` }}
                 className="mr-4 h-12 w-12 rounded-xl bg-cover bg-center"
