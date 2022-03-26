@@ -57,7 +57,6 @@ export default function Navbar() {
         }}
         className="fixed z-40 w-full bg-white dark:bg-black"
       >
-        {/* ${navbarHidden ? "-top-16" : "top-0"}  */}
         {({ open }) => (
           <>
             <div id="hidebar" className="horizontal-spacing container mx-auto">
@@ -86,7 +85,7 @@ export default function Navbar() {
                 </div>
               </div>
             </div>
-            <div className="bg-grayMain border-zinc-700 py-2 dark:border-y dark:bg-black sm:py-2 md:py-2.5">
+            <div className="border-zinc-700 bg-black py-2 dark:border-y dark:bg-black sm:py-2 md:py-2.5">
               <div className="horizontal-spacing container mx-auto flex">
                 <div className="flex-1 items-center md:block">
                   <div className="border-whiteMain-50 w-min border-r">

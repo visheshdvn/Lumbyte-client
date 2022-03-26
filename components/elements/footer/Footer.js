@@ -3,7 +3,7 @@ import Link from "next/link";
 
 const Footer = () => {
   return (
-    <footer className="body-font bg-grayMain border-zinc-700 dark:border-t dark:bg-black dark:bg-opacity-50">
+    <footer className="body-font border-zinc-700 bg-black dark:border-t dark:bg-opacity-50">
       <div className="container mx-auto flex flex-col items-center px-5 py-8 sm:flex-row">
         <div className="title-font flex items-center justify-center font-medium md:justify-start">
           <div className="flex flex-shrink-0 items-center">
@@ -72,21 +72,24 @@ const Footer = () => {
           </a> */}
         </p>
 
-        <span className="mt-4 inline-flex justify-center text-gray-500 sm:ml-auto sm:mt-0 sm:justify-start">
+        <span className="mt-4 inline-flex justify-center sm:ml-auto sm:mt-0 sm:justify-start">
           <Link href="/about">
-            <a className="font-medium text-gray-400 ml-5">About</a>
+            <a className="ml-5 font-medium text-gray-400 hover:text-neutral-300">
+              About
+            </a>
           </Link>
           <Link href="/about">
-            <a className="font-medium text-gray-400 ml-5">Contact</a>
+            <a className="ml-5 font-medium text-gray-400 hover:text-neutral-300">
+              Contact
+            </a>
+          </Link>
+          <Link href="/privacy-policy">
+            <a className="ml-5 font-medium text-gray-400 hover:text-neutral-300">
+              Privacy Policy
+            </a>
           </Link>
         </span>
       </div>
-      <div
-        style={{
-          backgroundImage: "linear-gradient(to right, #9400d3, #ff0000)",
-        }}
-        className="h-1 w-full"
-      ></div>
     </footer>
   );
 };
