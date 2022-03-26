@@ -229,7 +229,7 @@ const update = ({ initialContent, allTags }) => {
                 ref={titleRef}
                 contentEditable="true"
                 style={{ maxWidth: "720px" }}
-                className="unstyled-input font-raleway mb-10 w-full bg-white text-center text-5xl font-black"
+                className="unstyled-input mb-10 w-full bg-white font-primary text-center text-5xl font-bold leading-tight"
                 suppressContentEditableWarning={true}
               >
                 {updatedContent.title}

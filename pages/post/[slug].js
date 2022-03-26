@@ -77,7 +77,7 @@ const Post = ({ postData, similar }) => {
               {excerpt}
             </p>
 
-            <div className="my-10 flex">
+            <div className="mt-7 mb-8 flex">
               <a href={`/${username}`} rel="noreferrer">
                 {/* <div
                   style={{
