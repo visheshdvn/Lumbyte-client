@@ -3,6 +3,7 @@ import Link from "next/link";
 import Head from "next/head";
 // components
 import Navbar from "../components/elements/navbar/Navbar-client";
+import Footer from "../components/elements/footer/Footer";
 
 const About = () => {
   return (
@@ -50,6 +51,8 @@ const About = () => {
           </div>
         </div>
       </section>
+      {/*  */}
+      <Footer />
     </>
   );
 };
