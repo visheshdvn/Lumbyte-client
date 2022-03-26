@@ -67,50 +67,42 @@ export async function getServerSideProps({ res }) {
     });
 
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
-    <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-    <url>
+    <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <sitemap>
         <loc>https://lumbytes.com</loc>
         <lastmod>${new Date().toISOString()}</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.5</priority>
-    </url>
+    </sitemap>
       ${staticPages
         .map((url) => {
           return `
-            <url>
+            <sitemap>
               <loc>${url}</loc>
               <lastmod>${new Date().toISOString()}</lastmod>
-              <changefreq>monthly</changefreq>
-              <priority>0.5</priority>
-            </url>
+            </sitemap>
           `;
         })
         .join("")}
       ${posts
         .map(({ slug, updated_at }) => {
           return `
-            <url>
+            <sitemap>
               <loc>${baseUrl}/post/${encodeURIComponent(slug)}</loc>
               <lastmod>${new Date(updated_at).toISOString()}</lastmod>
-              <changefreq>daily</changefreq>
-              <priority>1.0</priority>
-            </url>
+            </sitemap>
           `;
         })
         .join("")}
       ${tagList
         .map(({ tagname, updated_at }) => {
           return `
-            <url>
+            <sitemap>
               <loc>${baseUrl}/tags/${encodeURIComponent(tagname)}</loc>
               <lastmod>${new Date(updated_at).toISOString()}</lastmod>
-              <changefreq>daily</changefreq>
-              <priority>1.0</priority>
-            </url>
+            </sitemap>
           `;
         })
         .join("")}
-    </urlset>
+    </sitemapindex>
   `;
 
   res.setHeader("Content-Type", "text/xml");
