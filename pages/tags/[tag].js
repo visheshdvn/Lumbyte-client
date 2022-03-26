@@ -74,7 +74,6 @@ const Tag = ({ posts, theme, metaDescription, ogImg, ogAlt, ogTitle }) => {
 export default Tag;
 
 export async function getStaticProps(context) {
-  console.log("Re-Generating...");
   const {
     params: { tag },
   } = context;
@@ -128,7 +127,7 @@ export async function getStaticProps(context) {
     },
     orderBy: {
       n: "desc",
-    }
+    },
   });
 
   posts = JSON.parse(JSON.stringify(posts));

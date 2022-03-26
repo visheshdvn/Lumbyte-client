@@ -77,9 +77,9 @@ const Post = ({ postData, similar }) => {
               {excerpt}
             </p>
 
-            <div className="my-6 flex">
+            <div className="my-10 flex">
               <a href={`/${username}`} rel="noreferrer">
-                <div
+                {/* <div
                   style={{
                     background: `center url(${
                       dp || getValidImageURL("/me.jpg")
@@ -88,17 +88,28 @@ const Post = ({ postData, similar }) => {
                     backgroundPosition: "center",
                   }}
                   className="aspect-1 relative float-left w-6 rounded-full"
-                />
+                /> */}
+                <div className="aspect-1 relative w-6 overflow-hidden rounded-full">
+                  <Image
+                    src={dp || getValidImageURL("/me.jpg")}
+                    alt={dpalt}
+                    width={30}
+                    height={30}
+                    layout="responsive"
+                    placeholder="blur"
+                    blurDataURL={dp || getValidImageURL("/me.jpg")}
+                  />
+                </div>
               </a>
               <div className="font-primary ml-2 flex items-center text-xs">
                 <a
                   href={`/${username}`}
                   rel="noreferrer"
-                  className="font-medium"
+                  className="font-semibold underline"
                 >
                   {firstname} {lastname || ""}
                 </a>
-                <div className="ml-4 flex h-3 items-center font-medium">
+                <div className="ml-4 flex h-3 items-center font-medium text-neutral-600">
                   <span className="">
                     <FormattedDate date={published_at || created_at} />
                   </span>
