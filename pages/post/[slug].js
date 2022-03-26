@@ -42,6 +42,7 @@ const Post = ({ postData, similar }) => {
     minuteRead,
     metaDescription,
     content,
+    excerpt,
   } = postData;
 
   return (
@@ -57,66 +58,52 @@ const Post = ({ postData, similar }) => {
       <Navbar />
 
       <div className="horizontal-spacing container mx-auto pt-5 md:pt-4 lg:pt-6 xl:pt-8">
-        <header style={{ maxWidth: "850px" }} className="mx-auto">
-          <div className="mb-5 flex items-center sm:hidden">
-            {tags.map((tag) => (
-              <ShowTags
-                tagname={tag.tagname}
-                color={tag.color}
-                key={tag.tagname}
-              />
-            ))}
-          </div>
+        <header className="mx-auto grid grid-cols-12 gap-4">
+          <div className="col-span-12 lg:col-span-11 xl:col-span-9">
+            <div className="mb-5 flex items-center">
+              {tags.map((tag) => (
+                <ShowTags
+                  tagname={tag.tagname}
+                  color={tag.color}
+                  key={tag.tagname}
+                />
+              ))}
+            </div>
 
-          <h1 className="font-primary lg:text-5.5xl text-center text-3xl font-black md:text-5xl md:leading-tight lg:leading-tight">
-            {title}
-          </h1>
+            <h1 className="font-primary mb-2 text-4xl font-bold leading-tight">
+              {title}
+            </h1>
+            <p className="font-primary mt-3 text-base font-medium text-neutral-600 dark:text-zinc-300 md:mt-0 md:text-lg">
+              {excerpt}
+            </p>
 
-          <div
-            style={{ maxWidth: "800px" }}
-            className="my-7 mx-auto md:my-8 lg:my-10"
-          >
-            <div className="clearfix relative">
-              <div className="float-left flex">
-                <a href={`/${username}`} rel="noreferrer">
-                  <div
-                    style={{
-                      background: `center url(${
-                        dp || getValidImageURL("/me.jpg")
-                      })`,
-                      backgroundSize: "cover",
-                      backgroundPosition: "center",
-                    }}
-                    className="relative float-left h-8 w-8 rounded-full border border-gray-900 md:h-10 md:w-10"
-                  />
+            <div className="my-6 flex">
+              <a href={`/${username}`} rel="noreferrer">
+                <div
+                  style={{
+                    background: `center url(${
+                      dp || getValidImageURL("/me.jpg")
+                    })`,
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                  }}
+                  className="aspect-1 relative float-left w-6 rounded-full"
+                />
+              </a>
+              <div className="font-primary ml-2 flex items-center text-xs">
+                <a
+                  href={`/${username}`}
+                  rel="noreferrer"
+                  className="font-medium"
+                >
+                  {firstname} {lastname || ""}
                 </a>
-                <div className="font-primary float-left flex flex-col justify-around pl-2">
-                  <a
-                    href={`/${username}`}
-                    rel="noreferrer"
-                    className="text-base font-bold"
-                  >
-                    {firstname} {lastname || ""}
-                  </a>
-                  <div className="text-grayText flex h-3 items-center text-sm dark:text-gray-400">
-                    <span className="">
-                      <FormattedDate date={published_at || created_at} />
-                    </span>
-                    <span className="mx-2">•</span>
-                    <span className="">{minuteRead} min read</span>
-                  </div>
-                </div>
-              </div>
-
-              <div className="absolute right-0 hidden h-full items-center sm:flex">
-                <div className="flex">
-                  {tags.map((tag) => (
-                    <ShowTags
-                      tagname={tag.tagname}
-                      color={tag.color}
-                      key={tag.tagname}
-                    />
-                  ))}
+                <div className="ml-4 flex h-3 items-center font-medium">
+                  <span className="">
+                    <FormattedDate date={published_at || created_at} />
+                  </span>
+                  <span className="mx-2">•</span>
+                  <span className="">{minuteRead} min read</span>
                 </div>
               </div>
             </div>
@@ -327,6 +314,7 @@ export async function getStaticProps(context) {
       metaDescription: true,
       minuteRead: true,
       published_at: true,
+      excerpt: true,
       author: {
         select: {
           id: true,
@@ -416,6 +404,7 @@ export async function getStaticProps(context) {
         metaDescription: blogpost.metaDescription,
         minuteRead: blogpost.minuteRead,
         content: blogpost.content,
+        excerpt: blogpost.excerpt,
       },
       similar,
     },

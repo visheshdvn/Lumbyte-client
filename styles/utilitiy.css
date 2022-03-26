@@ -22,7 +22,7 @@
 }
 
 .horizontal-spacing {
-  @apply px-2 md:px-3 lg:px-5 xl:px-0;
+  @apply px-3 lg:px-5 xl:px-0;
 }
 
 .divider-col {
