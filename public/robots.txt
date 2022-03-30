@@ -3,4 +3,4 @@ Sitemap: https://lumbytes.com/sitemap.xml
 User-agent: *
 Disallow: /api/*
 Disallow: /admin/*
-Disallow: [profile]
+Disallow: /[profile]
