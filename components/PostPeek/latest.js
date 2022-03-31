@@ -96,7 +96,6 @@ const Latest = ({ big, side }) => {
 };
 
 function SideHeads({ title, date, slug, author, tags }) {
-  console.log("author", author);
   return (
     // special-dividers
     <>
