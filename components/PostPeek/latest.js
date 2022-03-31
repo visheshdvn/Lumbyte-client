@@ -52,23 +52,25 @@ const Latest = ({ big, side }) => {
               </h1>
             </a>
             <div className="font-primary flex items-center text-sm text-zinc-50">
-              {author.dp && (
-                <div className="relative mr-2 h-5 w-5 overflow-hidden rounded-full">
-                  <Image
-                    src={author.dp}
-                    alt={author.dpalt}
-                    layout="fill"
-                    className="object-cover object-center"
-                    placeholder="blur"
-                    blurDataURL={author.dp}
-                  />
-                </div>
-              )}
-              <h4 className="font-medium">
-                <span className="">
-                  {author.firstname} {author.lastname || ""}
-                </span>
-              </h4>
+              <a href={`/${author.username}`} className="flex">
+                {author.dp && (
+                  <div className="relative mr-2 h-5 w-5 overflow-hidden rounded-full">
+                    <Image
+                      src={author.dp}
+                      alt={author.dpalt}
+                      layout="fill"
+                      className="object-cover object-center"
+                      placeholder="blur"
+                      blurDataURL={author.dp}
+                    />
+                  </div>
+                )}
+                <h4 className="font-medium">
+                  <span className="">
+                    {author.firstname} {author.lastname || ""}
+                  </span>
+                </h4>
+              </a>
               <span className="px-2">•</span>
               <h5 className="text-whiteMain font-normal">
                 <FormattedDate date={published_at} />
@@ -94,6 +96,7 @@ const Latest = ({ big, side }) => {
 };
 
 function SideHeads({ title, date, slug, author, tags }) {
+  console.log("author", author);
   return (
     // special-dividers
     <>
@@ -119,23 +122,25 @@ function SideHeads({ title, date, slug, author, tags }) {
         </a>
         {/* author and date */}
         <div className="font-primary flex items-center text-sm">
-          {author.dp && (
-            <div className="relative mr-2 h-5 w-5 overflow-hidden rounded-full">
-              <Image
-                src={author.dp}
-                alt={author.dpalt}
-                layout="fill"
-                className="object-cover object-center"
-                placeholder="blur"
-                blurDataURL={author.dp}
-              />
-            </div>
-          )}
-          <h4 className="text-whiteMain font-medium">
-            <span>
-              {author.firstname} {author.lastname || ""}
-            </span>
-          </h4>
+          <a href={`/${author.username}`} className="flex">
+            {author.dp && (
+              <div className="relative mr-2 h-5 w-5 overflow-hidden rounded-full">
+                <Image
+                  src={author.dp}
+                  alt={author.dpalt}
+                  layout="fill"
+                  className="object-cover object-center"
+                  placeholder="blur"
+                  blurDataURL={author.dp}
+                />
+              </div>
+            )}
+            <h4 className="text-whiteMain font-medium">
+              <span>
+                {author.firstname} {author.lastname || ""}
+              </span>
+            </h4>
+          </a>
           <span className="px-2">•</span>
           <h5 className="text-whiteMain font-normal">
             <FormattedDate date={date} />
