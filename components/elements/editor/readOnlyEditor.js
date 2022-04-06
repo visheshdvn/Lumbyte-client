@@ -14,6 +14,7 @@ const ContentReader = ({ content }) => {
     const Delimiter = require("@editorjs/delimiter");
     const InlineCode = require("@editorjs/inline-code");
     const CodeTool = require("@editorjs/code");
+    const Tooltip = require("editorjs-tooltip");
 
     editor = new EditorJS({
       holder: EDITOR_HOLDER_ID,
@@ -44,11 +45,20 @@ const ContentReader = ({ content }) => {
             preserveBlank: false,
           },
         },
+        tooltip: {
+          class: Tooltip,
+          config: {
+            location: "top",
+            backgroundColor: "#262611",
+            textColor: "#FDFEFE",
+            holder: EDITOR_HOLDER_ID,
+          },
+        },
         quote: Quote,
       },
       data: content,
       readOnly: true,
-      logLevel: "ERROR"
+      logLevel: "ERROR",
     });
     return () => {
       editor.destroy();

@@ -19,13 +19,8 @@ import {
   SaveButton,
   UnPublishButton,
 } from "../../../components/elements/buttons/buttons";
-import { AdminInlineTextInput } from "../../../components/elements/input/text";
 // utilities
-import {
-  tagsToOptions,
-  optionsToTags,
-  tagIdFromTags,
-} from "../../../utils/mutateTags";
+import { optionsToTags, tagIdFromTags } from "../../../utils/mutateTags";
 import {
   publishBlogpost,
   unPublishBlogpost,
@@ -63,7 +58,9 @@ const update = ({ initialContent, allTags }) => {
     const Delimiter = require("@editorjs/delimiter");
     const InlineCode = require("@editorjs/inline-code");
     const CodeTool = require("@editorjs/code");
-    // const ImageTool = require('@editorjs/image');
+    const Tooltip = require("editorjs-tooltip");
+    const Underline = require("@editorjs/underline");
+
     // configs
     editor = new EditorJS({
       holder: "editorjs",
@@ -95,6 +92,17 @@ const update = ({ initialContent, allTags }) => {
             placeholder: "Click here to write something amazing 🔥",
           },
         },
+        tooltip: {
+          class: Tooltip,
+          config: {
+            location: "top",
+            backgroundColor: "#262611",
+            textColor: "#FDFEFE",
+            holder: "editorjs",
+            underline: true,
+          },
+        },
+        underline: Underline,
         quote: Quote,
       },
       data: updatedContent.content,
@@ -229,7 +237,7 @@ const update = ({ initialContent, allTags }) => {
                 ref={titleRef}
                 contentEditable="true"
                 style={{ maxWidth: "720px" }}
-                className="unstyled-input mb-10 w-full bg-white font-primary text-center text-5xl font-bold leading-tight"
+                className="unstyled-input font-primary mb-10 w-full bg-white text-center text-5xl font-bold leading-tight"
                 suppressContentEditableWarning={true}
               >
                 {updatedContent.title}

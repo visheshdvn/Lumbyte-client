@@ -5,7 +5,6 @@ import { useTheme } from "next-themes";
 import { useSession } from "next-auth/react";
 import Router from "next/router";
 // components
-import Select from "../../../components/elements/dropdownSelect/adminSelect";
 import EditBanner from "../../../components/uploaders/editBanner";
 import CreateEditBlogpostLayout, {
   MetadataFields,
@@ -14,11 +13,7 @@ import { SaveButton } from "../../../components/elements/buttons/buttons";
 // utils
 import axios from "../../../utils/axios";
 import { HeadBlogposts } from "../../../utils/headTags/admin/meta";
-import {
-  tagsToOptions,
-  optionsToTags,
-  tagIdFromTags,
-} from "../../../utils/mutateTags";
+import { optionsToTags, tagIdFromTags } from "../../../utils/mutateTags";
 import uploadImage from "../../../utils/uploadImage/uploader";
 
 // editorjs tools
@@ -35,7 +30,8 @@ const create = () => {
     const Paragraph = require("@editorjs/paragraph");
     const List = require("@editorjs/list");
     const Delimiter = require("@editorjs/delimiter");
-    // const ImageTool = require("@editorjs/image");
+    const Tooltip = require("editorjs-tooltip");
+
     // configs
     editor = new EditorJS({
       holder: "editorjs",
@@ -60,6 +56,9 @@ const create = () => {
             preserveBlank: false,
             placeholder: "Let's write something amazing 🔥",
           },
+        },
+        tooltip: {
+          class: Tooltip,
         },
       },
       readOnly: false,
