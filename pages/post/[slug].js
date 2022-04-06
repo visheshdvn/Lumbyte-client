@@ -324,7 +324,6 @@ export async function getStaticProps(context) {
       id: true,
       metaDescription: true,
       minuteRead: true,
-      published_at: true,
       excerpt: true,
       author: {
         select: {
@@ -347,6 +346,7 @@ export async function getStaticProps(context) {
       banner: true,
       banneralt: true,
       content: true,
+      published: true,
       published_at: true,
       created_at: true,
     },
@@ -354,7 +354,7 @@ export async function getStaticProps(context) {
 
   blogpost = JSON.parse(JSON.stringify(blogpost));
 
-  if (!blogpost) {
+  if (!blogpost || !blogpost.published) {
     return {
       notFound: true,
     };
