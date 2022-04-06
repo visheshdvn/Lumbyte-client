@@ -62,7 +62,7 @@ export function MetadataFields({
         <textarea
           type="text"
           placeholder="write under 150 characters..."
-          className="border-black-10 mt-1 h-20 w-full border bg-white px-1 text-sm focus:outline-0"
+          className="border-black-10 mt-1 h-24 w-full border bg-white px-1 text-sm focus:outline-0"
           name="metaDescription"
           value={blogdata.metaDescription}
           onChange={(e) => updateblogdata(e)}
@@ -76,7 +76,7 @@ export function MetadataFields({
         <textarea
           type="text"
           placeholder="write under 150 characters..."
-          className="border-black-10 mt-1 h-20 w-full border bg-white px-1 text-sm focus:outline-0"
+          className="border-black-10 mt-1 h-24 w-full border bg-white px-1 text-sm focus:outline-0"
           name="excerpt"
           value={blogdata.excerpt}
           onChange={(e) => updateblogdata(e)}
