@@ -1,4 +1,3 @@
-import Head from "next/head";
 import { PrismaClient } from "@prisma/client";
 // components
 import BroadPeek from "../components/PostPeek/broad";

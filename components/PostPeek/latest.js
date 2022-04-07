@@ -19,10 +19,9 @@ const Latest = ({ big, side }) => {
             layout="fill"
             className="hidden object-cover object-center sm:block"
             placeholder="blur"
-            blurDataURL="https://lumbytes-general.s3.eu-west-1.amazonaws.com/defaultOG-large.png"
+            blurDataURL={banner}
           />
           <div className="">
-            {/* <div className="absolute bottom-8 hw-11/12 border border-red-900 px-4 py-5 md:px-5 md:py-6 lg:w-4/5"></div> */}
             <div
               style={{ backgroundColor: "rgba(38, 38, 17, 0.85)" }}
               className="absolute bottom-8 w-11/12 px-4 py-5 md:px-5 md:py-6 lg:w-4/5"
