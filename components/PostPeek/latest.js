@@ -43,18 +43,6 @@ const Latest = ({ big, side }) => {
               </a>
               <div className="font-primary flex items-center text-sm text-zinc-50">
                 <a href={`/${author.username}`} className="flex">
-                  {/* {author.dp && (
-                    <div className="relative mr-2 h-5 w-5 overflow-hidden rounded-full">
-                      <Image
-                        src={author.dp}
-                        alt={author.dpalt}
-                        layout="fill"
-                        className="object-cover object-center"
-                        placeholder="blur"
-                        blurDataURL={author.dp}
-                      />
-                    </div>
-                  )} */}
                   {author.dp && (
                     <Image
                       src={author.dp}
@@ -125,18 +113,17 @@ function SideHeads({ title, date, slug, author, tags }) {
         <div className="font-primary flex items-center justify-center text-sm md:justify-start">
           <a href={`/${author.username}`} className="flex">
             {author.dp && (
-              <div className="relative mr-2 h-5 w-5 overflow-hidden rounded-full">
-                <Image
-                  src={author.dp}
-                  alt={author.dpalt}
-                  layout="fill"
-                  className="object-cover object-center"
-                  placeholder="blur"
-                  blurDataURL={author.dp}
-                />
-              </div>
+              <Image
+                src={author.dp}
+                alt={author.dpalt}
+                className="overflow-hidden rounded-full object-cover object-center"
+                placeholder="blur"
+                blurDataURL={author.dp}
+                width={20}
+                height={20}
+              />
             )}
-            <h4 className="text-whiteMain font-medium">
+            <h4 className="text-whiteMain ml-2 font-medium">
               <span>
                 {author.firstname} {author.lastname || ""}
               </span>
