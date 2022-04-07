@@ -17,7 +17,7 @@ const Latest = ({ big, side }) => {
             src={banner}
             alt={banneralt}
             layout="fill"
-            className="hidden object-cover object-center sm:block"
+            className="object-cover object-center"
             placeholder="blur"
             blurDataURL={banner}
           />
@@ -43,7 +43,7 @@ const Latest = ({ big, side }) => {
               </a>
               <div className="font-primary flex items-center text-sm text-zinc-50">
                 <a href={`/${author.username}`} className="flex">
-                  {author.dp && (
+                  {/* {author.dp && (
                     <div className="relative mr-2 h-5 w-5 overflow-hidden rounded-full">
                       <Image
                         src={author.dp}
@@ -54,8 +54,19 @@ const Latest = ({ big, side }) => {
                         blurDataURL={author.dp}
                       />
                     </div>
+                  )} */}
+                  {author.dp && (
+                    <Image
+                      src={author.dp}
+                      alt={author.dpalt}
+                      className="rounded-full object-cover object-center"
+                      placeholder="blur"
+                      blurDataURL={author.dp}
+                      height={20}
+                      width={20}
+                    />
                   )}
-                  <h4 className="font-medium">
+                  <h4 className="ml-2 font-medium">
                     <span className="">
                       {author.firstname} {author.lastname || ""}
                     </span>
