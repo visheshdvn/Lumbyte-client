@@ -116,15 +116,16 @@ const Post = ({ postData, similar }) => {
             alt={banneralt}
             layout="fill"
             className="object-cover object-center"
-            priority
           />
         </div>
 
         <section className="mb-5 grid grid-cols-12 gap-1">
           <div className="order-2 col-span-1 flex items-center pt-2 lg:order-1 lg:flex-col lg:pt-0">
-            <ul className="flex flex-col items-center justify-center pt-2 lg:sticky lg:top-36 lg:block">
-              <h3 className="mb-5 text-lg font-medium">Share</h3>
-              <li className="mr-5 text-center lg:mb-8 lg:mr-0">
+            <ul className="flex items-center justify-center pt-2 lg:sticky lg:top-36 lg:block lg:flex-col">
+              <h3 className="mr-5 text-xl font-medium lg:mb-5 lg:mr-0 lg:text-lg">
+                Share
+              </h3>
+              <li className="mr-5 flex items-center justify-center lg:mb-8 lg:mr-0">
                 <TwitterShareButton
                   title={title}
                   url={`https://lumbytes.com/post/${slug}`}
@@ -142,7 +143,7 @@ const Post = ({ postData, similar }) => {
                 </TwitterShareButton>
               </li>
 
-              <li className="mr-5 text-center lg:mb-8 lg:mr-0">
+              <li className="mr-5 flex items-center justify-center lg:mb-8 lg:mr-0">
                 <FacebookShareButton
                   style={{ color: "#3A5794" }}
                   quote={title}
@@ -160,7 +161,7 @@ const Post = ({ postData, similar }) => {
                 </FacebookShareButton>
               </li>
 
-              <li className="mr-5 text-center lg:mr-0">
+              <li className="mr-5 flex items-center justify-center lg:mr-0">
                 <LinkedinShareButton
                   style={{ color: "#0A66C2" }}
                   title={title}
