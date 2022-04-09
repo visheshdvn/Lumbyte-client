@@ -20,6 +20,7 @@ const Latest = ({ big, side }) => {
             className="object-cover object-center"
             placeholder="blur"
             blurDataURL={banner}
+            priority
           />
           <div className="">
             <div
@@ -37,7 +38,7 @@ const Latest = ({ big, side }) => {
                 ))}
               </div>
               <a href={`/story/${author.username}/${slug}`}>
-                <h1 className="font-primary lg:text-3.5xl md:text-2.75xl xl:text-3.5xl my-0 text-xl font-black leading-10 text-zinc-50 sm:my-3 sm:text-3xl md:my-2 lg:my-4">
+                <h1 className="font-primary lg:text-3.5xl md:text-2.75xl xl:text-3.5xl my-0 text-xl font-black leading-10 text-zinc-50 hover:underline sm:my-3 sm:text-3xl md:my-2 lg:my-4">
                   {title}
                 </h1>
               </a>
@@ -104,7 +105,7 @@ function SideHeads({ title, date, slug, author, tags }) {
         <a href={`/story/${author.username}/${slug}`} className="">
           <h1
             style={{ lineHeight: "111%" }}
-            className="font-primary md:text-2.75xl my-3 text-center text-2xl font-bold hover:opacity-90 sm:text-3xl md:text-left"
+            className="font-primary md:text-2.75xl my-3 text-center text-2xl font-bold hover:underline hover:opacity-90 sm:text-3xl md:text-left"
           >
             {title}
           </h1>
