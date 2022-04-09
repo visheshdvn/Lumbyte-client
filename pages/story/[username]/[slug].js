@@ -109,12 +109,14 @@ const Post = ({ postData, similar }) => {
             </div>
           </div>
         </header>
+        {/* banner Image */}
         <div className="lg:h-100 relative mb-8 h-60 sm:h-80 md:h-96">
           <Image
             src={banner}
             alt={banneralt}
             layout="fill"
             className="object-cover object-center"
+            priority
           />
         </div>
 
