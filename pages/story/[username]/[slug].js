@@ -9,13 +9,13 @@ import {
 } from "react-share";
 
 // custom components
-import FormattedDate from "../../components/micro/formattedDate";
-import ShowTags from "../../components/micro/showTags";
-import { getValidImageURL } from "../../utils/checkValidURL";
-import ReadOnlyEditor from "../../components/elements/editor/readOnlyEditor";
-import Navbar from "../../components/elements/navbar/Navbar-client";
-import Footer from "../../components/elements/footer/Footer";
-import HeadBlogpost from "../../utils/headTags/public/headBlogpost";
+import FormattedDate from "../../../components/micro/formattedDate";
+import ShowTags from "../../../components/micro/showTags";
+import { getValidImageURL } from "../../../utils/checkValidURL";
+import ReadOnlyEditor from "../../../components/elements/editor/readOnlyEditor";
+import Navbar from "../../../components/elements/navbar/Navbar-client";
+import Footer from "../../../components/elements/footer/Footer";
+import HeadBlogpost from "../../../utils/headTags/public/headBlogpost";
 
 // prisma
 import { PrismaClient } from "@prisma/client";
@@ -290,9 +290,13 @@ function SimilarArticles({ data }) {
           </div>
         </div>
       </div>
-      <h3 className="font-primary xl:text-2.75xl font-bold sm:text-2xl sm:leading-7 xl:leading-8">
-        {title}
-      </h3>
+      <Link href={`/story/${author.username}/${slug}`} passHref>
+        <a>
+          <h3 className="font-primary xl:text-2.75xl font-bold hover:underline sm:text-2xl sm:leading-7 xl:leading-8">
+            {title}
+          </h3>
+        </a>
+      </Link>
     </div>
   );
 }
@@ -301,7 +305,7 @@ export async function getStaticProps(context) {
   console.log("Re-Generating...");
   const { blogposts } = prisma;
   const { params } = context;
-  const { slug } = params;
+  const { slug, username } = params;
 
   let blogpost = await blogposts.findUnique({
     where: {
@@ -416,6 +420,11 @@ export async function getStaticPaths() {
   const slugs = await blogposts.findMany({
     select: {
       slug: true,
+      author: {
+        select: {
+          username: true,
+        },
+      },
     },
     where: {
       published: true,
@@ -427,6 +436,7 @@ export async function getStaticPaths() {
     paths: slugs.map((s) => ({
       params: {
         slug: s.slug,
+        username: s.author.username,
       },
     })),
     fallback: true,

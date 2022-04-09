@@ -36,7 +36,7 @@ const Latest = ({ big, side }) => {
                   />
                 ))}
               </div>
-              <a href={`/post/${slug}`}>
+              <a href={`/story/${author.username}/${slug}`}>
                 <h1 className="font-primary lg:text-3.5xl md:text-2.75xl xl:text-3.5xl my-0 text-xl font-black leading-10 text-zinc-50 sm:my-3 sm:text-3xl md:my-2 lg:my-4">
                   {title}
                 </h1>
@@ -101,7 +101,7 @@ function SideHeads({ title, date, slug, author, tags }) {
           ))}
         </div>
         {/* title */}
-        <a href={`/post/${slug}`} className="">
+        <a href={`/story/${author.username}/${slug}`} className="">
           <h1
             style={{ lineHeight: "111%" }}
             className="font-primary md:text-2.75xl my-3 text-center text-2xl font-bold hover:opacity-90 sm:text-3xl md:text-left"

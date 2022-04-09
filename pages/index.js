@@ -38,7 +38,6 @@ export default function Home({ latest, latestSide, readMore }) {
 export async function getStaticProps() {
   const prisma = new PrismaClient();
   const { blogposts } = prisma;
-  console.log("Re-Generating...");
 
   let data = await blogposts.findMany({
     select: {
