@@ -48,7 +48,7 @@ const BroadPeek = ({
               />
             ))}
           </div>
-          <Link href={`/post/${slug}`} passHref>
+          <Link href={`/story/${username}/${slug}`} passHref>
             <a className="text-2.75xl font-primary sm:text-3.5xl lg:text-3.5xl mt-3 transform text-center font-bold leading-tight transition-all duration-300 hover:scale-95 sm:leading-tight md:mt-0 md:text-2xl md:leading-tight lg:leading-tight xl:text-4xl xl:leading-10">
               {title}
             </a>
@@ -72,16 +72,6 @@ const BroadPeek = ({
             <div className="font-primary flex items-center justify-center text-sm">
               <Link href={`/${username}`} passHref>
                 <a className="flex">
-                  {/* {dp && (
-                    <div className="relative mr-2 h-5 w-5 overflow-hidden">
-                      <Image
-                        src={dp}
-                        alt={dpalt}
-                        layout="fill"
-                        className="object-cover object-center"
-                      />
-                    </div>
-                  )} */}
                   {dp && (
                     <Image
                       src={dp}

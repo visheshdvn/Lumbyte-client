@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "../../utils/axios";
 import Link from "next/link";
+import Image from "next/image";
 // components
 import Navbar from "../../components/elements/navbar/Navbar-client";
 import Footer from "../../components/elements/footer/Footer";
@@ -96,6 +97,7 @@ function AuthorPagePeek({ data }) {
     title,
     tags,
     excerpt,
+    author,
   } = data;
 
   return (
@@ -105,10 +107,10 @@ function AuthorPagePeek({ data }) {
           <div className="mb-2 flex">
             <DisplayTags tags={tags} />
           </div>
-          <Link href={`/post/${slug}`} prefetch={false}>
+          <Link href={`/story/${author.username}/${slug}`} prefetch={false}>
             <h1
               style={{ lineHeight: "111%" }}
-              className="mb-1 cursor-pointer text-xl font-bold md:text-2xl"
+              className="mb-1 cursor-pointer text-xl font-bold hover:underline md:text-2xl"
             >
               {title}
             </h1>
@@ -125,10 +127,18 @@ function AuthorPagePeek({ data }) {
           </div>
         </div>
         <div className="flex items-center">
-          <div
-            style={{ backgroundImage: `url(${banner})` }}
-            className="lg:aspect-h-10 lg:aspect-w-16 aspect-w-1 aspect-h-1 w-25 bg-cover bg-center md:w-32 lg:w-52"
-          ></div>
+          <Link href={`/story/${author.username}/${slug}`} passHref>
+            <a>
+              <div className="lg:aspect-h-10 lg:aspect-w-16 aspect-w-1 aspect-h-1 w-25 relative bg-cover bg-center md:w-32 lg:w-52">
+                <Image
+                  src={banner}
+                  alt={banneralt}
+                  layout="fill"
+                  className="object-cover object-center"
+                />
+              </div>
+            </a>
+          </Link>
         </div>
       </div>
     </article>
