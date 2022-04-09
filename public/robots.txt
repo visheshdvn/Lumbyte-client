@@ -5,3 +5,5 @@ Disallow: /api/*
 Disallow: /admin/*
 Disallow: /[*]
 Disallow: /tags/[tag]
+Disallow: /story/[username]
+Disallow: /story/[username]/*
