@@ -77,25 +77,14 @@ const Post = ({ postData, similar }) => {
               {excerpt}
             </p>
 
-            <div className="mt-7 mb-8 flex">
+            <div className="mt-7 mb-8 flex items-center">
               <a href={`/${username}`} rel="noreferrer">
-                {/* <div
-                  style={{
-                    background: `center url(${
-                      dp || getValidImageURL("/me.jpg")
-                    })`,
-                    backgroundSize: "cover",
-                    backgroundPosition: "center",
-                  }}
-                  className="aspect-1 relative float-left w-6 rounded-full"
-                /> */}
-                <div className="aspect-1 relative w-6 overflow-hidden rounded-full">
+                <div className="aspect-1 overflow-hidden rounded-full">
                   <Image
                     src={dp || getValidImageURL("/me.jpg")}
                     alt={dpalt}
-                    width={30}
-                    height={30}
-                    layout="responsive"
+                    width={24}
+                    height={24}
                     placeholder="blur"
                     blurDataURL={dp || getValidImageURL("/me.jpg")}
                   />
@@ -126,8 +115,6 @@ const Post = ({ postData, similar }) => {
             alt={banneralt}
             layout="fill"
             className="object-cover object-center"
-            placeholder="blur"
-            blurDataURL={banner}
           />
         </div>
 
@@ -202,13 +189,14 @@ const Post = ({ postData, similar }) => {
               {/* author data */}
               <div className="border-grayMain flex border-t-4 border-b-4 py-3 dark:border-gray-400">
                 <div className="flex items-center">
-                  <div className="bg-yellow-75 border-grayMain relative h-24 w-24 overflow-hidden rounded-full border-4 dark:border-gray-400 lg:h-36 lg:w-36">
+                  <div className="border-grayMain aspect-1 h-24 overflow-hidden rounded-full border-4 dark:border-gray-400 lg:h-36">
                     <a href={`/${username}`}>
                       <Image
                         src={dp || getValidImageURL("/me.jpg")}
                         alt={dpalt}
-                        layout="fill"
-                        className="transform cursor-pointer object-cover object-center transition-all duration-1000 hover:scale-110"
+                        height={144}
+                        width={144}
+                        className="transform cursor-pointer transition-all duration-1000 hover:scale-105"
                         placeholder="blur"
                         blurDataURL={dp || getValidImageURL("/me.jpg")}
                       />
@@ -261,7 +249,7 @@ function SimilarArticles({ data }) {
     >
       <Link href={`/post/${slug}`} passHref>
         <a>
-          <div className="scale-parent relative h-44 w-full overflow-hidden sm:h-64 md:h-44 xl:h-60">
+          <div className="relative h-44 w-full overflow-hidden sm:h-64 md:h-44 xl:h-60">
             <Image
               className="object-cover object-center transition-all duration-1000"
               src={banner}
@@ -273,18 +261,17 @@ function SimilarArticles({ data }) {
           </div>
         </a>
       </Link>
+      {/* author */}
       <div className="my-4 flex">
         <a href={`/${author.username}`} rel="noreferrer">
-          <div
-            style={{
-              background: `center url(${
-                author.dp || getValidImageURL("/me.jpg")
-              })`,
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-            }}
-            className="relative float-left h-8 w-8 rounded-full md:h-8 md:w-8"
-          />
+          <div className="aspect-1 overflow-hidden rounded-full">
+            <Image
+              src={author.dp || getValidImageURL("/me.jpg")}
+              alt={author.dpalt}
+              width={32}
+              height={32}
+            />
+          </div>
         </a>
         <div className="font-primary float-left flex flex-col justify-around pl-2">
           <a
