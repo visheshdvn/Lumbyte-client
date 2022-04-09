@@ -116,6 +116,7 @@ const Post = ({ postData, similar }) => {
             alt={banneralt}
             layout="fill"
             className="object-cover object-center"
+            priority
           />
         </div>
 
