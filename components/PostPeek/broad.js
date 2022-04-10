@@ -55,7 +55,7 @@ const BroadPeek = ({
           </Link>
         </div>
         <div className="col-span-12 flex items-center justify-center md:col-span-4">
-          <div className="flex flex-col items-center justify-between md:h-32 lg:h-44 xl:h-52 lg:pl-5">
+          <div className="flex flex-col items-center justify-between md:h-32 lg:h-44 lg:pl-5">
             <div className="hidden justify-center md:flex">
               {tags.map((tag) => (
                 <ShowTags
