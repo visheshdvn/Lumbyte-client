@@ -24,7 +24,7 @@ const BroadPeek = ({
         <div className="col-span-12 flex h-auto items-center justify-center md:col-span-4 md:justify-start">
           <div
             style={{ aspectRatio: "8/5" }}
-            className="relative h-44 md:h-32 lg:h-44"
+            className="relative h-36 md:h-32 lg:h-44"
           >
             <a href={`/post/${slug}`}>
               <Image
