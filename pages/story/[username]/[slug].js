@@ -299,9 +299,9 @@ function SimilarArticles({ data }) {
   );
 }
 
-export async function getStaticProps(context) {
+export async function getStaticProps(ctx) {
   const { blogposts } = prisma;
-  const { params } = context;
+  const { params } = ctx;
   const { slug, username } = params;
 
   let blogpost = await blogposts.findUnique({
@@ -387,6 +387,10 @@ export async function getStaticProps(context) {
   similar = JSON.parse(JSON.stringify(similar));
 
   prisma.$disconnect();
+
+  return {
+    notFound: true,
+  };
 
   return {
     props: {

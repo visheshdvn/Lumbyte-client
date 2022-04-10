@@ -94,7 +94,7 @@ export default NextAuth({
       return token;
     },
     session: async ({ session, token }) => {
-      console.log("----inide session----");
+      // console.log("----inide session----");
       session.user = {
         id: token.userId,
         email: token.email,

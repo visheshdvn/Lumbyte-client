@@ -10,6 +10,7 @@ import MetaIndex from "../utils/headTags/public/headIndex";
 const MAX_RESPONSE = 20;
 
 export default function Home({ latest, latestSide, readMore }) {
+  console.log("client")
   if (Object.keys(latest).length === 0) {
     return <h1>No Data</h1>;
   }
@@ -35,7 +36,8 @@ export default function Home({ latest, latestSide, readMore }) {
   );
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps(ctx) {
+  // const cookie = cookies(ctx);
   const prisma = new PrismaClient();
   const { blogposts } = prisma;
 
@@ -103,6 +105,6 @@ export async function getStaticProps() {
       latestSide,
       readMore,
     },
-    revalidate: 14400,
+    // revalidate: 14400,
   };
 }
