@@ -20,11 +20,11 @@ const BroadPeek = ({
 }) => {
   return (
     <article className="mb-16 flex dark:text-white sm:mb-16 md:mb-20 lg:mb-24">
-      <div className=" z-0 grid w-full grid-cols-12 gap-1 ">
+      <div className=" z-0 grid w-full grid-cols-12 gap-1">
         <div className="col-span-12 flex h-auto items-center justify-center md:col-span-4 md:justify-start">
           <div
             style={{ aspectRatio: "8/5" }}
-            className="relative h-44 md:h-32 lg:h-44 xl:h-52"
+            className="relative h-44 md:h-32 lg:h-44"
           >
             <a href={`/post/${slug}`}>
               <Image
@@ -55,7 +55,7 @@ const BroadPeek = ({
           </Link>
         </div>
         <div className="col-span-12 flex items-center justify-center md:col-span-4">
-          <div className="flex flex-col items-center justify-between md:h-32 lg:h-44 xl:h-52">
+          <div className="flex flex-col items-center justify-between md:h-32 lg:h-44 xl:h-52 lg:pl-5">
             <div className="hidden justify-center md:flex">
               {tags.map((tag) => (
                 <ShowTags

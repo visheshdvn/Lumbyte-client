@@ -300,7 +300,6 @@ function SimilarArticles({ data }) {
 }
 
 export async function getStaticProps(context) {
-  console.log("Re-Generating...");
   const { blogposts } = prisma;
   const { params } = context;
   const { slug, username } = params;
