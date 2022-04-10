@@ -19,7 +19,6 @@ import HeadBlogpost from "../../../utils/headTags/public/headBlogpost";
 
 // prisma
 import { PrismaClient } from "@prisma/client";
-
 const prisma = new PrismaClient();
 
 const Post = ({ postData, similar }) => {
@@ -85,8 +84,6 @@ const Post = ({ postData, similar }) => {
                     alt={dpalt}
                     width={24}
                     height={24}
-                    placeholder="blur"
-                    blurDataURL={dp || getValidImageURL("/me.jpg")}
                   />
                 </div>
               </a>
@@ -247,10 +244,7 @@ function SimilarArticles({ data }) {
   const { slug, banner, title, banneralt, author, minuteRead, published_at } =
     data;
   return (
-    <div
-      style={{ minWidth: "x" }}
-      className="col-span-2 mb-10 h-auto w-full px-3 sm:h-auto md:mb-0 md:w-1/3 lg:col-auto"
-    >
+    <div className="col-span-2 mb-10 h-auto w-full px-3 sm:h-auto md:mb-0 md:w-1/3 lg:col-auto">
       <Link href={`/post/${slug}`} passHref>
         <a>
           <div className="relative h-44 w-full overflow-hidden sm:h-64 md:h-44 xl:h-60">
@@ -260,7 +254,7 @@ function SimilarArticles({ data }) {
               alt={banneralt}
               layout="fill"
               placeholder="blur"
-              blurDataURL="https://lumbytes-general.s3.eu-west-1.amazonaws.com/defaultOG-small.png"
+              blurDataURL={banner}
             />
           </div>
         </a>
