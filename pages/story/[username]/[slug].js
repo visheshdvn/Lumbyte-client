@@ -389,10 +389,6 @@ export async function getStaticProps(ctx) {
   prisma.$disconnect();
 
   return {
-    notFound: true,
-  };
-
-  return {
     props: {
       postData: {
         id: blogpost.id,
