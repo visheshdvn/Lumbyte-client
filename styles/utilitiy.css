@@ -58,15 +58,15 @@ ul.spaced li:not(:last-child) {
   @apply bg-darkGray absolute right-0 top-0 h-16 w-16 transform text-white opacity-0 transition-all duration-300;
 }
 
-/* line-before */
+/* line-across */
 
-.line-before::before {
+.line-across::before {
   content: "";
   height: 2px;
   @apply absolute block bg-black w-36 left-0 top-1/2 -z-10;
 }
 
-.line-before::after {
+.line-across::after {
   content: "";
   height: 2px;
   @apply absolute block bg-black w-36 right-0 top-1/2 -z-10;

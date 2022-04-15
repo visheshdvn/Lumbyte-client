@@ -4,6 +4,8 @@ import Router from "next/router";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Link from "next/link";
+// components
+import SignInForm from "../../components/elements/forms/signIn";
 // utilities
 import NoIndex from "../../utils/headTags/admin/noIndex";
 import Image from "next/image";
@@ -17,23 +19,23 @@ const Login = ({ providers }) => {
     }
   }, [status, session]);
 
-  const [formdata, updateFormData] = useState({
+  const [loginFormData, setLoginFormData] = useState({
     login: "",
     password: "",
   });
 
-  function updateformData(e) {
-    updateFormData({
-      ...formdata,
+  function updateFormData(e) {
+    setLoginFormData({
+      ...loginFormData,
       [e.target.name]: e.target.value,
     });
   }
 
-  async function submitHandler(e) {
+  async function signInHandler(e) {
     e.preventDefault();
     const res = await signIn(providers.credentials.id, {
       redirect: false,
-      ...formdata,
+      ...loginFormData,
     });
 
     if (res.error) {
@@ -65,42 +67,14 @@ const Login = ({ providers }) => {
             <h2 className="font-primary mb-8 text-center text-base font-bold">
               Sign In
             </h2>
-            <form onSubmit={submitHandler} className="mb-8">
-              <div className="login-input-group-email">
-                <input
-                  id="username_field"
-                  type="text"
-                  name="login"
-                  autoCorrect="false"
-                  onChange={(e) => updateformData(e)}
-                  required
-                />
-                <label htmlFor="username_field" className="label-name-email">
-                  <span className="content-name-email">Email</span>
-                </label>
-              </div>
 
-              <div className="login-input-group-pass">
-                <input
-                  id="login_main"
-                  type="password"
-                  name="password"
-                  autoCorrect="false"
-                  onChange={(e) => updateformData(e)}
-                  required
-                />
-                <label htmlFor="password_field" className="label-name-pass">
-                  <span className="content-name-pass">Password</span>
-                </label>
-              </div>
-              <input
-                type={"submit"}
-                className="font-primary h-10 w-full cursor-pointer rounded-sm bg-black text-sm font-bold text-white hover:brightness-110 focus:outline-none"
-                value="Next"
-              />
-            </form>
+            <SignInForm
+              onSubmitHandler={signInHandler}
+              updateFormData={updateFormData}
+              formData={loginFormData}
+            />
 
-            <h3 className="line-before relative mx-auto mb-5 text-center">
+            <h3 className="line-across relative mx-auto mb-5 text-center">
               <span className="font-primary bg-white px-2 text-sm font-bold">
                 OR
               </span>
