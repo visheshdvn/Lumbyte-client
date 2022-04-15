@@ -63,11 +63,11 @@ ul.spaced li:not(:last-child) {
 .line-across::before {
   content: "";
   height: 2px;
-  @apply absolute block bg-black w-36 left-0 top-1/2 -z-10;
+  @apply absolute left-0 top-1/2 -z-10 block w-36 bg-black;
 }
 
 .line-across::after {
   content: "";
   height: 2px;
-  @apply absolute block bg-black w-36 right-0 top-1/2 -z-10;
+  @apply absolute right-0 top-1/2 -z-10 block w-36 bg-black;
 }

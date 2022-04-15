@@ -12,7 +12,7 @@
 }
 
 .login-input-group-email input {
-  @apply h-full w-full border-none pt-4 pb-2 text-sm text-black outline-none;
+  @apply font-primary h-full w-full border-none bg-white pt-4 pb-1 text-sm font-medium text-black outline-none;
 }
 
 .login-input-group-email label {
@@ -26,7 +26,7 @@
 .login-input-group-email input:focus + .label-name-email .content-name-email,
 .login-input-group-email input:valid + .label-name-email .content-name-email {
   transform: translateY(-90%);
-  @apply font-medium text-black;
+  @apply font-bold text-black;
 }
 
 .login-input-group-email input:focus + .label-name-email,
@@ -40,7 +40,7 @@
 
 /* password field */
 .login-input-group-pass input {
-  @apply h-full w-full border-none pt-4 pb-2 text-sm text-black outline-none;
+  @apply font-primary h-full w-full border-none bg-white pt-4 pb-1 text-sm font-medium text-black outline-none;
 }
 
 .login-input-group-pass label {
@@ -54,7 +54,7 @@
 .login-input-group-pass input:focus + .label-name-pass .content-name-pass,
 .login-input-group-pass input:valid + .label-name-pass .content-name-pass {
   transform: translateY(-90%);
-  @apply font-medium text-black;
+  @apply font-bold text-black;
 }
 
 .login-input-group-pass input:focus + .label-name-pass,

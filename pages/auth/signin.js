@@ -59,7 +59,7 @@ const Login = ({ providers }) => {
             className="object-cover object-center"
           />
         </div>
-        <div className="col-span-12 flex items-center justify-center px-2 md:col-span-6 lg:col-span-5 xl:col-span-4">
+        <div className="col-span-12 flex items-center justify-center bg-white px-2 text-black md:col-span-6 lg:col-span-5 xl:col-span-4">
           <div className="w-full max-w-xs">
             <h1 className="font-primary mb-8 text-center text-4xl font-bold">
               LumBytes
@@ -74,7 +74,7 @@ const Login = ({ providers }) => {
               formData={loginFormData}
             />
 
-            <h3 className="line-across relative mx-auto mb-5 text-center">
+            <h3 className="line-across relative z-10 mx-auto mb-5 text-center">
               <span className="font-primary bg-white px-2 text-sm font-bold">
                 OR
               </span>
