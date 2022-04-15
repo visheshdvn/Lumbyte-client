@@ -6,6 +6,7 @@ module.exports = {
   darkMode: "class", // or 'media' or 'class'
   theme: {
     screens: {
+      xs: "425px",
       sm: "640px",
       md: "768px",
       lg: "1024px",
@@ -29,7 +30,7 @@ module.exports = {
         "4.75xl": "2.75rem",
         "3.5xl": "2rem",
         "2.75xl": "1.75rem",
-        "5.5xl": "52px"
+        "5.5xl": "52px",
       },
       colors: {
         grayText: "rgb(117, 117, 117)",
@@ -77,7 +78,7 @@ module.exports = {
   },
   plugins: [
     require("@tailwindcss/aspect-ratio"),
-    require('@tailwindcss/line-clamp'),
+    require("@tailwindcss/line-clamp"),
     // require("@tailwindcss/typography"),
     // require("@tailwindcss/forms"),
   ],

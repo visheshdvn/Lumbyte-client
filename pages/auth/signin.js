@@ -50,7 +50,7 @@ const Login = ({ providers }) => {
     <>
       <NoIndex />
       <div className="grid h-screen grid-cols-12 gap-0">
-        <div className="relative col-span-8">
+        <div className="relative hidden md:col-span-6 md:block lg:col-span-7 xl:col-span-8">
           <Image
             src="https://lumbytes-general.s3.eu-west-1.amazonaws.com/Frame+35.jpg"
             alt="Your ideas matters. - LumBytes"
@@ -59,7 +59,7 @@ const Login = ({ providers }) => {
             className="object-cover object-center"
           />
         </div>
-        <div className="col-span-4 flex items-center justify-center">
+        <div className="col-span-12 flex items-center justify-center px-2 md:col-span-6 lg:col-span-5 xl:col-span-4">
           <div className="w-full max-w-xs">
             <h1 className="font-primary mb-8 text-center text-4xl font-bold">
               LumBytes
