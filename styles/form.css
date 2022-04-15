@@ -1,3 +1,63 @@
 .form-control {
   @apply relative;
 }
+
+/* 
+* login form
+*/
+
+/* email field */
+.login-input-group-email {
+  @apply relative mb-10 max-h-12 w-full text-neutral-400;
+}
+
+.login-input-group-email input {
+  @apply h-full w-full border-none pt-4 pb-2 text-sm text-black outline-none;
+}
+
+.login-input-group-email label {
+  @apply font-primary pointer-events-none absolute bottom-0 left-0 h-full w-full border-b border-neutral-400;
+}
+
+.content-name-email {
+  @apply absolute bottom-0 left-0 transform pb-1 text-sm transition-all duration-300 ease-in;
+}
+
+.login-input-group-email input:focus + .label-name-email .content-name-email,
+.login-input-group-email input:valid + .label-name-email .content-name-email {
+  transform: translateY(-90%);
+  @apply font-medium text-black;
+}
+
+.login-input-group-email input:focus + .label-name-email,
+.login-input-group-email input:valid + .label-name-email {
+  @apply border-black;
+}
+
+.login-input-group-pass {
+  @apply relative mb-8 max-h-12 w-full text-neutral-400;
+}
+
+/* password field */
+.login-input-group-pass input {
+  @apply h-full w-full border-none pt-4 pb-2 text-sm text-black outline-none;
+}
+
+.login-input-group-pass label {
+  @apply font-primary pointer-events-none absolute bottom-0 left-0 h-full w-full border-b border-neutral-400;
+}
+
+.content-name-pass {
+  @apply absolute bottom-0 left-0 transform pb-1 text-sm transition-all duration-300 ease-in;
+}
+
+.login-input-group-pass input:focus + .label-name-pass .content-name-pass,
+.login-input-group-pass input:valid + .label-name-pass .content-name-pass {
+  transform: translateY(-90%);
+  @apply font-medium text-black;
+}
+
+.login-input-group-pass input:focus + .label-name-pass,
+.login-input-group-pass input:valid + .label-name-pass {
+  @apply border-black;
+}

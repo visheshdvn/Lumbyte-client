@@ -1,17 +1,15 @@
 import NextAuth from "next-auth";
-// import Providers from "next-auth/providers";
-import GitHubProvider from "next-auth/providers/github";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { comparePassword } from "../../../middleware/auth/encryptDecryptPassword";
 
 import { PrismaClient } from "@prisma/client";
-const { user, account, adminAccount } = new PrismaClient();
+const { user } = new PrismaClient();
 
 export default NextAuth({
   // Configure one or more authentication providers
-  // pages: {
-  //   signIn: "/auth/signin",
-  // },
+  pages: {
+    signIn: "/auth/signin",
+  },
   session: {
     strategy: "jwt",
     maxAge: 7 * 24 * 60 * 60,
@@ -24,18 +22,19 @@ export default NextAuth({
     // ...add more providers here
     CredentialsProvider({
       name: "Credentials",
-      credentials: {
-        email: {
-          label: "Email",
-          type: "email",
-          placeholder: "abc@example.com",
-        },
-        password: { label: "Password", type: "password" },
-      },
+      // credentials: {
+      //   email: {
+      //     label: "Email",
+      //     type: "email",
+      //     placeholder: "abc@example.com",
+      //   },
+      //   password: { label: "Password", type: "password" },
+      // },
       authorize: async (credentials, req) => {
+        console.log("credentials", credentials);
         var user_found = await user.findUnique({
           where: {
-            email: credentials.email,
+            email: credentials.login,
           },
           select: {
             id: true,
@@ -55,16 +54,17 @@ export default NextAuth({
         });
 
         if (!user_found) {
-          console.log("User not found");
           return null;
         }
 
-        console.log("user", user_found);
         const match = await comparePassword(
           credentials.password,
           user_found.account.password
         );
-        console.log("match", match);
+
+        if (!match) {
+          return null;
+        }
 
         return {
           id: user_found.id,
