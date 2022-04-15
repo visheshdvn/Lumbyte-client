@@ -41,9 +41,9 @@ const Login = ({ providers }) => {
     if (res.error) {
       toast.error("Trouble logging in. Please check your credentials.");
       return;
+    } else {
+      Router.replace("/");
     }
-
-    Router.replace("/");
   }
 
   return (
