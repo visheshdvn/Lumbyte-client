@@ -62,11 +62,15 @@ const Me = ({ user }) => {
 
           <section className="order-1 col-span-4 pb-8 dark:border-zinc-700 lg:order-2 lg:col-span-1 lg:border-l lg:pb-10">
             <div className="top-0 flex items-center lg:flex-col">
-              <img
-                src={dp}
-                alt={dpalt}
-                className="aspect-1 border-grayMain mb-2 h-24 rounded-full border-4 md:h-32 lg:h-44 xl:h-52"
-              />
+              <div className="aspect-1 relative mb-4 h-24 overflow-hidden rounded-full md:h-32 lg:h-44">
+                <Image
+                  src={dp}
+                  alt={dpalt}
+                  className="object-cover object-center"
+                  layout="fill"
+                  priority
+                />
+              </div>
               <div className="ml-3 md:ml-5 lg:ml-0 lg:text-center">
                 <h1 className="text-2xl font-bold md:text-3xl lg:text-2xl">
                   {firstname} {lastname || ""}
