@@ -47,7 +47,20 @@ const Me = ({ user }) => {
       <Navbar />
       <div className="horizontal-spacing container mx-auto">
         <div className="my-10 grid grid-cols-4 gap-4">
-          <section className="col-span-4 pb-10 dark:border-zinc-700 lg:col-span-1 lg:border-r">
+          <section className="order-2 col-span-4 lg:order-1 lg:col-span-3">
+            <div className="mb-10 flex border-b px-3 dark:border-zinc-700 lg:px-5">
+              <h4 className="border-b-2 border-gray-900 px-2 text-lg font-bold dark:border-neutral-300 ">
+                Posts
+              </h4>
+            </div>
+            <div className="px-3 lg:pr-3 lg:pl-0">
+              {posts.data.map((post) => (
+                <AuthorPagePeek key={post.slug} data={post} />
+              ))}
+            </div>
+          </section>
+
+          <section className="order-1 col-span-4 pb-8 dark:border-zinc-700 lg:order-2 lg:col-span-1 lg:border-l lg:pb-10">
             <div className="top-0 flex items-center lg:flex-col">
               <img
                 src={dp}
@@ -65,18 +78,6 @@ const Me = ({ user }) => {
               <p className="mt-8 hidden px-3 text-center text-sm lg:block">
                 {about}
               </p>
-            </div>
-          </section>
-          <section className="col-span-4 lg:col-span-3">
-            <div className="mb-10 flex border-b px-5 dark:border-zinc-700">
-              <h4 className="border-b-2 border-gray-900 px-2 text-lg font-bold dark:border-neutral-300 ">
-                Posts
-              </h4>
-            </div>
-            <div>
-              {posts.data.map((post) => (
-                <AuthorPagePeek key={post.slug} data={post} />
-              ))}
             </div>
           </section>
         </div>
