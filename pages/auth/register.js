@@ -1,13 +1,30 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 // third party packages
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "../../utils/axios";
+import Link from "next/link";
 // utilities
 import NoIndex from "../../utils/headTags/admin/noIndex";
 // components
+import Layout from "../../components/layouts/auth/signInRegister";
+import RegisterForm from "../../components/elements/forms/register";
+import "react-toastify/dist/ReactToastify.css";
+import { useSession } from "next-auth/react";
+import { useTheme } from "next-themes";
+import Router from "next/router";
 
 const SignUp = () => {
+  const { theme } = useTheme();
+
+  const { data: session, status } = useSession();
+
+  useEffect(() => {
+    if (status === "authenticated" && session) {
+      Router.replace("/");
+    }
+  }, [status, session]);
+
   const [details, setDetails] = useState({
     firstname: "",
     lastname: "",
@@ -23,17 +40,17 @@ const SignUp = () => {
     });
   };
 
-  const registerUser = async () => {
+  async function registerUser(e) {
+    e.preventDefault();
     const { firstname, lastname, username, email, password } = details;
 
     if (
-      firstname === "" ||
-      lastname === "" ||
-      username === "" ||
-      email === "" ||
-      password === ""
+      firstname.trim() === "" ||
+      username.trim() === "" ||
+      email.trim() === "" ||
+      password.trim() === ""
     ) {
-      toast.error("Please fill in all fields");
+      toast.error("Please fill in all fields", { theme });
       return;
     }
 
@@ -45,90 +62,52 @@ const SignUp = () => {
         email,
         password,
       });
-      console.log(res);
-      toast.success("Successfully registered");
+      toast.success("Registration successfull", { theme });
+      Router.push("/auth/signin?registration=success");
     } catch (error) {
-      //   console.log(error.response.data);
-      error.response.data.errors.map((err) =>
-        toast.error(err.msg, { duration: 5000 })
+      error.response?.data?.errors.map((err) =>
+        toast.error(err.msg, { duration: 5000, theme })
       );
     }
-  };
+  }
 
   return (
     <>
       <NoIndex />
-      <div className="body-top-spacing relative h-screen">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transform border p-2">
-          <div className="mx-2 mb-5 flex-1">
-            <label className="font-raleway mb-1 block text-xs font-semibold">
-              First name
-            </label>
-            <input
-              type="text"
-              name="firstname"
-              className="border-black-10 w-60 rounded-sm border py-2 px-2 focus:outline-none"
-              value={details.firstname}
-              onChange={updateDetails}
-            />
-          </div>
-          <div className="mx-2 mb-5 flex-1">
-            <label className="font-raleway mb-1 block text-xs font-semibold">
-              Last name
-            </label>
-            <input
-              type="text"
-              name="lastname"
-              className="border-black-10 w-60 rounded-sm border py-2 px-2 focus:outline-none"
-              value={details.lastname}
-              onChange={updateDetails}
-            />
-          </div>
-          <div className="mx-2 mb-5 flex-1">
-            <label className="font-raleway mb-1 block text-xs font-semibold">
-              Username
-            </label>
-            <input
-              type="text"
-              name="username"
-              className="border-black-10 w-60 rounded-sm border py-2 px-2 focus:outline-none"
-              value={details.username}
-              onChange={updateDetails}
-            />
-          </div>
-          <div className="relative mx-2 mb-5">
-            <label className="font-raleway mb-1 block text-xs font-semibold">
-              Email
-            </label>
-            <input
-              type="email"
-              name="email"
-              className="border-black-10 w-60 rounded-sm border py-2 px-2 focus:outline-none"
-              value={details.email}
-              onChange={updateDetails}
-            />
-            <p className="absolute hidden text-xs text-red-600">Error</p>
-          </div>
-          <div className="mx-2 mb-5 flex-1">
-            <label className="block">Password</label>
-            <input
-              type="password"
-              name="password"
-              className="border-black-10 w-60 rounded-sm border py-2 px-2 focus:outline-none"
-              value={details.password}
-              onChange={updateDetails}
-            />
-          </div>
-          <div className="flex justify-center">
-            <button
-              className="border border-blue-600 bg-blue-600 py-2 px-4 font-semibold text-white hover:bg-blue-500"
-              onClick={registerUser}
-            >
-              Sign Up!
-            </button>
-          </div>
+      {/* body */}
+      <Layout
+        bannerAlt="Your ideas matters. - LumBytes"
+        bannerURL="https://lumbytes-general.s3.eu-west-1.amazonaws.com/Frame+35.jpg"
+      >
+        <div className="w-full max-w-xs">
+          <h1 className="font-primary mb-8 text-center text-4xl font-bold">
+            LumBytes
+          </h1>
+          <h2 className="font-primary mb-8 text-center text-base font-bold">
+            Register
+          </h2>
+
+          <RegisterForm
+            onSubmitHandler={registerUser}
+            updateFormData={updateDetails}
+            formData={details}
+          />
+
+          <h3 className="line-across relative z-10 mx-auto mb-5 text-center">
+            <span className="font-primary bg-white px-2 text-sm font-bold">
+              OR
+            </span>
+          </h3>
+
+          <Link href={"/auth/signin"} passHref>
+            <a>
+              <p className="font-primary flex h-10 w-full transform items-center justify-center rounded-sm border border-black text-sm font-bold text-black transition-all duration-700 hover:bg-black hover:text-white">
+                Sign In Instead
+              </p>
+            </a>
+          </Link>
         </div>
-      </div>
+      </Layout>
     </>
   );
 };

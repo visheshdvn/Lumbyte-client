@@ -7,57 +7,102 @@
 */
 
 /* email field */
-.login-input-group-email {
+.login-input-group-email,
+.login-input-group-pass,
+.register-input-group-username,
+.register-input-group-email,
+.register-input-group-pass {
   @apply relative mb-10 max-h-12 w-full text-neutral-400;
 }
 
-.login-input-group-email input {
+.register-input-group-firstname,
+.register-input-group-lastname {
+  /* width: 45%; */
+  @apply xs:w-[45%] relative mb-10 max-h-12 w-full text-neutral-400;
+}
+
+.login-input-group-email input,
+.login-input-group-pass input,
+.register-input-group-firstname input,
+.register-input-group-lastname input,
+.register-input-group-username input,
+.register-input-group-email input,
+.register-input-group-pass input {
   @apply font-primary h-full w-full border-none bg-white pt-4 pb-1 text-sm font-medium text-black outline-none;
 }
 
-.login-input-group-email label {
+.login-input-group-email label,
+.login-input-group-pass label,
+.register-input-group-firstname label,
+.register-input-group-lastname label,
+.register-input-group-username label,
+.register-input-group-email label,
+.register-input-group-pass label {
   @apply font-primary pointer-events-none absolute bottom-0 left-0 h-full w-full border-b border-neutral-400;
 }
 
-.content-name-email {
+.content-name-email,
+.content-name-pass,
+.content-name-firstname,
+.content-name-lastname,
+.content-name-username,
+.content-name-email,
+.content-name-pass {
   @apply absolute bottom-0 left-0 transform pb-1 text-sm transition-all duration-300 ease-in;
 }
 
 .login-input-group-email input:focus + .label-name-email .content-name-email,
-.login-input-group-email input:valid + .label-name-email .content-name-email {
+.login-input-group-email input:valid + .label-name-email .content-name-email,
+.login-input-group-pass input:focus + .label-name-pass .content-name-pass,
+.login-input-group-pass input:valid + .label-name-pass .content-name-pass,
+.register-input-group-firstname
+  input:focus
+  + .label-name-firstname
+  .content-name-firstname,
+.register-input-group-firstname
+  input:valid
+  + .label-name-firstname
+  .content-name-firstname,
+.register-input-group-lastname
+  input:focus
+  + .label-name-lastname
+  .content-name-lastname,
+.register-input-group-lastname
+  input:not(:placeholder-shown)
+  + .label-name-lastname
+  .content-name-lastname,
+.register-input-group-username
+  input:focus
+  + .label-name-username
+  .content-name-username,
+.register-input-group-username
+  input:valid
+  + .label-name-username
+  .content-name-username,
+.register-input-group-email input:focus + .label-name-email .content-name-email,
+.register-input-group-email
+  input:not(:placeholder-shown)
+  + .label-name-email
+  .content-name-email,
+.register-input-group-pass input:focus + .label-name-pass .content-name-pass,
+.register-input-group-pass input:valid + .label-name-pass .content-name-pass {
   transform: translateY(-90%);
   @apply font-bold text-black;
 }
 
 .login-input-group-email input:focus + .label-name-email,
-.login-input-group-email input:valid + .label-name-email {
-  @apply border-black;
-}
-
-.login-input-group-pass {
-  @apply relative mb-8 max-h-12 w-full text-neutral-400;
-}
-
-/* password field */
-.login-input-group-pass input {
-  @apply font-primary h-full w-full border-none bg-white pt-4 pb-1 text-sm font-medium text-black outline-none;
-}
-
-.login-input-group-pass label {
-  @apply font-primary pointer-events-none absolute bottom-0 left-0 h-full w-full border-b border-neutral-400;
-}
-
-.content-name-pass {
-  @apply absolute bottom-0 left-0 transform pb-1 text-sm transition-all duration-300 ease-in;
-}
-
-.login-input-group-pass input:focus + .label-name-pass .content-name-pass,
-.login-input-group-pass input:valid + .label-name-pass .content-name-pass {
-  transform: translateY(-90%);
-  @apply font-bold text-black;
-}
-
+.login-input-group-email input:valid + .label-name-email,
 .login-input-group-pass input:focus + .label-name-pass,
-.login-input-group-pass input:valid + .label-name-pass {
+.login-input-group-pass input:valid + .label-name-pass,
+.register-input-group-firstname input:focus + .label-name-firstname,
+.register-input-group-firstname input:valid + .label-name-firstname,
+.register-input-group-lastname input:focus + .label-name-lastname,
+.register-input-group-lastname input:valid + .label-name-lastname,
+.register-input-group-username input:focus + .label-name-username,
+.register-input-group-username input:valid + .label-name-username,
+.register-input-group-email input:focus + .label-name-email,
+.register-input-group-email input:valid + .label-name-email,
+.register-input-group-pass input:focus + .label-name-pass,
+.register-input-group-pass input:valid + .label-name-pass {
   @apply border-black;
 }
