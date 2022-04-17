@@ -48,15 +48,19 @@ const Ui = ({
 
   const readOnlyMarkup = (
     <>
-      <q className="mb-0 font-serif text-lg md:leading-8 md:text-xl italic outline-none">{data.text}</q>
+      <q className="mb-0 font-serif text-lg italic outline-none md:text-xl md:leading-8">
+        {data.text}
+      </q>
       {authorField && (
-        <p className="mt-3 font-serif italic text-right">{"~ " + authorField}</p>
+        <p className="mt-3 text-right font-serif italic">
+          {"~ " + authorField}
+        </p>
       )}
     </>
   );
 
   return (
-    <div className="mb-8 rounded-r border-l-2 border-zinc-800 bg-neutral-50 py-3 px-5">
+    <div className="mb-8 rounded-r border-l-2 border-zinc-800 bg-neutral-50 py-3 px-5 dark:border-white dark:bg-zinc-800">
       {!readOnly && editableMarkup}
       {readOnly && readOnlyMarkup}
     </div>
