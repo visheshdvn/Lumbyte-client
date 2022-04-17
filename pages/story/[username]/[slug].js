@@ -206,10 +206,10 @@ const Post = ({ postData, similar }) => {
                 </div>
                 <div className="flex-1 px-4 py-3">
                   <a href={`/${username}`} rel="noreferrer">
-                    <h1 className="font-raleway rounded-md text-3xl font-black leading-8 lg:text-4xl">
+                    <h1 className="font-primary rounded-md text-2xl font-bold leading-8 lg:text-3xl">
                       {firstname} {lastname}
                     </h1>
-                    <p className="mt-3 pr-3 text-sm font-medium sm:text-base">
+                    <p className="lg:mt-3 mt-2 pr-3 text-sm font-medium sm:text-base">
                       {about}
                     </p>
                   </a>
