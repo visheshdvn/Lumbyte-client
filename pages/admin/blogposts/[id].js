@@ -84,6 +84,7 @@ const update = ({ initialContent, allTags }) => {
           class: List,
           inlineToolbar: true,
         },
+        // pageLink: Link,
         paragraph: {
           class: Paragraph,
           inlineToolbar: true,

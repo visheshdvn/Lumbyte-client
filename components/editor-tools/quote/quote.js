@@ -72,7 +72,6 @@ export default class BlockQuote {
   }
 
   save() {
-    console.log(this.data);
     return this.data;
   }
 

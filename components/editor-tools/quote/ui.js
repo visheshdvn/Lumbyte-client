@@ -57,7 +57,7 @@ const Ui = ({
   );
 
   return (
-    <div className="mb-8 rounded-r border-l-2 border-zinc-800 bg-neutral-50 py-3 px-5 dark:border-white dark:bg-zinc-800">
+    <div className="mb-10 rounded-r border-l-2 border-zinc-800 bg-neutral-50 py-3 px-5 dark:border-white dark:bg-zinc-800">
       {!readOnly && editableMarkup}
       {readOnly && readOnlyMarkup}
     </div>
