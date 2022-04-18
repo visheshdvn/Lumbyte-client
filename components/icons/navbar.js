@@ -2,7 +2,7 @@ const facebook = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 49.25 49.25"
-    className="mx-2 h-5 transform overflow-hidden rounded-full border bg-white fill-black transition-all duration-300 hover:border-none hover:bg-black hover:fill-zinc-50 lg:h-6 xl:h-7"
+    className="mx-2 h-5 transform overflow-hidden rounded-full border border-zinc-400 bg-white fill-black transition-all duration-200 hover:border-none hover:bg-black hover:fill-zinc-50 lg:h-6 xl:h-7"
   >
     <g id="Layer_2" data-name="Layer 2">
       <g id="Layer_1-2" data-name="Layer 1">
@@ -16,7 +16,7 @@ const twitter = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 49.25 49.25"
-    className="mx-2 h-5 transform overflow-hidden rounded-full border bg-white fill-black transition-all duration-300 hover:border-none hover:bg-black hover:fill-zinc-50 lg:h-6 xl:h-7"
+    className="mx-2 h-5 transform overflow-hidden rounded-full border border-zinc-400 bg-white fill-black transition-all duration-200 hover:border-none hover:bg-black hover:fill-zinc-50 lg:h-6 xl:h-7"
   >
     <g id="Layer_2" data-name="Layer 2">
       <g id="Layer_1-2" data-name="Layer 1">
