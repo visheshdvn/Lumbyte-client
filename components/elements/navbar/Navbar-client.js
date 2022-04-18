@@ -3,13 +3,20 @@ import { MenuIcon, XIcon, SearchIcon } from "@heroicons/react/outline";
 import { Disclosure, Switch } from "@headlessui/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
-
 import { useTheme } from "next-themes";
+import { useSession, signOut } from "next-auth/react";
+import Image from "next/image";
+import { Popover } from "@headlessui/react";
+import {
+  facebook as facebookSVG,
+  twitter as twitterSVG,
+} from "../../icons/navbar";
 
 export default function Navbar() {
-  const [enabled, setEnabled] = useState(false);
   const [searchValue, setSearchValue] = useState("");
   const [navbarHidden, setNavbarHidden] = useState(false);
+  const { data: session, status } = useSession();
+  const user = session?.user;
 
   const searchInputFieldRef = useRef(null);
 
@@ -44,7 +51,7 @@ export default function Navbar() {
 
   return (
     <>
-      <div className="body-top-spacing"></div>
+      <div className="md:pt-113 pt-24"></div>
       <Disclosure
         as="nav"
         style={{
@@ -86,9 +93,9 @@ export default function Navbar() {
               </div>
             </div>
             <div className="border-zinc-700 bg-black py-2 dark:border-y dark:bg-black sm:py-2 md:py-2.5">
-              <div className="horizontal-spacing container mx-auto flex">
-                <div className="flex-1 items-center md:block">
-                  <div className="border-whiteMain-50 w-min border-r">
+              <div className="horizontal-spacing container mx-auto flex justify-end md:justify-start">
+                <div className="hidden flex-1 items-center md:flex">
+                  <div className="w-min">
                     <a
                       href="/tags/web"
                       className={`nav-link ${
@@ -122,7 +129,7 @@ export default function Navbar() {
                   </div>
                 </div>
 
-                <div className="flex items-center">
+                <div className="flex h-8 items-center">
                   {/* search widget */}
                   <div
                     id="searchControl"
@@ -176,22 +183,14 @@ export default function Navbar() {
 
                   {/* social icons */}
                   {/* facebook link */}
-                  <div className="border-whiteMain-50 flex border-l py-1">
-                    <Link href="https://www.facebook.com/lumbytes">
+                  <div className="border-whiteMain-50 flex h-full items-center border-l px-1">
+                    <Link href="https://www.facebook.com/lumbytes" passHref>
                       <a
                         target="_blank"
                         rel="noopener"
                         aria-label="Facebook link"
                       >
-                        <svg
-                          version="1.1"
-                          viewBox="0 0 512 512"
-                          className="ml-4 mr-2 lg:h-5"
-                          height="18"
-                          fill="#fafafa"
-                        >
-                          <path d="M374.245,285.825l14.104,-91.961l-88.233,0l0,-59.677c0,-25.159 12.325,-49.682 51.845,-49.682l40.117,0l0,-78.291c0,0 -36.408,-6.214 -71.214,-6.214c-72.67,0 -120.165,44.042 -120.165,123.775l0,70.089l-80.777,0l0,91.961l80.777,0l0,222.31c16.197,2.542 32.798,3.865 49.709,3.865c16.911,0 33.512,-1.323 49.708,-3.865l0,-222.31l74.129,0Z" />
-                        </svg>
+                        {facebookSVG}
                       </a>
                     </Link>
 
@@ -202,17 +201,36 @@ export default function Navbar() {
                         rel="noopener"
                         aria-label="Twitter link"
                       >
-                        <svg
-                          version="1.1"
-                          viewBox="0 0 512 512"
-                          className="lg:h-5.5 ml-2 h-5"
-                          fill="#fafafa"
-                        >
-                          <path d="M492,109.5c-17.4,7.7-36,12.9-55.6,15.3c20-12,35.4-31,42.6-53.6c-18.7,11.1-39.4,19.2-61.5,23.5  C399.8,75.8,374.6,64,346.8,64c-53.5,0-96.8,43.4-96.8,96.9c0,7.6,0.8,15,2.5,22.1C172,179,100.6,140.4,52.9,81.7  c-8.3,14.3-13.1,31-13.1,48.7c0,33.6,17.1,63.3,43.1,80.7C67,210.7,52,206.3,39,199c0,0.4,0,0.8,0,1.2c0,47,33.4,86.1,77.7,95  c-8.1,2.2-16.7,3.4-25.5,3.4c-6.2,0-12.3-0.6-18.2-1.8c12.3,38.5,48.1,66.5,90.5,67.3c-33.1,26-74.9,41.5-120.3,41.5  c-7.8,0-15.5-0.5-23.1-1.4C62.9,432,113.8,448,168.4,448C346.6,448,444,300.3,444,172.2c0-4.2-0.1-8.4-0.3-12.5  C462.6,146,479,128.9,492,109.5z" />
-                        </svg>
+                        {twitterSVG}
                       </a>
                     </Link>
                   </div>
+
+                  <Popover className="border-whiteMain-50 relative h-full border-l pl-5 text-white">
+                    <Popover.Button>
+                      <div className="aspect-1 h-[30px] overflow-hidden rounded-full">
+                        {status === "authenticated" && (
+                          <Image
+                            src={user.dp}
+                            alt={user.dpalt}
+                            height={40}
+                            width={40}
+                          />
+                        )}
+                      </div>
+                    </Popover.Button>
+                    {status === "authenticated" && !!session.user && (
+                      <Popover.Panel className="absolute right-0 z-20 translate-y-2 transform rounded border-2 border-black bg-white p-2 text-black">
+                        <div className="flex min-w-[112px] flex-col">
+                          <PopoverLink
+                            text="Dashboard"
+                            link={`${user.username}`}
+                          />
+                          <PopoverButton text="Sign Out" action={signOut} />
+                        </div>
+                      </Popover.Panel>
+                    )}
+                  </Popover>
                 </div>
               </div>
             </div>
@@ -224,6 +242,27 @@ export default function Navbar() {
         )}
       </Disclosure>
     </>
+  );
+}
+
+function PopoverButton({ text, action }) {
+  return (
+    <button
+      onClick={action}
+      className="font-primary mb-2 rounded border border-white px-2 py-1 text-left text-sm font-medium hover:border-gray-200 hover:bg-zinc-200"
+    >
+      {text}
+    </button>
+  );
+}
+
+function PopoverLink({ text, link }) {
+  return (
+    <Link href={link}>
+      <a className="font-primary mb-2 rounded border border-white px-2 py-1 text-left text-sm font-medium hover:border-gray-200 hover:bg-zinc-200">
+        {text}
+      </a>
+    </Link>
   );
 }
 

@@ -10,10 +10,6 @@ body {
   @apply dark:bg-darkGray text-black dark:text-zinc-50;
 }
 
-.body-top-spacing {
-  @apply md:pt-113 pt-20;
-}
-
 /* broad headings */
 
 .wide-head {
