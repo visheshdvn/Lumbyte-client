@@ -34,9 +34,7 @@ export function MetadataFields({
 }) {
   return (
     <div className="border-black-10 col-span-1 bg-[#fafafa] px-5 py-6">
-      <h2 className="mb-8 text-center text-lg font-semibold">
-        Metadata
-      </h2>
+      <h2 className="mb-8 text-center text-lg font-semibold">Metadata</h2>
       <AdminInlineTextInput
         label="Banner URL"
         name="banner"
@@ -56,7 +54,7 @@ export function MetadataFields({
         onChangeHandler={updateblogdata}
       />
       <div className="mb-8">
-        <label className="font-adminPrimary text-base font-semibold">
+        <label className="font-primary text-base font-medium">
           Meta Description
         </label>
         <textarea
@@ -70,9 +68,7 @@ export function MetadataFields({
         />
       </div>
       <div className="mb-8">
-        <label className="font-adminPrimary text-base font-semibold">
-          Excerpt
-        </label>
+        <label className="font-primary text-base font-medium">Excerpt</label>
         <textarea
           type="text"
           placeholder="write under 150 characters..."
@@ -84,7 +80,7 @@ export function MetadataFields({
         />
       </div>
       <div className="mb-8">
-        <label className="font-adminPrimary text-base font-semibold">
+        <label className="font-primary text-base font-medium">
           Minute Read
         </label>
         <input
@@ -100,9 +96,7 @@ export function MetadataFields({
 
       <div className="mb-8 flex">
         <div className="flex-1">
-          <label className="font-adminPrimary text-base font-semibold">
-            Top Pick
-          </label>
+          <label className="font-primary text-base font-medium">Top Pick</label>
           <div className="mt-1">
             <button
               className={`admin-bool-btn ${
@@ -123,9 +117,7 @@ export function MetadataFields({
           </div>
         </div>
         <div className="flex-1">
-          <label className="font-adminPrimary text-base font-semibold">
-            Featured
-          </label>
+          <label className="font-primary text-base font-medium">Featured</label>
           <div className="mt-1">
             <button
               className={`admin-bool-btn ${
@@ -147,9 +139,7 @@ export function MetadataFields({
         </div>
       </div>
       <div className="mb-8">
-        <label className="font-adminPrimary mb-4 text-base font-semibold">
-          Tags
-        </label>
+        <label className="font-primary mb-4 text-base font-medium">Tags</label>
         <Select
           allOptions={tagsToOptions(allTags)}
           preSelected={tagsToOptions(blogdata.tags || [])}

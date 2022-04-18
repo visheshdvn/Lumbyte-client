@@ -3,9 +3,7 @@
 //   text: "",
 //   author: "",
 // };
-
-import { update } from "lodash";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 const Ui = ({
   api,
@@ -17,7 +15,6 @@ const Ui = ({
   updateAuthor,
   authorRef,
 }) => {
-  const [uiData, setUiData] = useState(data);
   const [authorField, setAuthor] = useState(data.author);
 
   const editableMarkup = (
