@@ -7,8 +7,7 @@ import Link from "next/link";
 // components
 import SignInForm from "../../components/elements/forms/signIn";
 import Layout from "../../components/layouts/auth/signInRegister";
-// utilities
-import NoIndex from "../../utils/headTags/admin/noIndex";
+import HeadTags from "../../components/headTags/public/auth/signin";
 
 const Login = ({ providers }) => {
   const { data: session, status } = useSession();
@@ -48,7 +47,12 @@ const Login = ({ providers }) => {
 
   return (
     <>
-      <NoIndex />
+      <HeadTags
+        title="SignIn to LumBytes."
+        metaDescription="LumBytes is a top-notch blog to stay updated on the latest trends in blockchain and web technologies."
+        ogAlt="Your ideas matters. - LumBytes"
+        bannerAlt="https://lumbytes-general.s3.eu-west-1.amazonaws.com/Frame+35.jpg"
+      />
       {/* body */}
       <Layout
         bannerAlt="Your ideas matters. - LumBytes"

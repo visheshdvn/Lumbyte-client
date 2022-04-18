@@ -4,8 +4,6 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "../../utils/axios";
 import Link from "next/link";
-// utilities
-import NoIndex from "../../utils/headTags/admin/noIndex";
 // components
 import Layout from "../../components/layouts/auth/signInRegister";
 import RegisterForm from "../../components/elements/forms/register";
@@ -13,6 +11,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { useSession } from "next-auth/react";
 import { useTheme } from "next-themes";
 import Router from "next/router";
+import HeadTags from "../../components/headTags/public/auth/signin";
 
 const SignUp = () => {
   const { theme } = useTheme();
@@ -73,7 +72,12 @@ const SignUp = () => {
 
   return (
     <>
-      <NoIndex />
+      <HeadTags
+        title="Register on LumBytes."
+        metaDescription="LumBytes is a top-notch blog to stay updated on the latest trends in blockchain and web technologies."
+        ogAlt="Your ideas matters. - LumBytes"
+        bannerAlt="https://lumbytes-general.s3.eu-west-1.amazonaws.com/Frame+35.jpg"
+      />
       {/* body */}
       <Layout
         bannerAlt="Your ideas matters. - LumBytes"
