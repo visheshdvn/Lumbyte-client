@@ -95,7 +95,7 @@ const Post = ({ postData, similar }) => {
                 >
                   {firstname} {lastname || ""}
                 </a>
-                <div className="ml-4 flex h-3 items-center font-medium text-neutral-600">
+                <div className="ml-4 flex h-3 items-center font-medium text-neutral-600 dark:text-zinc-100">
                   <span className="">
                     <FormattedDate date={published_at || created_at} />
                   </span>
