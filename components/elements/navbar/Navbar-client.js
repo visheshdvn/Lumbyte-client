@@ -10,7 +10,8 @@ import { Popover } from "@headlessui/react";
 import {
   facebook as facebookSVG,
   twitter as twitterSVG,
-} from "../../icons/navbar";
+} from "../../icons/social/navbar";
+import { maleUser as defaultUser } from "../../icons/user";
 
 export default function Navbar() {
   const [searchValue, setSearchValue] = useState("");
@@ -129,7 +130,7 @@ export default function Navbar() {
                   </div>
                 </div>
 
-                <div className="flex h-8 items-center">
+                <div className="flex lg:h-8 h-6 items-center">
                   {/* search widget */}
                   <div
                     id="searchControl"
@@ -207,29 +208,39 @@ export default function Navbar() {
                   </div>
 
                   <Popover className="border-whiteMain-50 relative h-full border-l pl-5 text-white">
-                    <Popover.Button>
-                      <div className="aspect-1 h-[30px] overflow-hidden rounded-full">
-                        {status === "authenticated" && (
+                    <Popover.Button className="h-full outline-none">
+                      <div className="aspect-1 overflow-hidden rounded-full lg:h-[30px h-full">
+                        {(status === "authenticated" && (
                           <Image
                             src={user.dp}
                             alt={user.dpalt}
                             height={40}
                             width={40}
                           />
+                        )) || (
+                          <div className="aspect-1 flex items-center justify-center rounded-full border-2">
+                            {defaultUser}
+                          </div>
                         )}
                       </div>
                     </Popover.Button>
-                    {status === "authenticated" && !!session.user && (
-                      <Popover.Panel className="absolute right-0 z-20 translate-y-2 transform rounded border-2 border-black bg-white p-2 text-black">
-                        <div className="flex min-w-[112px] flex-col">
-                          <PopoverLink
-                            text="Dashboard"
-                            link={`${user.username}`}
-                          />
-                          <PopoverButton text="Sign Out" action={signOut} />
-                        </div>
-                      </Popover.Panel>
-                    )}
+                    <Popover.Panel className="absolute right-0 z-20 translate-y-2 transform rounded border-2 border-black bg-white p-2 text-black">
+                      <div className="flex min-w-[112px] flex-col">
+                        {(status === "authenticated" && !!session.user && (
+                          <>
+                            <PopoverLink
+                              text="Dashboard"
+                              link={`${user.username}`}
+                            />
+                            <PopoverButton text="Sign Out" action={signOut} />
+                          </>
+                        )) || (
+                          <>
+                            <PopoverLink text="Sign In" link="/auth/signin" />
+                          </>
+                        )}
+                      </div>
+                    </Popover.Panel>
                   </Popover>
                 </div>
               </div>
