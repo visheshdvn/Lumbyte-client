@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import ImageTool from "../../../components/editor-tools/image/index";
 import Quote from "../../../components/editor-tools/quote/quote";
+import Paragraph from "../../../components/editor-tools/paragraph-read-only/index";
 
 const EDITOR_HOLDER_ID = "content-block";
 let editor;
@@ -9,7 +10,7 @@ const ContentReader = ({ content }) => {
   useEffect(() => {
     const EditorJS = require("@editorjs/editorjs");
     const Header = require("@editorjs/header");
-    const Paragraph = require("@editorjs/paragraph");
+    // const Paragraph = require("@editorjs/paragraph");
     const List = require("@editorjs/list");
     const Delimiter = require("@editorjs/delimiter");
     const InlineCode = require("@editorjs/inline-code");
@@ -38,13 +39,7 @@ const ContentReader = ({ content }) => {
           class: List,
           inlineToolbar: true,
         },
-        paragraph: {
-          class: Paragraph,
-          inlineToolbar: true,
-          config: {
-            preserveBlank: false,
-          },
-        },
+        paragraph: Paragraph,
         tooltip: {
           class: Tooltip,
           config: {

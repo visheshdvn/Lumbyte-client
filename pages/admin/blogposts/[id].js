@@ -60,10 +60,11 @@ const update = ({ initialContent, allTags }) => {
     const CodeTool = require("@editorjs/code");
     const Tooltip = require("editorjs-tooltip");
     const Underline = require("@editorjs/underline");
+    const EditorJSStyle = require('editorjs-style')
 
     // configs
     editor = new EditorJS({
-      holder: "editorjs",
+      holder: "content-editor",
       tools: {
         code: CodeTool,
         delimiter: Delimiter,
@@ -93,13 +94,14 @@ const update = ({ initialContent, allTags }) => {
             placeholder: "Click here to write something amazing 🔥",
           },
         },
+        style: EditorJSStyle.StyleInlineTool,
         tooltip: {
           class: Tooltip,
           config: {
             location: "top",
             backgroundColor: "#262611",
             textColor: "#FDFEFE",
-            holder: "editorjs",
+            holder: "content-editor",
             underline: true,
           },
         },
@@ -252,7 +254,7 @@ const update = ({ initialContent, allTags }) => {
 
             {/* editor holder */}
             <div
-              id="editorjs"
+              id="content-editor"
               className="editorjs-editable col-span-2 font-serif"
             ></div>
           </div>

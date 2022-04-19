@@ -1,6 +1,6 @@
 /* global */
 div.codex-editor__redactor {
-  padding-bottom: 2rem!important;
+  padding-bottom: 2rem !important;
 }
 
 div.ce-block__content {
@@ -21,7 +21,7 @@ h4.ce-header {
 }
 
 /* paragraph */
-div.ce-paragraph {
+.ce-paragraph {
   @apply mb-10 p-0 font-serif text-lg md:text-xl md:leading-8;
 }
 
@@ -34,8 +34,8 @@ div.ce-paragraph {
   @apply mb-5 p-0 font-serif text-lg md:text-xl md:leading-8;
 }
 
-/* 
-*
-* editorjs read only
-*
-*/
+/* inline links */
+#content-editor div a,
+#content-block div a {
+  @apply text-blue-700;
+}
