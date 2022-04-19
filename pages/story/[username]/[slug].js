@@ -96,7 +96,7 @@ const Post = ({ postData, similar }) => {
                 <a
                   href={`/${username}`}
                   rel="noreferrer"
-                  className="font-semibold underline"
+                  className="font-semibold hover:underline"
                 >
                   {firstname} {lastname || ""}
                 </a>
@@ -125,7 +125,7 @@ const Post = ({ postData, similar }) => {
         <section className="mb-5 grid grid-cols-12 gap-1">
           <div className="order-2 col-span-1 flex items-center pt-2 lg:order-1 lg:flex-col lg:pt-0">
             <ul className="flex items-center justify-center pt-2 lg:sticky lg:top-36 lg:block lg:flex-col">
-              <h3 className="mr-5 text-xl font-bold lg:mb-5 lg:mr-0 lg:text-lg flex font-primary">
+              <h3 className="font-primary mr-5 flex text-xl font-bold lg:mb-5 lg:mr-0 lg:text-lg">
                 Share
               </h3>
               <li className="mr-3 flex items-center justify-center lg:mb-8 lg:mr-0">

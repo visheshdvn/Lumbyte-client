@@ -84,7 +84,7 @@ export default function Navbar() {
                   {/* <div className="flex-shrink-0 flex items-center"> */}
                   <Link href="/" passHref>
                     <a className="font-antonio font-bold lg:-my-1">
-                      <h1 className="tracking-custom xl:text-4.75xl -mr-3 select-none pt-1 pb-2 text-3xl leading-none md:text-4xl lg:pt-3 lg:pb-4">
+                      <h1 className="tracking-custom -mr-3 flex select-none items-center pb-2 pt-1 text-3xl leading-none md:text-4xl lg:pb-3 lg:pt-2 xl:text-4xl">
                         LUMBYTES
                       </h1>
                     </a>
