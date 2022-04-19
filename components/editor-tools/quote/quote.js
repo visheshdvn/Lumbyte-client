@@ -75,11 +75,7 @@ export default class BlockQuote {
     return this.data;
   }
 
-  //   validate(savedData) {
-  //     if (this.data && this.data.file && this.data.file.url) {
-  //       return true;
-  //     }
-
-  //     return false;
-  //   }
+  validate(savedData) {
+    return !!savedData.text && !!savedData.text.trim();
+  }
 }
