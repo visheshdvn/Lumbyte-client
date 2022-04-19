@@ -130,7 +130,7 @@ export default function Navbar() {
                   </div>
                 </div>
 
-                <div className="flex lg:h-8 h-6 items-center">
+                <div className="flex h-6 items-center lg:h-8">
                   {/* search widget */}
                   <div
                     id="searchControl"
@@ -209,7 +209,7 @@ export default function Navbar() {
 
                   <Popover className="border-whiteMain-50 relative h-full border-l pl-5 text-white">
                     <Popover.Button className="h-full outline-none">
-                      <div className="aspect-1 overflow-hidden rounded-full lg:h-[30px h-full">
+                      <div className="aspect-1 lg:h-[30px h-full overflow-hidden rounded-full">
                         {(status === "authenticated" && (
                           <Image
                             src={user.dp}
