@@ -39,3 +39,8 @@ h4.ce-header {
 #content-block div a {
   @apply text-blue-700;
 }
+
+/* marker */
+.cdx-marker {
+  background-color: #dbeafe !important;
+}

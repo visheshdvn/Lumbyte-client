@@ -10,7 +10,6 @@ const ContentReader = ({ content }) => {
   useEffect(() => {
     const EditorJS = require("@editorjs/editorjs");
     const Header = require("@editorjs/header");
-    // const Paragraph = require("@editorjs/paragraph");
     const List = require("@editorjs/list");
     const Delimiter = require("@editorjs/delimiter");
     const InlineCode = require("@editorjs/inline-code");

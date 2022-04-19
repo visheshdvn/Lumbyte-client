@@ -60,7 +60,7 @@ const update = ({ initialContent, allTags }) => {
     const CodeTool = require("@editorjs/code");
     const Tooltip = require("editorjs-tooltip");
     const Underline = require("@editorjs/underline");
-    const EditorJSStyle = require('editorjs-style')
+    const Marker = require("@editorjs/marker");
 
     // configs
     editor = new EditorJS({
@@ -86,6 +86,10 @@ const update = ({ initialContent, allTags }) => {
           inlineToolbar: true,
         },
         // pageLink: Link,
+        Marker: {
+          class: Marker,
+          shortcut: "CMD+SHIFT+M",
+        },
         paragraph: {
           class: Paragraph,
           inlineToolbar: true,
@@ -94,7 +98,6 @@ const update = ({ initialContent, allTags }) => {
             placeholder: "Click here to write something amazing 🔥",
           },
         },
-        style: EditorJSStyle.StyleInlineTool,
         tooltip: {
           class: Tooltip,
           config: {
