@@ -21,7 +21,7 @@ const handler = nc({
 
 handler.get(async (req, res) => {
   //   const { url } = req.query;
-  console.log("req.query", req.query);
+  //   console.log("req.query", req.query);
 
   //   console.log("url", url);
   //   const { body: html } = await got(url);
@@ -33,6 +33,8 @@ handler.get(async (req, res) => {
   //     link: url,
   //     meta: { ...metadata, image: { url: metadata.image } },
   //   });
+
+  //   console.log("req", req);
 
   res.status(200).json({
     success: 1,
