@@ -3,6 +3,9 @@ const { PHASE_DEVELOPMENT_SERVER } = require("next/constants");
 module.exports = (phase, { defaultConfig }) => {
   if (phase === PHASE_DEVELOPMENT_SERVER) {
     return {
+      env: {
+        HOSTNAME: "http://localhost:3000/api",
+      },
       images: {
         domains: [
           "localhost",
@@ -19,7 +22,7 @@ module.exports = (phase, { defaultConfig }) => {
 
   return {
     env: {
-      HOSTNAME: "admin.lumbytes.com",
+      HOSTNAME: "https://lumbytes.com/api",
       PROTOCOL: "https",
       NEXT_PUBLIC_GA_ID: "G-3BNNCK0DEL",
     },

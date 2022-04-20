@@ -44,3 +44,20 @@ h4.ce-header {
 .cdx-marker {
   background-color: #dbeafe !important;
 }
+
+/* link tool */
+.link-tool__content {
+  @apply mb-10;
+}
+
+.link-tool__title {
+  font-weight: bold !important;
+  font-size: 20px !important;
+  @apply font-primary;
+}
+
+@media only screen and (min-width: 1024px) {
+  .link-tool__title {
+    font-size: 24px !important;
+  }
+}
