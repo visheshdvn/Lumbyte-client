@@ -4,23 +4,18 @@ const metascraper = require("metascraper")([
   require("metascraper-image")(),
   require("metascraper-title")(),
 ]);
-
-// const got = require("got");
 import got from "got";
 
 // middlewares
-import {
-  sanitizeRequest,
-  resolveQueryParams,
-} from "../../../middleware/sanitizeRequest";
+import { resolveQueryParams } from "../../../middleware/sanitizeRequest";
 
 const handler = nc({
   onError: (err, req, res) => {
     console.log(err.stack);
-    res.status(500).json({ msg: "Server Error", status: 0 });
+    res.status(500).json({ msg: "Server Error", success: 0 });
   },
   onNoMatch: (req, res, next) => {
-    res.status(404).json({ status: 0 });
+    res.status(404).json({ success: 0 });
   },
 });
 
@@ -29,8 +24,10 @@ handler.use(resolveQueryParams());
 handler.get(async (req, res) => {
   const { url } = req.query;
 
+  console.log("url", url);
   const { body: html } = await got(url);
   const metadata = await metascraper({ html, url });
+  console.log("metadata", metadata);
 
   res.status(200).json({
     success: 1,
