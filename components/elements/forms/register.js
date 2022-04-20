@@ -3,7 +3,7 @@ import React from "react";
 const Register = ({ onSubmitHandler, updateFormData, formData }) => {
   return (
     <form onSubmit={onSubmitHandler} className="mb-8">
-      <div className="xs:flex-row flex flex-col justify-between">
+      <div className="sm:flex-row flex flex-col justify-between">
         {/* firstname */}
         <div className="register-input-group-firstname">
           <input
