@@ -7,7 +7,7 @@ const metascraper = require("metascraper")([
 import got from "got";
 
 // middlewares
-import { resolveQueryParams } from "../../../middleware/sanitizeRequest";
+// import { resolveQueryParams } from "../../../middleware/sanitizeRequest";
 
 const handler = nc({
   onError: (err, req, res) => {
@@ -18,8 +18,6 @@ const handler = nc({
     res.status(404).json({ success: 0 });
   },
 });
-
-handler.use(resolveQueryParams());
 
 handler.get(async (req, res) => {
   const { url } = req.query;
