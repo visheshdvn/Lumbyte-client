@@ -20,17 +20,30 @@ const handler = nc({
 });
 
 handler.get(async (req, res) => {
-  const { url } = req.query;
+  //   const { url } = req.query;
+  console.log("req.query", req.query);
 
-  console.log("url", url);
-  const { body: html } = await got(url);
-  const metadata = await metascraper({ html, url });
-  console.log("metadata", metadata);
+  //   console.log("url", url);
+  //   const { body: html } = await got(url);
+  //   const metadata = await metascraper({ html, url });
+  //   console.log("metadata", metadata);
+
+  //   res.status(200).json({
+  //     success: 1,
+  //     link: url,
+  //     meta: { ...metadata, image: { url: metadata.image } },
+  //   });
 
   res.status(200).json({
     success: 1,
-    link: url,
-    meta: { ...metadata, image: { url: metadata.image } },
+    meta: {
+      title: "CodeX Team",
+      description:
+        "Club of web-development, design and marketing. We build team learning how to build full-valued projects on the world market.",
+      image: {
+        url: "https://codex.so/public/app/img/meta_img.png",
+      },
+    },
   });
 });
 
