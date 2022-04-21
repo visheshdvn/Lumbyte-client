@@ -1,10 +1,10 @@
 import nc from "next-connect";
-// const metascraper = require("metascraper")([
-//   require("metascraper-description")(),
-//   require("metascraper-image")(),
-//   require("metascraper-title")(),
-// ]);
-// import got from "got";
+const metascraper = require("metascraper")([
+  require("metascraper-description")(),
+  require("metascraper-image")(),
+  require("metascraper-title")(),
+]);
+import got from "got";
 
 const handler = nc({
   onError: (err, req, res) => {
