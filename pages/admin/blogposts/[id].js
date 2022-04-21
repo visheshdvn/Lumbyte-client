@@ -62,7 +62,6 @@ const update = ({ initialContent, allTags }) => {
     const Tooltip = require("editorjs-tooltip");
     const Underline = require("@editorjs/underline");
     const Marker = require("@editorjs/marker");
-    const LinkTool = require("@editorjs/link");
 
     // configs
     editor = new EditorJS({
@@ -86,12 +85,6 @@ const update = ({ initialContent, allTags }) => {
         list: {
           class: List,
           inlineToolbar: true,
-        },
-        linkTool: {
-          class: LinkTool,
-          config: {
-            endpoint: `${process.env.HOSTNAME}/fetchMetaData`,
-          },
         },
         Marker: {
           class: Marker,

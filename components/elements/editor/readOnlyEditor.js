@@ -16,7 +16,6 @@ const ContentReader = ({ content }) => {
     const InlineCode = require("@editorjs/inline-code");
     const CodeTool = require("@editorjs/code");
     const Tooltip = require("editorjs-tooltip");
-    const LinkTool = require("@editorjs/link");
 
     editor = new EditorJS({
       holder: EDITOR_HOLDER_ID,
@@ -35,12 +34,6 @@ const ContentReader = ({ content }) => {
         inlineCode: {
           class: InlineCode,
           shortcut: "CMD+SHIFT+M",
-        },
-        linkTool: {
-          class: LinkTool,
-          config: {
-            endpoint: `${process.env.HOSTNAME}/fetchMetaData`,
-          },
         },
         list: {
           class: List,
