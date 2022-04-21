@@ -9,19 +9,30 @@ import got from "got";
 const handler = nc({
   onError: (err, req, res) => {
     console.log(err.stack);
-    res.status(500).json({ msg: "Server Error", success: 0 });
+    res
+      .status(500)
+      .json({ msg: "Server Error! Please try again.", success: 0 });
   },
   onNoMatch: (req, res, next) => {
-    res.status(404).json({ success: 0 });
+    res.status(404).json({ success: 0, msg: "Not Found" });
   },
 });
 
 handler.post(async (req, res) => {
   const { url } = req.body;
 
-  const { body: html } = await got(url);
-  const metadata = await metascraper({ html, url });
-  console.log("metadata", metadata);
+  let metadata;
+  try {
+    const { body: html } = await got(url);
+    metadata = await metascraper({ html, url });
+    console.log("metadata", metadata);
+  } catch (error) {
+    return res.status(500).json({ success: 0, msg: "Invalid URL" });
+  }
+
+  if (!metadata.title) {
+    return res.status(404).json({ success: 0, msg: "URL data not found." });
+  }
 
   res.status(200).json({
     success: 1,

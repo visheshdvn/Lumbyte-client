@@ -25,6 +25,7 @@ const Ui = ({
   const [displayPreview, setDsiplayPreview] = useState(
     !!Object.keys(data).length || false
   );
+  const [errorMsg, setErrorMsg] = useState("Error");
 
   let responseClasses;
   if (fetchStatus === "neutral") {
@@ -36,6 +37,7 @@ const Ui = ({
   function handleData(data) {
     if (data.success !== 1) {
       setFetchStatus("failure");
+      setErrorMsg(data.msg);
       return;
     }
 
@@ -70,6 +72,13 @@ const Ui = ({
           // }}
           placeholder='enter the link then press "Enter"'
         />
+        <p
+          className={`text-sm text-red-600 ${
+            fetchStatus === "failure" ? "block" : "hidden"
+          }`}
+        >
+          {errorMsg}
+        </p>
       </form>
     </>
   );
@@ -98,7 +107,7 @@ const Ui = ({
         <div className="flex items-center py-2 pr-2">
           <div
             style={{ backgroundImage: `url(${data.imageURL})` }}
-            className="aspect-1 hidden bg-cover bg-center sm:block sm:h-28 md:h-32"
+            className="aspect-1 hidden rounded bg-cover bg-center sm:block sm:h-28 md:h-32"
           ></div>
         </div>
       </div>
