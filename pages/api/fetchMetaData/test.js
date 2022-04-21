@@ -1,10 +1,10 @@
 import nc from "next-connect";
-// const metascraper = require("metascraper")([
-//   require("metascraper-description")(),
-//   require("metascraper-image")(),
-//   require("metascraper-title")(),
-// ]);
-import got from "got";
+const metascraper = require("metascraper")([
+  require("metascraper-description")(),
+  require("metascraper-image")(),
+  require("metascraper-title")(),
+]);
+// import got from "got";
 
 const handler = nc({
   onError: (err, req, res) => {
@@ -20,7 +20,20 @@ const handler = nc({
 
 handler.post(async (req, res) => {
   const { url } = req.body;
-  console.log("url", url);
+
+  let metadata;
+  try {
+    const html = await (await fetch(url)).text();
+    // console.log("html", html);
+    metadata = await metascraper({ html, url });
+    console.log("metadata", metadata);
+  } catch (error) {
+    return res.status(500).json({ success: 0, msg: "Invalid URL" });
+  }
+
+  if (!metadata.title) {
+    return res.status(404).json({ success: 0, msg: "URL data not found." });
+  }
 
   res.status(200).json({
     success: 1,

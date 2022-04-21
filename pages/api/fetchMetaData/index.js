@@ -4,7 +4,7 @@ const metascraper = require("metascraper")([
   require("metascraper-image")(),
   require("metascraper-title")(),
 ]);
-import got from "got";
+// import got from "got";
 
 const handler = nc({
   onError: (err, req, res) => {
@@ -23,7 +23,9 @@ handler.post(async (req, res) => {
 
   let metadata;
   try {
-    const { body: html } = await got(url);
+    const html = await (await fetch(url)).text();
+    // const { body: html } = await got(url);
+    // console.log("html", html);
     metadata = await metascraper({ html, url });
   } catch (error) {
     return res.status(500).json({ success: 0, msg: "Invalid URL" });
