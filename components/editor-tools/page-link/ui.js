@@ -98,7 +98,7 @@ const Ui = ({
             </h3>
             <p
               style={{ fontSize: "15px" }}
-              className="md:line-clamp-2 line-clamp-1 leading-normal text-black dark:text-zinc-300"
+              className="line-clamp-2 leading-normal text-black dark:text-zinc-300"
             >
               {data.description}
             </p>
