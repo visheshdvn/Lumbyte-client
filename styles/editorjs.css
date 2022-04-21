@@ -1,6 +1,7 @@
 /* global */
 div.codex-editor__redactor {
   padding-bottom: 2rem !important;
+  margin-right: 10px !important;
 }
 
 div.ce-block__content {

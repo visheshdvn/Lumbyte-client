@@ -1,9 +1,8 @@
 // returned data format
 //  {
-//   link: "";
+//   url: "";
 //   title: ""
 //   imageURL: ""
-//   imageAlt: ""
 //   description: ""
 // };
 
@@ -21,11 +20,10 @@ export default class Link {
       type: config.type || "",
     };
 
-    this.linkRef = createRef(data.link || "");
-    this.titleRef = createRef(data.title || "");
-    this.descriptionRef = createRef(data.description || "");
-    this.imageURLRef = createRef(data.imageURL || "");
-    this.imageAltRef = createRef(data.imageAlt || "");
+    this.linkRef = createRef();
+    // this.titleRef = createRef();
+    // this.descriptionRef = createRef();
+    // this.imageURLRef = createRef();
   }
 
   static get toolbox() {
@@ -44,20 +42,17 @@ export default class Link {
   }
 
   render() {
-    const updateLink = () => {
-      this.data.link = this.linkRef.current.value;
+    const updateLink = (url) => {
+      this.data.url = url;
     };
-    const updateTitle = () => {
-      this.data.title = this.titleRef.current.innerText;
+    const updateTitle = (title) => {
+      this.data.title = title;
     };
-    const updateDescription = () => {
-      this.data.description = this.descriptionRef.current.innerText;
+    const updateDescription = (description) => {
+      this.data.description = description;
     };
-    const updateImageURL = () => {
-      this.data.imageURL = this.imageURLRef.current.innerText;
-    };
-    const updateImageAlt = () => {
-      this.data.imageAlt = this.imageAltRef.current.innerText;
+    const updateImageURL = (imageURL) => {
+      this.data.imageURL = imageURL;
     };
 
     const rootNode = document.createElement("div");
@@ -68,16 +63,11 @@ export default class Link {
         data={this.data}
         config={this.config}
         readOnly={this.readOnly}
-        updateLink={updateLink}
         linkRef={this.linkRef}
-        titlupdateTitle={updateTitle}
-        titleRef={this.titleRef}
+        updateLink={updateLink}
+        updateTitle={updateTitle}
         updateDescription={updateDescription}
-        descriptionRef={this.descriptionRef}
         updateImageURL={updateImageURL}
-        imageURLRef={this.imageURLRef}
-        updateImageAlt={updateImageAlt}
-        imageAltRef={this.imageAltRef}
       />,
       rootNode
     );
@@ -86,15 +76,14 @@ export default class Link {
   }
 
   save() {
-    console.log("this data", this.data);
     return this.data;
   }
 
-  //   validate(savedData) {
-  //     if (this.data && this.data.file && this.data.file.url) {
-  //       return true;
-  //     }
+  validate(savedData) {
+    if (!savedData.url || !savedData.title) {
+      return false;
+    }
 
-  //     return false;
-  //   }
+    return true;
+  }
 }

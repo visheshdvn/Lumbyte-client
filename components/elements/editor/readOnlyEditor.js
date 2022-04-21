@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import ImageTool from "../../../components/editor-tools/image/index";
 import Quote from "../../../components/editor-tools/quote/quote";
 import Paragraph from "../../../components/editor-tools/paragraph-read-only/index";
+import PageLink from "../../editor-tools/page-link/link";
 
 const EDITOR_HOLDER_ID = "content-block";
 let editor;
@@ -45,6 +46,7 @@ const ContentReader = ({ content }) => {
           class: List,
           inlineToolbar: true,
         },
+        pagelink: PageLink,
         paragraph: Paragraph,
         tooltip: {
           class: Tooltip,

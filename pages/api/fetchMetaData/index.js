@@ -6,9 +6,6 @@ const metascraper = require("metascraper")([
 ]);
 import got from "got";
 
-// middlewares;
-import { resolveQueryParams } from "../../../middleware/sanitizeRequest";
-
 const handler = nc({
   onError: (err, req, res) => {
     console.log(err.stack);
@@ -19,18 +16,21 @@ const handler = nc({
   },
 });
 
-handler.use(resolveQueryParams());
-
-handler.get(async (req, res) => {
-  const { url } = req.query;
+handler.post(async (req, res) => {
+  const { url } = req.body;
 
   const { body: html } = await got(url);
   const metadata = await metascraper({ html, url });
+  console.log("metadata", metadata);
 
   res.status(200).json({
     success: 1,
-    link: url,
-    meta: { ...metadata, image: { url: metadata.image } },
+    meta: {
+      url,
+      imageURL: metadata.image,
+      title: metadata.title,
+      description: metadata.description,
+    },
   });
 });
 

@@ -18,7 +18,7 @@
 .register-input-group-firstname,
 .register-input-group-lastname {
   /* width: 45%; */
-  @apply xs:w-[45%] relative mb-10 max-h-12 w-full text-neutral-400;
+  @apply sm:w-[45%] relative mb-10 max-h-12 w-full text-neutral-400;
 }
 
 .login-input-group-email input,

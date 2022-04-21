@@ -10,6 +10,7 @@ import { useTheme } from "next-themes";
 import EditBanner from "../../../components/uploaders/editBanner";
 import ImageTool from "../../../components/editor-tools/image/index";
 import Quote from "../../../components/editor-tools/quote/quote";
+import PageLink from "../../../components/editor-tools/page-link/link";
 import CreateEditBlogpostLayout, {
   MetadataFields,
 } from "../../../components/layouts/createEditBlogpost";
@@ -96,6 +97,7 @@ const update = ({ initialContent, allTags }) => {
           class: Marker,
           shortcut: "CMD+SHIFT+M",
         },
+        pagelink: PageLink,
         paragraph: {
           class: Paragraph,
           inlineToolbar: true,

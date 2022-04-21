@@ -1,69 +1,114 @@
 // returned data format
 //  {
-//   link: "",
+//   link: "";
+//   title: ""
+//   imageURL: ""
+//   description: ""
 // };
+
 import React, { useState } from "react";
-import Image from "next/image";
+import { KeyPressEventHandler, PasteEventHandler } from "./handlers";
 
 const Ui = ({
   api,
   data,
   config,
   readOnly,
-  updateLink,
   linkRef,
-  titlupdateTitle,
-  titleRef,
+  updateLink,
+  updateTitle,
   updateDescription,
-  descriptionRef,
   updateImageURL,
-  imageURLRef,
-  updateImageAlt,
-  imageAltRef,
 }) => {
-  const [link, setLink] = useState(data.link);
-  const [previewMode, setPreviewMode] = useState(false);
+  const [link, setLink] = useState(data.url || "");
+  const [fetchStatus, setFetchStatus] = useState("neutral");
+  const [displayPreview, setDsiplayPreview] = useState(
+    !!Object.keys(data).length || false
+  );
+
+  let responseClasses;
+  if (fetchStatus === "neutral") {
+    responseClasses = "border-gray-300 text-black";
+  } else {
+    responseClasses = "border-red-600 text-red-600";
+  }
+
+  function handleData(data) {
+    if (data.success !== 1) {
+      setFetchStatus("failure");
+      return;
+    }
+
+    const {
+      meta: { title, description, url, imageURL },
+    } = data;
+
+    updateLink(url);
+    updateTitle(title);
+    updateDescription(description);
+    updateImageURL(imageURL);
+    setDsiplayPreview(true);
+  }
 
   const editableMarkup = (
     <>
-      <div className="flex h-48 w-full flex-col items-center justify-center bg-zinc-50">
+      <form onSubmit={() => {}} className="w-full text-center">
         <input
           value={link}
+          onChange={(e) => setLink(e.target.value)}
           ref={linkRef}
-          onChange={() => {
-            setLink(linkRef.current.value);
-            updateLink();
+          className={`mb-1 w-full rounded border px-2 py-3 text-base outline-none ${responseClasses}`}
+          onKeyDown={async (e) => {
+            if (e.key !== "Enter") {
+              return;
+            }
+            const data = await KeyPressEventHandler(e);
+            handleData(data);
           }}
-          className="mb-1 w-4/5 rounded px-2 py-3 text-base outline-none focus:ring-2 focus:ring-black"
+          // onPaste={async (e) => {
+          //   const data = await PasteEventHandler(e, link);
+          // }}
+          placeholder='enter the link then press "Enter"'
         />
-        <button
-          onClick={() => setPreviewMode(true)}
-          className="font-primary mt-2 transform rounded-sm border-2 border-black px-1 text-sm font-bold transition-all duration-300 hover:bg-black hover:text-white"
-        >
-          Preview
-        </button>
-      </div>
+      </form>
     </>
-  );
-
-  const previewModeMarkup = (
-    <div className="flex h-44 w-full border">
-      <div className="flex-1 border">Title</div>
-    </div>
   );
 
   const readOnlyMarkup = (
-    <>
-      <q className="mb-0 font-serif text-lg italic outline-none md:text-xl md:leading-8">
-        {data.link}
-      </q>
-    </>
+    <a
+      href={data.url}
+      rel="nofollow noindex noreferrer"
+      target="_blank"
+      style={{ textDecoration: "none" }}
+    >
+      <div className="mb-10 flex overflow-hidden rounded border shadow">
+        <div className="flex-1 p-6">
+          <div className="flex h-full flex-col justify-between">
+            <h3 className="font-primary remove-decoration mb-2 text-xl font-bold text-black decoration-white lg:text-xl">
+              {data.title}
+            </h3>
+            <p
+              style={{ fontSize: "15px" }}
+              className="md:line-clamp-2 line-clamp-1 text-black"
+            >
+              {data.description}
+            </p>
+          </div>
+        </div>
+        <div className="flex items-center py-2 pr-2">
+          <div
+            style={{ backgroundImage: `url(${data.imageURL})` }}
+            className="aspect-1 hidden bg-cover bg-center sm:block sm:h-28 md:h-32"
+          ></div>
+        </div>
+      </div>
+    </a>
   );
 
   return (
     <div className="mb-8 dark:bg-zinc-800">
-      {!readOnly && !previewMode && editableMarkup}
-      {!readOnly && previewMode && previewModeMarkup}
+      {!readOnly && !displayPreview && editableMarkup}
+      {!readOnly && displayPreview && readOnlyMarkup}
       {readOnly && readOnlyMarkup}
     </div>
   );

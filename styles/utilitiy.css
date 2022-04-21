@@ -29,6 +29,10 @@
   border-color: rgba(0, 0, 0, 0.2);
 }
 
+/* .remove-decoration {
+  text-decoration: none !important;
+} */
+
 ul.spaced li:not(:last-child) {
   @apply mb-5;
 }
