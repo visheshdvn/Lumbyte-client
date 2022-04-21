@@ -2,7 +2,7 @@ import axios from "../../../lib/axios";
 import { isValidURL, ValidateIPaddress } from "../../../utils/checkValidURL";
 
 export async function fetchMetaData(url) {
-  const { data } = await axios.post(`/fetchMetaData`, {
+  const { data } = await axios.post(`/fetchMetaData/test`, {
     url,
   });
   return data;
