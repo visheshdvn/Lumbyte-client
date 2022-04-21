@@ -4,7 +4,7 @@ const metascraper = require("metascraper")([
   require("metascraper-image")(),
   require("metascraper-title")(),
 ]);
-import got from "got";
+// import got from "got";
 
 const handler = nc({
   onError: (err, req, res) => {
