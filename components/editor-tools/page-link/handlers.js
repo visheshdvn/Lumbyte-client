@@ -5,7 +5,6 @@ export async function fetchMetaData(url) {
   const { data } = await axios.post(`${process.env.HOSTNAME}/fetchMetaData`, {
     url,
   });
-  console.log("returned data", data);
   return data;
 }
 
@@ -46,7 +45,7 @@ export async function KeyPressEventHandler(e) {
 }
 
 export async function PasteEventHandler(e, link) {
-  console.log("pasted", link);
+  // console.log("pasted", link);
   // const data = await fetchMetaData(e.target.value);
   // return data;
 }

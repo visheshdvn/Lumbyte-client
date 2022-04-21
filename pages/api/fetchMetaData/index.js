@@ -25,7 +25,6 @@ handler.post(async (req, res) => {
   try {
     const { body: html } = await got(url);
     metadata = await metascraper({ html, url });
-    console.log("metadata", metadata);
   } catch (error) {
     return res.status(500).json({ success: 0, msg: "Invalid URL" });
   }
