@@ -90,15 +90,15 @@ const Ui = ({
       target="_blank"
       style={{ textDecoration: "none" }}
     >
-      <div className="mb-10 flex overflow-hidden rounded border shadow">
+      <div className="mb-10 flex overflow-hidden rounded border shadow dark:border-zinc-700 dark:bg-black">
         <div className="flex-1 p-6">
           <div className="flex h-full flex-col justify-between">
-            <h3 className="font-primary remove-decoration mb-2 text-xl font-bold text-black decoration-white lg:text-xl">
+            <h3 className="font-primary remove-decoration mb-2 text-xl font-bold text-black decoration-white dark:text-white lg:text-xl">
               {data.title}
             </h3>
             <p
               style={{ fontSize: "15px" }}
-              className="md:line-clamp-2 line-clamp-1 text-black"
+              className="md:line-clamp-2 line-clamp-1 leading-normal text-black dark:text-zinc-300"
             >
               {data.description}
             </p>
