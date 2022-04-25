@@ -16,6 +16,11 @@ class MyDocument extends Document {
             href="https://fonts.gstatic.com"
             crossOrigin="true"
           />
+          <script
+            async
+            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2147491552844925"
+            crossorigin="anonymous"
+          ></script>
 
           {/* new fonts */}
           <link

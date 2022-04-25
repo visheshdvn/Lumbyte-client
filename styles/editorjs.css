@@ -38,7 +38,8 @@ h4.ce-header {
 /* inline links */
 #content-editor div a,
 #content-block div a {
-  @apply text-blue-700;
+  color: #2c40d0;
+  /* @apply text-blue-700; */
 }
 
 /* marker */

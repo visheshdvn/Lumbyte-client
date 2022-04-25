@@ -10,7 +10,7 @@ import MetaIndex from "../utils/headTags/public/headIndex";
 const MAX_RESPONSE = 20;
 
 export default function Home({ latest, latestSide, readMore }) {
-  console.log("client")
+  console.log("client");
   if (Object.keys(latest).length === 0) {
     return <h1>No Data</h1>;
   }
@@ -90,7 +90,7 @@ export async function getServerSideProps(ctx) {
         latestSide: [],
         readMore: [],
       },
-      revalidate: 14400,
+      // revalidate: 14400,
     };
   }
 
