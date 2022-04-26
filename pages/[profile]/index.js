@@ -9,12 +9,20 @@ import { PrismaClient } from "@prisma/client";
 import ShowTags, { DisplayTags } from "../../components/micro/showTags";
 import FormattedDate from "../../components/micro/formattedDate";
 import UserTags from "../../components/headTags/public/userTags";
+import {
+  twitterIcon,
+  linkedInIcon,
+  facebookIcon,
+} from "../../components/icons/social/Dashboard";
 
 const TAKE_IN_REQUEST = 10;
 
 const Me = ({ user }) => {
   const { firstname, lastname, username, about, dp, dpalt, role, account } =
     user;
+  console.log(account);
+  const { behance, facebook, linkedin, twitter, github, instagram, px365 } =
+    account;
   const [posts, setPosts] = useState({
     data: [],
     skipped: 0,
@@ -61,27 +69,50 @@ const Me = ({ user }) => {
           </section>
 
           <section className="order-1 col-span-4 pb-8 dark:border-zinc-700 lg:order-2 lg:col-span-1 lg:border-l lg:pb-10">
-            <div className="top-0 flex items-center lg:flex-col">
-              <div className="aspect-1 relative mb-4 h-24 overflow-hidden rounded-full md:h-32 lg:h-44">
-                <Image
-                  src={dp}
-                  alt={dpalt}
-                  className="object-cover object-center"
-                  layout="fill"
-                  priority
-                />
+            <div className="pl-2">
+              <div className="top-0 lg:mb-10 mb-6 flex items-center lg:flex-col">
+                <div className="aspect-1 relative mb-4 h-24 overflow-hidden rounded-full md:h-32 lg:h-44">
+                  <Image
+                    src={dp}
+                    alt={dpalt}
+                    className="object-cover object-center"
+                    layout="fill"
+                    priority
+                  />
+                </div>
+                <div className="ml-3 md:ml-5 lg:ml-0 lg:text-center">
+                  <h1 className="text-2xl font-bold md:text-3xl lg:text-2xl">
+                    {firstname} {lastname || ""}
+                  </h1>
+                  <h2 className="font-primary text-sm text-neutral-500 dark:text-zinc-200 lg:mt-1">
+                    {role.toLowerCase()} on LumBytes
+                  </h2>
+                </div>
+                <p className="mt-8 hidden px-3 text-center text-sm lg:block">
+                  {about}
+                </p>
               </div>
-              <div className="ml-3 md:ml-5 lg:ml-0 lg:text-center">
-                <h1 className="text-2xl font-bold md:text-3xl lg:text-2xl">
-                  {firstname} {lastname || ""}
-                </h1>
-                <h2 className="font-primary text-sm text-neutral-500 dark:text-zinc-200 lg:mt-1">
-                  {role.toLowerCase()} on LumBytes
+              <div className="pl-2">
+                <h2 className="font-primary lg:mb-4 lg:text-xl mb-2 text-base font-bold block">
+                  Check me out on
                 </h2>
+                <div className="flex lg:flex-col">
+                  {linkedin && (
+                    <SocialLink
+                      username={linkedin}
+                      icon={linkedInIcon}
+                      link={`https://www.linkedin.com/in/${linkedin}/`}
+                    />
+                  )}
+                  {twitter && (
+                    <SocialLink
+                      username={twitter}
+                      icon={twitterIcon}
+                      link={`https://twitter.com/${twitter}`}
+                    />
+                  )}
+                </div>
               </div>
-              <p className="mt-8 hidden px-3 text-center text-sm lg:block">
-                {about}
-              </p>
             </div>
           </section>
         </div>
@@ -147,6 +178,19 @@ function AuthorPagePeek({ data }) {
         </div>
       </div>
     </article>
+  );
+}
+
+function SocialLink({ icon, username, link }) {
+  return (
+    <a className="lg:mb-4 flex" href={link} target="_blank" rel="noreferrer">
+      <div className="lg:mr-2 mr-4">{icon}</div>
+      <p
+        className={`font-primary hidden items-center text-sm font-medium hover:underline lg:flex`}
+      >
+        {username}
+      </p>
+    </a>
   );
 }
 
