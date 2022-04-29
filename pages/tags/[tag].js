@@ -9,7 +9,7 @@ import Navbar from "../../components/elements/navbar/Navbar-client";
 import Footer from "../../components/elements/footer/Footer";
 import HeadTags from "../../components/headTags/public/headTags";
 
-const { tags, blogposts } = new PrismaClient();
+const prisma = new PrismaClient();
 
 const Tag = ({ posts, theme, metaDescription, ogImg, ogAlt, ogTitle }) => {
   const router = useRouter();
@@ -74,6 +74,7 @@ const Tag = ({ posts, theme, metaDescription, ogImg, ogAlt, ogTitle }) => {
 export default Tag;
 
 export async function getStaticProps(context) {
+  const { tags, blogposts } = prisma;
   const {
     params: { tag },
   } = context;
@@ -131,6 +132,8 @@ export async function getStaticProps(context) {
   });
 
   posts = JSON.parse(JSON.stringify(posts));
+
+  await prisma.$disconnect();
 
   if (posts.length === 0) {
     return {

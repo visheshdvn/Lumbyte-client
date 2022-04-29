@@ -231,7 +231,7 @@ export async function getServerSideProps(ctx) {
     },
   });
 
-  prisma.$disconnect();
+  await prisma.$disconnect();
 
   if (!userData) {
     return {

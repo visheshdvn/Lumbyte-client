@@ -94,6 +94,8 @@ export async function getServerSideProps(ctx) {
     };
   }
 
+  await prisma.$disconnect();
+
   data = JSON.parse(JSON.stringify(data));
   const latest = data.slice(0, 1);
   const latestSide = data.slice(1, 4);

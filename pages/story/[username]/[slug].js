@@ -369,7 +369,7 @@ export async function getStaticProps(ctx) {
 
   similar = JSON.parse(JSON.stringify(similar));
 
-  prisma.$disconnect();
+  await prisma.$disconnect();
 
   return {
     props: {

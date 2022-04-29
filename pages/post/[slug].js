@@ -1,7 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 
 const Redirect = () => {
-  return <div>Hi</div>;
+  return <div>Redirecting...</div>;
 };
 
 export default Redirect;
@@ -23,7 +23,7 @@ export async function getServerSideProps({ res, params }) {
     },
   });
 
-  console.log(!blogpost, blogpost);
+  await prisma.$disconnect();
 
   if (!blogpost) {
     return {
