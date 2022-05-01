@@ -8,8 +8,7 @@ import FormattedDate from "../../../components/micro/formattedDate";
 import AdminHomeLayout from "../../../components/layouts/adminHome";
 // utils
 import { HeadBlogposts } from "../../../utils/headTags/admin/meta";
-
-const { blogposts } = new PrismaClient();
+import prisma from "../../../utils/prisma";
 
 function capitalize(str) {
   return str.charAt(0).toUpperCase() + str.slice(1);
@@ -111,6 +110,7 @@ Blogposts.auth = {
 export default Blogposts;
 
 export async function getServerSideProps(context) {
+  const { blogposts } = prisma;
   BigInt.prototype.toJSON = function () {
     return Number(this);
   };
@@ -133,6 +133,7 @@ export async function getServerSideProps(context) {
       n: "desc",
     },
   });
+  await prisma.$disconnect();
   let json = JSON.stringify(data);
   json = JSON.parse(json);
 

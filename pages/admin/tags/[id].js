@@ -6,7 +6,6 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useTheme } from "next-themes";
 // components
-import Sidebar from "../../../components/elements/sideBar/leftSideBar";
 import EditCreateTags, {
   DataEntryCard,
 } from "../../../components/layouts/editCreateTags";
@@ -20,8 +19,7 @@ import {
 import { HeadTags } from "../../../utils/headTags/admin/meta";
 import axios from "../../../utils/axios";
 import { unPublishTag, publishTag } from "../../../utils/togglePublish";
-
-const { tags } = new PrismaClient();
+import prisma from "../../../utils/prisma";
 
 const Update = ({ initialTagData }) => {
   const router = useRouter();
@@ -101,6 +99,7 @@ Update.auth = {
 export default Update;
 
 export async function getServerSideProps({ params }) {
+  const { tags } = prisma;
   const id = params.id;
   if (!parseInt(id)) {
     return {

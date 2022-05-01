@@ -31,8 +31,9 @@ import axios from "../../../utils/axios";
 import uploadImage from "../../../utils/uploadImage/uploader";
 
 let editor;
-const prisma = new PrismaClient();
-const { blogposts, tags } = prisma;
+// const prisma = new PrismaClient();
+// const { blogposts, tags } = prisma;
+import prisma from "../../../utils/prisma";
 
 const update = ({ initialContent, allTags }) => {
   const router = useRouter();
@@ -284,6 +285,7 @@ update.auth = {
 export default update;
 
 export async function getServerSideProps({ params }) {
+  const { blogposts, tags } = prisma;
   const id = params.id;
 
   let data = await blogposts.findUnique({
@@ -320,8 +322,9 @@ export async function getServerSideProps({ params }) {
     },
   });
 
+  await prisma.$disconnect();
+  
   if (!data) {
-    prisma.$disconnect();
     return {
       redirect: {
         destination: "/404",

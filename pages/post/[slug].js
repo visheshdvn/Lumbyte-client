@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client";
+import prisma from "../../utils/prisma";
 
 const Redirect = () => {
   return <div>Redirecting...</div>;
@@ -7,7 +7,6 @@ const Redirect = () => {
 export default Redirect;
 
 export async function getServerSideProps({ res, params }) {
-  const prisma = new PrismaClient();
   const { blogposts } = prisma;
   const { slug } = params;
 

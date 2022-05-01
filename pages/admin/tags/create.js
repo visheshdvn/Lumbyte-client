@@ -3,17 +3,11 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Router from "next/router";
 // components
-import Sidebar from "../../../components/elements/sideBar/leftSideBar";
 import EditCreateTags, {
   DataEntryCard,
 } from "../../../components/layouts/editCreateTags";
 // elements
-import {
-  PublishButton,
-  SaveButton,
-  UnPublishButton,
-} from "../../../components/elements/buttons/buttons";
-import { AdminInlineTextInput } from "../../../components/elements/input/text";
+import { SaveButton } from "../../../components/elements/buttons/buttons";
 // utilities
 import axios from "../../../utils/axios";
 import { HeadTags } from "../../../utils/headTags/admin/meta";

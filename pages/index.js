@@ -1,4 +1,3 @@
-import { PrismaClient } from "@prisma/client";
 // components
 import BroadPeek from "../components/PostPeek/broad";
 import Latest from "../components/PostPeek/latest";
@@ -6,6 +5,7 @@ import Navbar from "../components/elements/navbar/Navbar-client";
 import Footer from "../components/elements/footer/Footer";
 
 import MetaIndex from "../utils/headTags/public/headIndex";
+import prisma from "../utils/prisma";
 
 const MAX_RESPONSE = 20;
 
@@ -38,7 +38,6 @@ export default function Home({ latest, latestSide, readMore }) {
 
 export async function getServerSideProps(ctx) {
   // const cookie = cookies(ctx);
-  const prisma = new PrismaClient();
   const { blogposts } = prisma;
 
   let data = await blogposts.findMany({

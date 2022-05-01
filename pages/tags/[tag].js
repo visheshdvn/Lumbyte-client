@@ -1,15 +1,12 @@
 import React from "react";
 import { useRouter } from "next/router";
-import Head from "next/head";
-import { PrismaClient } from "@prisma/client";
 
 // components
 import BroadPeek from "../../components/PostPeek/broad";
 import Navbar from "../../components/elements/navbar/Navbar-client";
 import Footer from "../../components/elements/footer/Footer";
 import HeadTags from "../../components/headTags/public/headTags";
-
-const prisma = new PrismaClient();
+import prisma from "../../utils/prisma";
 
 const Tag = ({ posts, theme, metaDescription, ogImg, ogAlt, ogTitle }) => {
   const router = useRouter();
@@ -155,6 +152,7 @@ export async function getStaticProps(context) {
 }
 
 export async function getStaticPaths() {
+  const { tags } = prisma;
   const data = await tags.findMany({
     select: {
       tagname: true,

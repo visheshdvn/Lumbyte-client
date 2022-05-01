@@ -7,7 +7,8 @@ import AdminHomeLayout from "../../../components/layouts/adminHome";
 // utils
 import { HeadTags } from "../../../utils/headTags/admin/meta";
 
-const { tags } = new PrismaClient();
+// const { tags } = new PrismaClient();
+import prisma from "../../../utils/prisma";
 
 const Tags = ({ tags }) => {
   return (
@@ -84,6 +85,7 @@ Tags.auth = {
 export default Tags;
 
 export async function getServerSideProps(context) {
+  const { tags } = prisma;
   const data = await tags.findMany({
     select: {
       id: true,
