@@ -1,7 +1,7 @@
-import { PrismaClient } from "@prisma/client";
 import nc from "next-connect";
 
-const { blogposts } = new PrismaClient();
+import prisma from "../../../utils/prisma";
+const { blogposts } = prisma;
 
 // middlewares
 import {
@@ -75,6 +75,8 @@ handler.post(async (req, res) => {
       published: false,
     },
   });
+
+  await prisma.$disconnect();
 
   res.status(200).json({ blogpost: blog, status: "created" });
 });

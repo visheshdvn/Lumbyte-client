@@ -1,7 +1,9 @@
 import { PrismaClient } from "@prisma/client";
 import nc from "next-connect";
 
-const { blogposts } = new PrismaClient();
+// const { blogposts } = new PrismaClient();
+import prisma from "../../../utils/prisma";
+const { blogposts } = prisma;
 
 // middlewares
 import {
@@ -127,7 +129,7 @@ handler.get(async (req, res) => {
           username: true,
           dp: true,
           dpalt: true,
-        }
+        },
       },
       updated_at: true,
       created_at: true,
@@ -151,7 +153,7 @@ handler.get(async (req, res) => {
       n: "desc",
     },
   });
-
+  
   res.status("200").json({ status: "success", data: blog });
 });
 
