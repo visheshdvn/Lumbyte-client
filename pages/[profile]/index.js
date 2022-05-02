@@ -20,7 +20,6 @@ const TAKE_IN_REQUEST = 10;
 const Me = ({ user }) => {
   const { firstname, lastname, username, about, dp, dpalt, role, account } =
     user;
-  console.log(account);
   const { linkedin, twitter, github } = account;
   const [posts, setPosts] = useState({
     data: [],
@@ -92,7 +91,7 @@ const Me = ({ user }) => {
                 </p>
               </div>
               <div className="pl-2">
-                <h2 className="font-primary mb-2 block text-base font-bold lg:mb-5 lg:text-xl">
+                <h2 className="font-primary lg:mb- mb-2 block text-base font-bold lg:text-xl">
                   Check me out on
                 </h2>
                 <div className="flex lg:flex-col">

@@ -5,6 +5,8 @@ import { comparePassword } from "../../../middleware/auth/encryptDecryptPassword
 import { PrismaClient } from "@prisma/client";
 const { user } = new PrismaClient();
 
+const secret = process.env.TOKEN_SECRET;
+
 export default NextAuth({
   // Configure one or more authentication providers
   pages: {
@@ -14,9 +16,9 @@ export default NextAuth({
     strategy: "jwt",
     maxAge: 7 * 24 * 60 * 60,
   },
-  secret: "Heg8jcjIaznHZPwFhYPznzwkR8CcDkqlyMNEQ0w/mQE=",
+  secret: secret,
   jwt: {
-    secret: "d9d8df00bdd183a320aa947e8a70e2a693d695e4588838338aa126dc43ad9c53",
+    maxAge: 1 * 24 * 60 * 60,
   },
   providers: [
     // ...add more providers here
