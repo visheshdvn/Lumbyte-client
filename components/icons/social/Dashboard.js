@@ -16,7 +16,7 @@ const twitterIcon = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 49.25 49.25"
-    className="h-6 transform overflow-hidden rounded-full border transition-all duration-200 border-[#00ACEE] bg-[#00ACEE] fill-zinc-50 xl:h-7"
+    className="h-6 transform overflow-hidden rounded-full border border-[#00ACEE] bg-[#00ACEE] fill-zinc-50 transition-all duration-200 xl:h-7"
   >
     <g id="Layer_2" data-name="Layer 2">
       <g id="Layer_1-2" data-name="Layer 1">
@@ -43,4 +43,25 @@ const linkedInIcon = (
   </svg>
 );
 
-export { facebookIcon, twitterIcon, linkedInIcon };
+const githubIcon = (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 49.58 48.36"
+    className="h-6 transform overflow-hidden rounded-full border border-[#231f20] bg-[#231f20] fill-zinc-50 transition-all duration-200 xl:h-7"
+  >
+    <g id="Layer_2" data-name="Layer 2">
+      <g id="Layer_1-2" data-name="Layer 1">
+        <path d="M24.79,0A24.79,24.79,0,0,0,17,48.31c1.24.23,1.7-.53,1.7-1.19s0-2.54,0-4.61c-6.89,1.5-8.35-2.93-8.35-2.93C9.13,36.72,7.51,36,7.51,36c-2.25-1.53.17-1.5.17-1.5A5.2,5.2,0,0,1,11.48,37c2.21,3.79,5.8,2.7,7.21,2.06a5.31,5.31,0,0,1,1.58-3.31C14.76,35.12,9,33,9,23.5a9.6,9.6,0,0,1,2.56-6.66,8.87,8.87,0,0,1,.24-6.56s2.08-.67,6.82,2.54a23.61,23.61,0,0,1,12.41,0c4.73-3.21,6.81-2.54,6.81-2.54a8.94,8.94,0,0,1,.25,6.56,9.63,9.63,0,0,1,2.55,6.66c0,9.52-5.8,11.61-11.32,12.23A5.93,5.93,0,0,1,31,40.32c0,3.32,0,6,0,6.8s.45,1.44,1.7,1.19A24.79,24.79,0,0,0,24.79,0Z" />
+        <path d="M9.39,35.59c-.05.13-.25.16-.43.08s-.28-.25-.22-.37.25-.16.43-.08.28.25.22.37Z" />
+        <path d="M10.39,36.71c-.11.11-.35.06-.5-.11a.4.4,0,0,1-.08-.52.4.4,0,0,1,.51.12c.17.17.2.4.07.51Z" />
+        <path d="M11.37,38.14c-.15.11-.4,0-.55-.21s-.15-.49,0-.59.4,0,.56.21.15.48,0,.59Z" />
+        <path d="M12.71,39.52a.47.47,0,0,1-.64-.09.5.5,0,0,1-.14-.64c.14-.15.43-.1.64.1s.29.48.14.63Z" />
+        <path d="M14.56,40.32c-.06.2-.34.28-.62.2s-.47-.31-.41-.51.34-.28.62-.2.47.31.41.51Z" />
+        <path d="M16.59,40.47c0,.21-.23.37-.53.38s-.54-.16-.54-.36.23-.38.53-.38.54.16.54.36Z" />
+        <path d="M18.47,40.15c0,.2-.16.4-.46.46s-.55-.07-.59-.27.17-.41.46-.46.56.07.59.27Z" />
+      </g>
+    </g>
+  </svg>
+);
+
+export { facebookIcon, twitterIcon, linkedInIcon, githubIcon };

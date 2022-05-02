@@ -17,15 +17,12 @@ enum Role {
 model Account {
   id         String      @id @default(uuid())
   password   String      @db.VarChar(250)
-  facebook   String?     @db.VarChar(50)
   twitter    String?     @db.VarChar(50)
-  instagram  String?     @db.VarChar(50)
   linkedin   String?     @db.VarChar(50)
   github     String?     @db.VarChar(50)
-  behance    String?     @db.VarChar(50)
-  pintrest   String?     @db.VarChar(50)
-  eyeem      String?     @db.VarChar(50)
-  px365      String?     @db.VarChar(50)
+  // facebook   String?     @db.VarChar(50)
+  // pintrest   String?     @db.VarChar(50)
+  // instagram  String?     @db.VarChar(50)
   // relations
   user       User        @relation(fields: [userId], references: [id])
   userId     String      @unique
@@ -37,21 +34,8 @@ model Account {
   disabled   Boolean     @default(false)
 }
 
-model AdminAccount {
-  id         Int      @id @default(autoincrement())
-  password   String   @db.VarChar(200)
-  // relations
-  user       User     @relation(fields: [userId], references: [id])
-  userId     String   @unique
-  // defaults
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
-  //superuser actions
-  restricted Boolean  @default(false)
-}
-
 model Blogposts {
-  // opengraph properties are extracted from he blogpost itself
+  // opengraph properties are extracted from the blogpost itself
   id              String     @id @default(uuid())
   n               BigInt     @default(autoincrement()) @db.BigInt
   title           String     @db.VarChar(150)
@@ -114,25 +98,24 @@ model Videos {
 }
 
 model User {
-  id           String        @id @default(uuid())
-  firstname    String        @db.VarChar(50)
-  lastname     String?       @db.VarChar(50)
-  username     String        @unique @db.VarChar(20)
-  about        String?       @db.VarChar(200)
-  dp           String?
-  dpalt        String?
-  email        String        @unique @db.VarChar(50)
-  phone        String?       @unique @db.VarChar(15)
-  role         Role          @default(PUBLIC)
+  id         String      @id @default(uuid())
+  firstname  String      @db.VarChar(50)
+  lastname   String?     @db.VarChar(50)
+  username   String      @unique @db.VarChar(20)
+  about      String?     @db.VarChar(200)
+  dp         String?
+  dpalt      String?
+  email      String      @unique @db.VarChar(50)
+  phone      String?     @unique @db.VarChar(15)
+  role       Role        @default(PUBLIC)
   // relations
-  blogposts    Blogposts[]
-  account      Account?
-  adminAccount AdminAccount?
+  blogposts  Blogposts[]
+  account    Account?
   // default fields
-  created_at   DateTime      @default(now())
-  updated_at   DateTime      @updatedAt
+  created_at DateTime    @default(now())
+  updated_at DateTime    @updatedAt
   // superuser actions
-  adminGrant   Boolean       @default(false)
+  adminGrant Boolean     @default(false)
 }
 
 model Tags {

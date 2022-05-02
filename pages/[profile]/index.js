@@ -6,13 +6,13 @@ import Image from "next/image";
 import Navbar from "../../components/elements/navbar/Navbar-client";
 import Footer from "../../components/elements/footer/Footer";
 import { PrismaClient } from "@prisma/client";
-import ShowTags, { DisplayTags } from "../../components/micro/showTags";
+import { DisplayTags } from "../../components/micro/showTags";
 import FormattedDate from "../../components/micro/formattedDate";
 import UserTags from "../../components/headTags/public/userTags";
 import {
   twitterIcon,
   linkedInIcon,
-  facebookIcon,
+  githubIcon,
 } from "../../components/icons/social/Dashboard";
 
 const TAKE_IN_REQUEST = 10;
@@ -21,8 +21,7 @@ const Me = ({ user }) => {
   const { firstname, lastname, username, about, dp, dpalt, role, account } =
     user;
   console.log(account);
-  const { behance, facebook, linkedin, twitter, github, instagram, px365 } =
-    account;
+  const { linkedin, twitter, github } = account;
   const [posts, setPosts] = useState({
     data: [],
     skipped: 0,
@@ -70,7 +69,7 @@ const Me = ({ user }) => {
 
           <section className="order-1 col-span-4 pb-8 dark:border-zinc-700 lg:order-2 lg:col-span-1 lg:border-l lg:pb-10">
             <div className="pl-2">
-              <div className="top-0 lg:mb-10 mb-6 flex items-center lg:flex-col">
+              <div className="top-0 mb-6 flex items-center lg:mb-10 lg:flex-col">
                 <div className="aspect-1 relative mb-4 h-24 overflow-hidden rounded-full md:h-32 lg:h-44">
                   <Image
                     src={dp}
@@ -93,7 +92,7 @@ const Me = ({ user }) => {
                 </p>
               </div>
               <div className="pl-2">
-                <h2 className="font-primary lg:mb-4 lg:text-xl mb-2 text-base font-bold block">
+                <h2 className="font-primary mb-2 block text-base font-bold lg:mb-5 lg:text-xl">
                   Check me out on
                 </h2>
                 <div className="flex lg:flex-col">
@@ -109,6 +108,13 @@ const Me = ({ user }) => {
                       username={twitter}
                       icon={twitterIcon}
                       link={`https://twitter.com/${twitter}`}
+                    />
+                  )}
+                  {github && (
+                    <SocialLink
+                      username={github}
+                      icon={githubIcon}
+                      link={`https://github.com/${github}`}
                     />
                   )}
                 </div>
@@ -183,12 +189,12 @@ function AuthorPagePeek({ data }) {
 
 function SocialLink({ icon, username, link }) {
   return (
-    <a className="lg:mb-4 flex" href={link} target="_blank" rel="noreferrer">
-      <div className="lg:mr-2 mr-4">{icon}</div>
+    <a className="flex lg:mb-5" href={link} target="_blank" rel="noreferrer">
+      <div className="mr-4 lg:mr-2">{icon}</div>
       <p
         className={`font-primary hidden items-center text-sm font-medium hover:underline lg:flex`}
       >
-        {username}
+        {"@" + username}
       </p>
     </a>
   );
@@ -219,13 +225,13 @@ export async function getServerSideProps(ctx) {
       role: true,
       account: {
         select: {
-          facebook: true,
+          // facebook: true,
           twitter: true,
           linkedin: true,
-          instagram: true,
+          // instagram: true,
           github: true,
-          behance: true,
-          px365: true,
+          // behance: true,
+          // px365: true,
         },
       },
     },
