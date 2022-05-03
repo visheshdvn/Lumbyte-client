@@ -210,10 +210,10 @@ export default function Navbar() {
                   <Popover className="border-whiteMain-50 relative h-full border-l pl-5 text-white">
                     <Popover.Button className="h-full outline-none">
                       <div className="aspect-1 lg:h-[30px h-full overflow-hidden rounded-full">
-                        {(status === "authenticated" && (
+                        {(session && session.user.dp && (
                           <Image
                             src={user.dp}
-                            alt={user.dpalt}
+                            alt={user.dpalt || "default user"}
                             height={40}
                             width={40}
                           />
