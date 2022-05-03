@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "../../utils/axios";
 import Link from "next/link";
 import Image from "next/image";
+import { useSession } from "next-auth/react";
 // components
 import Navbar from "../../components/elements/navbar/Navbar-client";
 import Footer from "../../components/elements/footer/Footer";
@@ -26,6 +27,7 @@ const Me = ({ user }) => {
     skipped: 0,
     taken: TAKE_IN_REQUEST,
   });
+  const { data: session, status } = useSession();
 
   useEffect(async () => {
     const {
@@ -70,13 +72,23 @@ const Me = ({ user }) => {
             <div className="pl-2">
               <div className="top-0 mb-6 flex items-center lg:mb-10 lg:flex-col">
                 <div className="aspect-1 relative mb-4 h-24 overflow-hidden rounded-full md:h-32 lg:h-44">
-                  <Image
-                    src={dp}
-                    alt={dpalt}
-                    className="object-cover object-center"
-                    layout="fill"
-                    priority
-                  />
+                  {(dp && (
+                    <Image
+                      src={dp}
+                      alt={dpalt}
+                      className="object-cover object-center"
+                      layout="fill"
+                      priority
+                    />
+                  )) || (
+                    <svg
+                      viewBox="0 0 18 19"
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="aspect-1 w-full rounded-full border border-zinc-300 bg-transparent fill-neutral-300"
+                    >
+                      <path d="M4.5 4.5C4.5 6.981 6.519 9 9 9C11.481 9 13.5 6.981 13.5 4.5C13.5 2.019 11.481 0 9 0C6.519 0 4.5 2.019 4.5 4.5ZM17 19H18V18C18 14.141 14.859 11 11 11H7C3.14 11 0 14.141 0 18V19H17Z" />
+                    </svg>
+                  )}
                 </div>
                 <div className="ml-3 md:ml-5 lg:ml-0 lg:text-center">
                   <h1 className="text-2xl font-bold md:text-3xl lg:text-2xl">
@@ -89,6 +101,13 @@ const Me = ({ user }) => {
                 <p className="mt-8 hidden px-3 text-center text-sm lg:block">
                   {about}
                 </p>
+                {session && session.user.username === username && (
+                  <div className="font-primary mt-5 rounded-full border border-green-800 px-3 py-2">
+                    <a href="#" className="text-sm font-medium text-green-800">
+                      Edit Profile
+                    </a>
+                  </div>
+                )}
               </div>
               <div className="pl-2">
                 <h2 className="font-primary lg:mb- mb-2 block text-base font-bold lg:text-xl">
@@ -224,13 +243,9 @@ export async function getServerSideProps(ctx) {
       role: true,
       account: {
         select: {
-          // facebook: true,
           twitter: true,
           linkedin: true,
-          // instagram: true,
           github: true,
-          // behance: true,
-          // px365: true,
         },
       },
     },

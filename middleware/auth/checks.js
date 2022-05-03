@@ -5,7 +5,7 @@ import { check, validationResult } from "express-validator";
 
 const notEmpty = (value) => {
   if (value.trim() === "") {
-    return Promise.reject("value cannot be empty or only spaces ");
+    return Promise.reject("value cannot be empty.");
   } else {
     return Promise.resolve("value is valid.");
   }
@@ -54,7 +54,11 @@ const checkEmailPassword = [
             }
           }
         });
-    }),
+    })
+    .custom((username) => notEmpty(username)),
+  check("firstname", "First name cannot be empty")
+    .isString()
+    .custom((name) => notEmpty(name)),
 ];
 
 // validation results

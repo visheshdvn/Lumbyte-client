@@ -25,7 +25,6 @@ handler.use((req, res, next) => {
   req.params.postId = req.query.postId;
   next();
 });
-// handler.use(resolveQueryParams());
 handler.use(updateblogpostvalidations());
 
 handler.patch(async (req, res) => {

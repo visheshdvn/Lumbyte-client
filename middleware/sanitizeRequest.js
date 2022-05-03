@@ -31,6 +31,27 @@ export const sanitizeRequest = () => {
   };
 };
 
+export const sanitizeUser = () => {
+  return (req, res, next) => {
+    if (req.body.username) {
+      req.body.username = req.body.username.trim();
+    }
+    if (req.body.firstname) {
+      req.body.firstname = req.body.firstname.trim();
+    }
+    if (req.body.lastname) {
+      req.body.lastname = req.body.lastname.trim();
+    }
+    if (req.body.about) {
+      req.body.about = req.body.about.trim();
+    }
+    if (req.body.email) {
+      req.body.email = req.body.email.trim();
+    }
+    next();
+  };
+};
+
 export const resolveQueryParams = () => {
   return (req, res, next) => {
     let query = /\?(.*)/.exec(req.url);

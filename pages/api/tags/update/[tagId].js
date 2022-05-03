@@ -1,13 +1,9 @@
-import { PrismaClient } from "@prisma/client";
 import nc from "next-connect";
-
-const { tags } = new PrismaClient();
+import prisma from "../../../../utils/prisma";
+const { tags } = prisma;
 
 // middlewares
-import {
-  sanitizeRequest,
-  // resolveQueryParams,
-} from "../../../../middleware/sanitizeRequest";
+import { sanitizeRequest } from "../../../../middleware/sanitizeRequest";
 import { updatetagsvalidations } from "../../../../middleware/tags/createUpdateTag";
 
 const handler = nc({
