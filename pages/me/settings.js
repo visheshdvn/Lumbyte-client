@@ -81,7 +81,7 @@ const settings = ({ data }) => {
           <div className="grid grid-cols-4 gap-1">
             <div className="font-open-sans col-span-1 hidden xl:block">
               <h3 className="mb-5 text-2xl font-bold">Settings</h3>
-              <ul className="text-lg font-semibold text-neutral-500">
+              <ul className="text-lg font-semibold text-neutral-500 dark:text-zinc-50">
                 <a href="#about">
                   <li>About</li>
                 </a>
