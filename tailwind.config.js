@@ -19,7 +19,11 @@ module.exports = {
       primary: ["Poppins", ...defaultTheme.fontFamily.serif],
       adminPrimary: ["Quicksand", ...defaultTheme.fontFamily.serif],
       "raleway-dot": ["Raleway Dots"],
-      "open-sans": ["Open Sans Condensed", ...defaultTheme.fontFamily.sans],
+      "open-sans-condensed": [
+        "Open Sans Condensed",
+        ...defaultTheme.fontFamily.sans,
+      ],
+      "open-sans": ["Open Sans", ...defaultTheme.fontFamily.sans],
       mono: [...defaultTheme.fontFamily.mono],
     },
     extend: {

@@ -16,26 +16,21 @@ class MyDocument extends Document {
             href="https://fonts.gstatic.com"
             crossOrigin="true"
           />
-          <script
-            async
-            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2147491552844925"
-            crossOrigin="anonymous"
-          ></script>
-
-          {/* new fonts */}
           <link
             rel="preconnect"
             href="https://fonts.googleapis.com"
             crossOrigin="true"
           />
           <link
-            href="https://fonts.googleapis.com/css2?family=Antonio:wght@700&family=Open+Sans+Condensed:wght@300;700&family=Raleway+Dots&display=swap"
+            href="https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@300;700&family=Raleway+Dots&display=swap"
             rel="stylesheet"
           />
+
           <link
-            href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+            href="https://fonts.googleapis.com/css2?family=Antonio:wght@700&family=Open+Sans:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap"
             rel="stylesheet"
           />
+
           <link
             rel="shortcut icon"
             href="https://lumbytes-general.s3.eu-west-1.amazonaws.com/favIcon-dark.png"

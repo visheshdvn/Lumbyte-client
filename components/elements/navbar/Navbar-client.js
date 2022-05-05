@@ -268,7 +268,6 @@ function PopoverButton({ text, action }) {
 }
 
 function PopoverLink({ text, link }) {
-  console.log("link", link);
   return (
     <Link href={`/${link}`}>
       <a className="font-primary mb-2 rounded border border-white px-2 py-1 text-left text-sm font-medium hover:border-gray-200 hover:bg-zinc-200">

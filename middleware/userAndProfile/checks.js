@@ -74,7 +74,7 @@ const editUserDataValidations = [
         .then((user) => {
           if (user.length > 0) {
             if (user.length > 0) {
-              return Promise.reject("Username already exists");
+              return Promise.reject("Username already taken");
             } else {
               return Promise.resolve("Success");
             }
@@ -109,6 +109,6 @@ export const editUserValidations = () => {
       return next();
     }
 
-    return res.status(422).json({ errors: errors.array() });
+    return res.status(409).json({ errors: errors.array() });
   };
 };

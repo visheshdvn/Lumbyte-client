@@ -10,15 +10,15 @@ div.ce-block__content {
 
 /* headings */
 h2.ce-header {
-  @apply font-open-sans mb-8 pt-2 text-4xl font-bold;
+  @apply font-open-sans-condensed mb-8 pt-2 text-4xl font-bold;
 }
 
 h3.ce-header {
-  @apply font-open-sans mb-6 pt-2 text-3xl font-bold;
+  @apply font-open-sans-condensed mb-6 pt-2 text-3xl font-bold;
 }
 
 h4.ce-header {
-  @apply font-open-sans mb-4 pt-2 font-bold lg:text-xl;
+  @apply font-open-sans-condensed mb-4 pt-2 font-bold lg:text-xl;
 }
 
 /* paragraph */
