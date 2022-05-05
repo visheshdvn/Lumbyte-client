@@ -230,7 +230,11 @@ export default function Navbar() {
                           <>
                             <PopoverLink
                               text="Dashboard"
-                              link={`${user.username}`}
+                              link={`/${user.username}`}
+                            />
+                            <PopoverLink
+                              text="Settings"
+                              link={`/me/settings`}
                             />
                             <PopoverButton text="Sign Out" action={signOut} />
                           </>
@@ -269,19 +273,10 @@ function PopoverButton({ text, action }) {
 
 function PopoverLink({ text, link }) {
   return (
-    <Link href={`/${link}`}>
+    <Link href={`${link}`}>
       <a className="font-primary mb-2 rounded border border-white px-2 py-1 text-left text-sm font-medium hover:border-gray-200 hover:bg-zinc-200">
         {text}
       </a>
     </Link>
-  );
-}
-
-function Divider() {
-  return (
-    <div
-      style={{ width: "1px" }}
-      className="-mx-1 inline-block h-full border-red-500 bg-red-500"
-    />
   );
 }
