@@ -102,7 +102,7 @@ function SideHeads({ title, date, slug, author, tags }) {
           ))}
         </div>
         {/* title */}
-        <a href={`/story/${author.username}/${slug}`} className="">
+        <a href={`/story/${author.username}/${slug}`}>
           <h1
             style={{ lineHeight: "111%" }}
             className="font-primary md:text-2.75xl my-3 text-center text-2xl font-bold hover:underline hover:opacity-90 sm:text-3xl md:text-left"

@@ -1,7 +1,13 @@
 import prisma from "../../utils/prisma";
+import NoIndex from "../../components/headTags/noIndex";
 
 const Redirect = () => {
-  return <div>Redirecting...</div>;
+  return (
+    <>
+      <NoIndex />
+      <div>Redirecting...</div>;
+    </>
+  );
 };
 
 export default Redirect;
@@ -26,17 +32,14 @@ export async function getServerSideProps({ res, params }) {
 
   if (!blogpost) {
     return {
-      redirect: {
-        destination: `/404`,
-        permanent: false,
-      },
+      notFound: true,
     };
   }
 
   return {
     redirect: {
       destination: `/story/${blogpost.author.username}/${slug}`,
-      permanent: false,
+      permanent: true,
     },
   };
 }

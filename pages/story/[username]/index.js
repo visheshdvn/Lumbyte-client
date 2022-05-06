@@ -1,7 +1,13 @@
 import React from "react";
+import NoIndex from "../../../components/headTags/noIndex";
 
 const index = () => {
-  return <div>Loading...</div>;
+  return (
+    <>
+      <NoIndex />
+      <div>Loading...</div>;
+    </>
+  );
 };
 
 export async function getServerSideProps(context) {
@@ -10,7 +16,7 @@ export async function getServerSideProps(context) {
   return {
     redirect: {
       destination: `/${username}`,
-      permanent: false,
+      permanent: true,
     },
     props: {},
   };

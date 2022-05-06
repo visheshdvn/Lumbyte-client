@@ -56,6 +56,7 @@ const Post = ({ postData, similar }) => {
         metaDescription={metaDescription}
         banner={banner}
         banneralt={banneralt}
+        author={username}
       />
 
       <Navbar />

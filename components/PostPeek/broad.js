@@ -26,7 +26,7 @@ const BroadPeek = ({
             style={{ aspectRatio: "8/5" }}
             className="relative h-36 md:h-32 lg:h-44"
           >
-            <a href={`/post/${slug}`}>
+            <a href={`/story/${username}/${slug}`}>
               <Image
                 src={banner}
                 alt={banneralt}
