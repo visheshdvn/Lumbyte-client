@@ -216,6 +216,7 @@ const settings = ({ data }) => {
                         maxLength={200}
                         onChange={updateData}
                         disabled={disabledControls.about}
+                        placeholder="Tell us about yourself"
                       />
                     )}
                   </div>

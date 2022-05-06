@@ -3,10 +3,10 @@ import axios from "../../utils/axios";
 import Link from "next/link";
 import Image from "next/image";
 import { useSession } from "next-auth/react";
+import prisma from "../../lib/prisma";
 // components
 import Navbar from "../../components/elements/navbar/Navbar-client";
 import Footer from "../../components/elements/footer/Footer";
-import { PrismaClient } from "@prisma/client";
 import { DisplayTags } from "../../components/micro/showTags";
 import FormattedDate from "../../components/micro/formattedDate";
 import UserTags from "../../components/headTags/public/userTags";
@@ -15,6 +15,7 @@ import {
   linkedInIcon,
   githubIcon,
 } from "../../components/icons/social/Dashboard";
+import { useRouter } from "next/router";
 
 const TAKE_IN_REQUEST = 10;
 
@@ -28,16 +29,19 @@ const Me = ({ user }) => {
     taken: TAKE_IN_REQUEST,
   });
   const { data: session, status } = useSession();
+  const router = useRouter();
 
   useEffect(async () => {
     const {
-      data: { status, data },
+      data: { data },
     } = await axios.get(
-      `/blogposts?_select=excerpt&_select=minuteRead&_select=banner&_select=tags&_select=banneralt&take=${TAKE_IN_REQUEST}`
+      `/${router.query.profile}/stories?skip=0&take=${TAKE_IN_REQUEST}`
     );
 
     setPosts({ data: data, skipped: 0, taken: TAKE_IN_REQUEST });
   }, []);
+
+  // console.log("posts", !posts.data.length);
 
   return (
     <>
@@ -57,14 +61,26 @@ const Me = ({ user }) => {
         <div className="my-10 grid grid-cols-4 gap-4">
           <section className="order-2 col-span-4 lg:order-1 lg:col-span-3">
             <div className="mb-10 flex border-b px-3 dark:border-zinc-700 lg:px-5">
-              <h4 className="border-b-2 border-gray-900 px-2 text-lg font-bold dark:border-neutral-300 ">
-                Posts
+              <h4 className="border-b-2 border-gray-900 px-2 text-lg font-bold dark:border-neutral-300">
+                Stories
               </h4>
             </div>
             <div className="px-3 lg:pr-3 lg:pl-0">
-              {posts.data.map((post) => (
-                <AuthorPagePeek key={post.slug} data={post} />
-              ))}
+              {!posts.data.length ? (
+                <div className="aspect-w-16 aspect-h-6 w-full">
+                  <div className="flex items-center justify-center">
+                    <h2 className="font-primary text-lg font-bold">
+                      No Stories
+                    </h2>
+                  </div>
+                </div>
+              ) : (
+                <div>
+                  {posts.data.map((post) => (
+                    <AuthorPagePeek key={post.slug} data={post} />
+                  ))}
+                </div>
+              )}
             </div>
           </section>
 
@@ -90,7 +106,7 @@ const Me = ({ user }) => {
                     </svg>
                   )}
                 </div>
-                <div className="ml-3 md:ml-5 lg:ml-0 lg:text-center">
+                <div className="ml-3 md:ml-5 lg:ml-0 lg:text-center flex-1">
                   <h1 className="text-2xl font-bold md:text-3xl lg:text-2xl">
                     {firstname} {lastname || ""}
                   </h1>
@@ -102,8 +118,11 @@ const Me = ({ user }) => {
                   {about}
                 </p>
                 {session && session.user.username === username && (
-                  <div className="font-primary mt-5 rounded-full border border-green-800 px-3 py-2">
-                    <a href="#" className="text-sm font-medium text-green-800">
+                  <div className="font-primary mt-5 rounded-full border border-green-800 px-3 lg:py-2 py-1">
+                    <a
+                      href="/me/settings"
+                      className="text-sm font-medium text-green-800"
+                    >
                       Edit Profile
                     </a>
                   </div>
@@ -225,7 +244,6 @@ export async function getServerSideProps(ctx) {
     params: { profile },
   } = ctx;
 
-  const prisma = new PrismaClient();
   const { user } = prisma;
 
   let userData = await user.findUnique({
