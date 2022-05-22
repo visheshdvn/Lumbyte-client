@@ -236,6 +236,10 @@ export default function Navbar() {
                               text="Settings"
                               link={`/me/settings`}
                             />
+                            <PopoverLink
+                              text="Admin"
+                              link={`/admin`}
+                            />
                             <PopoverButton text="Sign Out" action={signOut} />
                           </>
                         )) || (
