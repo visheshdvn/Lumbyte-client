@@ -236,10 +236,12 @@ export default function Navbar() {
                               text="Settings"
                               link={`/me/settings`}
                             />
-                            <PopoverLink
-                              text="Admin"
-                              link={`/admin`}
-                            />
+                            {console.log(session.user.role)}
+                            {session.user.role === "ADMIN" ||
+                            session.user.role === "SUPERUSER" ? (
+                              <PopoverLink text="Admin" link={`/admin`} />
+                            ) : null}
+
                             <PopoverButton text="Sign Out" action={signOut} />
                           </>
                         )) || (
