@@ -31,6 +31,7 @@ const Me = ({ user }) => {
   const { data: session, status } = useSession();
   const router = useRouter();
 
+  
   useEffect(async () => {
     const {
       data: { data },
@@ -39,7 +40,7 @@ const Me = ({ user }) => {
     );
 
     setPosts({ data: data, skipped: 0, taken: TAKE_IN_REQUEST });
-  }, []);
+  }, [router.query.profile]);
 
   // console.log("posts", !posts.data.length);
 
