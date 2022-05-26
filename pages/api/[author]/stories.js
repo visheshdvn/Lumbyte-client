@@ -32,11 +32,13 @@ handler.get(async (req, res) => {
       author: {
         username: author,
       },
+      published: true,
     },
     select: {
       banner: true,
       banneralt: true,
       published_at: true,
+      updated_at: true,
       minuteRead: true,
       slug: true,
       title: true,
