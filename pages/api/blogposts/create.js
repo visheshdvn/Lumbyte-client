@@ -2,6 +2,7 @@ import nc from "next-connect";
 
 import prisma from "../../../utils/prisma";
 const { blogposts } = prisma;
+import { getSession } from "next-auth/react";
 
 // middlewares
 import {
@@ -25,6 +26,12 @@ handler.use(resolveQueryParams());
 handler.use(createblogpostvalidations());
 
 handler.post(async (req, res) => {
+  const session = await getSession({ req });
+
+  if (!session) {
+    return res.status(401).json({ success: 0, msg: "Unauthorized", data: {} });
+  }
+
   const {
     title,
     slug,
@@ -59,9 +66,9 @@ handler.post(async (req, res) => {
       featured,
       topPick,
       date,
-      author: authorId && {
+      author: session && {
         connect: {
-          id: authorId,
+          id: session.user.id,
         },
       },
       topics: topicsId && {

@@ -3,6 +3,7 @@ import nc from "next-connect";
 
 const prisma = new PrismaClient();
 const { blogposts, user } = prisma;
+import { getSession } from "next-auth/react";
 
 // middlewares
 import { sanitizeRequest } from "../../../../middleware/sanitizeRequest";
@@ -28,6 +29,12 @@ handler.use((req, res, next) => {
 handler.use(updateblogpostvalidations());
 
 handler.patch(async (req, res) => {
+  const session = await getSession({ req });
+
+  if (!session) {
+    return res.status(401).json({ success: 0, msg: "Unauthorized", data: {} });
+  }
+
   const { postId } = req.params;
   // implement express validator
   const {
@@ -86,7 +93,7 @@ handler.patch(async (req, res) => {
       minuteRead,
       author: {
         connect: {
-          id: !author.id ? currData.authorId || lumbytesUID.id : author.id,
+          id: session.user.id,
         },
       },
       tags: {

@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import SideBar from "../elements/sideBar/leftSideBar";
+import SideBar from "../elements/sideBar/adminSidebar";
 
 const AdminHome = ({ children, title, count, addNewHref }) => {
   return (

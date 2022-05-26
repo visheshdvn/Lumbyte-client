@@ -60,7 +60,14 @@ function Auth({ children, roles }) {
   const isUser = !!session?.user;
 
   if (isUser && status === "authenticated") {
-    if (roles.includes(session.user.role)) {
+    // console.log("session", session.user.roles);
+    // console.log("page roles", roles);
+    const intersectingRoles = roles.filter((role) =>
+      session.user.roles.includes(role)
+    );
+    // console.log(intersectingRoles);
+
+    if (!!intersectingRoles.length) {
       return children;
     }
 

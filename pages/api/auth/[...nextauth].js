@@ -24,16 +24,7 @@ export default NextAuth({
     // ...add more providers here
     CredentialsProvider({
       name: "Credentials",
-      // credentials: {
-      //   email: {
-      //     label: "Email",
-      //     type: "email",
-      //     placeholder: "abc@example.com",
-      //   },
-      //   password: { label: "Password", type: "password" },
-      // },
       authorize: async (credentials, req) => {
-        console.log("credentials", credentials);
         var user_found = await user.findUnique({
           where: {
             email: credentials.login,
@@ -44,7 +35,7 @@ export default NextAuth({
             lastname: true,
             email: true,
             username: true,
-            role: true,
+            roles: true,
             dp: true,
             dpalt: true,
             account: {
@@ -74,7 +65,7 @@ export default NextAuth({
           lastname: user_found.lastname,
           username: user_found.username,
           email: user_found.email,
-          role: user_found.role,
+          roles: user_found.roles,
           dp: user_found.dp,
           dpalt: user_found.dpalt,
         };
@@ -86,7 +77,7 @@ export default NextAuth({
       if (user) {
         token.userId = user.id;
         token.email = user.email;
-        token.role = user.role;
+        token.roles = user.roles;
         token.username = user.username;
         token.firstname = user.firstname;
         token.lastname = user.lastname;
@@ -100,7 +91,7 @@ export default NextAuth({
       session.user = {
         id: token.userId,
         email: token.email,
-        role: token.role,
+        roles: token.roles,
         username: token.username,
         firstname: token.firstname,
         lastname: token.lastname,

@@ -1,5 +1,5 @@
 import React from "react";
-import Sidebar from "../elements/sideBar/leftSideBar";
+import Sidebar from "../elements/sideBar/adminSidebar";
 import FormattedDate from "../micro/formattedDate";
 import Select from "../elements/dropdownSelect/adminSelect";
 import { AdminInlineTextInput } from "../elements/input/text";

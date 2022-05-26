@@ -1,9 +1,9 @@
 import React from "react";
-import Link from "next/link";
-import SideBar from "../elements/sideBar/leftSideBar";
+import SideBar from "../elements/sideBar/adminSidebar";
 import { AdminInlineTextInput } from "../elements/input/text";
+import FormattedDate from "../../components/micro/formattedDate";
 
-const EditCreateTags = ({ children, title }) => {
+const EditCreateTags = ({ children, title, updated_at }) => {
   return (
     <div className="font-primary flex min-h-screen dark:bg-gray-50 dark:text-gray-800">
       <SideBar />
@@ -11,7 +11,11 @@ const EditCreateTags = ({ children, title }) => {
         <div className="mb-10 flow-root">
           <h1 className="mb-1 text-2xl font-bold ">{title}</h1>
           <div className="float-left text-sm font-medium">
-            {/* Last edited: <FormattedDate date={updatedContent.updated_at} /> */}
+            {updated_at && (
+              <>
+                Last edited: <FormattedDate date={updated_at} />
+              </>
+            )}
           </div>
         </div>
         <>{children}</>

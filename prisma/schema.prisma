@@ -7,11 +7,10 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-enum Role {
+enum Privileges {
   SUPERUSER
   ADMIN
   CREATOR
-  PUBLIC
 }
 
 model Account {
@@ -98,24 +97,24 @@ model Videos {
 }
 
 model User {
-  id         String      @id @default(uuid())
-  firstname  String      @db.VarChar(50)
-  lastname   String?     @db.VarChar(50)
-  username   String      @unique @db.VarChar(20)
-  about      String?     @db.VarChar(200)
+  id         String       @id @default(uuid())
+  firstname  String       @db.VarChar(50)
+  lastname   String?      @db.VarChar(50)
+  username   String       @unique @db.VarChar(20)
+  about      String?      @db.VarChar(200)
   dp         String?
   dpalt      String?
-  email      String      @unique @db.VarChar(50)
-  phone      String?     @unique @db.VarChar(15)
-  role       Role        @default(PUBLIC)
+  email      String       @unique @db.VarChar(50)
+  phone      String?      @unique @db.VarChar(15)
+  roles      Privileges[]
   // relations
   blogposts  Blogposts[]
   account    Account?
   // default fields
-  created_at DateTime    @default(now())
-  updated_at DateTime    @updatedAt
+  created_at DateTime     @default(now())
+  updated_at DateTime     @updatedAt
   // superuser actions
-  adminGrant Boolean     @default(false)
+  adminGrant Boolean      @default(false)
 }
 
 model Tags {
