@@ -12,14 +12,12 @@ const index = () => {
 };
 
 index.auth = {
-  roles: ["SUPERUSER"],
+  roles: ["SUPERUSER", "ADMIN"],
 };
 
 export default index;
 
-
 export async function getServerSideProps(context) {
-  
   return {
     redirect: {
       destination: "/admin/blogposts",

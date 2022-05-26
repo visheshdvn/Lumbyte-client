@@ -1,6 +1,5 @@
 import React from "react";
 import { useSession } from "next-auth/react";
-import { PrismaClient } from "@prisma/client";
 import "react-toastify/dist/ReactToastify.css";
 import Link from "next/link";
 // custom components
@@ -111,6 +110,7 @@ export default Blogposts;
 
 export async function getServerSideProps(context) {
   const { blogposts } = prisma;
+  
   BigInt.prototype.toJSON = function () {
     return Number(this);
   };
@@ -124,7 +124,6 @@ export async function getServerSideProps(context) {
       topPick: true,
       date: true,
       published: true,
-      author: true,
       updated_at: true,
       created_at: true,
       n: true,

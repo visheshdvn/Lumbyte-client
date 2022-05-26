@@ -307,7 +307,6 @@ export async function getServerSideProps({ params }) {
           tagname: true,
         },
       },
-      author: true,
       banner: true,
       banneralt: true,
       updated_at: true,
@@ -323,7 +322,7 @@ export async function getServerSideProps({ params }) {
   });
 
   await prisma.$disconnect();
-  
+
   if (!data) {
     return {
       redirect: {

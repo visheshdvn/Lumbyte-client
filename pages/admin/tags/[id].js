@@ -24,7 +24,6 @@ import prisma from "../../../utils/prisma";
 const Update = ({ initialTagData }) => {
   const router = useRouter();
   const { theme } = useTheme();
-  console.log(theme);
 
   const [tagData, settagData] = useState({
     ...initialTagData,
@@ -47,6 +46,8 @@ const Update = ({ initialTagData }) => {
       return;
     }
 
+    delete tagData.updated_at;
+
     const { data } = await axios.patch(
       `/tags/update/${router.query.id}`,
       tagData
@@ -62,7 +63,7 @@ const Update = ({ initialTagData }) => {
       <HeadTags title="Edit tag" />
 
       {/* body */}
-      <EditCreateTags title="Edit tag.">
+      <EditCreateTags title="Edit tag." updated_at={tagData.updated_at}>
         <div className="flow-root">
           <div className="float-right">
             {!tagData.published ? (
@@ -101,16 +102,14 @@ export default Update;
 export async function getServerSideProps({ params }) {
   const { tags } = prisma;
   const id = params.id;
+
   if (!parseInt(id)) {
     return {
-      redirect: {
-        destination: "/404",
-        permanent: false,
-      },
+      notFound: true,
     };
   }
 
-  const data = await tags.findUnique({
+  let data = await tags.findUnique({
     where: { id: +id },
     select: {
       id: true,
@@ -121,15 +120,15 @@ export async function getServerSideProps({ params }) {
       ogAlt: true,
       ogTitle: true,
       published: true,
+      updated_at: true,
     },
   });
 
+  data = JSON.parse(JSON.stringify(data));
+
   if (!data) {
     return {
-      redirect: {
-        destination: "/404",
-        permanent: false,
-      },
+      notFound: true,
     };
   }
 
