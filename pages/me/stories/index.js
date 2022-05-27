@@ -1,19 +1,18 @@
 import React, { useState, useEffect } from "react";
 import axios from "../../../lib/axios";
 import Link from "next/link";
-import Image from "next/image";
 import { useSession } from "next-auth/react";
 // components
 import Navbar from "../../../components/elements/navbar/Navbar-client";
 import Footer from "../../../components/elements/footer/Footer";
-import { DisplayTags } from "../../../components/micro/showTags";
 import FormattedDate from "../../../components/micro/formattedDate";
 import HeadTags from "../../../components/headTags/creators/stories";
+import CreatorSideBar from "../../../components/elements/sideBar/creatorsPanelSidebar";
+import { edit } from "../../../components/icons/creatorPanel";
 
-const TAKE_IN_REQUEST = 10;
+const TAKE_IN_REQUEST = 10000;
 
-const Me = ({ user }) => {
-  //   const { about, dp, dpalt } = user;
+const Me = () => {
   const [posts, setPosts] = useState({
     data: [],
     skipped: 0,
@@ -26,7 +25,7 @@ const Me = ({ user }) => {
       const {
         data: { data },
       } = await axios.get(
-        `/user/${session?.user.username}/stories?skip=0&take=${TAKE_IN_REQUEST}`
+        `/user/${session?.user.username}/stories?skip=0&take=${TAKE_IN_REQUEST}&includePublished=true`
       );
       setPosts({ data: data, skipped: 0, taken: TAKE_IN_REQUEST });
     }
@@ -44,96 +43,90 @@ const Me = ({ user }) => {
       {/* body */}
       <Navbar />
       <div className="horizontal-spacing container mx-auto">
-        <div className="my-10 grid grid-cols-4 gap-4">
-          <section className="order-2 col-span-4 lg:order-1 lg:col-span-3">
-            <div className="mb-8 flex border-b px-3 dark:border-zinc-700 lg:px-5">
-              <h4 className="border-b-2 border-gray-900 px-2 text-lg font-bold dark:border-neutral-300">
+        <div className="my-10 grid grid-cols-10 gap-4 px-3">
+          <CreatorSideBar />
+          <div className="col-span-8">
+            <div className="mb-16 flex items-center justify-between">
+              <h1 className="font-primary text-2xl font-bold leading-none">
                 Stories
-              </h4>
+              </h1>
+              <div>
+                <button className="h-10 transform rounded-lg border bg-black px-3 text-base font-bold text-white transition-all duration-200 ease-in hover:border-2 hover:border-black hover:bg-white hover:text-black">
+                  + Add New
+                </button>
+              </div>
             </div>
-            <div className="px-3 lg:pr-3 lg:pl-0">
-              {!posts.data.length ? (
-                <div className="aspect-w-16 aspect-h-6 w-full">
-                  <div className="flex items-center justify-center">
-                    <h2 className="font-primary text-lg font-bold">
-                      No Stories
-                    </h2>
-                  </div>
-                </div>
-              ) : (
-                <div>
-                  {posts.data.map((post) => (
-                    <AuthorPagePeek key={post.slug} data={post} />
-                  ))}
-                </div>
-              )}
-            </div>
-          </section>
-
-          <section className="order-1 col-span-4 pb-8 dark:border-zinc-700 lg:order-2 lg:col-span-1 lg:border-l lg:pb-10">
-            <div className="pl-2"></div>
-          </section>
+            <main>
+              <div className="grid grid-cols-12 gap-4 pb-1">
+                <TableHead text="title" span={5} />
+                <TableHead text="" />
+                <TableHead text="published" span={2} />
+                <TableHead text="status" span={2} />
+                <TableHead text="manage" span={2} />
+              </div>
+              <div className="">
+                {posts.data.map((post) => (
+                  <Peek key={post.slug} data={post} />
+                ))}
+              </div>
+            </main>
+          </div>
         </div>
       </div>
       {/* footer */}
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 };
 
-function AuthorPagePeek({ data }) {
-  const {
-    banner,
-    banneralt,
-    published_at,
-    minuteRead,
-    slug,
-    title,
-    tags,
-    excerpt,
-    author,
-  } = data;
+function TableHead({ text, span }) {
+  return (
+    <h3 className={`uppercase col-span-${span || 1} text-base font-bold`}>
+      {text}
+    </h3>
+  );
+}
+
+function Peek({ data }) {
+  const { id, published_at, title, excerpt, published } = data;
 
   return (
-    <article className="mb-16 lg:mb-20">
-      <div className="flex">
-        <div className="relative flex-1 md:pr-3">
-          <div className="mb-2 flex">
-            <DisplayTags tags={tags} />
+    <article className="font-primary grid h-28 grid-cols-12 gap-4 border-t">
+      <div className="col-span-5 flex h-full flex-col justify-center">
+        <h1 className="font-primary line-clamp-2 mb-2 text-lg font-semibold leading-tight">
+          {title}
+        </h1>
+        <p className="font-primary line-clamp-1 text-sm font-medium leading-tight text-neutral-500">
+          {excerpt}
+        </p>
+      </div>
+      <div></div>
+      <div className="col-span-2 flex items-center text-sm font-medium">
+        {published_at ? <FormattedDate date={published_at} /> : <p>--</p>}
+      </div>
+      <div className="col-span-2 flex items-center text-sm font-medium">
+        {published ? (
+          <div className="flex">
+            <div className="flex items-center">
+              <span className="aspect-1 w-1 rounded-full bg-green-600"></span>
+            </div>
+            <span className="pl-1 text-green-600">Live</span>
           </div>
-          <Link href={`/story/${author.username}/${slug}`} prefetch={false}>
-            <h1
-              style={{ lineHeight: "111%" }}
-              className="mb-1 cursor-pointer text-xl font-bold hover:underline md:text-2xl"
-            >
-              {title}
-            </h1>
-          </Link>
-          <p className="md:line-clamp-1 mb-10 hidden font-serif">{excerpt}</p>
-
-          {/* date time */}
-          <div className="font-primary bottom-1 mt-3 flex items-center justify-start text-sm md:absolute md:mt-0">
-            <h5 className="font-normal">
-              <FormattedDate date={published_at || created_at} />
-              <span className="px-2">•</span>
-              <span>{minuteRead} minutes read</span>
-            </h5>
+        ) : (
+          <div className="flex">
+            <div className="flex items-center">
+              <span className="aspect-1 w-1 rounded-full bg-red-600"></span>
+            </div>
+            <span className="pl-1 text-red-600">Draft</span>
           </div>
-        </div>
-        <div className="flex items-center">
-          <Link href={`/story/${author.username}/${slug}`} passHref>
-            <a>
-              <div className="lg:aspect-h-10 lg:aspect-w-16 aspect-w-1 aspect-h-1 w-25 relative bg-cover bg-center md:w-32 lg:w-52">
-                <Image
-                  src={banner}
-                  alt={banneralt}
-                  layout="fill"
-                  className="object-cover object-center"
-                />
-              </div>
-            </a>
-          </Link>
-        </div>
+        )}
+      </div>
+      <div className="col-span-2 flex items-center">
+        {/* <Link href={`/me/stories/${id}`} passHref> */}
+        <a href={`/me/stories/${id}`}>
+          <div className="aspect-1 w-4">{edit}</div>
+        </a>
+        {/* </Link> */}
       </div>
     </article>
   );
