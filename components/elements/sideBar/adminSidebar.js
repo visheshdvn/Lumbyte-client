@@ -45,16 +45,9 @@ const LeftSideBar = () => {
             {/*  */}
             <div className="between-rel-paren absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transform">
               <ul className="text-gray-400">
-                <NavItem text="Dashboard" link="/me/dashboard" />
-                <NavItem text="Stories" link="/me/stories" />
-                {/* to - add */}
-                {/* drafts
-                published posts
-                liked posts
-                saved posts
-                subscribers
-                comments
-                newsletters */}
+                <NavItem text="Dashboard" link="/admin" />
+                <NavItem text="Stories" link="/admin/blogposts" />
+                <NavItem text="Tags" link="/admin/tags" />
               </ul>
             </div>
             {user && (
@@ -68,7 +61,7 @@ const LeftSideBar = () => {
                     {user.firstname} {user.lastname || ""}
                   </h4>
                   <h5 className="text-xs font-medium">
-                    {user.role.toLowerCase()}
+                    {user.roles.includes("SUPERUSER") ? "superuser" : "admin"}
                   </h5>
                 </div>
                 <div className="flex items-center">
