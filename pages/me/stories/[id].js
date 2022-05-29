@@ -25,14 +25,12 @@ import {
   publishBlogpost,
   unPublishBlogpost,
 } from "../../../utils/togglePublish";
-import HeadStories from "../../../components/headTags/public/me/stories/index"; 
+import HeadStories from "../../../components/headTags/public/me/stories/index";
 import axios from "../../../utils/axios";
 import uploadImage from "../../../utils/uploadImage/uploader";
 
 let editor;
-// const prisma = new PrismaClient();
-// const { blogposts, tags } = prisma;
-import prisma from "../../../utils/prisma";
+import prisma from "../../../lib/prisma";
 
 const update = ({ initialContent, allTags }) => {
   const router = useRouter();

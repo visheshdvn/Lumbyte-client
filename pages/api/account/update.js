@@ -24,19 +24,7 @@ handler.patch(async (req, res) => {
   const { username, firstname, lastname, email, about, id } = req.body;
   const { user } = prisma;
   const session = await getSession({ req });
-  //   const session = {
-  //     user: {
-  //       id: "2c4db745-d349-45bb-afbb-946b31469cae",
-  //       email: "visheshdvn@gmail.com",
-  //       role: "ADMIN",
-  //       username: "visheshdvn",
-  //       firstname: "Vishesh",
-  //       lastname: "Dhawan",
-  //       dp: "https://lumbytes-general.s3.eu-west-1.amazonaws.com/visheshdhawan.jpg",
-  //       dpalt: "Vishesh Dhawan",
-  //     },
-  //     expires: "2022-05-10T11:09:32.288Z",
-  //   };
+  
   if (!session) {
     return res.status(401).json({ success: 0, msg: "Unauthorized", data: {} });
   }
