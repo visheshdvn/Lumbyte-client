@@ -122,13 +122,13 @@ const update = ({ initialContent, allTags }) => {
         quote: Quote,
       },
       data: updatedContent.content,
-      readOnly: false,
+      readOnly: updatedContent.published,
       logLevel: "ERROR",
     });
     return () => {
       editor.destroy();
     };
-  }, []);
+  }, [updatedContent.published]);
 
   function updateblogdata(e) {
     setUpdateContent({
@@ -220,7 +220,7 @@ const update = ({ initialContent, allTags }) => {
             <div className="text-sm font-medium italic">
               Last edited:{" "}
               <time>
-                <FormattedDate date={updatedContent.title} />
+                <FormattedDate date={updatedContent.updated_at} />
               </time>
             </div>
           </div>
@@ -250,7 +250,7 @@ const update = ({ initialContent, allTags }) => {
                 "need-placeholder unstyled-input mb-2 w-full text-4xl font-bold leading-tight text-black"
               }
               ref={titleRef}
-              contentEditable={true}
+              contentEditable={!updatedContent.published}
               suppressContentEditableWarning={true}
               placeholder="Enter Title"
               onPaste={(e) => {
@@ -268,7 +268,7 @@ const update = ({ initialContent, allTags }) => {
             <div
               ref={excerptRef}
               className="need-placeholder unstyled-input mt-3 text-base font-medium text-neutral-600 dark:text-zinc-300 md:mt-0 md:text-lg"
-              contentEditable={true}
+              contentEditable={!updatedContent.published}
               suppressContentEditableWarning={true}
               placeholder="Write excerpt"
               onPaste={(e) => {
@@ -368,6 +368,7 @@ const update = ({ initialContent, allTags }) => {
                 value={updatedContent.banner}
                 onChangeHandler={updateblogdata}
                 label={"Banner URL"}
+                disabled={updatedContent.published}
               />
 
               {/* banner alt */}
@@ -378,6 +379,7 @@ const update = ({ initialContent, allTags }) => {
                 value={updatedContent.banneralt}
                 onChangeHandler={updateblogdata}
                 label={"Banner alt text"}
+                disabled={updatedContent.published}
               />
 
               {/* Meta description */}
@@ -390,6 +392,7 @@ const update = ({ initialContent, allTags }) => {
                   value={updatedContent.metaDescription}
                   onChange={updateblogdata}
                   maxLength={150}
+                  disabled={updatedContent.published}
                 />
                 <label className="dark-on-valid-label transform text-sm font-medium opacity-0 transition-all duration-300">
                   Meta Description
@@ -404,6 +407,7 @@ const update = ({ initialContent, allTags }) => {
                 name="minuteRead"
                 onChangeHandler={updateblogdata}
                 label={"Minute Read"}
+                disabled={updatedContent.published}
               />
 
               {/* Tags */}
@@ -412,11 +416,16 @@ const update = ({ initialContent, allTags }) => {
                   allOptions={tagsToOptions(allTags)}
                   preSelected={tagsToOptions(updatedContent.tags || [])}
                   onChangeHandler={updateTagHandler}
+                  disabled={updatedContent.published}
                 />
                 <label
                   className={`transform text-sm font-medium transition-all duration-300 ${
                     !!updatedContent.tags.length
-                      ? "text-black opacity-100"
+                      ? `opacity-100 ${
+                          updatedContent.published
+                            ? "text-neutral-400"
+                            : "text-neutral-600"
+                        }`
                       : "opacity-0"
                   }`}
                 >
@@ -443,18 +452,22 @@ function InlineInput({
   onChangeHandler,
   value,
   type,
+  disabled,
 }) {
   return (
     <div className="mb-14">
       <input
         type={type}
         placeholder={placeholder}
-        className="creator-dashboard-input font-primary mt-1 h-10 w-full border-b border-neutral-300 bg-white px-1 text-sm font-normal valid:text-neutral-600 focus:outline-0"
+        className="creator-dashboard-input font-primary mt-1 h-10 w-full border-b border-neutral-300 bg-white px-1 text-sm font-medium valid:text-neutral-600 focus:outline-0"
         name={name}
         value={value}
         onChange={onChangeHandler}
+        disabled={disabled}
       />
-      <label className="dark-on-valid-label transform text-sm font-medium opacity-0 transition-all duration-300">
+      <label
+        className={`dark-on-valid-label transform text-sm font-medium opacity-0 transition-all duration-300`}
+      >
         {label}
       </label>
     </div>

@@ -1,7 +1,12 @@
 import Select from "react-select";
 import makeAnimated from "react-select/animated";
 
-const adminSelect = ({ allOptions, preSelected, onChangeHandler }) => {
+const adminSelect = ({
+  allOptions,
+  preSelected,
+  onChangeHandler,
+  disabled,
+}) => {
   return (
     <Select
       options={allOptions}
@@ -15,6 +20,7 @@ const adminSelect = ({ allOptions, preSelected, onChangeHandler }) => {
       components={makeAnimated()}
       maxMenuHeight={150}
       className="text-sm"
+      isDisabled={disabled || false}
     />
   );
 };
