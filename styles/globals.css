@@ -11,13 +11,11 @@ body {
 }
 
 /* broad headings */
-
 .wide-head {
   @apply font-antonio xl:text-4.75xl lg:text-4.5xl sm:text-4.5xl text-3.5xl tracking-custom lg:mb-18 -mr-3 mb-16 text-center font-bold uppercase leading-none md:text-4xl xl:mb-20;
 }
 
 /* nav links */
-
 .nav-link {
   @apply font-primary mr-3 hidden text-sm uppercase transition-all duration-300 sm:mr-5 md:inline lg:mr-7 lg:text-lg;
 }
