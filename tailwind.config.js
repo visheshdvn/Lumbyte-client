@@ -37,11 +37,12 @@ module.exports = {
         "5.5xl": "52px",
       },
       colors: {
-        grayText: "rgb(117, 117, 117)",
-        "bquote-dark": "rgba(75, 75, 75, 0.5)",
         white: "white",
         black: "black",
         transparent: "transparent",
+        "neutral-350": "#E3E3E3",
+        "bquote-dark": "rgba(75, 75, 75, 0.5)",
+        grayText: "rgb(117, 117, 117)",
         "yellow-75": "rgba(251,191,36,0.75)",
         "whiteMain-50": "rgba(250, 250, 250, 0.5)",
         grayMain: "#262611",
@@ -52,6 +53,7 @@ module.exports = {
       },
       lineHeight: {
         7.5: "1.875rem",
+        "111%": "111%",
       },
       height: {
         100: "41.625rem",
@@ -83,7 +85,5 @@ module.exports = {
   plugins: [
     require("@tailwindcss/aspect-ratio"),
     require("@tailwindcss/line-clamp"),
-    // require("@tailwindcss/typography"),
-    // require("@tailwindcss/forms"),
   ],
 };
