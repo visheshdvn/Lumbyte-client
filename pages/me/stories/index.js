@@ -7,7 +7,7 @@ import qs from "qs";
 import Navbar from "../../../components/elements/navbar/Navbar-client";
 import Footer from "../../../components/elements/footer/Footer";
 import FormattedDate from "../../../components/micro/formattedDate";
-import HeadTags from "../../../components/headTags/creators/stories";
+import HeadTags from "../../../components/headTags/unIndexed/creator/stories";
 import CreatorSideBar from "../../../components/elements/sideBar/creatorsPanelSidebar";
 import { edit } from "../../../components/icons/creatorPanel";
 import { useRouter } from "next/router";
@@ -113,6 +113,7 @@ function TableHead({ text, span }) {
 
 function Peek({ data }) {
   const { id, published_at, title, excerpt, published } = data;
+  console.log(title, id);
 
   return (
     <article className="font-primary h-27 grid grid-cols-12 gap-4 border-t dark:border-zinc-700">

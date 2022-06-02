@@ -138,7 +138,6 @@ const update = ({ initialContent, allTags }) => {
   }
 
   async function saveBlogpost() {
-    console.log("saving");
     let uploadedUrl = null;
     if (file) {
       const { status, responseData } = await uploadImage(file);
@@ -243,9 +242,9 @@ const update = ({ initialContent, allTags }) => {
             <div className="flex justify-center px-10">
               <div
                 ref={titleRef}
-                contentEditable="true"
                 style={{ maxWidth: "720px" }}
                 className="unstyled-input font-primary mb-10 w-full bg-white text-center text-5xl font-bold leading-tight"
+                contentEditable="true"
                 suppressContentEditableWarning={true}
               >
                 {updatedContent.title}

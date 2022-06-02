@@ -20,7 +20,7 @@ import { useRouter } from "next/router";
 const TAKE_IN_REQUEST = 10;
 
 const Me = ({ user }) => {
-  const { firstname, lastname, username, about, dp, dpalt, role, account } =
+  const { firstname, lastname, username, about, dp, dpalt, roles, account } =
     user;
   const { linkedin, twitter, github } = account;
   const [posts, setPosts] = useState({
@@ -31,18 +31,15 @@ const Me = ({ user }) => {
   const { data: session, status } = useSession();
   const router = useRouter();
 
-  
   useEffect(async () => {
     const {
       data: { data },
     } = await axios.get(
-      `/${router.query.profile}/stories?skip=0&take=${TAKE_IN_REQUEST}`
+      `/user/${router.query.profile}/stories?skip=0&take=${TAKE_IN_REQUEST}`
     );
 
     setPosts({ data: data, skipped: 0, taken: TAKE_IN_REQUEST });
   }, [router.query.profile]);
-
-  // console.log("posts", !posts.data.length);
 
   return (
     <>
@@ -61,7 +58,7 @@ const Me = ({ user }) => {
       <div className="horizontal-spacing container mx-auto">
         <div className="my-10 grid grid-cols-4 gap-4">
           <section className="order-2 col-span-4 lg:order-1 lg:col-span-3">
-            <div className="mb-10 flex border-b px-3 dark:border-zinc-700 lg:px-5">
+            <div className="mb-8 flex border-b px-3 dark:border-zinc-700 lg:px-5">
               <h4 className="border-b-2 border-gray-900 px-2 text-lg font-bold dark:border-neutral-300">
                 Stories
               </h4>
@@ -107,19 +104,21 @@ const Me = ({ user }) => {
                     </svg>
                   )}
                 </div>
-                <div className="ml-3 md:ml-5 lg:ml-0 lg:text-center flex-1">
+                <div className="ml-3 flex-1 md:ml-5 lg:ml-0 lg:text-center">
                   <h1 className="text-2xl font-bold md:text-3xl lg:text-2xl">
                     {firstname} {lastname || ""}
                   </h1>
-                  <h2 className="font-primary text-sm text-neutral-500 dark:text-zinc-200 lg:mt-1">
-                    {role.toLowerCase()} on LumBytes
-                  </h2>
+                  {roles.includes("CREATOR") && (
+                    <h2 className="font-primary text-sm text-neutral-500 dark:text-zinc-200 lg:mt-1">
+                      Creator on LumBytes
+                    </h2>
+                  )}
                 </div>
                 <p className="mt-8 hidden px-3 text-center text-sm lg:block">
                   {about}
                 </p>
                 {session && session.user.username === username && (
-                  <div className="font-primary mt-5 rounded-full border border-green-800 px-3 lg:py-2 py-1">
+                  <div className="font-primary mt-5 rounded-full border border-green-800 px-3 py-1 lg:py-2">
                     <a
                       href="/me/settings"
                       className="text-sm font-medium text-green-800"
@@ -259,7 +258,7 @@ export async function getServerSideProps(ctx) {
       about: true,
       dp: true,
       dpalt: true,
-      role: true,
+      roles: true,
       account: {
         select: {
           twitter: true,

@@ -1,12 +1,15 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useCallback } from "react";
 import { useRouter } from "next/router";
 // third party libraries
-import _ from "lodash";
+import _, { initial } from "lodash";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useTheme } from "next-themes";
+import { getSession, useSession } from "next-auth/react";
+import Image from "next/image";
 // components
-import EditBanner from "../../../components/uploaders/editBanner";
+import Select from "../../../components/elements/dropdownSelect/creatorDashboard";
+import EditBanner from "../../../components/elements/dropzone/image";
 import ImageTool from "../../../components/editor-tools/image/index";
 import Quote from "../../../components/editor-tools/quote/quote";
 import PageLink from "../../../components/editor-tools/page-link/link";
@@ -20,22 +23,30 @@ import {
   UnPublishButton,
 } from "../../../components/elements/buttons/buttons";
 // utilities
-import { optionsToTags, tagIdFromTags } from "../../../utils/mutateTags";
+import {
+  optionsToTags,
+  tagIdFromTags,
+  tagsToOptions,
+} from "../../../utils/mutateTags";
 import {
   publishBlogpost,
   unPublishBlogpost,
 } from "../../../utils/togglePublish";
-import HeadStories from "../../../components/headTags/public/me/stories/index";
+import HeadStories from "../../../components/headTags/unIndexed/creator/stories";
 import axios from "../../../utils/axios";
 import uploadImage from "../../../utils/uploadImage/uploader";
 
 let editor;
 import prisma from "../../../lib/prisma";
+import FormattedDate from "../../../components/micro/formattedDate";
 
 const update = ({ initialContent, allTags }) => {
   const router = useRouter();
   const titleRef = useRef(null);
+  const excerptRef = useRef(null);
   const { theme } = useTheme();
+
+  const { data: session, status } = useSession();
 
   const { content } = initialContent;
   const initialContentBody = JSON.parse(content);
@@ -127,6 +138,7 @@ const update = ({ initialContent, allTags }) => {
   }
 
   function updateTagHandler(option) {
+    console.log(option);
     const newTags = [...optionsToTags(option)];
     setUpdateContent({
       ...updatedContent,
@@ -156,6 +168,7 @@ const update = ({ initialContent, allTags }) => {
       content: JSON.stringify(content),
       title: titleRef.current.textContent,
       banner: uploadedUrl || updatedContent.banner,
+      excerpt: excerptRef.current.textContent,
     };
 
     const noChange =
@@ -196,92 +209,247 @@ const update = ({ initialContent, allTags }) => {
 
   return (
     <>
-      <HeadStories title="Edit Story." />
+      <HeadStories title={`Edit Story - ${updatedContent.title}`} />
 
       {/* Body */}
-      <CreateEditBlogpostLayout
-        title="Edit Blogpost"
-        updated_at={updatedContent.updated_at}
-      >
-        <div className="mb-10 flow-root">
-          <div className="float-right">
-            {updatedContent.published ? (
-              <UnPublishButton
-                text={`UnPublish`}
-                onClickHandler={() =>
-                  unPublishBlogpost(
-                    router.query.id,
-                    updatedContent,
-                    setUpdateContent,
-                    theme
-                  )
-                }
-              />
-            ) : (
-              <PublishButton
-                text="Publish"
-                onClickHandler={() =>
-                  publishBlogpost(
-                    router.query.id,
-                    updatedContent,
-                    setUpdateContent,
-                    theme
-                  )
-                }
-              />
-            )}
-            <SaveButton text="Save" onClickHandler={saveBlogpost} />
+      <div className="horizontal-spacing container mx-auto mt-5 text-neutral-400">
+        <header className="font-primary flex items-center justify-between">
+          <div>
+            <div className="mb-1 text-xl font-medium">
+              Post: <span>{updatedContent.slug}</span>
+            </div>
+            <div className="text-sm font-medium italic">
+              Last edited:{" "}
+              <time>
+                <FormattedDate date={updatedContent.title} />
+              </time>
+            </div>
           </div>
-        </div>
+          <div>X</div>
+        </header>
 
-        {/* content body */}
-        <div className="grid grid-cols-4 gap-4">
-          <div className="col-span-3">
-            <div className="flex justify-center px-10">
-              <div
-                ref={titleRef}
-                contentEditable="true"
-                style={{ maxWidth: "720px" }}
-                className="unstyled-input font-primary mb-10 w-full bg-white text-center text-5xl font-bold leading-tight"
-                suppressContentEditableWarning={true}
-              >
-                {updatedContent.title}
+        {/* primary groups */}
+        <div className="mt-10 grid grid-cols-11 gap-4">
+          <div className="col-span-8 pb-40">
+            {/* title */}
+            <div
+              className={
+                "need-placeholder unstyled-input mb-2 w-full text-4xl font-bold leading-tight text-black"
+              }
+              ref={titleRef}
+              contentEditable={true}
+              suppressContentEditableWarning={true}
+              placeholder="Enter Title"
+              onPaste={(e) => {
+                e.preventDefault();
+                var text = (e.originalEvent || e).clipboardData.getData(
+                  "text/plain"
+                );
+                document.execCommand("insertHTML", false, text);
+              }}
+            >
+              {updatedContent.title}
+            </div>
+
+            {/* Excerpt */}
+            <div
+              ref={excerptRef}
+              className="need-placeholder unstyled-input mt-3 text-base font-medium text-neutral-600 dark:text-zinc-300 md:mt-0 md:text-lg"
+              contentEditable={true}
+              suppressContentEditableWarning={true}
+              placeholder="Write excerpt"
+              onPaste={(e) => {
+                e.preventDefault();
+                var text = (e.originalEvent || e).clipboardData.getData(
+                  "text/plain"
+                );
+                document.execCommand("insertHTML", false, text);
+              }}
+            >
+              {updatedContent.excerpt}
+            </div>
+
+            <div className="mt-7 mb-8 flex items-center text-black">
+              <div className="aspect-1 overflow-hidden rounded-full">
+                <Image
+                  src={session.user?.dp || getValidImageURL("/me.jpg")}
+                  alt={session.user?.dpalt}
+                  width={24}
+                  height={24}
+                />
+              </div>
+              <div className="font-primary ml-2 flex items-center text-xs">
+                <h3 className="font-semibold">
+                  {session.user?.firstname} {session.user?.lastname || ""}
+                </h3>
+                <div className="ml-4 flex h-3 items-center font-medium dark:text-zinc-100">
+                  <span className="">
+                    <FormattedDate date={updatedContent.updated_at} />
+                  </span>
+                  <span className="mx-2">•</span>
+                  <span className="">{updatedContent.minuteRead} min read</span>
+                </div>
               </div>
             </div>
 
-            {/* Image uploader / Management */}
-            <div style={{ maxWidth: "720px" }} className="mx-auto mb-8">
-              <EditBanner setFile={setFile} bannerUrl={updatedContent.banner} />
+            {/* Image */}
+            <div className="aspect-w-16 aspect-h-10 mb-8 w-full border">
+              <div className="bg-[#D9D9D9]">
+                <EditBanner
+                  setFile={setFile}
+                  bannerUrl={updatedContent.banner}
+                />
+              </div>
             </div>
 
             {/* editor holder */}
             <div
               id="content-editor"
-              className="editorjs-editable col-span-2 font-serif"
+              className="editorjs-editable col-span-2 font-serif text-black"
             ></div>
           </div>
+          <div className="col-span-3 flex">
+            {/* vertical border */}
+            <div
+              style={{ width: "1px" }}
+              className="text h-full bg-neutral-300"
+            ></div>
 
-          {/* metadata column */}
-          <MetadataFields
-            blogdata={updatedContent}
-            updateblogdata={updateblogdata}
-            allTags={allTags}
-            setBlogdata={setUpdateContent}
-            updateTagHandler={updateTagHandler}
-          />
+            <div className="flex-1 pl-2">
+              {/* Publish/Unpublish, save button */}
+              <div className="mb-10 flex h-24 items-center justify-around border-b border-neutral-300">
+                <SaveButton text="Save" onClickHandler={saveBlogpost} />
+
+                {updatedContent.published ? (
+                  <UnPublishButton
+                    text={`UnPublish`}
+                    onClickHandler={() =>
+                      unPublishBlogpost(
+                        router.query.id,
+                        updatedContent,
+                        setUpdateContent,
+                        theme
+                      )
+                    }
+                  />
+                ) : (
+                  <PublishButton
+                    text="Publish"
+                    onClickHandler={() =>
+                      publishBlogpost(
+                        router.query.id,
+                        updatedContent,
+                        setUpdateContent,
+                        theme
+                      )
+                    }
+                  />
+                )}
+              </div>
+
+              {/* banner url */}
+              <div className="mb-14">
+                <input
+                  type="text"
+                  placeholder="Banner URL"
+                  className="creator-dashboard-input font-primary mt-1 h-10 w-full border-b border-neutral-300 bg-white px-1 text-sm font-normal valid:text-black focus:outline-0"
+                  name="banner"
+                  value={updatedContent.banner}
+                  onChange={updateblogdata}
+                />
+                <label className="dark-on-valid-label transform text-sm font-medium opacity-0 transition-all duration-300">
+                  Banner URL
+                </label>
+              </div>
+
+              {/* banner alt */}
+              <div className="mb-14">
+                <input
+                  type="text"
+                  placeholder="Banner alt"
+                  className="creator-dashboard-input font-primary mt-1 h-10 w-full border-b border-neutral-300 bg-white px-1 text-sm font-normal valid:text-black focus:outline-0"
+                  name="banneralt"
+                  value={updatedContent.banneralt}
+                  onChange={updateblogdata}
+                />
+                <label className="dark-on-valid-label transform text-sm font-medium opacity-0 transition-all duration-300">
+                  Banner alt
+                </label>
+              </div>
+
+              {/* Meta description */}
+              <div className="mb-14">
+                <textarea
+                  placeholder="Write a description of the story in under 150 characters."
+                  style={{ height: "90px" }}
+                  className="creator-dashboard-input font-primary mt-1 w-full border-b border-neutral-300 bg-white px-1 text-sm valid:text-black focus:outline-0"
+                  name="metaDescription"
+                  value={updatedContent.metaDescription}
+                  onChange={updateblogdata}
+                  maxLength={150}
+                />
+                <label className="dark-on-valid-label transform text-sm font-medium opacity-0 transition-all duration-300">
+                  Meta Description
+                </label>
+              </div>
+
+              {/* minute read */}
+              <div className="mb-14">
+                <input
+                  type="number"
+                  placeholder="minute read"
+                  className="creator-dashboard-input font-primary mt-1 h-10 w-full border-b border-neutral-300 bg-white px-1 text-sm font-normal valid:text-black focus:outline-0"
+                  name="minuteRead"
+                  value={updatedContent.minuteRead}
+                  onChange={updateblogdata}
+                  min={1}
+                />
+                <label className="dark-on-valid-label transform text-sm font-medium opacity-0 transition-all duration-300">
+                  Minute Read
+                </label>
+              </div>
+
+              <div className="mb-14">
+                <Select
+                  allOptions={tagsToOptions(allTags)}
+                  preSelected={tagsToOptions(updatedContent.tags || [])}
+                  onChangeHandler={updateTagHandler}
+                />
+                <label
+                  className={`transform text-sm font-medium transition-all duration-300 ${
+                    !!updatedContent.tags.length
+                      ? "text-black opacity-100"
+                      : "opacity-0"
+                  }`}
+                >
+                  Tags
+                </label>
+              </div>
+            </div>
+          </div>
         </div>
-      </CreateEditBlogpostLayout>
+      </div>
     </>
   );
 };
-
 update.auth = {
-  roles: ["SUPERUSER", "ADMIN", "CREATOR"],
+  roles: ["CREATOR"],
 };
 
 export default update;
 
-export async function getServerSideProps({ params }) {
+export async function getServerSideProps({ params, req }) {
+  // const session = await getSession({ req });
+
+  // if (!session) {
+  //   return {
+  //     redirect: {
+  //       destination: "/auth/signin",
+  //       permanent: true,
+  //     },
+  //   };
+  // }
+
   const { blogposts, tags } = prisma;
   const id = params.id;
 
@@ -323,10 +491,7 @@ export async function getServerSideProps({ params }) {
 
   if (!data) {
     return {
-      redirect: {
-        destination: "/404",
-        permanent: false,
-      },
+      notFound: true,
     };
   }
 

@@ -10,7 +10,6 @@ import prisma from "../utils/prisma";
 const MAX_RESPONSE = 20;
 
 export default function Home({ latest, latestSide, readMore }) {
-  console.log("client");
   if (Object.keys(latest).length === 0) {
     return <h1>No Data</h1>;
   }
@@ -37,7 +36,6 @@ export default function Home({ latest, latestSide, readMore }) {
 }
 
 export async function getServerSideProps(ctx) {
-  // const cookie = cookies(ctx);
   const { blogposts } = prisma;
 
   let data = await blogposts.findMany({
