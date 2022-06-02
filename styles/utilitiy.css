@@ -77,26 +77,15 @@ ul.spaced li:not(:last-child) {
 
 /* label text in creator panel */
 .creator-dashboard-input:not(:placeholder-shown) {
-  @apply border-black;
+  @apply border-neutral-600;
 }
 
 .creator-dashboard-input:not(:placeholder-shown) + .dark-on-valid-label {
-  @apply text-black opacity-100;
+  @apply text-neutral-600 opacity-100;
 }
 
-/*  */
+/* placeholder on contenteditable div */
 .need-placeholder[placeholder]:empty::before {
   content: attr(placeholder);
   @apply text-neutral-400;
-}
-
-input#hide-arrows:not(:hover):-webkit-outer-spin-button,
-input#hide-arrows:not(:hover)::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-/* Firefox */
-input#hide-arrows[type="number"]:not(:hover) {
-  -moz-appearance: textfield;
 }

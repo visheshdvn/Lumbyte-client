@@ -3,6 +3,7 @@ export function tagsToOptions(tags) {
     return {
       value: tag.id,
       label: tag.tagname,
+      color: tag.color,
     };
   });
   return options;
@@ -13,6 +14,7 @@ export function optionsToTags(options) {
     return {
       id: option.value,
       tagname: option.label,
+      color: option.color,
     };
   });
 

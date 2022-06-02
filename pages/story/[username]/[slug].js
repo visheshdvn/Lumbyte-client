@@ -11,10 +11,10 @@ import {
 // custom components
 import FormattedDate from "../../../components/micro/formattedDate";
 import ShowTags from "../../../components/micro/showTags";
-import { getValidImageURL } from "../../../utils/checkValidURL";
 import ReadOnlyEditor from "../../../components/elements/editor/readOnlyEditor";
 import Navbar from "../../../components/elements/navbar/Navbar-client";
 import Footer from "../../../components/elements/footer/Footer";
+import { getValidImageURL } from "../../../utils/checkValidURL";
 import HeadBlogpost from "../../../utils/headTags/public/headBlogpost";
 import {
   facebook as fbSVG,
@@ -47,6 +47,8 @@ const Post = ({ postData, similar }) => {
     content,
     excerpt,
   } = postData;
+
+  const parsedContent = JSON.parse(content);
 
   return (
     <>
@@ -163,12 +165,14 @@ const Post = ({ postData, similar }) => {
           </div>
           <div className="order-1 col-span-12 lg:order-2 lg:col-span-8">
             <main key={id} className="pr-0 lg:pr-8 xl:pr-12">
-              <div
-                id="toSpeech"
-                className="mx-auto font-serif text-lg md:text-xl md:leading-8"
-              >
-                <ReadOnlyEditor content={JSON.parse(content)} />
-              </div>
+              {!!parsedContent.blocks.length && (
+                <div
+                  id="toSpeech"
+                  className="mx-auto font-serif text-lg md:text-xl md:leading-8"
+                >
+                  <ReadOnlyEditor content={parsedContent} />
+                </div>
+              )}
 
               {/* author data */}
               <div className="border-grayMain flex border-t-4 border-b-4 py-3 dark:border-gray-400">

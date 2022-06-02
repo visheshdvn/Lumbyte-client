@@ -12,7 +12,7 @@ import CreateEditBlogpostLayout, {
 import { SaveButton } from "../../../components/elements/buttons/buttons";
 // utils
 import axios from "../../../utils/axios";
-import HeadStories from "../../../components/headTags/public/me/stories";
+import HeadStories from "../../../components/headTags/unIndexed/creator/stories";
 import { optionsToTags, tagIdFromTags } from "../../../utils/mutateTags";
 import uploadImage from "../../../utils/uploadImage/uploader";
 
@@ -160,8 +160,8 @@ const create = () => {
 
   return (
     <>
-    {/* head */}
-    <HeadStories title="New Story" />
+      {/* head */}
+      <HeadStories title="New Story" />
 
       {/* body */}
       <CreateEditBlogpostLayout title="Create new blogpost">

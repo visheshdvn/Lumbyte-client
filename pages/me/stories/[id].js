@@ -1,21 +1,21 @@
-import React, { useEffect, useState, useRef, useCallback } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useRouter } from "next/router";
 // third party libraries
-import _, { initial } from "lodash";
+import _ from "lodash";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useTheme } from "next-themes";
 import { getSession, useSession } from "next-auth/react";
 import Image from "next/image";
+import Router from "next/router";
 // components
 import Select from "../../../components/elements/dropdownSelect/creatorDashboard";
 import EditBanner from "../../../components/elements/dropzone/image";
 import ImageTool from "../../../components/editor-tools/image/index";
 import Quote from "../../../components/editor-tools/quote/quote";
 import PageLink from "../../../components/editor-tools/page-link/link";
-import CreateEditBlogpostLayout, {
-  MetadataFields,
-} from "../../../components/layouts/createEditBlogpost";
+import { cross } from "../../../components/icons/creatorPanel";
+import ShowTags from "../../../components/micro/showTags";
 // elements
 import {
   PublishButton,
@@ -147,7 +147,6 @@ const update = ({ initialContent, allTags }) => {
   }
 
   async function saveBlogpost() {
-    console.log("saving");
     let uploadedUrl = null;
     if (file) {
       const { status, responseData } = await uploadImage(file);
@@ -225,12 +224,26 @@ const update = ({ initialContent, allTags }) => {
               </time>
             </div>
           </div>
-          <div>X</div>
+          <div>
+            <button className="aspect-1 w-3.5" onClick={() => Router.back()}>
+              {cross}
+            </button>
+          </div>
         </header>
 
         {/* primary groups */}
         <div className="mt-10 grid grid-cols-11 gap-4">
           <div className="col-span-8 pb-40">
+            <div className="mb-5 flex items-center text-black">
+              {updatedContent.tags.map((tag) => (
+                <ShowTags
+                  tagname={tag.tagname}
+                  color={tag.color}
+                  key={tag.tagname}
+                />
+              ))}
+            </div>
+
             {/* title */}
             <div
               className={
@@ -312,12 +325,12 @@ const update = ({ initialContent, allTags }) => {
             {/* vertical border */}
             <div
               style={{ width: "1px" }}
-              className="text h-full bg-neutral-300"
+              className="text h-full bg-neutral-200"
             ></div>
 
             <div className="flex-1 pl-2">
               {/* Publish/Unpublish, save button */}
-              <div className="mb-10 flex h-24 items-center justify-around border-b border-neutral-300">
+              <div className="mb-10 flex h-24 items-center justify-around border-b border-neutral-200">
                 <SaveButton text="Save" onClickHandler={saveBlogpost} />
 
                 {updatedContent.published ? (
@@ -348,34 +361,24 @@ const update = ({ initialContent, allTags }) => {
               </div>
 
               {/* banner url */}
-              <div className="mb-14">
-                <input
-                  type="text"
-                  placeholder="Banner URL"
-                  className="creator-dashboard-input font-primary mt-1 h-10 w-full border-b border-neutral-300 bg-white px-1 text-sm font-normal valid:text-black focus:outline-0"
-                  name="banner"
-                  value={updatedContent.banner}
-                  onChange={updateblogdata}
-                />
-                <label className="dark-on-valid-label transform text-sm font-medium opacity-0 transition-all duration-300">
-                  Banner URL
-                </label>
-              </div>
+              <InlineInput
+                type={"text"}
+                placeholder={"Banner URL"}
+                name={"banner"}
+                value={updatedContent.banner}
+                onChangeHandler={updateblogdata}
+                label={"Banner URL"}
+              />
 
               {/* banner alt */}
-              <div className="mb-14">
-                <input
-                  type="text"
-                  placeholder="Banner alt"
-                  className="creator-dashboard-input font-primary mt-1 h-10 w-full border-b border-neutral-300 bg-white px-1 text-sm font-normal valid:text-black focus:outline-0"
-                  name="banneralt"
-                  value={updatedContent.banneralt}
-                  onChange={updateblogdata}
-                />
-                <label className="dark-on-valid-label transform text-sm font-medium opacity-0 transition-all duration-300">
-                  Banner alt
-                </label>
-              </div>
+              <InlineInput
+                type={"text"}
+                placeholder={"Banner alt text"}
+                name={"banneralt"}
+                value={updatedContent.banneralt}
+                onChangeHandler={updateblogdata}
+                label={"Banner alt text"}
+              />
 
               {/* Meta description */}
               <div className="mb-14">
@@ -394,21 +397,16 @@ const update = ({ initialContent, allTags }) => {
               </div>
 
               {/* minute read */}
-              <div className="mb-14">
-                <input
-                  type="number"
-                  placeholder="minute read"
-                  className="creator-dashboard-input font-primary mt-1 h-10 w-full border-b border-neutral-300 bg-white px-1 text-sm font-normal valid:text-black focus:outline-0"
-                  name="minuteRead"
-                  value={updatedContent.minuteRead}
-                  onChange={updateblogdata}
-                  min={1}
-                />
-                <label className="dark-on-valid-label transform text-sm font-medium opacity-0 transition-all duration-300">
-                  Minute Read
-                </label>
-              </div>
+              <InlineInput
+                type={"number"}
+                placeholder={"Minute read"}
+                value={updatedContent.minuteRead}
+                name="minuteRead"
+                onChangeHandler={updateblogdata}
+                label={"Minute Read"}
+              />
 
+              {/* Tags */}
               <div className="mb-14">
                 <Select
                   allOptions={tagsToOptions(allTags)}
@@ -437,6 +435,31 @@ update.auth = {
 };
 
 export default update;
+
+function InlineInput({
+  placeholder,
+  name,
+  label,
+  onChangeHandler,
+  value,
+  type,
+}) {
+  return (
+    <div className="mb-14">
+      <input
+        type={type}
+        placeholder={placeholder}
+        className="creator-dashboard-input font-primary mt-1 h-10 w-full border-b border-neutral-300 bg-white px-1 text-sm font-normal valid:text-neutral-600 focus:outline-0"
+        name={name}
+        value={value}
+        onChange={onChangeHandler}
+      />
+      <label className="dark-on-valid-label transform text-sm font-medium opacity-0 transition-all duration-300">
+        {label}
+      </label>
+    </div>
+  );
+}
 
 export async function getServerSideProps({ params, req }) {
   // const session = await getSession({ req });
@@ -470,6 +493,7 @@ export async function getServerSideProps({ params, req }) {
         select: {
           id: true,
           tagname: true,
+          color: true,
         },
       },
       author: true,
@@ -484,6 +508,7 @@ export async function getServerSideProps({ params, req }) {
     select: {
       id: true,
       tagname: true,
+      color: true,
     },
   });
 
