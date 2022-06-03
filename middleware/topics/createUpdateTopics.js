@@ -1,5 +1,5 @@
-import { PrismaClient } from "@prisma/client";
-const { topics } = new PrismaClient();
+import prisma from "../../lib/prisma";
+const { topics } = prisma;
 
 import { check, validationResult } from "express-validator";
 
@@ -84,7 +84,9 @@ export const createTopicsValidations = () => {
 
 export const updateTopicsValidations = () => {
   return async (req, res, next) => {
-    await Promise.all(updateTopicsChecks.map((validation) => validation.run(req)));
+    await Promise.all(
+      updateTopicsChecks.map((validation) => validation.run(req))
+    );
 
     const errors = validationResult(req);
     if (errors.isEmpty()) {

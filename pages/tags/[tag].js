@@ -6,7 +6,7 @@ import BroadPeek from "../../components/PostPeek/broad";
 import Navbar from "../../components/elements/navbar/Navbar-client";
 import Footer from "../../components/elements/footer/Footer";
 import HeadTags from "../../components/headTags/public/headTags";
-import prisma from "../../utils/prisma";
+import prisma from "../../lib/prisma";
 
 const Tag = ({ posts, theme, metaDescription, ogImg, ogAlt, ogTitle }) => {
   const router = useRouter();

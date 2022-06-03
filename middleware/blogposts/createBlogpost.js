@@ -1,5 +1,5 @@
-import { PrismaClient } from "@prisma/client";
-const { blogposts } = new PrismaClient();
+import prisma from "../../lib/prisma"
+const { blogposts } = prisma;
 
 import { check, validationResult } from "express-validator";
 

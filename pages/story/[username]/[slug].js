@@ -23,7 +23,7 @@ import {
 } from "../../../components/icons/social/contentPage";
 
 // prisma
-import prisma from "../../../utils/prisma";
+import prisma from "../../../lib/prisma";
 
 const Post = ({ postData, similar }) => {
   const router = useRouter();
