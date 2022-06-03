@@ -174,19 +174,19 @@ const create = () => {
         excerptRef={excerptRef}
         dataState={blogdata}
         setFileHandler={setFile}
+        published={blogdata.published}
       >
-
         {/* meta section */}
         <div className="col-span-3 flex">
           {/* vertical border */}
           <div
             style={{ width: "1px" }}
-            className="text h-full bg-neutral-200"
+            className="text h-full bg-neutral-200 dark:bg-zinc-700"
           ></div>
 
           <div className="flex-1 pl-2">
             {/* Publish/Unpublish, save button */}
-            <div className="mb-10 flex h-24 items-center justify-around border-b border-neutral-200">
+            <div className="mb-10 flex h-24 items-center justify-around border-b border-neutral-200 dark:border-zinc-700">
               <SaveButton text="Save" onClickHandler={saveBlogpost} />
             </div>
 
@@ -228,7 +228,7 @@ const create = () => {
               <textarea
                 placeholder="Write a description of the story in under 150 characters."
                 style={{ height: "90px" }}
-                className="creator-dashboard-input font-primary mt-1 w-full border-b border-neutral-300 bg-white px-1 text-sm valid:text-black focus:outline-0"
+                className="creator-dashboard-input font-primary mt-1 w-full border-b border-neutral-300 bg-transparent px-1 text-sm valid:text-black focus:outline-0"
                 name="metaDescription"
                 value={blogdata.metaDescription}
                 onChange={updateblogdata}
@@ -294,7 +294,7 @@ function InlineInput({
       <input
         type={type}
         placeholder={placeholder}
-        className="creator-dashboard-input font-primary mt-1 h-10 w-full border-b border-neutral-300 bg-white px-1 text-sm font-medium valid:text-neutral-600 focus:outline-0"
+        className="creator-dashboard-input font-primary mt-1 h-10 w-full border-b border-neutral-300 bg-transparent px-1 text-sm font-medium valid:text-neutral-600 focus:outline-0"
         name={name}
         value={value}
         onChange={onChangeHandler}

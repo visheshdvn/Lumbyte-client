@@ -17,6 +17,7 @@ const editCreate = ({
   excerptRef,
   dataState,
   setFileHandler,
+  published,
 }) => {
   const { data: session, status } = useSession();
   return (
@@ -24,7 +25,7 @@ const editCreate = ({
       {/* head */}
       <HeadStories title={title} />
       {/* body */}
-      <div className="horizontal-spacing container mx-auto mt-5 text-neutral-400">
+      <div className="horizontal-spacing container mx-auto mt-5 text-neutral-400 dark:text-neutral-500">
         <header className="font-primary flex items-center justify-between">
           <div>
             <div className="mb-1 text-xl font-medium">{slug}</div>
@@ -45,7 +46,13 @@ const editCreate = ({
         <div className="mt-10 grid grid-cols-11 gap-4">
           {/* main content */}
           <div className="col-span-8 pb-40">
-            <div className="mb-5 flex items-center text-black">
+            <div
+              className={`mb-5 flex items-center ${
+                !!published
+                  ? "text-neutral-400"
+                  : "text-black dark:text-zinc-50"
+              }`}
+            >
               {dataState.tags.map((tag) => (
                 <ShowTags
                   tagname={tag.tagname}
@@ -57,9 +64,11 @@ const editCreate = ({
 
             {/* title */}
             <div
-              className={
-                "need-placeholder unstyled-input mb-2 w-full text-4xl font-bold leading-tight text-black"
-              }
+              className={`need-placeholder unstyled-input mb-2 w-full text-4xl font-bold leading-tight ${
+                !!published
+                  ? "text-neutral-400"
+                  : "text-black dark:text-zinc-50"
+              }`}
               ref={titleRef}
               contentEditable={!dataState.published}
               suppressContentEditableWarning={true}
@@ -78,7 +87,11 @@ const editCreate = ({
             {/* Excerpt */}
             <div
               ref={excerptRef}
-              className="need-placeholder unstyled-input mt-3 text-base font-medium text-neutral-600 dark:text-zinc-300 md:mt-0 md:text-lg"
+              className={`need-placeholder unstyled-input mt-3 text-base font-medium md:mt-0 md:text-lg ${
+                published
+                  ? "text-neutral-400"
+                  : "text-neutral-600 dark:text-zinc-300"
+              }`}
               contentEditable={!dataState.published}
               suppressContentEditableWarning={true}
               placeholder="Write excerpt"
@@ -93,7 +106,11 @@ const editCreate = ({
               {dataState.excerpt}
             </div>
 
-            <div className="mt-7 mb-8 flex items-center text-black">
+            <div
+              className={`mt-7 mb-8 flex items-center ${
+                !published ? "text-black dark:text-zinc-50" : "text-neutral-400"
+              }`}
+            >
               <div className="aspect-1 overflow-hidden rounded-full">
                 <Image
                   src={session.user?.dp || getValidImageURL("/me.jpg")}
@@ -106,7 +123,7 @@ const editCreate = ({
                 <h3 className="font-semibold">
                   {session.user?.firstname} {session.user?.lastname || ""}
                 </h3>
-                <div className="ml-4 flex h-3 items-center font-medium dark:text-zinc-100">
+                <div className="ml-4 flex h-3 items-center font-medium">
                   <span className="">
                     <FormattedDate date={new Date().toISOString()} />
                   </span>
@@ -117,8 +134,8 @@ const editCreate = ({
             </div>
 
             {/* Image */}
-            <div className="aspect-w-16 aspect-h-10 mb-8 w-full border">
-              <div className="bg-[#D9D9D9]">
+            <div className="aspect-w-16 aspect-h-10 mb-8 w-full">
+              <div className="bg-[#D9D9D9] dark:bg-neutral-800">
                 <EditBanner
                   setFile={setFileHandler}
                   bannerUrl={dataState.banner}
@@ -129,7 +146,11 @@ const editCreate = ({
             {/* editor holder */}
             <div
               id="content-editor"
-              className="editorjs-editable col-span-2 font-serif text-black"
+              className={`editorjs-editable col-span-2 font-serif ${
+                !!published
+                  ? "text-neutral-400"
+                  : "text-black dark:text-zinc-50"
+              }`}
             ></div>
           </div>
           {/* meta */}

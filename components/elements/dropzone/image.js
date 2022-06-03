@@ -69,9 +69,9 @@ const EditBanner = ({ setFile, bannerUrl }) => {
         {...getRootProps({ className: "dropzone" })}
         className=" h-full w-full"
       >
-        <div className="flex h-full w-full items-center justify-center rounded border">
+        <div className="flex h-full w-full items-center justify-center rounded border border-zinc-600 dark:border-neutral-300">
           <input {...getInputProps()} />
-          <p className="cursor-pointer text-lg font-semibold lg:text-xl lg:font-normal xl:text-2xl">
+          <p className="font-primary cursor-pointer text-lg font-semibold text-zinc-600 dark:text-neutral-300 lg:text-xl">
             Drop image here, or click to browse.
           </p>
         </div>
