@@ -76,13 +76,13 @@ ul.spaced li:not(:last-child) {
 }
 
 /* label text in creator panel */
-.creator-dashboard-input:disabled {
+/* .creator-dashboard-input:disabled {
   @apply border-neutral-400;
 }
 
 .creator-dashboard-input:disabled + .dark-on-valid-label {
   @apply text-neutral-400 opacity-100;
-}
+} */
 
 .creator-dashboard-input:not(:placeholder-shown):disabled {
   @apply border-neutral-400;
@@ -94,10 +94,14 @@ ul.spaced li:not(:last-child) {
 }
 
 .creator-dashboard-input:not(:placeholder-shown) {
-  @apply border-neutral-600;
+  @apply border-neutral-600 dark:border-neutral-300;
 }
 
 .creator-dashboard-input:not(:placeholder-shown) + .dark-on-valid-label {
+  @apply text-neutral-600 opacity-100 dark:text-neutral-300;
+}
+
+.creator-dashboard-input:not(:placeholder-shown):disabled + .dark-on-valid-label {
   @apply text-neutral-600 opacity-100;
 }
 

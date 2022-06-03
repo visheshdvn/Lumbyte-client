@@ -5,15 +5,13 @@ import _ from "lodash";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useTheme } from "next-themes";
-import { getSession, useSession } from "next-auth/react";
+import { getSession } from "next-auth/react";
 import Image from "next/image";
 // components
 import Select from "../../../components/elements/dropdownSelect/creatorDashboard";
-import EditBanner from "../../../components/elements/dropzone/image";
 import ImageTool from "../../../components/editor-tools/image/index";
 import Quote from "../../../components/editor-tools/quote/quote";
 import PageLink from "../../../components/editor-tools/page-link/link";
-import ShowTags from "../../../components/micro/showTags";
 import Layout from "../../../components/layouts/creator/editCreate";
 // elements
 import {
@@ -31,20 +29,17 @@ import {
   publishBlogpost,
   unPublishBlogpost,
 } from "../../../utils/togglePublish";
-import axios from "../../../utils/axios";
 import uploadImage from "../../../utils/uploadImage/uploader";
+import axios from "../../../lib/axios";
+import prisma from "../../../lib/prisma";
 
 let editor;
-import prisma from "../../../lib/prisma";
-import FormattedDate from "../../../components/micro/formattedDate";
 
 const update = ({ initialContent, allTags }) => {
   const router = useRouter();
   const titleRef = useRef(null);
   const excerptRef = useRef(null);
   const { theme } = useTheme();
-
-  const { data: session, status } = useSession();
 
   const { content } = initialContent;
   const initialContentBody = JSON.parse(content);
@@ -282,7 +277,7 @@ const update = ({ initialContent, allTags }) => {
               <textarea
                 placeholder="Write a description of the story in under 150 characters."
                 style={{ height: "90px" }}
-                className="creator-dashboard-input font-primary mt-1 w-full border-b border-neutral-300 bg-transparent px-1 text-sm valid:text-black focus:outline-0"
+                className="creator-dashboard-input font-primary mt-1 dark:disabled:text-neutral-600 w-full border-b border-neutral-300 bg-transparent px-1 text-sm font-medium text-neutral-600 focus:outline-0 dark:text-neutral-300"
                 name="metaDescription"
                 value={updatedContent.metaDescription}
                 onChange={updateblogdata}
@@ -318,8 +313,8 @@ const update = ({ initialContent, allTags }) => {
                   !!updatedContent.tags.length
                     ? `opacity-100 ${
                         updatedContent.published
-                          ? "text-neutral-400"
-                          : "text-neutral-600"
+                          ? "text-neutral-600"
+                          : "text-neutral-600 dark:text-neutral-300"
                       }`
                     : "opacity-0"
                 }`}
@@ -354,7 +349,7 @@ function InlineInput({
       <input
         type={type}
         placeholder={placeholder}
-        className="creator-dashboard-input font-primary mt-1 h-10 w-full border-b border-neutral-300 bg-transparent px-1 text-sm font-medium valid:text-neutral-600 focus:outline-0"
+        className="creator-dashboard-input font-primary mt-1 h-10 w-full border-b border-neutral-300 bg-transparent px-1 text-sm font-medium valid:text-neutral-600 focus:outline-0 dark:border-neutral-600 dark:valid:text-neutral-300"
         name={name}
         value={value}
         onChange={onChangeHandler}

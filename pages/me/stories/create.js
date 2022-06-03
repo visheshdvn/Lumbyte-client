@@ -228,7 +228,7 @@ const create = () => {
               <textarea
                 placeholder="Write a description of the story in under 150 characters."
                 style={{ height: "90px" }}
-                className="creator-dashboard-input font-primary mt-1 w-full border-b border-neutral-300 bg-transparent px-1 text-sm valid:text-black focus:outline-0"
+                className="creator-dashboard-input font-primary mt-1 w-full border-b border-neutral-300 bg-transparent px-1 text-sm text-neutral-600 valid:text-black focus:outline-0 dark:text-neutral-300"
                 name="metaDescription"
                 value={blogdata.metaDescription}
                 onChange={updateblogdata}
@@ -262,11 +262,7 @@ const create = () => {
               <label
                 className={`transform text-sm font-medium transition-all duration-300 ${
                   !!blogdata.tags.length
-                    ? `opacity-100 ${
-                        blogdata.published
-                          ? "text-neutral-400"
-                          : "text-neutral-600"
-                      }`
+                    ? `text-neutral-600 opacity-100 dark:text-neutral-300`
                     : "opacity-0"
                 }`}
               >
@@ -294,7 +290,7 @@ function InlineInput({
       <input
         type={type}
         placeholder={placeholder}
-        className="creator-dashboard-input font-primary mt-1 h-10 w-full border-b border-neutral-300 bg-transparent px-1 text-sm font-medium valid:text-neutral-600 focus:outline-0"
+        className="creator-dashboard-input font-primary mt-1 h-10 w-full border-b border-neutral-300 bg-transparent px-1 text-sm font-medium valid:text-neutral-600 focus:outline-0 dark:border-neutral-600 dark:valid:text-neutral-300"
         name={name}
         value={value}
         onChange={onChangeHandler}
