@@ -50,7 +50,6 @@ handler.post(async (req, res) => {
   } = req.body;
 
   const saveTagIds = tagIdFromTags(tags);
-  console.log("saved id", saveTagIds);
 
   BigInt.prototype.toJSON = function () {
     return Number(this);
