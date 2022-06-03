@@ -113,7 +113,6 @@ function TableHead({ text, span }) {
 
 function Peek({ data }) {
   const { id, published_at, title, excerpt, published } = data;
-  console.log(title, id);
 
   return (
     <article className="font-primary h-27 grid grid-cols-12 gap-4 border-t dark:border-zinc-700">
