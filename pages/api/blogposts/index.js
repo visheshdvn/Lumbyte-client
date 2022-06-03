@@ -1,8 +1,5 @@
-import { PrismaClient } from "@prisma/client";
 import nc from "next-connect";
-
-// const { blogposts } = new PrismaClient();
-import prisma from "../../../utils/prisma";
+import prisma from "../../../lib/prisma";
 const { blogposts } = prisma;
 
 // middlewares
@@ -153,7 +150,7 @@ handler.get(async (req, res) => {
       n: "desc",
     },
   });
-  
+
   res.status("200").json({ status: "success", data: blog });
 });
 

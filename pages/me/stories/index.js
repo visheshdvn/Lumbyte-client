@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "../../../lib/axios";
 import Link from "next/link";
-import { useSession } from "next-auth/react";
+import { useSession, getSession } from "next-auth/react";
 import qs from "qs";
 // components
 import Navbar from "../../../components/elements/navbar/Navbar-client";
@@ -155,6 +155,22 @@ function Peek({ data }) {
       </div>
     </article>
   );
+}
+
+export async function getServerSideProps({ req }) {
+  const session = await getSession({ req });
+  if (!session) {
+    return {
+      redirect: {
+        destination: "/auth/signin",
+        permanent: true,
+      },
+    };
+  }
+
+  return {
+    props: {},
+  };
 }
 
 export default Me;

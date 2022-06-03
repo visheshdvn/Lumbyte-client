@@ -1,7 +1,6 @@
-import { PrismaClient } from "@prisma/client";
 import nc from "next-connect";
-
-const { tags } = new PrismaClient();
+import prisma from "../../../lib/prisma";
+const { tags } = prisma;
 
 // middlewares
 import {
@@ -42,7 +41,7 @@ handler.post(async (req, res) => {
     },
     select: {
       id: true,
-    }
+    },
   });
 
   res.status(200).json({ data: { ...tag }, status: "created" });

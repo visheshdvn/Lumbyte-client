@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { getSession } from "next-auth/react";
 import Head from "next/head";
+import { toast } from "react-toastify";
+import { useTheme } from "next-themes";
+import { useSession } from "next-auth/react";
+import Router from "next/router";
 // components
+import "react-toastify/dist/ReactToastify.css";
 import Navbar from "../../components/elements/navbar/Navbar-client";
 import NoIndex from "../../components/headTags/noIndex";
 import prisma from "../../lib/prisma";
 import axios from "../../lib/axios";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import { useTheme } from "next-themes";
-import { useSession } from "next-auth/react";
-import Router from "next/router";
+import errorHandler from "../../utils/errorHandler";
 
 const settings = ({ data }) => {
   const { data: session, status } = useSession();
@@ -43,7 +44,6 @@ const settings = ({ data }) => {
   };
 
   const saveData = async (payload) => {
-    // console.log("saving", payload, !!Object.keys(payload).length);
     try {
       const { data, status } = await axios.patch("/account/update", {
         ...payload,
@@ -51,19 +51,7 @@ const settings = ({ data }) => {
       });
       return data.success;
     } catch (error) {
-      if (error.response.status === 409) {
-        error.response.data.errors.map((err) => {
-          toast.error(err.msg, { theme });
-        });
-        return;
-      }
-      if (error.response.status === 401) {
-        error.response.data.errors.map((err) => {
-          toast.error("Unauthorized", { theme });
-        });
-        return;
-      }
-      toast.error("Error", { theme });
+      errorHandler(error, theme);
     }
   };
 
@@ -314,7 +302,6 @@ function SaveButton({
       className="text mr-3 mt-3 h-8 rounded-full border border-[#65A30D] px-3 text-sm font-medium text-green-600 md:mt-0 md:h-10 md:px-4 md:text-base"
       onClick={async () => {
         const success = await saveData(payload);
-        console.log("success", success);
         if (!!success) {
           stateHandler({
             ...initialState,

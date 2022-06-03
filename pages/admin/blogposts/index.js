@@ -7,7 +7,7 @@ import FormattedDate from "../../../components/micro/formattedDate";
 import AdminHomeLayout from "../../../components/layouts/adminHome";
 // utils
 import { HeadBlogposts } from "../../../utils/headTags/admin/meta";
-import prisma from "../../../utils/prisma";
+import prisma from "../../../lib/prisma";
 
 function capitalize(str) {
   return str.charAt(0).toUpperCase() + str.slice(1);
@@ -110,7 +110,7 @@ export default Blogposts;
 
 export async function getServerSideProps(context) {
   const { blogposts } = prisma;
-  
+
   BigInt.prototype.toJSON = function () {
     return Number(this);
   };

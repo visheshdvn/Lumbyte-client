@@ -109,6 +109,6 @@ export const editUserValidations = () => {
       return next();
     }
 
-    return res.status(409).json({ errors: errors.array() });
+    return res.status(422).json({ errors: errors.array() });
   };
 };

@@ -1,7 +1,5 @@
-import { PrismaClient } from "@prisma/client";
 import nc from "next-connect";
-
-const prisma = new PrismaClient();
+import prisma from "../../../../lib/prisma";
 const { blogposts, user } = prisma;
 import { getSession } from "next-auth/react";
 

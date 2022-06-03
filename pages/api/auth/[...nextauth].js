@@ -1,9 +1,8 @@
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { comparePassword } from "../../../middleware/auth/encryptDecryptPassword";
-
-import { PrismaClient } from "@prisma/client";
-const { user } = new PrismaClient();
+import prisma from "../../../lib/prisma";
+const { user } = prisma;
 
 const secret = process.env.TOKEN_SECRET;
 

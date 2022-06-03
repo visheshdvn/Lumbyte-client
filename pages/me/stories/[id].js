@@ -32,6 +32,7 @@ import {
 import uploadImage from "../../../utils/uploadImage/uploader";
 import axios from "../../../lib/axios";
 import prisma from "../../../lib/prisma";
+import errorHandler from "../../../utils/errorHandler";
 
 let editor;
 
@@ -181,7 +182,6 @@ const update = ({ initialContent, allTags }) => {
     payload.tags = tagIdFromTags(payload.tags);
 
     try {
-      console.log("sending request");
       const { data } = await axios.patch(
         `/blogposts/update/${router.query.id}`,
         payload,
@@ -193,8 +193,7 @@ const update = ({ initialContent, allTags }) => {
       setUpdateContent({ ...data.blogpost });
       toast.success("Changes saved Successfully ⭐", { theme });
     } catch (err) {
-      console.error("error", err);
-      toast.error("Error", { theme });
+      errorHandler(err, theme);
     }
   }
 
@@ -277,7 +276,7 @@ const update = ({ initialContent, allTags }) => {
               <textarea
                 placeholder="Write a description of the story in under 150 characters."
                 style={{ height: "90px" }}
-                className="creator-dashboard-input font-primary mt-1 dark:disabled:text-neutral-600 w-full border-b border-neutral-300 bg-transparent px-1 text-sm font-medium text-neutral-600 focus:outline-0 dark:text-neutral-300"
+                className="creator-dashboard-input font-primary mt-1 w-full border-b border-neutral-300 bg-transparent px-1 text-sm font-medium text-neutral-600 focus:outline-0 dark:text-neutral-300 dark:disabled:text-neutral-600"
                 name="metaDescription"
                 value={updatedContent.metaDescription}
                 onChange={updateblogdata}
@@ -365,22 +364,22 @@ function InlineInput({
 }
 
 export async function getServerSideProps({ params, req }) {
-  // const session = await getSession({ req });
+  const session = await getSession({ req });
 
-  // if (!session) {
-  //   return {
-  //     redirect: {
-  //       destination: "/auth/signin",
-  //       permanent: true,
-  //     },
-  //   };
-  // }
+  if (!session) {
+    return {
+      redirect: {
+        destination: "/auth/signin",
+        permanent: true,
+      },
+    };
+  }
 
   const { blogposts, tags } = prisma;
   const id = params.id;
 
   let data = await blogposts.findUnique({
-    where: { id },
+    where: { id: id },
     select: {
       id: true,
       title: true,
@@ -406,6 +405,12 @@ export async function getServerSideProps({ params, req }) {
       published: true,
     },
   });
+
+  if (session.user.id !== data.author.id) {
+    return {
+      notFound: true,
+    };
+  }
 
   let allTags = await tags.findMany({
     select: {

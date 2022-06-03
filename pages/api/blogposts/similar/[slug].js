@@ -1,7 +1,6 @@
-import { PrismaClient } from "@prisma/client";
 import nc from "next-connect";
-
-const { blogposts } = new PrismaClient();
+import prisma from "../../../../lib/prisma";
+const { blogposts } = prisma;
 
 // middlewares
 import {

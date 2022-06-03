@@ -5,7 +5,7 @@ import Navbar from "../components/elements/navbar/Navbar-client";
 import Footer from "../components/elements/footer/Footer";
 
 import MetaIndex from "../utils/headTags/public/headIndex";
-import prisma from "../utils/prisma";
+import prisma from "../lib/prisma";
 
 const MAX_RESPONSE = 20;
 

@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useRouter } from "next/router";
 // third party libraries
-import { PrismaClient } from "@prisma/client";
 import _ from "lodash";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -27,13 +26,14 @@ import {
   unPublishBlogpost,
 } from "../../../utils/togglePublish";
 import { HeadBlogposts } from "../../../utils/headTags/admin/meta";
-import axios from "../../../utils/axios";
 import uploadImage from "../../../utils/uploadImage/uploader";
+import axios from "../../../lib/axios";
+import prisma from "../../../lib/prisma";
+import errorHandler from "../../../utils/errorHandler";
 
 let editor;
 // const prisma = new PrismaClient();
 // const { blogposts, tags } = prisma;
-import prisma from "../../../utils/prisma";
 
 const update = ({ initialContent, allTags }) => {
   const router = useRouter();
@@ -191,8 +191,7 @@ const update = ({ initialContent, allTags }) => {
       setUpdateContent({ ...data.blogpost });
       toast.success("Changes saved Successfully ⭐", { theme });
     } catch (err) {
-      console.error("error", err);
-      toast.error("Error", { theme });
+      errorHandler(err, theme);
     }
   }
 

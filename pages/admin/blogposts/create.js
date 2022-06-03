@@ -11,7 +11,7 @@ import CreateEditBlogpostLayout, {
 } from "../../../components/layouts/createEditBlogpost";
 import { SaveButton } from "../../../components/elements/buttons/buttons";
 // utils
-import axios from "../../../utils/axios";
+import axios from "../../../lib/axios";
 import { HeadBlogposts } from "../../../utils/headTags/admin/meta";
 import { optionsToTags, tagIdFromTags } from "../../../utils/mutateTags";
 import uploadImage from "../../../utils/uploadImage/uploader";

@@ -1,12 +1,13 @@
 import React from "react";
+import Image from "next/image";
+import Router from "next/router";
+import { useSession } from "next-auth/react";
 import HeadStories from "../../headTags/unIndexed/creator/stories";
 import FormattedDate from "../../micro/formattedDate";
 import { cross } from "../../icons/creatorPanel";
-import Router from "next/router";
 import ShowTags from "../../micro/showTags";
-import { useSession } from "next-auth/react";
 import EditBanner from "../../elements/dropzone/image";
-import Image from "next/image";
+import { getValidImageURL } from "../../../utils/checkValidURL";
 
 const editCreate = ({
   children,
@@ -87,7 +88,7 @@ const editCreate = ({
             {/* Excerpt */}
             <div
               ref={excerptRef}
-              className={`need-placeholder unstyled-input mt-3 text-base font-medium md:mt-0 md:text-lg ${
+              className={`need-placeholder unstyled-input mt-3 text-base font-medium leading-snug md:mt-0 md:text-lg md:leading-snug lg:leading-snug xl:leading-snug ${
                 published
                   ? "text-neutral-400"
                   : "text-neutral-600 dark:text-zinc-300"
@@ -135,7 +136,7 @@ const editCreate = ({
 
             {/* Image */}
             <div className="aspect-w-16 aspect-h-10 mb-8 w-full">
-              <div className="bg-[#D9D9D9] dark:bg-neutral-800">
+              <div className="rounded bg-[#D9D9D9] dark:bg-neutral-800">
                 <EditBanner
                   setFile={setFileHandler}
                   bannerUrl={dataState.banner}

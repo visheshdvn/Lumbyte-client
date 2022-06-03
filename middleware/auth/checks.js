@@ -5,9 +5,9 @@ import { check, validationResult } from "express-validator";
 
 const notEmpty = (value) => {
   if (value.trim() === "") {
-    return Promise.reject("value cannot be empty.");
+    return false;
   } else {
-    return Promise.resolve("value is valid.");
+    return true;
   }
 };
 

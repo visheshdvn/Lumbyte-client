@@ -12,6 +12,7 @@ import { useSession } from "next-auth/react";
 import { useTheme } from "next-themes";
 import Router from "next/router";
 import HeadTags from "../../components/headTags/public/auth/signin";
+import errorHandler from "../../utils/errorHandler";
 
 const SignUp = () => {
   const { theme } = useTheme();
@@ -64,9 +65,7 @@ const SignUp = () => {
       toast.success("Registration successfull", { theme });
       Router.push("/auth/signin?registration=success");
     } catch (error) {
-      error.response?.data?.errors.map((err) =>
-        toast.error(err.msg, { duration: 5000, theme })
-      );
+      errorHandler(error, theme);
     }
   }
 

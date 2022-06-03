@@ -1,5 +1,5 @@
 import nc from "next-connect";
-import prisma from "../../../utils/prisma";
+import prisma from "../../../lib/prisma";
 import { getSession } from "next-auth/react";
 
 // middlewares

@@ -1,14 +1,11 @@
 import React from "react";
 import Link from "next/link";
-import { PrismaClient } from "@prisma/client";
 import "react-toastify/dist/ReactToastify.css";
 // components
 import AdminHomeLayout from "../../../components/layouts/adminHome";
 // utils
 import { HeadTags } from "../../../utils/headTags/admin/meta";
-
-// const { tags } = new PrismaClient();
-import prisma from "../../../utils/prisma";
+import prisma from "../../../lib/prisma";
 
 const Tags = ({ tags }) => {
   return (

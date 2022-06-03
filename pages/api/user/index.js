@@ -1,5 +1,4 @@
 import nc from "next-connect";
-// import { getToken } from "next-auth/jwt";
 import { getSession } from "next-auth/react";
 
 const handler = nc({

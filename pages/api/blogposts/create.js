@@ -1,9 +1,9 @@
 import nc from "next-connect";
 
-import prisma from "../../../utils/prisma";
+import prisma from "../../../lib/prisma";
 const { blogposts } = prisma;
 import { getSession } from "next-auth/react";
-import { optionsToTags, tagIdFromTags } from "../../../utils/mutateTags";
+import { tagIdFromTags } from "../../../utils/mutateTags";
 
 // middlewares
 import {

@@ -1,7 +1,6 @@
-import { PrismaClient } from "@prisma/client";
 import nc from "next-connect";
-
-const { user } = new PrismaClient();
+import prisma from "../../../lib/prisma";
+const { user } = prisma;
 import { signupValidations } from "../../../middleware/auth/checks";
 import { hashPassword } from "../../../middleware/auth/encryptDecryptPassword";
 

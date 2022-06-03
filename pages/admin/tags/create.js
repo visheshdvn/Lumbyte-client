@@ -9,7 +9,7 @@ import EditCreateTags, {
 // elements
 import { SaveButton } from "../../../components/elements/buttons/buttons";
 // utilities
-import axios from "../../../utils/axios";
+import axios from "../../../lib/axios";
 import { HeadTags } from "../../../utils/headTags/admin/meta";
 
 const createTag = ({}) => {

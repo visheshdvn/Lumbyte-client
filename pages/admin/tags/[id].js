@@ -17,9 +17,9 @@ import {
 } from "../../../components/elements/buttons/buttons";
 // utils
 import { HeadTags } from "../../../utils/headTags/admin/meta";
-import axios from "../../../utils/axios";
+import axios from "../../../lib/axios";
 import { unPublishTag, publishTag } from "../../../utils/togglePublish";
-import prisma from "../../../utils/prisma";
+import prisma from "../../../lib/prisma";
 
 const Update = ({ initialTagData }) => {
   const router = useRouter();

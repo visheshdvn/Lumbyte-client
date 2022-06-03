@@ -1,7 +1,6 @@
-import { PrismaClient } from "@prisma/client";
 import nc from "next-connect";
-
-const { topics } = new PrismaClient();
+import prisma from "../../../lib/prisma";
+const { topics } = prisma;
 
 // middlewares
 import {
@@ -89,7 +88,7 @@ handler.get(async (req, res) => {
           : false,
     },
     where: {
-    //   published: true,
+      //   published: true,
       id: _where && _where.id ? +_where.id || undefined : undefined,
       topicname:
         _where && _where.topicname

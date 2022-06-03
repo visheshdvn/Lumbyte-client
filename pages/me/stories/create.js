@@ -2,13 +2,10 @@ import React, { useEffect, useState, useRef } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useTheme } from "next-themes";
-import { useSession } from "next-auth/react";
+import { getSession } from "next-auth/react";
 import Router from "next/router";
 import Image from "next/image";
 // components
-import EditBanner from "../../../components/elements/dropzone/image";
-import FormattedDate from "../../../components/micro/formattedDate";
-import ShowTags from "../../../components/micro/showTags";
 import { SaveButton } from "../../../components/elements/buttons/buttons";
 import Select from "../../../components/elements/dropdownSelect/creatorDashboard";
 import Layout from "../../../components/layouts/creator/editCreate";
@@ -16,12 +13,12 @@ import Layout from "../../../components/layouts/creator/editCreate";
 import { optionsToTags, tagsToOptions } from "../../../utils/mutateTags";
 import axios from "../../../lib/axios";
 import uploadImage from "../../../utils/uploadImage/uploader";
+import errorHandler from "../../../utils/errorHandler";
 
 // editorjs tools
 let editor;
 const create = () => {
   const { theme } = useTheme();
-  const { data: session, status } = useSession();
 
   // initialize editor
   useEffect(() => {
@@ -156,11 +153,7 @@ const create = () => {
       toast.success("Post created 🌟", { theme });
       Router.push(`/me/stories/${id}`);
     } catch (err) {
-      if (err.response?.status === 401) {
-        toast.error("Unauthorized", { theme });
-        return;
-      }
-      toast.error("Could not create post", { theme });
+      errorHandler(err, theme);
     }
   }
 

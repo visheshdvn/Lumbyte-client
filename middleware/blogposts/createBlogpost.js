@@ -5,9 +5,9 @@ import { check, validationResult } from "express-validator";
 
 const notEmpty = (value) => {
   if (value.trim() === "") {
-    return Promise.reject("value cannot be empty or only spaces ");
+    return false;
   } else {
-    return Promise.resolve("value is valid.");
+    return true;
   }
 };
 
@@ -88,7 +88,7 @@ const commoncheks = [
 
 // checks
 const createBlogpostValidationChecks = [
-  check("title", "title should be a non empty string")
+  check("title", "Title should be a non empty string")
     .isString()
     .custom((title) => notEmpty(title)),
   check("slug", "slug should be a valid string")
@@ -113,7 +113,7 @@ const createBlogpostValidationChecks = [
 ];
 
 const updateBlogpostValidationChecks = [
-  check("title", "title should be a string")
+  check("title", "Title should be a string")
     .optional()
     .isString()
     .custom((title) => notEmpty(title)),
@@ -133,9 +133,9 @@ const updateBlogpostValidationChecks = [
         })
         .then((blogpost) => {
           if (blogpost.length > 0) {
-            return Promise.reject("slug should be unique");
+            return Promise.reject("Slug should be unique");
           } else {
-            return Promise.resolve("slug valid");
+            return Promise.resolve("Slug valid");
           }
         });
     }),
@@ -154,9 +154,7 @@ export const createblogpostvalidations = () => {
       return next();
     }
 
-    console.log("error", errors.array());
-    //422
-    return res.status(400).json({ errors: errors.array() });
+    return res.status(422).json({ errors: errors.array() });
   };
 };
 
