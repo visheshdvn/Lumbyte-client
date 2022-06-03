@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 // third party packages
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import axios from "../../utils/axios";
+import axios from "../../lib/axios";
 import Link from "next/link";
 // components
 import Layout from "../../components/layouts/auth/signInRegister";

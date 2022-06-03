@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from "../../utils/axios";
+import axios from "../../lib/axios";
 import Link from "next/link";
 import Image from "next/image";
 import { useSession } from "next-auth/react";
