@@ -138,7 +138,6 @@ const update = ({ initialContent, allTags }) => {
   }
 
   function updateTagHandler(option) {
-    console.log(option);
     const newTags = [...optionsToTags(option)];
     setUpdateContent({
       ...updatedContent,

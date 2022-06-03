@@ -3,6 +3,7 @@ import nc from "next-connect";
 import prisma from "../../../utils/prisma";
 const { blogposts } = prisma;
 import { getSession } from "next-auth/react";
+import { optionsToTags, tagIdFromTags } from "../../../utils/mutateTags";
 
 // middlewares
 import {
@@ -44,10 +45,12 @@ handler.post(async (req, res) => {
     featured,
     topPick,
     date,
-    authorId,
     tags,
     topicsId,
   } = req.body;
+
+  const saveTagIds = tagIdFromTags(tags);
+  console.log("saved id", saveTagIds);
 
   BigInt.prototype.toJSON = function () {
     return Number(this);
@@ -76,8 +79,8 @@ handler.post(async (req, res) => {
           id: topicsId,
         },
       },
-      tags: tags && {
-        connect: tags,
+      tags: saveTagIds && {
+        connect: saveTagIds,
       },
       published: false,
     },
