@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Router from "next/router";
+import { useTheme } from "next-themes";
 // components
 import EditCreateTags, {
   DataEntryCard,
@@ -11,8 +12,10 @@ import { SaveButton } from "../../../components/elements/buttons/buttons";
 // utilities
 import axios from "../../../lib/axios";
 import { HeadTags } from "../../../utils/headTags/admin/meta";
+import errorHandler from "../../../utils/errorHandler";
 
 const createTag = ({}) => {
+  const { theme } = useTheme();
   const [tagData, settagData] = useState({
     tagname: "",
     color: "",
@@ -50,8 +53,7 @@ const createTag = ({}) => {
       toast.success("Created successfully.");
       Router.push(`/admin/tags/${data.id}`);
     } catch (err) {
-      console.log(err.toJSON());
-      toast.error("some error.");
+      errorHandler(err, { theme });
     }
   };
 

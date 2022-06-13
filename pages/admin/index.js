@@ -20,7 +20,7 @@ export default index;
 export async function getServerSideProps(context) {
   return {
     redirect: {
-      destination: "/admin/blogposts",
+      destination: "/admin/stories",
       permanent: false,
     },
   };

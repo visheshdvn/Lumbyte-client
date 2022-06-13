@@ -28,7 +28,7 @@ const Blogposts = ({ blogposts }) => {
       <AdminHomeLayout
         title="Blogpost"
         count={blogposts.length}
-        addNewHref="/admin/blogposts/create"
+        addNewHref="/admin/stories/create"
       >
         {/* all blogpost grid */}
         <div className="mt-5">
@@ -63,7 +63,7 @@ function TableContents({ data }) {
   const { id, slug, title, featured, topPick, published, created_at, n } = data;
 
   return (
-    <Link passHref href={`/admin/blogposts/${id}`}>
+    <Link passHref href={`/admin/stories/${id}`}>
       {/* <a> */}
       <tr
         className="font-primary cursor-pointer border-b bg-white text-xs font-medium text-gray-800"

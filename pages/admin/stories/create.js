@@ -15,6 +15,7 @@ import axios from "../../../lib/axios";
 import { HeadBlogposts } from "../../../utils/headTags/admin/meta";
 import { optionsToTags, tagIdFromTags } from "../../../utils/mutateTags";
 import uploadImage from "../../../utils/uploadImage/uploader";
+import errorHandler from "../../../utils/errorHandler";
 
 // editorjs tools
 let editor;
@@ -147,10 +148,7 @@ const create = () => {
       toast.success("Post created 🌟", { theme });
       Router.push(`/admin/blogposts/${id}`);
     } catch (err) {
-      toast.error("Could not create post", { theme });
-      // err.response.data.errors.map((error) => {
-      //   toast.error(error.msg);
-      // });
+      errorHandler(err, { theme });
     }
   }
 

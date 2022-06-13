@@ -36,7 +36,7 @@ const LeftSideBar = () => {
                   style={{
                     backgroundImage: `url(/logo/Logo-SimpletextDark.png)`,
                   }}
-                  className="h-12 w-12 rounded-xl border border-zinc-50 bg-cover bg-center"
+                  className="h-12 w-12 rounded-full border border-zinc-50 bg-cover bg-center"
                 ></div>
               </a>
               <div className="mx-4 h-9 items-center border-l"></div>
@@ -46,15 +46,22 @@ const LeftSideBar = () => {
             <div className="between-rel-paren absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transform">
               <ul className="text-gray-400">
                 <NavItem text="Dashboard" link="/admin" />
-                <NavItem text="Stories" link="/admin/blogposts" />
+                <NavItem text="Stories" link="/admin/stories" />
                 <NavItem text="Tags" link="/admin/tags" />
               </ul>
+              {/* drafts
+                published posts
+                liked posts
+                saved posts
+                subscribers
+                comments
+                newsletters */}
             </div>
             {user && (
               <div className="absolute bottom-8 left-1/2 flex w-60 -translate-x-1/2 transform text-white">
                 <div
                   style={{ backgroundImage: `url(${user.dp})` }}
-                  className="mr-4 h-12 w-12 rounded-xl bg-cover bg-center"
+                  className="mr-4 h-12 w-12 rounded-full bg-cover bg-center"
                 ></div>
                 <div className="flex-1 flex-col justify-around">
                   <h4 className="text-base font-semibold">
@@ -92,13 +99,20 @@ const LeftSideBar = () => {
 
 function NavItem({ text, link }) {
   const router = useRouter();
-  // console.log(router.pathname)
-  let path = router.pathname.replace("/me/", "");
+  let path = router.pathname.replace("/admin/", "");
   const thisPath = path.toLowerCase().startsWith(text.toLowerCase());
 
-  const conditionalClass = path.toLowerCase().startsWith(text.toLowerCase())
+  const conditionalClass = thisPath
     ? "bg-slate-800 text-white font-bold"
     : "font-medium";
+
+  console.log("text", text);
+  console.log("path", path);
+  console.log(
+    path.toLowerCase().startsWith(text.toLowerCase()),
+    "for path",
+    path
+  );
 
   const icon = {
     Dashboard: thisPath ? (
