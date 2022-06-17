@@ -2,9 +2,8 @@ import React, { useEffect, useState, useRef } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useTheme } from "next-themes";
-import { getSession } from "next-auth/react";
 import Router from "next/router";
-import Image from "next/image";
+import slugify from "slugify";
 // components
 import { SaveButton } from "../../../components/elements/buttons/buttons";
 import Select from "../../../components/elements/dropdownSelect/creatorDashboard";
@@ -69,7 +68,6 @@ const create = () => {
   }, []);
 
   // tags display
-  const [selectedTags, setSelectedTags] = useState([]);
   const [allTags, setAllTags] = useState([]);
   useEffect(async () => {
     let { data } = await axios.get("/tags?_select=tagname&_select=color");
@@ -82,7 +80,6 @@ const create = () => {
 
   const [blogdata, setBlogdata] = useState({
     title: "",
-    slug: "",
     metaDescription: "",
     excerpt: "",
     minuteRead: 1,
@@ -124,14 +121,19 @@ const create = () => {
     //
     let payload = {};
     let content = await editor.save();
+    const slug = slugify(titleRef.current.textContent, {
+      lower: true,
+      strict: true,
+    });
+
     payload = {
       ...blogdata,
       content: JSON.stringify(content),
       minuteRead: +blogdata.minuteRead,
-      // authorId: session.user.id,
       banner: uploadedUrl || "",
       title: titleRef.current.textContent,
       excerpt: excerptRef.current.textContent,
+      slug,
     };
 
     if (!payload.slug || !payload.title) {
@@ -184,7 +186,7 @@ const create = () => {
             </div>
 
             {/* slug */}
-            <InlineInput
+            {/* <InlineInput
               type={"text"}
               placeholder={"enter slug"}
               name={"slug"}
@@ -192,7 +194,7 @@ const create = () => {
               onChangeHandler={updateblogdata}
               label={"Slug"}
               disabled={blogdata.published}
-            />
+            /> */}
 
             {/* banner url */}
             <InlineInput
