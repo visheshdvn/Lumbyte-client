@@ -63,42 +63,41 @@ function TableContents({ data }) {
   const { id, slug, title, featured, topPick, published, created_at, n } = data;
 
   return (
-    <Link passHref href={`/admin/stories/${id}`}>
-      {/* <a> */}
-      <tr
-        className="font-primary cursor-pointer border-b bg-white text-xs font-medium text-gray-800"
-        key={data.id}
-      >
-        <td className="opacity-0">S</td>
-        <td className="py-4">{n}</td>
-        <td className="py-4">{decodeURIComponent(slug)}</td>
-        <td className="line-clamp-1 pt-4">{title}</td>
-        <td className={data.featured ? "text-green-600" : "text-red-600"}>
-          {capitalize(featured.toString())}
-        </td>
-        <td className={topPick ? "text-green-600" : "text-red-600"}>
-          {capitalize(topPick.toString())}
-        </td>
-        <td>
-          <FormattedDate date={created_at} />
-        </td>
-        <td className={published ? "text-green-600" : "text-red-600"}>
-          <div className="flex">
-            <h5
-              className={`border px-2 py-1 ${
-                published
-                  ? "border-green-600 bg-green-600 bg-opacity-5"
-                  : "border-red-600 bg-red-600 bg-opacity-5"
-              }`}
-            >
-              {published ? "Published" : "UnPublished"}
-            </h5>
-          </div>
-        </td>
-        <td className="opacity-0">controls</td>
-      </tr>
-      {/* </a> */}
-    </Link>
+    // <Link href={`/admin/stories/${id}`}>
+    // </Link>
+
+    <tr
+      className="font-primary cursor-pointer border-b bg-white text-xs font-medium text-gray-800"
+      key={data.id}
+    >
+      <td className="opacity-0">S</td>
+      <td className="py-4">{n}</td>
+      <td className="py-4">{decodeURIComponent(slug)}</td>
+      <td className="line-clamp-1 pt-4">{title}</td>
+      <td className={data.featured ? "text-green-600" : "text-red-600"}>
+        {capitalize(featured.toString())}
+      </td>
+      <td className={topPick ? "text-green-600" : "text-red-600"}>
+        {capitalize(topPick.toString())}
+      </td>
+      <td>
+        <FormattedDate date={created_at} />
+      </td>
+      <td className={published ? "text-green-600" : "text-red-600"}>
+        <div className="flex">
+          <h5
+            className={`border px-2 py-1 ${
+              published
+                ? "border-green-600 bg-green-600 bg-opacity-5"
+                : "border-red-600 bg-red-600 bg-opacity-5"
+            }`}
+          >
+            {published ? "Published" : "UnPublished"}
+          </h5>
+        </div>
+      </td>
+      <td className="opacity-0">controls</td>
+    </tr>
   );
 }
 

@@ -13,15 +13,6 @@ const AdminHome = ({ children, title, count, addNewHref }) => {
           <h2 className="text-base font-normal">{count} items found.</h2>
         </div>
 
-        {/* add new button */}
-        <div className="mt-20 flex justify-end">
-          <Link passHref href={addNewHref}>
-            <a className="rounded bg-green-600 px-3 py-1 text-base font-medium text-white ring-green-600 ring-opacity-50 hover:ring-2 focus:ring-2">
-              + Add new {title.toLowerCase()}
-            </a>
-          </Link>
-        </div>
-
         <>{children}</>
       </div>
     </div>
