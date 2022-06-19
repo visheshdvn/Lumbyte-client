@@ -9,10 +9,11 @@ import {
 } from "react-share";
 
 // custom components
+// import Navbar from "../../../components/elements/navbar/Navbar-client";
+import Navbar from "../../../components/elements/navbar/Navbar";
 import FormattedDate from "../../../components/micro/formattedDate";
 import ShowTags from "../../../components/micro/showTags";
 import ReadOnlyEditor from "../../../components/elements/editor/readOnlyEditor";
-import Navbar from "../../../components/elements/navbar/Navbar-client";
 import Footer from "../../../components/elements/footer/Footer";
 import { getValidImageURL } from "../../../utils/checkValidURL";
 import HeadBlogpost from "../../../utils/headTags/public/headBlogpost";

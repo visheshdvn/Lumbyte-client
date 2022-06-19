@@ -11,7 +11,6 @@ import {
   facebook as facebookSVG,
   twitter as twitterSVG,
 } from "../../icons/social/navbar";
-import { maleUser as defaultUser } from "../../icons/user";
 
 export default function Navbar() {
   const [searchValue, setSearchValue] = useState("");
