@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useSession, getSession } from "next-auth/react";
 import qs from "qs";
 // components
-import Navbar from "../../../components/elements/navbar/Navbar-client";
+import Navbar from "../../../components/elements/navbar/Navbar";
 import Footer from "../../../components/elements/footer/Footer";
 import FormattedDate from "../../../components/micro/formattedDate";
 import HeadTags from "../../../components/headTags/unIndexed/creator/stories";

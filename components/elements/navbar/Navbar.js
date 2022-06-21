@@ -4,6 +4,7 @@ import { BellIcon, MenuIcon, XIcon } from "@heroicons/react/outline";
 import { useSession, signOut } from "next-auth/react";
 import { useTheme } from "next-themes";
 import Image from "next/image";
+import { sun as SunIcon, moon as moonIcon } from "../../icons/themeSwitch";
 
 const navigation = [
   { name: "Web", href: "/tags/web" },
@@ -89,7 +90,6 @@ export default function Navbar() {
                   </button>
 
                   {/* theme switch below*/}
-
                   <Switch
                     checked={theme === "dark"}
                     onChange={() => {
@@ -99,12 +99,16 @@ export default function Navbar() {
                         setTheme("light");
                       }
                     }}
+                    // style={{ marginTop: "2px" }}
                     className="inline-flex w-6 cursor-pointer items-center focus:outline-none"
                   >
                     <span className="sr-only">Switch theme mode</span>
-                    <div className="absolute">
-                      <div style={{ paddingBottom: "2px" }} className="text-xl">
-                        {theme === "dark" ? "🌞" : "🌒"}
+                    <div
+                      style={{ width: "30px", height: "30px" }}
+                      className="absolute flex transform items-center justify-center rounded-full transition-all duration-200 hover:bg-gray-100 dark:hover:bg-gray-500"
+                    >
+                      <div className="h-5 w-5 text-xl">
+                        {theme === "dark" ? <>{moonIcon}</> : <>{SunIcon}</>}
                       </div>
                     </div>
                   </Switch>
