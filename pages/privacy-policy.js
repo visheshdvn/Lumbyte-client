@@ -1,8 +1,7 @@
 import React from "react";
-import Link from "next/link";
 import Head from "next/head";
 // components
-import Navbar from "../components/elements/navbar/Navbar-client";
+import Navbar from "../components/elements/navbar/Navbar";
 import Footer from "../components/elements/footer/Footer";
 
 const About = () => {
@@ -14,7 +13,7 @@ const About = () => {
 
       {/* body */}
       <Navbar />
-      <section className="horizontal-spacing container my-20 mx-auto">
+      <section className="horizontal-spacing container my-16 mx-auto">
         <div className="grid grid-cols-3 gap-4">
           {/* About */}
           <div className="col-span-3 mb-10 lg:col-span-2">

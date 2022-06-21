@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 import Head from "next/head";
 // components
-import Navbar from "../components/elements/navbar/Navbar-client";
+import Navbar from "../components/elements/navbar/Navbar";
 import Footer from "../components/elements/footer/Footer";
 
 const About = () => {

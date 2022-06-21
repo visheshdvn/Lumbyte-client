@@ -5,7 +5,7 @@ import Image from "next/image";
 import { useSession } from "next-auth/react";
 import prisma from "../../lib/prisma";
 // components
-import Navbar from "../../components/elements/navbar/Navbar-client";
+import Navbar from "../../components/elements/navbar/Navbar";
 import Footer from "../../components/elements/footer/Footer";
 import { DisplayTags } from "../../components/micro/showTags";
 import FormattedDate from "../../components/micro/formattedDate";

@@ -1,7 +1,7 @@
 // components
 import BroadPeek from "../components/PostPeek/broad";
 import Latest from "../components/PostPeek/latest";
-import Navbar from "../components/elements/navbar/Navbar-client";
+import Navbar from "../components/elements/navbar/Navbar";
 import Footer from "../components/elements/footer/Footer";
 
 import MetaIndex from "../utils/headTags/public/headIndex";

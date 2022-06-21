@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 
 // components
 import BroadPeek from "../../components/PostPeek/broad";
-import Navbar from "../../components/elements/navbar/Navbar-client";
+import Navbar from "../../components/elements/navbar/Navbar";
 import Footer from "../../components/elements/footer/Footer";
 import HeadTags from "../../components/headTags/public/headTags";
 import prisma from "../../lib/prisma";

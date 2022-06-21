@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { getSession } from "next-auth/react";
 import Head from "next/head";
-import { toast } from "react-toastify";
 import { useTheme } from "next-themes";
 import { useSession } from "next-auth/react";
 import Router from "next/router";
 // components
 import "react-toastify/dist/ReactToastify.css";
-import Navbar from "../../components/elements/navbar/Navbar-client";
+import Navbar from "../../components/elements/navbar/Navbar";
 import NoIndex from "../../components/headTags/noIndex";
 import prisma from "../../lib/prisma";
 import axios from "../../lib/axios";
