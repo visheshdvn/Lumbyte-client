@@ -8,6 +8,9 @@ import { cross } from "../../icons/creatorPanel";
 import ShowTags from "../../micro/showTags";
 import EditBanner from "../../elements/dropzone/image";
 import { getValidImageURL } from "../../../utils/checkValidURL";
+import { Switch } from "@headlessui/react";
+import { useTheme } from "next-themes";
+import { moon as moonIcon, sun as sunIcon } from "../../icons/themeSwitch";
 
 const editCreate = ({
   children,
@@ -21,6 +24,7 @@ const editCreate = ({
   published,
 }) => {
   const { data: session, status } = useSession();
+  const { theme, setTheme } = useTheme();
   return (
     <>
       {/* head */}
@@ -37,8 +41,30 @@ const editCreate = ({
               </time>
             </div>
           </div>
-          <div>
-            <button className="aspect-1 w-3.5" onClick={() => Router.back()}>
+
+          <div className="flex h-14 items-center">
+            <Switch
+              checked={theme === "dark"}
+              onChange={() => {
+                if (theme === "light") {
+                  setTheme("dark");
+                  return;
+                }
+                setTheme("light");
+              }}
+              className="inline-flex cursor-pointer items-center focus:outline-none"
+            >
+              <span className="sr-only">Switch theme mode</span>
+              <div className="mr-5">
+                <div className="flex h-7 w-7 items-center justify-center overflow-hidden rounded-full hover:bg-gray-100 dark:hover:bg-gray-500">
+                  {theme === "dark" ? <>{moonIcon}</> : <>{sunIcon}</>}
+                </div>
+              </div>
+            </Switch>
+            <button
+              style={{ width: "20.5px", height: "20.5px" }}
+              onClick={() => Router.back()}
+            >
               {cross}
             </button>
           </div>

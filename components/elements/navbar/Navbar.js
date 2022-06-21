@@ -10,6 +10,7 @@ const navigation = [
   { name: "Web", href: "/tags/web" },
   { name: "Blockchain", href: "/tags/blockchain" },
   { name: "Code", href: "/tags/code" },
+  // { name: "Technology", href: "/tags/technology" },
 ];
 
 function classNames(...classes) {
@@ -39,7 +40,7 @@ export default function Navbar() {
                 style={{ height: "57px" }}
                 className="relative flex items-center justify-between"
               >
-                <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
+                <div className="absolute inset-y-0 left-0 flex items-center md:hidden">
                   {/* Mobile menu button*/}
                   <Disclosure.Button className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
                     <span className="sr-only">Open main menu</span>
@@ -50,7 +51,7 @@ export default function Navbar() {
                     )}
                   </Disclosure.Button>
                 </div>
-                <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
+                <div className="flex flex-1 items-center justify-center md:items-stretch md:justify-start">
                   <div className="flex flex-shrink-0 items-center">
                     <Link href={"/"} passHref>
                       <a className="font-primary mb-0 h-8 w-auto font-bold leading-none">
@@ -64,7 +65,7 @@ export default function Navbar() {
                       </a>
                     </Link>
                   </div>
-                  <div className="hidden items-center sm:ml-16 sm:flex">
+                  <div className="hidden items-center md:ml-16 md:flex">
                     <div className="flex space-x-8">
                       {navigation.map((item) => (
                         <a
@@ -80,7 +81,7 @@ export default function Navbar() {
                   </div>
                 </div>
 
-                <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+                <div className="absolute inset-y-0 right-0 flex items-center pr-2 md:static md:inset-auto md:ml-6 md:pr-0">
                   <button
                     type="button"
                     className="hidden rounded-full bg-white p-1 text-gray-600 hover:text-black focus:text-black focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
@@ -95,9 +96,9 @@ export default function Navbar() {
                     onChange={() => {
                       if (theme === "light") {
                         setTheme("dark");
-                      } else {
-                        setTheme("light");
+                        return;
                       }
+                      setTheme("light");
                     }}
                     // style={{ marginTop: "2px" }}
                     className="inline-flex w-6 cursor-pointer items-center focus:outline-none"
@@ -112,6 +113,7 @@ export default function Navbar() {
                       </div>
                     </div>
                   </Switch>
+                  {/* <ThemeSwitch /> */}
 
                   {/* Profile dropdown */}
                   <Menu as="div" className="relative ml-5 pl-3">
@@ -196,24 +198,26 @@ export default function Navbar() {
               className="w-full bg-black dark:bg-zinc-700"
             ></div>
 
-            <Disclosure.Panel className="sm:hidden">
-              <div className="space-y-1 px-2 pt-2 pb-3">
+            <Disclosure.Panel className="md:hidden">
+              <div className="space-y-1 border px-2 pt-2 pb-3">
                 {navigation.map((item) => (
                   <Disclosure.Button
                     key={item.name}
                     as="a"
                     href={item.href}
-                    className={classNames(
-                      item.current
-                        ? "bg-gray-900 text-white"
-                        : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                      "block rounded-md px-3 py-2 text-base font-medium"
-                    )}
+                    // className={classNames(
+                    //   item.current
+                    //     ? "bg-gray-900 text-white"
+                    //     : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                    //   "block rounded-md px-3 py-2 text-base font-medium"
+                    // )}
+                    className="font-primary block rounded-md px-3 py-2 text-base font-medium"
                     aria-current={item.current ? "page" : undefined}
                   >
                     {item.name}
                   </Disclosure.Button>
                 ))}
+                <hr />
               </div>
             </Disclosure.Panel>
           </>
