@@ -13,10 +13,6 @@ const navigation = [
   // { name: "Technology", href: "/tags/technology" },
 ];
 
-function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
-}
-
 export default function Navbar() {
   const { theme, setTheme } = useTheme();
   const { data: session, status } = useSession();
@@ -68,14 +64,14 @@ export default function Navbar() {
                   <div className="hidden items-center md:ml-16 md:flex">
                     <div className="flex space-x-8">
                       {navigation.map((item) => (
-                        <a
-                          key={item.name}
-                          href={item.href}
-                          className="font-primary text-sm font-medium hover:underline"
-                          //   aria-current={item.current ? "page" : undefined}
-                        >
-                          {item.name}
-                        </a>
+                        <Link href={item.href} passHref key={item.name}>
+                          <a
+                            className="font-primary text-sm font-medium hover:underline"
+                            //   aria-current={item.current ? "page" : undefined}
+                          >
+                            {item.name}
+                          </a>
+                        </Link>
                       ))}
                     </div>
                   </div>
@@ -201,21 +197,14 @@ export default function Navbar() {
             <Disclosure.Panel className="md:hidden">
               <div className="space-y-1 border px-2 pt-2 pb-3">
                 {navigation.map((item) => (
-                  <Disclosure.Button
-                    key={item.name}
-                    as="a"
-                    href={item.href}
-                    // className={classNames(
-                    //   item.current
-                    //     ? "bg-gray-900 text-white"
-                    //     : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                    //   "block rounded-md px-3 py-2 text-base font-medium"
-                    // )}
-                    className="font-primary block rounded-md px-3 py-2 text-base font-medium"
-                    aria-current={item.current ? "page" : undefined}
-                  >
-                    {item.name}
-                  </Disclosure.Button>
+                  <Link href={item.href} passHref key={item.name}>
+                    <a
+                      className="font-primary block rounded-md px-3 py-2 text-base font-medium"
+                      // aria-aria-current={item.current ? "page" : undefined}
+                    >
+                      {item.name}
+                    </a>
+                  </Link>
                 ))}
                 <hr />
               </div>
