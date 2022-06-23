@@ -12,48 +12,12 @@ import errorHandler from "../../../utils/errorHandler";
 // lib
 import axios from "../../../lib/axios";
 import prisma from "../../../lib/prisma";
-import { toast } from "react-toastify";
-
-// function SlugToTruth(arr) {
-//   const slugToTruth = {};
-
-//   arr.forEach((post) => {
-//     slugToTruth[post.slug] = { topPick: post.topPick, featured: post.featured };
-//   });
-
-//   return slugToTruth;
-// }
 
 const Blogposts = ({ blogposts }) => {
   const { data: session, status } = useSession();
   if (status === "loading") {
     return <p>Loading</p>;
   }
-
-  // console.log("blogposts", blogposts)
-  // const slugToTruth = {};
-
-  // blogposts.forEach((post) => {
-  //   slugToTruth[post.slug] = { topPick: post.topPick, featured: post.featured };
-  // });
-
-  // const [truth, setTruth] = useState(SlugToTruth(blogposts));
-
-  // const topPickToggler = async (slug, topPick) => {
-  //   const { data } = await axios.patch(`/blogposts/set/topPick/${slug}`, {
-  //     topPick: !truth.slug.topPick,
-  //   });
-
-  //   console.log(data);
-
-  //   // setTruth({
-  //   //   ...truth,
-  //   //   slug: {
-  //   //     ...truth.slug,
-  //   //     topPick,
-  //   //   },
-  //   // });
-  // };
 
   return (
     <>
