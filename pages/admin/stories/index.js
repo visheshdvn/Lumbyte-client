@@ -1,23 +1,59 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSession } from "next-auth/react";
 import "react-toastify/dist/ReactToastify.css";
 import Link from "next/link";
 // custom components
 import FormattedDate from "../../../components/micro/formattedDate";
 import AdminHomeLayout from "../../../components/layouts/adminHome";
+import { tick, cross } from "../../../components/icons/admin/booleans";
 // utils
 import { HeadBlogposts } from "../../../utils/headTags/admin/meta";
+import errorHandler from "../../../utils/errorHandler";
+// lib
+import axios from "../../../lib/axios";
 import prisma from "../../../lib/prisma";
+import { toast } from "react-toastify";
 
-function capitalize(str) {
-  return str.charAt(0).toUpperCase() + str.slice(1);
-}
+// function SlugToTruth(arr) {
+//   const slugToTruth = {};
+
+//   arr.forEach((post) => {
+//     slugToTruth[post.slug] = { topPick: post.topPick, featured: post.featured };
+//   });
+
+//   return slugToTruth;
+// }
 
 const Blogposts = ({ blogposts }) => {
   const { data: session, status } = useSession();
   if (status === "loading") {
     return <p>Loading</p>;
   }
+
+  // console.log("blogposts", blogposts)
+  // const slugToTruth = {};
+
+  // blogposts.forEach((post) => {
+  //   slugToTruth[post.slug] = { topPick: post.topPick, featured: post.featured };
+  // });
+
+  // const [truth, setTruth] = useState(SlugToTruth(blogposts));
+
+  // const topPickToggler = async (slug, topPick) => {
+  //   const { data } = await axios.patch(`/blogposts/set/topPick/${slug}`, {
+  //     topPick: !truth.slug.topPick,
+  //   });
+
+  //   console.log(data);
+
+  //   // setTruth({
+  //   //   ...truth,
+  //   //   slug: {
+  //   //     ...truth.slug,
+  //   //     topPick,
+  //   //   },
+  //   // });
+  // };
 
   return (
     <>
@@ -32,72 +68,126 @@ const Blogposts = ({ blogposts }) => {
       >
         {/* all blogpost grid */}
         <div className="mt-5">
-          <table className="font-primary w-full table-auto border">
-            <thead>
-              <tr className="bg-gray-100 text-left text-sm font-medium text-gray-800">
-                <td className="opacity-0">S</td>
-                <th>S.No</th>
-                <th className="py-4">Slug</th>
-                <th rowSpan={2}>Title</th>
-                <th>Featured</th>
-                <th>Top Pick</th>
-                <th>Date</th>
-                <th>Status</th>
-                <th>Controls</th>
-                <th className="opacity-0">controls</th>
-              </tr>
-            </thead>
-            <tbody>
+          <div>
+            {/* headings */}
+            <div className="font-primary grid grid-cols-8 gap-4 pb-1 text-base font-semibold">
+              <h3 className="col-span-3">Title</h3>
+              <h3>Top Pick</h3>
+              <h3>Featured</h3>
+              <h3>Published</h3>
+              <h3>Manage</h3>
+            </div>
+
+            <div className="pb-52">
               {blogposts.map((data) => (
-                <TableContents data={data} key={data.id} />
+                <Peek data={data} key={data.title} />
               ))}
-            </tbody>
-          </table>
+            </div>
+          </div>
         </div>
       </AdminHomeLayout>
     </>
   );
 };
 
-function TableContents({ data }) {
-  const { id, slug, title, featured, topPick, published, created_at, n } = data;
+function Peek({ data }) {
+  const { title, featured, topPick, published, slug } = data;
+  const [topPickStatus, setTopPickStatus] = useState(topPick);
+  const [featuredStatus, setFeaturedStatus] = useState(topPick);
+
+  const topPickToggler = async () => {
+    try {
+      const { data } = await axios.patch(`/blogposts/set/topPick/${slug}`, {
+        topPick: !topPickStatus,
+      });
+
+      setTopPickStatus(data.data.topPick);
+    } catch (error) {
+      console.log(error);
+      errorHandler(error);
+    }
+  };
+
+  const featuredToggler = async () => {
+    try {
+      const { data } = await axios.patch(`/blogposts/set/featured/${slug}`, {
+        featured: !featuredStatus,
+      });
+
+      setFeaturedStatus(data.data.featured);
+    } catch (error) {
+      console.log(error);
+      errorHandler(error);
+    }
+  };
 
   return (
-    // <Link href={`/admin/stories/${id}`}>
-    // </Link>
+    <article className="font-primary grid h-20 grid-cols-8 gap-4 border-t dark:border-zinc-700">
+      <div className="col-span-3 flex h-full flex-col justify-center">
+        <h1 className="font-primary line-clamp-2 mb-2 pr-8 text-base font-semibold leading-tight">
+          {title}
+        </h1>
+      </div>
+      <div className="col-span-1 flex items-center text-sm font-medium">
+        {/* {published_at ? <FormattedDate date={published_at} /> : <p>--</p>} */}
+        {topPickStatus ? (
+          <TrueButton name={tick} onClickHandler={topPickToggler} />
+        ) : (
+          <CrossButton name={cross} onClickHandler={topPickToggler} />
+        )}
+      </div>
+      <div className="col-span-1 flex items-center text-sm font-medium">
+        {featuredStatus ? (
+          <TrueButton name={tick} onClickHandler={featuredToggler} />
+        ) : (
+          <CrossButton name={cross} onClickHandler={featuredToggler} />
+        )}
+      </div>
+      <div className="flex items-center">
+        {published ? (
+          <div className="flex">
+            <div className="flex items-center">
+              <span className="aspect-1 w-1 rounded-full bg-green-600"></span>
+            </div>
+            <span className="pl-1 text-sm font-semibold text-green-600">
+              Live
+            </span>
+          </div>
+        ) : (
+          <div className="flex">
+            <div className="flex items-center">
+              <span className="aspect-1 w-1 rounded-full bg-red-600"></span>
+            </div>
+            <span className="pl-1 text-sm font-semibold text-red-600">
+              Draft
+            </span>
+          </div>
+        )}
+      </div>
+      <div className="col-span-1 flex items-center">--</div>
+    </article>
+  );
+}
 
-    <tr
-      className="font-primary cursor-pointer border-b bg-white text-xs font-medium text-gray-800"
-      key={data.id}
+function TrueButton({ name, onClickHandler }) {
+  return (
+    <button
+      className="admin-tickgreen flex h-6 w-6 transform items-center justify-center rounded-full border border-white transition-all duration-200 hover:border-green-600 active:bg-green-600"
+      onClick={onClickHandler}
     >
-      <td className="opacity-0">S</td>
-      <td className="py-4">{n}</td>
-      <td className="py-4">{decodeURIComponent(slug)}</td>
-      <td className="line-clamp-1 pt-4">{title}</td>
-      <td className={data.featured ? "text-green-600" : "text-red-600"}>
-        {capitalize(featured.toString())}
-      </td>
-      <td className={topPick ? "text-green-600" : "text-red-600"}>
-        {capitalize(topPick.toString())}
-      </td>
-      <td>
-        <FormattedDate date={created_at} />
-      </td>
-      <td className={published ? "text-green-600" : "text-red-600"}>
-        <div className="flex">
-          <h5
-            className={`border px-2 py-1 ${
-              published
-                ? "border-green-600 bg-green-600 bg-opacity-5"
-                : "border-red-600 bg-red-600 bg-opacity-5"
-            }`}
-          >
-            {published ? "Published" : "UnPublished"}
-          </h5>
-        </div>
-      </td>
-      <td className="opacity-0">controls</td>
-    </tr>
+      <div className="stroke-green-60 m-0 h-4 w-4 p-0">{name}</div>
+    </button>
+  );
+}
+
+function CrossButton({ name, onClickHandler }) {
+  return (
+    <button
+      className="admin-tickgreen flex h-6 w-6 transform items-center justify-center rounded-full border border-white transition-all duration-200 hover:border-red-600 active:bg-red-600"
+      onClick={onClickHandler}
+    >
+      <div className="stroke-green-60 m-0 h-4 w-4 p-0">{name}</div>
+    </button>
   );
 }
 
@@ -116,26 +206,22 @@ export async function getServerSideProps(context) {
 
   const data = await blogposts.findMany({
     select: {
-      id: true,
-      slug: true,
       title: true,
       featured: true,
       topPick: true,
-      date: true,
       published: true,
-      updated_at: true,
-      created_at: true,
-      n: true,
+      slug: true,
     },
     orderBy: {
       n: "desc",
     },
   });
+
   await prisma.$disconnect();
   let json = JSON.stringify(data);
   json = JSON.parse(json);
 
   return {
-    props: { blogposts: json },
+    props: { blogposts: json, success: 1 },
   };
 }

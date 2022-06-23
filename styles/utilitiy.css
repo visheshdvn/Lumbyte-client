@@ -101,7 +101,8 @@ ul.spaced li:not(:last-child) {
   @apply text-neutral-600 opacity-100 dark:text-neutral-300;
 }
 
-.creator-dashboard-input:not(:placeholder-shown):disabled + .dark-on-valid-label {
+.creator-dashboard-input:not(:placeholder-shown):disabled
+  + .dark-on-valid-label {
   @apply text-neutral-600 opacity-100;
 }
 
@@ -109,4 +110,9 @@ ul.spaced li:not(:last-child) {
 .need-placeholder[placeholder]:empty::before {
   content: attr(placeholder);
   @apply text-neutral-400;
+}
+
+/* admin green tick button */
+.admin-tickgreen:active div svg {
+  @apply transform stroke-white transition-all duration-300;
 }

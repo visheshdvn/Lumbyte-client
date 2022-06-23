@@ -134,14 +134,14 @@ function Peek({ data }) {
             <div className="flex items-center">
               <span className="aspect-1 w-1 rounded-full bg-green-600"></span>
             </div>
-            <span className="pl-1 text-green-600">Live</span>
+            <span className="pl-1 text-green-600 font-semibold">Live</span>
           </div>
         ) : (
           <div className="flex">
             <div className="flex items-center">
               <span className="aspect-1 w-1 rounded-full bg-red-600"></span>
             </div>
-            <span className="pl-1 text-red-600">Draft</span>
+            <span className="pl-1 text-red-600 font-semibold">Draft</span>
           </div>
         )}
       </div>

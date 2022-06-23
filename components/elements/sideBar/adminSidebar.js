@@ -106,14 +106,6 @@ function NavItem({ text, link }) {
     ? "bg-slate-800 text-white font-bold"
     : "font-medium";
 
-  console.log("text", text);
-  console.log("path", path);
-  console.log(
-    path.toLowerCase().startsWith(text.toLowerCase()),
-    "for path",
-    path
-  );
-
   const icon = {
     Dashboard: thisPath ? (
       <HomeIconSolid className="mr-2 h-5 w-5" />
