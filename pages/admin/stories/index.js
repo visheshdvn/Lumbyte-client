@@ -3,7 +3,6 @@ import { useSession } from "next-auth/react";
 import "react-toastify/dist/ReactToastify.css";
 import Link from "next/link";
 // custom components
-import FormattedDate from "../../../components/micro/formattedDate";
 import AdminHomeLayout from "../../../components/layouts/adminHome";
 import { tick, cross } from "../../../components/icons/admin/booleans";
 // utils
@@ -136,7 +135,7 @@ function Peek({ data }) {
 function TrueButton({ name, onClickHandler }) {
   return (
     <button
-      className="admin-tickgreen flex h-6 w-6 transform items-center justify-center rounded-full border border-white transition-all duration-200 hover:border-green-600 active:bg-green-600"
+      className="admin-tickgreen dark:border-darkGray flex h-6 w-6 transform items-center justify-center rounded-full border border-white transition-all duration-200 hover:border-green-600 active:bg-green-600 dark:hover:border-green-600"
       onClick={onClickHandler}
     >
       <div className="stroke-green-60 m-0 h-4 w-4 p-0">{name}</div>
@@ -147,7 +146,7 @@ function TrueButton({ name, onClickHandler }) {
 function CrossButton({ name, onClickHandler }) {
   return (
     <button
-      className="admin-tickgreen flex h-6 w-6 transform items-center justify-center rounded-full border border-white transition-all duration-200 hover:border-red-600 active:bg-red-600"
+      className="admin-tickgreen dark:border-darkGray flex h-6 w-6 transform items-center justify-center rounded-full border border-white transition-all duration-200 hover:border-red-600 active:bg-red-600 dark:hover:border-red-600"
       onClick={onClickHandler}
     >
       <div className="stroke-green-60 m-0 h-4 w-4 p-0">{name}</div>
