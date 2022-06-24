@@ -2,10 +2,12 @@ import { useEffect } from "react";
 import { useRouter } from "next/router";
 import { SessionProvider, useSession } from "next-auth/react";
 // third party libraries
-import axios from "axios";
 import * as gtag from "../lib/gtag";
 import { ThemeProvider } from "next-themes";
 import { ToastContainer } from "react-toastify";
+
+// component
+import AccessDenied from "../components/accessDenied";
 
 // css
 import "../styles/components.css";
@@ -14,11 +16,9 @@ import "../styles/globals.css";
 import "../styles/utilitiy.css";
 import "../styles/editorjs.css";
 
-// component
-import AccessDenied from "../components/accessDenied";
-
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
+
   useEffect(() => {
     const handleRouteChange = (url) => {
       gtag.pageview(url);

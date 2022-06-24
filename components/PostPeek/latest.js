@@ -9,7 +9,7 @@ const Latest = ({ big, side }) => {
   return (
     <div
       style={{ minHeight: "12rem" }}
-      className="horizontal-spacing container mx-auto mt-3 mb-14 grid h-auto grid-cols-12 gap-1 sm:mt-4 md:mt-0 md:mb-10 lg:mt-5 lg:mb-11 xl:mt-12 xl:mb-12"
+      className="horizontal-spacing container mx-auto mt-3 mb-14 grid h-auto grid-cols-12 gap-1 sm:mt-4 md:mb-10 lg:mt-5 lg:mb-11 xl:mt-12 xl:mb-12"
     >
       <div className="col-span-12 overflow-hidden xl:col-span-9">
         <div className="aspect-h-10 aspect-w-16">

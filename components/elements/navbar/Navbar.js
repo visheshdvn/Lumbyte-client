@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Disclosure, Menu, Transition, Switch } from "@headlessui/react";
 import { BellIcon, MenuIcon, XIcon } from "@heroicons/react/outline";
@@ -17,6 +18,11 @@ export default function Navbar() {
   const { theme, setTheme } = useTheme();
   const { data: session, status } = useSession();
   const user = session?.user;
+
+  const [loaded, setLoaded] = useState(false);
+  useEffect(() => {
+    setLoaded(true);
+  }, []);
 
   return (
     <>
@@ -88,13 +94,13 @@ export default function Navbar() {
 
                   {/* theme switch below*/}
                   <Switch
-                    checked={theme === "dark"}
+                    checked={false}
                     onChange={() => {
                       if (theme === "light") {
                         setTheme("dark");
-                        return;
+                      } else {
+                        setTheme("light");
                       }
-                      setTheme("light");
                     }}
                     // style={{ marginTop: "2px" }}
                     className="inline-flex w-6 cursor-pointer items-center focus:outline-none"
@@ -105,7 +111,11 @@ export default function Navbar() {
                       className="absolute flex transform items-center justify-center rounded-full transition-all duration-200 hover:bg-gray-100 dark:hover:bg-gray-500"
                     >
                       <div className="h-5 w-5 text-xl">
-                        {theme === "dark" ? <>{moonIcon}</> : <>{SunIcon}</>}
+                        {loaded && theme === "dark" ? (
+                          <>{moonIcon}</>
+                        ) : (
+                          <>{SunIcon}</>
+                        )}
                       </div>
                     </div>
                   </Switch>
