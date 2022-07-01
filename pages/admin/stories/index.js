@@ -56,7 +56,7 @@ const Blogposts = ({ blogposts }) => {
 function Peek({ data }) {
   const { title, featured, topPick, published, slug } = data;
   const [topPickStatus, setTopPickStatus] = useState(topPick);
-  const [featuredStatus, setFeaturedStatus] = useState(topPick);
+  const [featuredStatus, setFeaturedStatus] = useState(featured);
 
   const topPickToggler = async () => {
     try {
