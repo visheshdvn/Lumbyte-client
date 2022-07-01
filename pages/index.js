@@ -10,7 +10,7 @@ import prisma from "../lib/prisma";
 
 const MAX_RESPONSE = 20;
 
-export default function Home({ latest, latestSide, readMore }) {
+export default function Home({ latest, latestSide, readMore, featuredPosts }) {
   if (Object.keys(latest).length === 0) {
     return <h1>No Data</h1>;
   }
@@ -21,7 +21,7 @@ export default function Home({ latest, latestSide, readMore }) {
       <Navbar />
 
       {/* <Latest big={latest} side={latestSide} /> */}
-      <Hero big={latest} side={latestSide} />
+      <Hero big={latest} side={latestSide} featured={featuredPosts} />
 
       <section className="">
         <div className="horizontal-spacing container mx-auto">
@@ -93,6 +93,31 @@ export async function getServerSideProps(ctx) {
     };
   }
 
+  let featuredPosts = await blogposts.findMany({
+    where: {
+      featured: true,
+      published: true,
+    },
+    select: {
+      title: true,
+      slug: true,
+      banner: true,
+      banneralt: true,
+      author: {
+        select: {
+          firstname: true,
+          lastname: true,
+          lastname: true,
+        },
+      },
+    },
+    orderBy: {
+      n: "desc",
+    },
+    skip: 0,
+    take: 5,
+  });
+
   await prisma.$disconnect();
 
   data = JSON.parse(JSON.stringify(data));
@@ -105,6 +130,7 @@ export async function getServerSideProps(ctx) {
       latest: latest[0],
       latestSide,
       readMore,
+      featuredPosts,
     },
     // revalidate: 14400,
   };
