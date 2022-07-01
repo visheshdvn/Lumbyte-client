@@ -9,7 +9,7 @@ const Latest = ({ big, side }) => {
   return (
     <div
       style={{ minHeight: "12rem" }}
-      className="horizontal-spacing container mx-auto mt-3 mb-14 grid h-auto grid-cols-12 gap-1 sm:mt-4 md:mb-10 lg:mt-5 lg:mb-11 xl:mt-12 xl:mb-12"
+      className="horizontal-spacing container mx-auto mb-14 mt-5 grid h-auto grid-cols-12 gap-1 md:mb-10 lg:mt-8 lg:mb-11 xl:mb-12"
     >
       <div className="col-span-12 overflow-hidden xl:col-span-9">
         <div className="aspect-h-10 aspect-w-16">
@@ -94,11 +94,23 @@ function SideHeads({ title, date, slug, author, tags }) {
         {/* tags */}
         <div className="flex justify-center md:justify-start">
           {tags.map((tag) => (
-            <ShowTags
-              tagname={tag.tagname}
-              color={tag.color}
+            // <ShowTags
+            //   tagname={tag.tagname}
+            //   color={tag.color}
+            //   key={tag.tagname}
+            // />
+            <a
+              href={`/tags/${tag.tagname}`}
+              className="margin-tags"
               key={tag.tagname}
-            />
+            >
+              <h3
+                className={`font-mono text-sm font-semibold lowercase leading-4 filter hover:brightness-125 md:text-base md:leading-none lg:leading-none`}
+              >
+                <span style={{ color: `${tag.color}` }}>#</span>
+                {tag.tagname}
+              </h3>
+            </a>
           ))}
         </div>
         {/* title */}
@@ -124,14 +136,14 @@ function SideHeads({ title, date, slug, author, tags }) {
                 height={20}
               />
             )}
-            <h4 className="text-whiteMain ml-2 font-medium">
+            <h4 className="ml-2 font-medium">
               <span>
                 {author.firstname} {author.lastname || ""}
               </span>
             </h4>
           </a>
           <span className="px-2">•</span>
-          <h5 className="text-whiteMain font-normal">
+          <h5 className="font-normal">
             <FormattedDate date={date} />
           </h5>
         </div>

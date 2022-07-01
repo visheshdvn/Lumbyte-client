@@ -1,6 +1,7 @@
 // components
 import BroadPeek from "../components/PostPeek/broad";
 import Latest from "../components/PostPeek/latest";
+import Hero from "../components/PostPeek/hero";
 import Navbar from "../components/elements/navbar/Navbar";
 import Footer from "../components/elements/footer/Footer";
 
@@ -19,7 +20,8 @@ export default function Home({ latest, latestSide, readMore }) {
       <MetaIndex />
       <Navbar />
 
-      <Latest big={latest} side={latestSide} />
+      {/* <Latest big={latest} side={latestSide} /> */}
+      <Hero big={latest} side={latestSide} />
 
       <section className="">
         <div className="horizontal-spacing container mx-auto">
@@ -95,8 +97,8 @@ export async function getServerSideProps(ctx) {
 
   data = JSON.parse(JSON.stringify(data));
   const latest = data.slice(0, 1);
-  const latestSide = data.slice(1, 4);
-  const readMore = data.slice(4, 20);
+  const latestSide = data.slice(1, 3);
+  const readMore = data.slice(3, 20);
 
   return {
     props: {

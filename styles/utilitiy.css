@@ -22,6 +22,10 @@
 }
 
 .horizontal-spacing {
+  @apply px-3 lg:px-5 xl:px-[76px];
+}
+
+.horizontal-spacing-wide {
   @apply px-3 lg:px-5 xl:px-0;
 }
 

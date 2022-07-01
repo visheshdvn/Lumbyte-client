@@ -36,7 +36,7 @@ export default function Navbar() {
           <>
             <div
               style={{ paddingTop: "2px" }}
-              className="horizontal-spacing container mx-auto"
+              className="horizontal-spacing-wide container mx-auto"
             >
               <div
                 style={{ height: "57px" }}
