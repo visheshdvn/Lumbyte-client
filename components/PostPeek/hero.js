@@ -1,7 +1,6 @@
 import React from "react";
 import Image from "next/image";
 import FormattedDate from "../micro/formattedDate";
-import ShowTags from "../micro/showTags";
 import Link from "next/link";
 
 const Hero = ({ big, side, featured }) => {
@@ -18,19 +17,21 @@ const Hero = ({ big, side, featured }) => {
   } = big;
 
   return (
-    <div className="horizontal-spacing-wide container mx-auto mb-14 mt-5 grid h-auto grid-cols-4 gap-4 md:mb-10 lg:mt-8 lg:mb-11 xl:mb-24">
-      <div>
-        <h3 className="font-primary mb-3 pt-2 text-sm font-bold text-amber-500">
+    <div className="horizontal-spacing-wide container mx-auto mb-14 mt-5 grid h-auto grid-cols-3 gap-0 md:mb-10 lg:mt-8 lg:mb-11 xl:mb-24 xl:grid-cols-4">
+      {/* col 1 */}
+      <div className="order-3 col-span-3 border-zinc-300 pr-[10px] dark:border-zinc-700 xl:order-1 xl:col-span-1 xl:border-r">
+        <h3 className="font-primary mt-8 mb-3 pt-2 text-sm font-bold text-amber-500 xl:mt-0">
           FEATURED
         </h3>
-        <div className="space-y-6">
+        <div className="flex flex-wrap xl:block xl:space-y-9">
           {featured.map((data) => (
             <FeaturedPeek data={data} key={data.title} />
           ))}
         </div>
       </div>
-      <div className="col-span-2">
-        <div className="aspect-h-10 aspect-w-16 mb-4">
+      {/* col 2 */}
+      <div className="order-1 col-span-3 mb-12 pr-[10px] md:col-span-2 md:mb-0 xl:order-2 xl:px-[10px]">
+        <div className="aspect-h-10 aspect-w-16 mb-4 overflow-hidden">
           <Link href={`/story/${author.username}/${slug}`} passHref>
             <a>
               <Image
@@ -73,17 +74,18 @@ const Hero = ({ big, side, featured }) => {
         {/* title */}
         <Link href={`/story/${author.username}/${slug}`} passHref>
           <a>
-            <h1 className="font-primary mb-3 text-3xl font-bold hover:underline">
+            <h1 className="font-primary mb-1 text-2xl font-bold leading-[125%] hover:underline md:text-3xl">
               {title}
             </h1>
+            {/* excerpt */}
+            <p className="font-serif text-base font-medium">{excerpt}</p>
           </a>
         </Link>
-        {/* excerpt */}
-        <p className="font-serif text-base font-medium">{excerpt}</p>
       </div>
-      <div>
-        <h3 className="font-primary mb-3 pt-2 text-sm font-bold">LATEST</h3>
-        <div className="space-y-7">
+      {/* col 3 */}
+      <div className="order-2 col-span-3 md:col-span-1 md:pl-[10px] xl:order-3">
+        <h3 className="font-primary mb-3 text-sm font-bold md:pt-2">LATEST</h3>
+        <div className="space-y-12 md:space-y-7">
           {side.map((post) => (
             <LatestSide data={post} key={post.title} />
           ))}
@@ -128,12 +130,12 @@ function LatestSide({
             />
           )}
           <h4 className="ml-2 flex items-center font-medium">
-            <span className="">
+            <span>
               {author.firstname} {author.lastname || ""}
             </span>
           </h4>
         </a>
-        <span className="px-2">•</span>
+        <span className="px-1 xl:px-2">•</span>
         <h5 className="text-whiteMain flex items-center font-normal">
           <FormattedDate date={published_at} />
         </h5>
@@ -141,7 +143,7 @@ function LatestSide({
       {/* title */}
       <Link href={`/story/${author.username}/${slug}`} passHref>
         <a>
-          <h2 className="font-primary text-base font-semibold hover:underline leading-[125%]">
+          <h2 className="font-primary text-xl font-semibold leading-[125%] hover:underline md:text-base">
             {title}
           </h2>
         </a>
@@ -151,9 +153,8 @@ function LatestSide({
 }
 
 function FeaturedPeek({ data: { title, banner, banneralt, author, slug } }) {
-  console.log(banner);
   return (
-    <div className="flex h-24">
+    <div className="mb-8 flex h-20 pr-5 md:w-1/2 xl:mb-0 xl:w-auto xl:pr-0">
       <div className="h-20 w-20">
         <Image
           src={banner}

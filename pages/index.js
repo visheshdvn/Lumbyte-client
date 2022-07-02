@@ -1,6 +1,5 @@
 // components
 import BroadPeek from "../components/PostPeek/broad";
-import Latest from "../components/PostPeek/latest";
 import Hero from "../components/PostPeek/hero";
 import Navbar from "../components/elements/navbar/Navbar";
 import Footer from "../components/elements/footer/Footer";
