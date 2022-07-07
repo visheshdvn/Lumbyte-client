@@ -211,7 +211,9 @@ const Post = ({ postData, similar }) => {
       {similar.length > 0 ? (
         <section className="horizontal-spacing mb-20 pt-3">
           <div className="container mx-auto">
-            <h1 className="wide-head xl:mt-18 lg:mt-18 mt-12">Read more</h1>
+            <h1 className="font-primary tracking-[8px] xl:mt-18 lg:mt-18 mb-10 mt-12 text-center text-2.75xl font-bold uppercase">
+              Read more
+            </h1>
             {/* <div className="flex flex-col flex-wrap md:flex-row"> */}
             <div className="grid gap-4 md:grid-cols-2 md:gap-10 xl:grid-cols-4 xl:gap-4">
               {similar.map((data) => (

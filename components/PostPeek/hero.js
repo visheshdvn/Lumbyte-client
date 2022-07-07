@@ -141,7 +141,7 @@ function LatestSide({
       {/* title */}
       <Link href={`/story/${author.username}/${slug}`} passHref>
         <a>
-          <h2 className="font-primary text-xl font-semibold leading-[125%] hover:underline md:text-base">
+          <h2 className="font-primary text-xl font-semibold leading-tight hover:underline md:text-lg md:leading-tight">
             {title}
           </h2>
         </a>
@@ -167,7 +167,7 @@ function FeaturedPeek({ data: { title, banner, banneralt, author, slug } }) {
       <div className="h-full flex-1 pl-4">
         <Link href={`/story/${author.username}/${slug}`} passHref>
           <a>
-            <h2 className="font-primary line-clamp-3 mb-3 text-base font-semibold leading-[119%] hover:underline">
+            <h2 className="font-primary line-clamp-3 mb-3 text-base md:text-lg md:leading-[119%] font-semibold leading-[119%] hover:underline">
               {title}
             </h2>
           </a>
