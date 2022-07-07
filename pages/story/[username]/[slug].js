@@ -206,21 +206,22 @@ const Post = ({ postData, similar }) => {
             </main>
           </div>
         </section>
-
-        {/* similar here */}
-        {similar.length > 0 ? (
-          <section className="mb-20 pt-3">
-            <div className="container mx-auto">
-              <h1 className="wide-head xl:mt-18 lg:mt-18 mt-12">Read more</h1>
-              <div className="flex flex-col flex-wrap md:flex-row">
-                {similar.map((data) => (
-                  <SimilarArticles key={data.slug} data={data} />
-                ))}
-              </div>
-            </div>
-          </section>
-        ) : null}
       </div>
+      {/* similar here */}
+      {similar.length > 0 ? (
+        <section className="horizontal-spacing mb-20 pt-3">
+          <div className="container mx-auto">
+            <h1 className="wide-head xl:mt-18 lg:mt-18 mt-12">Read more</h1>
+            {/* <div className="flex flex-col flex-wrap md:flex-row"> */}
+            <div className="grid gap-4 md:grid-cols-2 md:gap-10 xl:grid-cols-4 xl:gap-4">
+              {similar.map((data) => (
+                <SimilarArticles key={data.slug} data={data} />
+              ))}
+            </div>
+            {/* </div> */}
+          </div>
+        </section>
+      ) : null}
 
       {/* Footer */}
       <Footer />
@@ -232,10 +233,10 @@ function SimilarArticles({ data }) {
   const { slug, banner, title, banneralt, author, minuteRead, published_at } =
     data;
   return (
-    <div className="col-span-2 mb-10 h-auto w-full px-3 sm:h-auto md:mb-0 md:w-1/3 lg:col-auto">
+    <div className="px- col-span-1 mb-8 h-auto w-full sm:h-auto md:mb-0">
       <Link href={`/post/${slug}`} passHref>
         <a>
-          <div className="relative h-44 w-full overflow-hidden sm:h-64 md:h-44 xl:h-60">
+          <div className="aspect-h-10 aspect-w-16">
             <Image
               className="object-cover object-center transition-all duration-1000"
               src={banner}
@@ -247,38 +248,32 @@ function SimilarArticles({ data }) {
           </div>
         </a>
       </Link>
-      {/* author */}
-      <div className="my-4 flex">
-        <a href={`/${author.username}`} rel="noreferrer">
-          <div className="aspect-1 overflow-hidden rounded-full">
+      {/* author data */}
+      <div className="font-primary mt-3 mb-2 flex items-center text-xs">
+        <a href={`/${author.username}`} className="flex">
+          {author.dp && (
             <Image
-              src={author.dp || getValidImageURL("/me.jpg")}
+              src={author.dp}
               alt={author.dpalt}
-              width={32}
-              height={32}
+              className="rounded-full object-cover object-center"
+              height={20}
+              width={20}
             />
-          </div>
-        </a>
-        <div className="font-primary float-left flex flex-col justify-around pl-2">
-          <a
-            href={`/${author.username}`}
-            rel="noreferrer"
-            className="text-sm font-bold"
-          >
-            {author.firstname} {author.lastname || ""}
-          </a>
-          <div className="text-grayText flex h-3 items-center text-xs dark:text-gray-400">
-            <span className="">
-              <FormattedDate date={published_at || created_at} />
+          )}
+          <h4 className="ml-2 flex items-center font-semibold">
+            <span>
+              {author.firstname} {author.lastname || ""}
             </span>
-            <span className="mx-2">•</span>
-            <span className="">{minuteRead} min read</span>
-          </div>
-        </div>
+          </h4>
+        </a>
+        <span className="px-1 xl:px-2">•</span>
+        <h5 className="text-whiteMain flex items-center font-normal">
+          <FormattedDate date={published_at} />
+        </h5>
       </div>
       <Link href={`/story/${author.username}/${slug}`} passHref>
         <a>
-          <h3 className="font-primary xl:text-2.75xl font-bold hover:underline sm:text-2xl sm:leading-7 xl:leading-8">
+          <h3 className="font-primary text-xl font-bold leading-tight hover:underline sm:text-2xl sm:leading-tight xl:text-xl xl:leading-tight">
             {title}
           </h3>
         </a>
@@ -366,7 +361,7 @@ export async function getStaticProps(ctx) {
         },
       },
     },
-    take: 3,
+    take: 4,
     orderBy: {
       n: "desc",
     },

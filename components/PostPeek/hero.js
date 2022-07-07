@@ -123,8 +123,6 @@ function LatestSide({
               src={author.dp}
               alt={author.dpalt}
               className="rounded-full object-cover object-center"
-              placeholder="blur"
-              blurDataURL={author.dp}
               height={20}
               width={20}
             />
