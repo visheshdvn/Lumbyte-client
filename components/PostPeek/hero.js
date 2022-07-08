@@ -4,7 +4,6 @@ import FormattedDate from "../micro/formattedDate";
 import Link from "next/link";
 
 const Hero = ({ big, side, featured }) => {
-  console.log("featred", featured);
   const {
     title,
     tags,
@@ -167,7 +166,7 @@ function FeaturedPeek({ data: { title, banner, banneralt, author, slug } }) {
       <div className="h-full flex-1 pl-4">
         <Link href={`/story/${author.username}/${slug}`} passHref>
           <a>
-            <h2 className="font-primary line-clamp-3 mb-3 text-base md:text-lg md:leading-[119%] font-semibold leading-[119%] hover:underline">
+            <h2 className="font-primary line-clamp-3 mb-3 text-base font-semibold leading-[119%] hover:underline md:text-lg md:leading-[119%]">
               {title}
             </h2>
           </a>
