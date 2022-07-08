@@ -16,7 +16,7 @@ const Hero = ({ big, side, featured }) => {
   } = big;
 
   return (
-    <div className="horizontal-spacing-wide container mx-auto mb-14 mt-5 grid h-auto grid-cols-3 gap-0 md:mb-10 lg:mt-8 lg:mb-11 xl:mb-24 xl:grid-cols-4">
+    <div className="horizontal-spacing-wide container mx-auto mb-14 mt-8 grid h-auto grid-cols-3 gap-0 md:mb-10 lg:mt-9 xl:mt-11 lg:mb-11 xl:mb-24 xl:grid-cols-4">
       {/* col 1 */}
       <div className="order-3 col-span-3 border-zinc-300 pr-[10px] dark:border-zinc-700 xl:order-1 xl:col-span-1 xl:border-r">
         <h3 className="font-primary mt-8 mb-3 pt-2 text-sm font-bold text-amber-500 xl:mt-0">

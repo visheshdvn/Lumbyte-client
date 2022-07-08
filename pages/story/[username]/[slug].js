@@ -125,8 +125,9 @@ const Post = ({ postData, similar }) => {
           />
         </div>
 
-        <section className="mb-5 grid grid-cols-12 gap-1">
-          <div className="order-2 col-span-1 flex items-center pt-2 lg:order-1 lg:flex-col lg:pt-0">
+        <section className="mb-5 grid grid-cols-12 gap-0">
+          {/* share Icons */}
+          <div className="order-2 col-span-1 flex items-center pt-2 lg:order-1 lg:flex-col lg:pt-0 lg:pr-4">
             <ul className="flex items-center justify-center pt-2 lg:sticky lg:top-36 lg:block lg:flex-col">
               <h3 className="font-primary mr-5 flex text-xl font-bold lg:mb-5 lg:mr-0 lg:text-lg">
                 Share
@@ -164,8 +165,9 @@ const Post = ({ postData, similar }) => {
               </li>
             </ul>
           </div>
-          <div className="order-1 col-span-12 lg:order-2 lg:col-span-8">
-            <main key={id} className="pr-0 lg:pr-8 xl:pr-12">
+          {/* blog text */}
+          <div className="order-1 col-span-12 lg:order-2 lg:col-span-7">
+            <main key={id} className="pr-0 lg:pr-4 xl:pr-8">
               {!!parsedContent.blocks.length && (
                 <div
                   id="toSpeech"
@@ -207,11 +209,12 @@ const Post = ({ postData, similar }) => {
           </div>
         </section>
       </div>
+
       {/* similar here */}
       {similar.length > 0 ? (
-        <section className="horizontal-spacing mb-20 pt-3">
-          <div className="container mx-auto">
-            <h1 className="font-primary tracking-[8px] xl:mt-18 lg:mt-18 mb-10 mt-12 text-center text-2.75xl font-bold uppercase">
+        <section className="mb-20 pt-3">
+          <div className="horizontal-spacing-wide container mx-auto">
+            <h1 className="font-primary xl:mt-18 lg:mt-18 text-2.75xl mb-10 mt-12 text-center font-bold uppercase tracking-[8px]">
               Read more
             </h1>
             {/* <div className="flex flex-col flex-wrap md:flex-row"> */}
@@ -232,8 +235,7 @@ const Post = ({ postData, similar }) => {
 };
 
 function SimilarArticles({ data }) {
-  const { slug, banner, title, banneralt, author, minuteRead, published_at } =
-    data;
+  const { slug, banner, title, banneralt, author, published_at } = data;
   return (
     <div className="px- col-span-1 mb-8 h-auto w-full sm:h-auto md:mb-0">
       <Link href={`/post/${slug}`} passHref>
@@ -349,7 +351,6 @@ export async function getStaticProps(ctx) {
         },
       },
       published_at: true,
-      minuteRead: true,
     },
     where: {
       published: true,
