@@ -1,21 +1,26 @@
 import axios from "../lib/axios";
 import { toast } from "react-toastify";
+import errorHandler from "./errorHandler";
 
 // blogposts
 export async function publishBlogpost(
   postId,
   state,
   setState,
-  theme = "light"
+  theme = "light",
+  new_data
 ) {
   try {
     const res = await axios.put(`blogposts/publish/${postId}`);
-    setState({ ...state, published: true });
-    toast.success("Blogpost published successfully", { theme });
-  } catch (err) {
-    err.response.data.errors.map((error) => {
-      toast.error(error.msg, { theme });
+    setState({
+      ...state,
+      ...new_data.blogpost,
+      content: JSON.parse(new_data.blogpost.content),
+      published: true,
     });
+    toast.success("Blogpost published.", { theme });
+  } catch (err) {
+    errorHandler(err, theme);
   }
 }
 
@@ -30,9 +35,7 @@ export async function unPublishBlogpost(
     setState({ ...state, published: false });
     toast.success("Blogpost unpublished successfully", { theme });
   } catch (err) {
-    err.response.data.errors.map((error) => {
-      toast.error(error.msg, { theme });
-    });
+    errorHandler(err, theme);
   }
 }
 

@@ -42,8 +42,7 @@ const update = ({ initialContent, allTags }) => {
   const excerptRef = useRef(null);
   const { theme } = useTheme();
 
-  const { content } = initialContent;
-  const initialContentBody = JSON.parse(content);
+  const initialContentBody = JSON.parse(initialContent.content);
 
   const [file, setFile] = useState(null);
 
@@ -53,7 +52,7 @@ const update = ({ initialContent, allTags }) => {
   });
 
   // initialize editor
-  useEffect(() => {
+  const Initializer = () => {
     // imports
     const EditorJS = require("@editorjs/editorjs");
     const Header = require("@editorjs/header");
@@ -119,6 +118,10 @@ const update = ({ initialContent, allTags }) => {
       readOnly: updatedContent.published,
       logLevel: "ERROR",
     });
+  };
+
+  useEffect(() => {
+    Initializer();
     return () => {
       editor.destroy();
     };
@@ -139,6 +142,8 @@ const update = ({ initialContent, allTags }) => {
     });
   }
 
+  // console.log("before", updatedContent);
+
   async function saveBlogpost() {
     let uploadedUrl = null;
     if (file) {
@@ -147,7 +152,7 @@ const update = ({ initialContent, allTags }) => {
       if (status === "OK") {
         uploadedUrl = responseData.url;
       } else {
-        toast.error("could not upload banner Image", { theme });
+        toast.error("cannot upload banner Image", { theme });
         return;
       }
 
@@ -166,8 +171,8 @@ const update = ({ initialContent, allTags }) => {
     const noChange =
       _.isEqual(content.blocks, initialContentBody.blocks) &&
       _.isEqual(
-        { ...payload, content: null },
-        { ...initialContent, content: null }
+        { ...payload, content: null, published: false },
+        { ...initialContent, content: null, published: false }
       );
 
     if (noChange) {
@@ -190,8 +195,12 @@ const update = ({ initialContent, allTags }) => {
         }
       );
       initialContent = data.blogpost;
-      setUpdateContent({ ...data.blogpost });
-      toast.success("Changes saved Successfully ⭐", { theme });
+      setUpdateContent({
+        ...data.blogpost,
+        content: JSON.parse(data.blogpost.content),
+      });
+      toast.success("Changes saved ⭐", { theme });
+      return data;
     } catch (err) {
       errorHandler(err, theme);
     }
@@ -220,7 +229,9 @@ const update = ({ initialContent, allTags }) => {
           <div className="flex-1 pl-2">
             {/* Publish/Unpublish, save button */}
             <div className="mb-10 flex h-24 items-center justify-around border-b border-neutral-200 dark:border-zinc-700">
-              <SaveButton text="Save" onClickHandler={saveBlogpost} />
+              {!updatedContent.published && (
+                <SaveButton text="Save" onClickHandler={saveBlogpost} />
+              )}
 
               {updatedContent.published ? (
                 <UnPublishButton
@@ -237,14 +248,16 @@ const update = ({ initialContent, allTags }) => {
               ) : (
                 <PublishButton
                   text="Publish"
-                  onClickHandler={() =>
+                  onClickHandler={async () => {
+                    const data = await saveBlogpost();
                     publishBlogpost(
                       router.query.id,
                       updatedContent,
                       setUpdateContent,
-                      theme
-                    )
-                  }
+                      theme,
+                      data
+                    );
+                  }}
                 />
               )}
             </div>

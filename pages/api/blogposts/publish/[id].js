@@ -50,37 +50,37 @@ handler.put(async (req, res) => {
   if (!metaDescription || !metaDescription.trim()) {
     errors.push({
       field: "metaDescription",
-      msg: "metaDescription is required",
+      msg: "Description is required",
     });
   }
   if (!excerpt || !excerpt.trim()) {
     errors.push({
       field: "excerpt",
-      msg: "excerpt is required",
+      msg: "Excerpt is required",
     });
   }
   if (!banner || !banner.trim()) {
     errors.push({
       field: "banner",
-      msg: "banner is required",
+      msg: "Banner image is required",
     });
   }
   if (!banneralt || !banneralt.trim()) {
     errors.push({
       field: "banneralt",
-      msg: "banneralt is required",
+      msg: "Banner Alt text is required",
     });
   }
 
   if (tags.length === 0) {
     errors.push({
       field: "tags",
-      msg: "tags are required",
+      msg: "Min 1 Tag is required",
     });
   }
 
   if (errors.length > 0) {
-    return res.status(400).json({ status: "ERR", errors });
+    return res.status(422).json({ status: "ERR", errors });
   }
 
   await blogposts.update({
