@@ -12,12 +12,20 @@ export async function publishBlogpost(
 ) {
   try {
     const res = await axios.put(`blogposts/publish/${postId}`);
-    setState({
-      ...state,
-      ...new_data.blogpost,
-      content: JSON.parse(new_data.blogpost.content),
-      published: true,
-    });
+    console.log("new_data", new_data);
+    if (new_data) {
+      setState({
+        ...state,
+        ...new_data?.blogpost,
+        content: JSON.parse(new_data.blogpost.content),
+        published: true,
+      });
+    } else {
+      setState({
+        ...state,
+        published: true,
+      });
+    }
     toast.success("Blogpost published.", { theme });
   } catch (err) {
     errorHandler(err, theme);
