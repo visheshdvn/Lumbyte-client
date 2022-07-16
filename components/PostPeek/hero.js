@@ -121,6 +121,7 @@ function LatestSide({
               placeholder="blur"
               blurDataURL="https://lumbytes-general.s3.eu-west-1.amazonaws.com/defaultOG-small.png"
               priority
+              className="object-cover object-center"
             />
           </a>
         </Link>

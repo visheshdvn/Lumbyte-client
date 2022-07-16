@@ -107,7 +107,7 @@ function TableHead({ text, span, visible }) {
   return (
     <h3
       className={`uppercase col-span-${span || 1} text-base font-bold ${
-        visible === false && "hidden"
+        visible === false && "opacity-0"
       }`}
     >
       {text}
