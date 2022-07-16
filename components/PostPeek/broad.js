@@ -72,7 +72,7 @@ const BroadPeek = ({
             <div className="font-primary flex items-center justify-center text-sm">
               <Link href={`/${username}`} passHref>
                 <a className="flex">
-                  {dp && (
+                  {(dp && (
                     <Image
                       src={dp}
                       alt={dpalt}
@@ -80,6 +80,17 @@ const BroadPeek = ({
                       height={20}
                       className="overflow-hidden rounded-full"
                     />
+                  )) || (
+                    <div className="aspect-1 flex h-[20px] items-center justify-center rounded-full bg-gray-800">
+                      {/* {defaultUser} */}
+                      <svg
+                        viewBox="0 0 18 19"
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="aspect-1 w-full scale-75 transform rounded-full bg-transparent fill-white"
+                      >
+                        <path d="M4.5 4.5C4.5 6.981 6.519 9 9 9C11.481 9 13.5 6.981 13.5 4.5C13.5 2.019 11.481 0 9 0C6.519 0 4.5 2.019 4.5 4.5ZM17 19H18V18C18 14.141 14.859 11 11 11H7C3.14 11 0 14.141 0 18V19H17Z" />
+                      </svg>
+                    </div>
                   )}
                   <h5 className="ml-2 font-medium">
                     {firstname} {lastname || ""}

@@ -26,7 +26,7 @@ handler.post(async (req, res) => {
       username,
       firstname,
       lastname,
-      role: username === "lumbytes" ? "SUPERUSER" : "PUBLIC",
+      roles: username === "lumbytes" ? "SUPERUSER" : "PUBLIC",
       account: {
         create: {
           password,
@@ -42,7 +42,7 @@ handler.post(async (req, res) => {
       dpalt: true,
       about: true,
       email: true,
-      role: true,
+      roles: true,
       account: {
         select: {
           password: true,

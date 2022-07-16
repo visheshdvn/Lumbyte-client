@@ -16,7 +16,7 @@ const Hero = ({ big, side, featured }) => {
   } = big;
 
   return (
-    <div className="horizontal-spacing-wide container mx-auto mb-14 mt-8 grid h-auto grid-cols-3 gap-0 md:mb-10 lg:mt-9 xl:mt-11 lg:mb-11 xl:mb-24 xl:grid-cols-4">
+    <div className="horizontal-spacing-wide container mx-auto mb-14 mt-8 grid h-auto grid-cols-3 gap-0 md:mb-10 lg:mt-9 lg:mb-11 xl:mt-11 xl:mb-24 xl:grid-cols-4">
       {/* col 1 */}
       <div className="order-3 col-span-3 border-zinc-300 pr-[10px] dark:border-zinc-700 xl:order-1 xl:col-span-1 xl:border-r">
         <h3 className="font-primary mt-8 mb-3 pt-2 text-sm font-bold text-amber-500 xl:mt-0">
@@ -48,7 +48,7 @@ const Hero = ({ big, side, featured }) => {
         {/* author data */}
         <div className="font-primary mb-2 flex items-center text-xs">
           <a href={`/${author.username}`} className="flex">
-            {author.dp && (
+            {(author.dp && (
               <Image
                 src={author.dp}
                 alt={author.dpalt}
@@ -58,6 +58,17 @@ const Hero = ({ big, side, featured }) => {
                 height={20}
                 width={20}
               />
+            )) || (
+              <div className="aspect-1 flex h-[20px] items-center justify-center rounded-full bg-gray-800">
+                {/* {defaultUser} */}
+                <svg
+                  viewBox="0 0 18 19"
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="aspect-1 w-full scale-75 transform rounded-full bg-transparent fill-white"
+                >
+                  <path d="M4.5 4.5C4.5 6.981 6.519 9 9 9C11.481 9 13.5 6.981 13.5 4.5C13.5 2.019 11.481 0 9 0C6.519 0 4.5 2.019 4.5 4.5ZM17 19H18V18C18 14.141 14.859 11 11 11H7C3.14 11 0 14.141 0 18V19H17Z" />
+                </svg>
+              </div>
             )}
             <h4 className="ml-2 flex items-center font-medium">
               <span className="">
@@ -117,7 +128,7 @@ function LatestSide({
       {/* author data */}
       <div className="font-primary mb-2 flex items-center text-xs">
         <a href={`/${author.username}`} className="flex">
-          {author.dp && (
+          {(author.dp && (
             <Image
               src={author.dp}
               alt={author.dpalt}
@@ -125,6 +136,16 @@ function LatestSide({
               height={20}
               width={20}
             />
+          )) || (
+            <div className="aspect-1 flex h-[20px] items-center justify-center rounded-full bg-gray-800">
+              <svg
+                viewBox="0 0 18 19"
+                xmlns="http://www.w3.org/2000/svg"
+                className="aspect-1 w-full scale-75 transform rounded-full bg-transparent fill-white"
+              >
+                <path d="M4.5 4.5C4.5 6.981 6.519 9 9 9C11.481 9 13.5 6.981 13.5 4.5C13.5 2.019 11.481 0 9 0C6.519 0 4.5 2.019 4.5 4.5ZM17 19H18V18C18 14.141 14.859 11 11 11H7C3.14 11 0 14.141 0 18V19H17Z" />
+              </svg>
+            </div>
           )}
           <h4 className="ml-2 flex items-center font-medium">
             <span>

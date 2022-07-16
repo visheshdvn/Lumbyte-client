@@ -71,10 +71,7 @@ export default function Navbar() {
                     <div className="flex space-x-8">
                       {navigation.map((item) => (
                         <Link href={item.href} passHref key={item.name}>
-                          <a
-                            className="font-primary text-sm font-medium hover:underline"
-                            //   aria-current={item.current ? "page" : undefined}
-                          >
+                          <a className="font-primary text-sm font-medium hover:underline">
                             {item.name}
                           </a>
                         </Link>

@@ -83,7 +83,7 @@ const Me = () => {
             <main>
               <div className="grid grid-cols-12 gap-4 pb-1">
                 <TableHead text="title" span={5} />
-                <TableHead text="space" className="hidden" />
+                <TableHead text="space" visible={false} />
                 <TableHead text="published" span={2} />
                 <TableHead text="status" span={2} />
                 <TableHead text="manage" span={2} />
@@ -103,9 +103,13 @@ const Me = () => {
   );
 };
 
-function TableHead({ text, span }) {
+function TableHead({ text, span, visible }) {
   return (
-    <h3 className={`uppercase col-span-${span || 1} text-base font-bold`}>
+    <h3
+      className={`uppercase col-span-${span || 1} text-base font-bold ${
+        visible === false && "hidden"
+      }`}
+    >
       {text}
     </h3>
   );
@@ -134,14 +138,14 @@ function Peek({ data }) {
             <div className="flex items-center">
               <span className="aspect-1 w-1 rounded-full bg-green-600"></span>
             </div>
-            <span className="pl-1 text-green-600 font-semibold">Live</span>
+            <span className="pl-1 font-semibold text-green-600">Live</span>
           </div>
         ) : (
           <div className="flex">
             <div className="flex items-center">
               <span className="aspect-1 w-1 rounded-full bg-red-600"></span>
             </div>
-            <span className="pl-1 text-red-600 font-semibold">Draft</span>
+            <span className="pl-1 font-semibold text-red-600">Draft</span>
           </div>
         )}
       </div>

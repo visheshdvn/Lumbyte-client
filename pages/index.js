@@ -11,7 +11,14 @@ const MAX_RESPONSE = 20;
 
 export default function Home({ latest, latestSide, readMore, featuredPosts }) {
   if (Object.keys(latest).length === 0) {
-    return <h1>No Data</h1>;
+    return (
+      <h1>
+        <Navbar />
+        <h1 className="font-primary mt-10 text-center text-4xl font-bold">
+          Site Under Mantainance
+        </h1>
+      </h1>
+    );
   }
 
   return (
