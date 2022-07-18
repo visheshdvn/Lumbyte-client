@@ -106,9 +106,9 @@ const Hero = ({ big, side, featured }) => {
 };
 
 function LatestSide({
-  data: { title, date, slug, author, tags, banner, banneralt, published_at },
+  data: { title, slug, author, banner, banneralt, published_at },
 }) {
-  //   console.log(title);
+  
   return (
     <article>
       <div className="aspect-w-16 aspect-h-9 mb-3">
