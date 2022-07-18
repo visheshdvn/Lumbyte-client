@@ -23,10 +23,6 @@ handler.use((req, res, next) => {
 handler.put(async (req, res) => {
   const { id } = req.params;
 
-  // if (isNaN(id)) {
-  //   return res.status(400).json({ msg: "Invalid id" });
-  // }
-
   const post = await blogposts.findUnique({
     where: { id },
     select: {
@@ -39,9 +35,11 @@ handler.put(async (req, res) => {
       banneralt: true,
       tags: true,
       authorId: true,
+      published_at: true,
     },
   });
-  // console.log(post);
+
+  // console.log("prev date", post.published_at);
 
   const { metaDescription, excerpt, banner, banneralt, tags } = post;
   // validations
@@ -87,7 +85,7 @@ handler.put(async (req, res) => {
     where: { id: id },
     data: {
       published: true,
-      published_at: new Date().toISOString(),
+      published_at: post.published_at || new Date().toISOString(),
     },
   });
 
